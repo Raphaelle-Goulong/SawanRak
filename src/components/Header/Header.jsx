@@ -1,9 +1,18 @@
 import '../Header/Header.scss'
 
+
+import Navbar from '../Navbar/Navbar'
+
+
+
+
 function Header() {
-    return <div className="Header">
-        <h1>salut</h1>
-    </div>
+    return (
+        <div className="Header">
+            
+            <Navbar />
+        </div>
+    )
 }
 
 export default Header

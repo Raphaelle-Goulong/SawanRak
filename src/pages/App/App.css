@@ -30,7 +30,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	background-image: radial-gradient(circle at center center, rgba(33,33,33,0),rgb(1,1,1)),repeating-linear-gradient(135deg, rgb(1,1,1) 0px, rgb(1,1,1) 1px,transparent 1px, transparent 4px),repeating-linear-gradient(45deg, rgb(30,30,30) 0px, rgb(30,30,30) 5px,transparent 5px, transparent 6px),linear-gradient(90deg, rgb(1,1,1),rgb(1,1,1));
+	/* background-image: repeating-linear-gradient(90deg, hsla(71,0%,0%,0.2) 0px, hsla(71,0%,0%,0.2) 0px,transparent 0px, transparent 1px,hsla(71,0%,0%,0.2) 1px, hsla(71,0%,0%,0.2) 4px,transparent 4px, transparent 5px,hsla(71,0%,0%,0.2) 5px, hsla(71,0%,0%,0.2) 8px),repeating-linear-gradient(135deg, hsla(71,0%,0%,0.2) 0px, hsla(71,0%,0%,0.2) 0px,transparent 0px, transparent 1px,hsla(71,0%,0%,0.2) 1px, hsla(71,0%,0%,0.2) 4px,transparent 4px, transparent 5px,hsla(71,0%,0%,0.2) 5px, hsla(71,0%,0%,0.2) 8px),linear-gradient(45deg, rgb(59, 59, 59),rgb(4, 4, 4)); */
+	background-color: rgb(24, 24, 24);
 	height: 100%; 
 }
 ol, ul {
