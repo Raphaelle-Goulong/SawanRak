@@ -4,15 +4,16 @@ import '../Search/Search.scss'
 import { Grip, Search as SearchIcon } from 'lucide-react'
 
 
+
 function Search() {
     return (
         <>
             <div className="Search">
                 <form action="">
                     <input type="text" name="Rechercher" id="Rechercher" placeholder="Rechercher" />
-                <SearchIcon className='recherche'/>
+                    <SearchIcon className="recherche" />
                 </form>
-                
+
                 <Grip />
             </div>
         </>

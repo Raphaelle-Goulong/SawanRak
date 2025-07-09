@@ -3,12 +3,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    // background-color: violet;
+    background-color: rgba(44, 44, 44, 0.568);
     width: 100%;
     position: relative;
     form {
         display: flex;
-    align-items: center;
+        align-items: center;
 
         #Rechercher {
             width: 210px;
@@ -17,7 +17,6 @@
             background-color: rgb(0, 0, 0);
             padding: 0px 10px;
             border-color: transparent;
-            
         }
         .recherche {
             // color: black;

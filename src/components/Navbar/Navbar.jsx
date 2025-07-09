@@ -6,11 +6,13 @@ function Navbar() {
     return (
         <section className="Navbar-section">
             <div className="Navbar">
-                <h1>GLandia</h1>
-                <Menu />
-            </div>
-            <div className="Search-section">
-                <Search />
+                <div className="Navbar-title">
+                    <h1>GLandia</h1>
+                    <Menu className='menu'/>
+                </div>
+                <div className="Search-section">
+                    <Search />
+                </div>
             </div>
         </section>
     )

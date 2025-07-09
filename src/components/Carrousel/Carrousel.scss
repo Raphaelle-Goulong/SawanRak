@@ -1,0 +1,27 @@
+.Carrousel {
+    margin: 20px 0px;
+    .Title-carrousel {
+        margin: 20px 0px;
+        font-family: 'Marcellus', serif;
+        font-size: large;
+    }
+    .Cards-carrousel {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        // gap: 20px;
+        position: relative;
+        #arrow-left{
+            position: absolute;
+            left: 1px;
+            background-color: red;
+
+        }
+        #arrow-right{
+            position: absolute;
+            right: 1px;
+            background-color: rgb(0, 132, 255);
+
+        }
+    }
+}
