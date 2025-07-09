@@ -1,9 +1,8 @@
 import '../Search/Search.scss'
 // import { Grip } from 'lucide-react'
+import Dropdown from '../Dropdown/Dropdown'
 
-import { Grip, Search as SearchIcon } from 'lucide-react'
-
-
+import { Search as SearchIcon } from 'lucide-react'
 
 function Search() {
     return (
@@ -14,7 +13,7 @@ function Search() {
                     <SearchIcon className="recherche" />
                 </form>
 
-                <Grip />
+                <Dropdown />
             </div>
         </>
     )

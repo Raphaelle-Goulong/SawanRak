@@ -1,0 +1,15 @@
+.Section-AllBooks {
+    padding: 10px;
+    h2 {
+        margin: 40px 0px;
+        font-family: 'Marcellus', serif;
+        font-size: large;
+    }
+    .AllBooks {
+        display: flex;
+        justify-content: flex-start;
+        // justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}

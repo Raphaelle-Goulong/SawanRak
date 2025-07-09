@@ -1,6 +1,8 @@
 import '../Home/Home.scss'
 import Card from '../../components/Card/Card'
 import Carrousel from '../../components/Carrousel/Carrousel'
+import Resume from '../../components/Resume/Resume'
+
 
 function Home() {
     return (
@@ -16,20 +18,17 @@ function Home() {
                     </div>
                 </section>
                 <section className="Home-Books-section">
-                    <div className='Home-Books'>
-                        {/* <div className="Title-Section">
-                            <h2> Comédie</h2>
-                        </div>
-                        <div className="Carrousel-Section">
-                            <Carrousel />
-                        </div> */}
-                         <Carrousel />
-                         <Carrousel />
-                         <Carrousel />
+                    <div className="Home-Books">
+                        <Carrousel />
+                        <Carrousel />
+                        <Carrousel />
                     </div>
                 </section>
+                
             </div>
+            <Resume />
         </section>
+        
     )
 }
 
