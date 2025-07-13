@@ -1,20 +1,122 @@
-.Section-Resume{
-    background-color: gray;
+.Section-Resume {
+    background-color: #212121;
+    backdrop-filter: blur(5px);
     position: relative;
-      width: 100%;
-      height: 90%;
-        z-index: 5;
-display: flex;
-justify-content: center;
-align-items: center;
-    .Resume{
+    width: 100%;
+    height: auto;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    // box-shadow: rgba(68, 68, 68, 0.034) 0px 19px 38px, rgba(255, 255, 255, 0.137) 0px 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    .Top-resume {
         display: flex;
-justify-content: center;
-        width: 90%;
+        h2 {
+            font-family: 'Marcellus', serif;
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+        .cross {
+            position: relative;
+            left: 80px;
+            top: 10px;
+        }
+    }
+
+    .Resume {
+        display: flex;
+        justify-content: center;
+        width: 100%;
         position: relative;
-        height: 100px;
-        padding: 5px;
-        background-color: rebeccapurple;
+        height: 500px;
+        padding: 10px;
         z-index: 10;
+        flex-wrap: wrap;
+
+        .text-resume {
+            background-color: rgba(56, 56, 55, 0.048);
+            width: 60%;
+            padding: 5px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            #title-resume {
+                // background-color: red;
+                font-family: 'Marcellus', serif;
+                padding: 20px 0;
+                font-size: 1.2rem;
+            }
+            #resume-book {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 15px;
+                //  background-color: rgba(70, 70, 70, 0.678);
+                // border: 1px solid rgb(100, 100, 100);
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                font-family: 'Mulish', sans-serif;
+            }
+        }
+        .Resume-img {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 0;
+            margin-left: 10px;
+
+            p {
+                margin-top: 5px;
+            }
+        }
+        .Categorie {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+        }
+        .chapter-available {
+            display: flex;
+            align-items: center;
+            background-color: rgba(54, 54, 54, 0.678);
+            border-radius: 10px;
+            width: 100%;
+            height: 155px;
+            flex-wrap: wrap;
+            padding: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            .last-chapter {
+                display: flex;
+                align-items: center;
+                height: 30px;
+                justify-content: center;
+                width: 100%;
+                margin: 5px 0;
+                padding: 5px;
+                border-bottom: 1px solid rgb(100, 100, 100);
+
+                #last-chap {
+                    font-family: 'Mulish', sans-serif;
+                    margin: 2px;
+                }
+            }
+            .all-chapter {
+                display: flex;
+                justify-content: center;
+                gap: 4px;
+                align-items: center;
+                flex-wrap: wrap;
+                // background-color: rgb(163, 160, 160);
+                border-radius: 10px;
+            }
+        }
+    }
+    .Btn-start{
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
     }
 }

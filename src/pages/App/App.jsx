@@ -1,6 +1,7 @@
 import '../App/App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../Home/Home'
+import Book from '../Book/Book'
 // import Error from './Error'
 
 
@@ -16,6 +17,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/Home" element={<Home />} />
+                      <Route path="/Book/" element={<Book />} />
                     {/* <Route path="/Book/:id" element={<Book />} /> */}
                     {/* <Route path="*" element={<Error />} /> */}
                 </Routes>
