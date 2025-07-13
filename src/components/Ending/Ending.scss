@@ -1,0 +1,64 @@
+.Section-Ending {
+    background-color: rgba(54, 54, 54, 0.918);
+    // height: 200px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    // padding: 5px;
+    border-radius: 10px;
+    position: relative;
+    .cross{
+        position: absolute;
+        top: 10px;
+        // left: 0px;
+        right: 20px;
+    }
+    h2 {
+        font-family: 'Marcellus', serif;
+        margin: 40px;
+        font-size: 1.2rem;
+    }
+    .Note {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // flex-direction: column;
+        flex-wrap: wrap;
+
+        height: 100px;
+        margin: 20px 0 20px 0;
+        // background-color: red;
+        .title {
+            font-family: 'Marcellus', serif;
+            font-size: 1rem;
+            margin: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+    .other-books {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        .title {
+            width: 100%;
+            font-family: 'Marcellus', serif;
+            font-size: 1rem;
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        .book-cat {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+    }
+    .btn-quit {
+        margin: 20px;
+    }
+}

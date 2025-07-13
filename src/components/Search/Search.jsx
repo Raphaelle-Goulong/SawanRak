@@ -1,6 +1,5 @@
 import '../Search/Search.scss'
-// import { Grip } from 'lucide-react'
-import Dropdown from '../Dropdown/Dropdown'
+
 import Grip from '../Grip/Grip'
 
 import { Search as SearchIcon } from 'lucide-react'

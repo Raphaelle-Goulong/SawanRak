@@ -1,19 +1,23 @@
-import '../Card/Card.scss'
+import '../Card/Card.scss';
 
+function Card({ Book }) {
 
-import monImage  from '../Card/download.jpg'
-
-function Card() {
-    return (
-        <div className="Card">
-            <div className='Img-books'>
-                <img src={monImage} alt="" />
-            </div>
-            <div className='Title-books'>
-                <h3>Titre du livre</h3>
-            </div>
-        </div>
-    )
+    if (!Book || !Book.cover || !Book.title ) {
+    return null; // Ne rend rien si les données sont incomplètes
+  }
+  return (
+    <div className="Card">
+      <div className="Img-books">
+        <img src={Book.cover} alt={`Couverture de ${Book.title}`} />
+      </div>
+      <div className="Title-books">
+        <h3>{Book.title}</h3>
+        
+      </div>
+    </div>
+    //   "cover": "/Images/Poisonous Love (Special Chapters).webp",
+  );
 }
 
-export default Card
+export default Card;
+

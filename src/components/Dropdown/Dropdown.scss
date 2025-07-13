@@ -6,10 +6,11 @@
   transition: 300ms;
   color: white;
   overflow: hidden;
+  font-family: "Mulish", sans-serif;
 }
 
 .selected {
-  background-color: #2a2f3b;
+  background-color: #636262a9;
   padding: 5px;
   margin-bottom: 3px;
   border-radius: 5px;
@@ -19,15 +20,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: "Mulish", sans-serif;
 }
 
 .arrow {
   position: relative;
   right: 0px;
-  height: 10px;
+//   height: 10px;
   transform: rotate(-90deg);
-  width: 25px;
-  fill: white;
+//   width: 25px;
+//   fill: white;
   z-index: 100000;
   transition: 300ms;
 }
@@ -37,11 +39,12 @@
   flex-direction: column;
   border-radius: 5px;
   padding: 5px;
-  background-color: #2a2f3b;
+  background-color: #2a2f3b8e;
   position: relative;
   top: -100px;
   opacity: 0;
   transition: 300ms;
+  font-family: "Mulish", sans-serif;
 }
 
 .select:hover > .options {
@@ -57,12 +60,13 @@
   border-radius: 5px;
   padding: 5px;
   transition: 300ms;
-  background-color: #2a2f3b;
+  background-color: #38383841;
   width: 150px;
   font-size: 15px;
+  font-family: "Mulish", sans-serif;
 }
 .option:hover {
-  background-color: #323741;
+  background-color: #7a7a7ac0;
 }
 
 .options input[type="radio"] {
