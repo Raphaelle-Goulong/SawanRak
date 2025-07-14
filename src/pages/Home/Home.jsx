@@ -88,12 +88,12 @@ function Home({ searchTerm, filterType, setFilterType }) {
                         <section className="Home-Books-section">
                             <div className="Home-Books">
                                 {categories.map((category) => (
-                                     <Carrousel 
-                key={category} 
-                category={category} 
-                books={Data}
-                onCardClick={handleCardClick}  // Passez la fonction de gestion du clic
-            />
+                                    <Carrousel
+                                        key={category}
+                                        category={category}
+                                        books={Data}
+                                        onCardClick={handleCardClick} // Passez la fonction de gestion du clic
+                                    />
                                 ))}
                             </div>
                         </section>

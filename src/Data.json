@@ -6,7 +6,7 @@
         "url": "/Books/23.5 Degree.docx",
         "auteur": "Nom de l'Auteur",
         "categorie": ["School", "Romance"],
-        "descrisption": "",
+        "description": "L'axe de la Terre s'incline, L'amour aussi.Au début, Ongsa ne s'attendait pas à développer des sentiments si profonds pour Sun. Que peut-elle faire maintenant qu'elle l'a réalisé ? Peu importe à quel point Ongsa est éprise de Sun, elle ne peut pas révéler ses sentiments. Ongsa est une personne timide qui n'a pas beaucoup de courage. De plus, Ongsa est une fille. Comment peut-elle avouer... quand Sun... ...est aussi une fille ?",
         "note": "null",
         "date": "2024-12-01",
         "chapters": 20,
@@ -20,7 +20,7 @@
         "url": "/Books/AFFAIR.docx",
         "auteur": "Chao Planoy",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 43,
         "date": "2024-12-01",
@@ -34,7 +34,7 @@
         "url": "/Books/APPLE.docx",
         "auteur": "Chao Planoy",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -46,8 +46,8 @@
         "url": "/Books/ARPO.docx",
         "auteur": "Chao Planoy",
         "categorie": "Romance",
-        "descrisption": "",
-        "note": "null",
+        "description": "Bow, à la vie ordinaire et réservée, est constamment harcelée par Arpo, sa voisine qui lui déclare son amour depuis l'enfance. Exaspérée par cette affection persistante et l'approbation de ses parents, Bow s'étonne que personne ne trouve étrange l'amour d'Arpo. Le jour où Arpo annonce qu'elle ne l'aime plus, le cœur de Bow s'emballe. Perdue, elle réalise qu'elle ne peut accepter qu'Arpo cesse de l'aimer, car 'Arpo... Tu m'appartiens.'",
+        "note": "3",
         "chapters": 24,
         "date": "2024-12-01"
     },
@@ -58,7 +58,7 @@
         "url": "/Books/BE MY BABY.docx",
         "auteur": "khunphuying",
         "categorie": "Entreprise",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -70,7 +70,7 @@
         "url": "/Books/BE MY BOO!.docx",
         "auteur": "khunphuying",
         "categorie": "School",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -82,7 +82,7 @@
         "url": "/Books/BE MY SUGAR !.docx",
         "auteur": "khunphuying",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -94,7 +94,7 @@
         "url": "/Books/BLANK.docx",
         "auteur": "Chao Planoy",
         "categorie": "Adulte",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -106,7 +106,7 @@
         "url": "/Books/BUILT IN LOVE.docx",
         "auteur": "แซลม่อน",
         "categorie": "Ennemies to Lovers",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -118,7 +118,7 @@
         "url": "/Books/CHAIN.docx",
         "auteur": "REVERSE",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -130,7 +130,7 @@
         "url": "/Books/CRANIUM.docx",
         "auteur": "Nalan",
         "categorie": "Action",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -142,8 +142,8 @@
         "url": "/Books/CRUSH.docx",
         "auteur": "Chao Planoy",
         "categorie": "Romance",
-        "descrisption": "",
-        "note": "null",
+        "description": "Frung, nouvelle présidente de l'entreprise familiale, doit gérer une série de bonnes inefficaces. Elle décide d'interviewer elle-même la prochaine candidate. C'est ainsi qu'elle rencontre Yu, dont la présence la trouble instantanément. Malgré son peu d'informations sur Yu et son comportement suspect, Frung l'embauche. Face à son propre aveuglement, elle l'attribue à la taille mignonne, au sourire magnifique, et surtout, à son énorme béguin pour Yu.",
+        "note": "3",
         "chapters": 24,
         "date": "2024-12-01"
     },
@@ -154,7 +154,7 @@
         "url": "/Books/DREAM.docx",
         "auteur": "Chao Planoy",
         "categorie": "School",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -166,7 +166,7 @@
         "url": "/Books/ENEMIES WITH BENEFITS.docx",
         "auteur": "Nom de l'Auteur",
         "categorie": "Ennemies to Lovers",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -178,7 +178,7 @@
         "url": "/Books/Gap-Pink theory.docx",
         "auteur": "Chao Planoy",
         "categorie": "Entreprise",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -190,7 +190,7 @@
         "url": "/Books/Gap 2-Eternity.docx",
         "auteur": "Chao Planoy",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -202,7 +202,7 @@
         "url": "/Books/GOD VOL 1.docx",
         "auteur": "Chao Planoy",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -214,7 +214,7 @@
         "url": "/Books/GOD VOL2 (END).docx",
         "auteur": "Chao Planoy",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -226,7 +226,7 @@
         "url": "/Books/IRRESISTIBLE.docx",
         "auteur": "Chao Planoy",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -238,7 +238,7 @@
         "url": "/Books/LOVE SENIOR VOL 1.docx",
         "auteur": "Nom de l'Auteur",
         "categorie": "School",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -250,7 +250,7 @@
         "url": "/Books/LOYAL PIN (VOL.01).docx",
         "auteur": "MONMAW",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -262,7 +262,7 @@
         "url": "/Books/LOYAL PIN ( VOL.02).docx",
         "auteur": "MONMAW",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -274,7 +274,7 @@
         "url": "/Books/MATE.docx",
         "auteur": "Chao Planoy",
         "categorie": "Adulte",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -286,7 +286,7 @@
         "url": "/Books/More & More.docx",
         "auteur": "khunphuying",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -298,7 +298,7 @@
         "url": "/Books/MY PINK LOVE.docx",
         "auteur": "Buarawong",
         "categorie": "Comédie",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -310,7 +310,7 @@
         "url": "/Books/OBSESSED.docx",
         "auteur": "Chao Planoy",
         "categorie": "Adulte",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -322,9 +322,9 @@
         "url": "/Books/911 Love Code.docx",
         "auteur": "Chao Planoy",
         "categorie": "Comédie",
-        "descrisption": "",
+        "description": "",
         "note": "null",
-        "chapters": 24,
+        "chapters": 35,
         "date": "2025-02-19"
     },
     {
@@ -334,7 +334,7 @@
         "url": "/Books/Professor With Benefits.docx",
         "auteur": "wanwira",
         "categorie": "School",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-02-19"
@@ -346,7 +346,7 @@
         "url": "/Books/PETRICHOR 1.docx",
         "auteur": " SIXTEENSEVEN",
         "categorie": "Action",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -358,7 +358,7 @@
         "url": "/Books/PETRICHOR 2(Special Chapter).docx",
         "auteur": " SIXTEENSEVEN",
         "categorie": "Action",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -370,7 +370,7 @@
         "url": "/Books/PLUTO.docx",
         "auteur": "Chao Planoy",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -382,7 +382,7 @@
         "url": "/Books/Poisonous Love.docx",
         "auteur": "Mee Nam",
         "categorie": "Ennemies to Lovers",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -394,7 +394,7 @@
         "url": "/Books/QUEENDOM (END).docx",
         "auteur": "แซลม่อน",
         "categorie": "Adulte",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -406,7 +406,7 @@
         "url": "/Books/REVERSE 4 U(complete).docx",
         "auteur": "Zezeho",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -418,7 +418,7 @@
         "url": "/Books/REVERSE WITH ME (END).docx",
         "auteur": "Zezeho",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -430,8 +430,8 @@
         "url": "/Books/RHYTHM Vol 1.docx",
         "auteur": "Chao Planoy",
         "categorie": "Mystique",
-        "descrisption": "",
-        "note": "null",
+        "description": "Jom possède un don : lire les pensées et voir les souvenirs d'autrui au toucher. Ses parents exploitent ce don pour le jeu et la sélection de locataires. Un jour, Renu, une nouvelle locataire et enseignante dans l'école de Jom, arrive. Jom est incapable de lire Renu, n'entendant que le battement constant de son cœur. Intriguée, Jom, qui déteste normalement connaître la vie des autres, se sent irrésistiblement attirée par Renu, d'autant plus que leurs cœurs s'alignent. Jom s'interroge sur la nature de cette attraction pour une personne du même sexe, qu'elle ne peut 'lire', mais dont le cœur résonne si fort avec le sien.",
+        "note": "4",
         "chapters": 24,
         "date": "2024-12-01"
     },
@@ -442,7 +442,7 @@
         "url": "/Books/RHYTHM VOL 2 END.docx",
         "auteur": "Chao Planoy",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -454,7 +454,7 @@
         "url": "/Books/Rolling In Love.docx",
         "auteur": "Chao Planoy",
         "categorie": "Adulte",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -466,7 +466,7 @@
         "url": "/Books/SISTER.docx",
         "auteur": "Chao Planoy",
         "categorie": "Red Flag",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -478,7 +478,7 @@
         "url": "/Books/the secret of us.docx",
         "auteur": " Mee Nam",
         "categorie": "Hospital",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -490,7 +490,7 @@
         "url": "/Books/US_complete.docx",
         "auteur": "Chao Planoy",
         "categorie": "Adulte",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-01"
@@ -502,9 +502,9 @@
         "url": "/Books/In's love.docx",
         "auteur": "Chao Planoy",
         "categorie": "Comédie",
-        "descrisption": "",
+        "description": "De retour de l'étranger, Intuorn est résolue à ne plus aimer et à prouver sa maturité. Son père lui assigne Arunburgfah comme 'secrétaire'. Intuorn, d'abord pleine de préjugés et défiante, surtout qu'Arunburgfah ressemble à une ancienne rivale, se retrouve étrangement attirée par cette femme indifférente et sans émotion. Elle cherche désespérément à obtenir une réaction d'elle, même un sourire, défiant sa propre résolution de ne plus tomber amoureuse.",
         "note": "null",
-        "chapters": 24,
+        "chapters": 52,
         "date": "2024-12-08"
     },
     {
@@ -514,7 +514,7 @@
         "url": "/Books/4P.docx",
         "auteur": "Chao Planoy",
         "categorie": "Red Flag",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 40,
         "date": "2024-12-08"
@@ -526,9 +526,9 @@
         "url": "/Books/Adore khun Jae.docx",
         "auteur": "THEK34",
         "categorie": "Entreprise",
-        "descrisption": "",
+        "description": "Veetara, directrice d'un institut de tutorat, est la cible des déclarations d'amour bruyantes de Salee, sa jeune employée. Personne ne prend Salee au sérieux, ignorant ses sentiments profonds. Une voyante prédit pourtant que Salee épousera sa patronne. Salee y croit fermement et l'annonce à tous, provoquant l'exaspération de ses collègues.",
         "note": "null",
-        "chapters": 24,
+        "chapters": 18,
         "date": "2024-12-08"
     },
     {
@@ -538,7 +538,7 @@
         "url": "/Books/Chain ed special.docx",
         "auteur": "REVERSE",
         "categorie": "Hospital",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-08"
@@ -550,7 +550,7 @@
         "url": "/Books/FORMIDABLE EYES.docx",
         "auteur": "Luxurious.W",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-08"
@@ -562,7 +562,7 @@
         "url": "/Books/One night stand.docx",
         "auteur": "ไรท์ฟิน",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-08"
@@ -574,9 +574,9 @@
         "url": "/Books/N° 5.docx",
         "auteur": "Chao Planoy",
         "categorie": "Adulte",
-        "descrisption": "",
-        "note": "null",
-        "chapters": 24,
+        "description": "Après cette demande en mariage, je me sentais perdue, incertaine de mon chemin. C'est là que j'ai revu Rattikarn, une ancienne camarade de lycée. Je lui avais parlé une seule fois, le jour où elle portait du Chanel N°5. Et c'est là que mes pensées ont commencé à changer. Son parfum réveille mes souvenirs et mes émotions, révélant la vérité la plus enfouie dans mon cœur : je l'aime.",
+        "note": "4",
+        "chapters": 29,
         "date": "2024-12-08"
     },
     {
@@ -586,7 +586,7 @@
         "url": "/Books/LYRIC.docx",
         "auteur": "Chao Planoy",
         "categorie": "Comédie",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-11"
@@ -598,7 +598,7 @@
         "url": "/Books/Bad sugar.docx",
         "auteur": "Nom de l'Auteur",
         "categorie": "Ennemies to Lovers",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-11"
@@ -610,7 +610,7 @@
         "url": "/Books/Buy My Boss.docx",
         "auteur": "FoxyFox",
         "categorie": "Adulte",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-13"
@@ -622,7 +622,7 @@
         "url": "/Books/Hello Neighbor.docx",
         "auteur": "Velvet",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-13"
@@ -634,7 +634,7 @@
         "url": "/Books/STUCK WITH ME.docx",
         "auteur": "Zezeho",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-17"
@@ -646,7 +646,7 @@
         "url": "/Books/Somewhere Somehow.docx",
         "auteur": "MONMAW",
         "categorie": "School",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2024-12-29"
@@ -658,7 +658,7 @@
         "url": "/Books/CHLOE.docx",
         "auteur": "Chao Planoy",
         "categorie": "Mystique",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-02"
@@ -670,7 +670,7 @@
         "url": "/Books/HEART VILLAIN (SC).docx",
         "auteur": "Zezeho",
         "categorie": "Ennemies to Lovers",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-08"
@@ -682,7 +682,7 @@
         "url": "/Books/Secret Affair.docx",
         "auteur": "มีนาม",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-10"
@@ -694,7 +694,7 @@
         "url": "/Books/PREDICT.docx",
         "auteur": "Hiiroda",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-10"
@@ -706,7 +706,7 @@
         "url": "/Books/If I stop being stubborn, will you still love me.docx",
         "auteur": "โซดาซ่าส์น้อย",
         "categorie": "Comédie",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-10"
@@ -718,7 +718,7 @@
         "url": "/Books/Promise in the illusion.docx",
         "auteur": "NATPAT",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-10"
@@ -730,7 +730,7 @@
         "url": "/Books/Just Friend.docx",
         "auteur": "Ferrary_ff",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-11"
@@ -742,7 +742,7 @@
         "url": "/Books/Evil Enemy Defeats Love.docx",
         "auteur": "White Fox",
         "categorie": "Ennemies to Lovers",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-11"
@@ -754,7 +754,7 @@
         "url": "/Books/The Whale Store.docx",
         "auteur": "Snow Leopard",
         "categorie": "Comédie",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-11"
@@ -766,7 +766,7 @@
         "url": "/Books/ABOUT GALAXY.docx",
         "auteur": "Zezeho",
         "categorie": "Romance",
-        "descrisption": "",
+        "description": "",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-11"
@@ -778,7 +778,7 @@
         "url": "/Books/Bitter Sweet Toxic.docx",
         "auteur": "Hojicha Studio",
         "categorie": "Red Flag",
-        "descrisption": "What happens when the woman who was your 'first love' becomes the new flame of your best friend? 'Kulaphat' is thrust back into the world of 'Lalin', her first love, now entwined with her close friend 'Irene'. As old wounds resurface and tangled emotions ignite, Kulaphat is driven by a burning desire for revenge, ready to go to any lengths to make her first love pay for the heartbreak of the past.",
+        "description": "What happens when the woman who was your 'first love' becomes the new flame of your best friend? 'Kulaphat' is thrust back into the world of 'Lalin', her first love, now entwined with her close friend 'Irene'. As old wounds resurface and tangled emotions ignite, Kulaphat is driven by a burning desire for revenge, ready to go to any lengths to make her first love pay for the heartbreak of the past.",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-24"
@@ -790,7 +790,7 @@
         "url": "/Books/FWB With My Boss.docx",
         "auteur": "Hojicha Studio",
         "categorie" : "Red Flag",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-01-24"
@@ -802,7 +802,7 @@
         "url": "/Books/Shh... Or they'll find out.docx",
         "auteur": "Zezeho",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-01-24"
@@ -814,9 +814,9 @@
         "url": "/Books/6th Rules Being A Wife.docx",
         "auteur": "ไรท์ฟิน",
         "categorie" : "Ennemies to Lovers",
-        "descrisption" :"Ennemies to Lovers" ,
+        "description" :"Ennemies to Lovers" ,
         "note": "null",
-        "chapters": 24,
+        "chapters": 27,
         "date": "2025-01-25"
     },
     {
@@ -826,7 +826,7 @@
         "url": "/Books/Somewhere Somehow vol.2.docx",
         "auteur": "MONMAW",
         "categorie" : "Ennemies to Lovers",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-01-25"
@@ -838,7 +838,7 @@
         "url": "/Books/LUCKY ONE.docx",
         "auteur": "Zezeho",
         "categorie" : "Comédie",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-01-26"
@@ -850,7 +850,7 @@
         "url": "/Books/Operation 13.docx",
         "auteur": "Nalan",
         "categorie" : "Action",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-01-26"
@@ -862,7 +862,7 @@
         "url": "/Books/Love Or Lust.docx",
         "auteur": "Sarsaparilla",
        "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-01-26"
@@ -874,7 +874,7 @@
         "url": "/Books/Little bit little more.docx",
         "auteur": "Chao Planoy",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-02-22"
@@ -886,7 +886,7 @@
         "url": "/Books/The Secret of Us (Special Chapters).docx",
         "auteur": "Mee Nam",
         "categorie" : "Ennemies to Lovers",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-02-28"
@@ -898,7 +898,7 @@
         "url": "/Books/Harmony Secret.docx",
         "auteur": "Serenista",
         "categorie" : "Ennemies to Lovers",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-02-28"
@@ -910,7 +910,7 @@
         "url": "/Books/Harmony Secret(Special).docx",
         "auteur": "Serenista",
         "categorie" : "Ennemies to Lovers",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-02-28"
@@ -922,7 +922,7 @@
         "url": "/Books/Love Begins with a Terrible Kiss.docx",
         "auteur": "Northern Red Panda",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-03-03"
@@ -934,7 +934,7 @@
         "url": "/Books/Mirror.docx",
         "auteur": "Chao planoy",
        "categorie" : "Mystique",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-03-12"
@@ -946,7 +946,7 @@
         "url": "/Books/Like A Palette.docx",
         "auteur": "Zezeho",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-03-12"
@@ -958,7 +958,7 @@
         "url": "/Books/MIDNIGHT FLIGHT.docx",
         "auteur": "Chao Planoy",
         "categorie" : "Comédie",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-10"
@@ -970,7 +970,7 @@
         "url": "/Books/My Only Sunshine.docx",
         "auteur": "Flower of memory",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-10"
@@ -982,7 +982,7 @@
         "url": "/Books/My Sweet Love.docx",
         "auteur": "Anonymous",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2024-04-10"
@@ -994,7 +994,7 @@
         "url": "/Books/ClaireBell.docx",
         "auteur": "KA9ESAMA",
         "categorie" : "Adulte",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1006,7 +1006,7 @@
         "url": "/Books/STOP YOUR HEART (FOR ME).docx",
         "auteur": "Flower of memory",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1018,7 +1018,7 @@
         "url": "/Books/UNCERTAINTY.docx",
         "auteur": "Flower of memory",
        "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1030,7 +1030,7 @@
         "url": "/Books/WARM EYES.docx",
         "auteur": "Pillow_Mark",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1042,7 +1042,7 @@
         "url": "/Books/STOP BEING EVIL.docx",
         "auteur": "Flower of memory",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1054,7 +1054,7 @@
         "url": "/Books/CHASING LOVE.docx",
         "auteur": "PEONY",
         "categorie" : "Entreprise",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1066,7 +1066,7 @@
         "url": "/Books/Rin Will Never Love (Denied Love).docx",
         "auteur": "PEONY",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-27"
@@ -1078,7 +1078,7 @@
         "url": "/Books/Rin Will Never Love (Denied Love) special.docx",
         "auteur": "PEONY",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-04-27"
@@ -1090,7 +1090,7 @@
         "url": "/Books/Player.docx",
         "auteur": "SIIX",
        "categorie" : "Adulte",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-05-18"
@@ -1102,9 +1102,9 @@
         "url": "/Books/7 Years.docx",
         "auteur": "Chao Planoy",
         "categorie" : "Adulte",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
-        "chapters": 24,
+        "chapters": 28,
         "date": "2025-05-18"
     },
     {
@@ -1114,7 +1114,7 @@
         "url": "/Books/Dangerous Queen.docx",
         "auteur": "คุณผู้หญิง",
         "categorie" : "Adulte",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-05-18"
@@ -1126,7 +1126,7 @@
         "url": "/Books/Ferris Wheel.docx",
         "auteur": "reallyb",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-05-26"
@@ -1138,7 +1138,7 @@
         "url": "/Books/The Girl to Khun Yai.docx",
         "auteur": "reallyb",
         "categorie" : "Adulte",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-05-26"
@@ -1150,7 +1150,7 @@
         "url": "/Books/Be my Universe.docx",
         "auteur": "คุณผู้หญิง",
         "categorie" : "School",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-05-30"
@@ -1162,7 +1162,7 @@
         "url": "/Books/Hello! How Are You.docx",
         "auteur": "SIIX",
         "categorie" : "Romance",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-06-13"
@@ -1174,7 +1174,7 @@
         "url": "/Books/Chained.docx",
         "auteur": "SIIX",
         "categorie" : "Mystique",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-06-14"
@@ -1186,7 +1186,7 @@
         "url": "/Books/NOPE! Je ne taime pas.docx",
         "auteur": "khunphuying",
         "categorie" : "Comédie",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-06-19"
@@ -1198,7 +1198,7 @@
         "url": "/Books/Chain Baby (Special).docx",
         "auteur": "REVERSE",
         "categorie" : "",
-        "descrisption" :"Hospital" ,
+        "description" :"Hospital" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-06-25"
@@ -1210,7 +1210,7 @@
         "url": "/Books/Juste la lune à travers le voile du temps.docx",
         "auteur": "SIIX",
         "categorie" : "Ennemies to Lovers",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-06-27"
@@ -1222,7 +1222,7 @@
         "url": "/Books/Cupide.docx",
         "auteur": "SIIX",
         "categorie" : "Mystique",
-        "descrisption" :"" ,
+        "description" :"test" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-07-03"
@@ -1234,7 +1234,7 @@
         "url": "/Books/Poisonous Love (Special Chapters).docx",
         "auteur": "Mee Nam",
         "categorie" : "Hospital",
-        "descrisption" :"" ,
+        "description" :"" ,
         "note": "null",
         "chapters": 24,
         "date": "2025-07-03"

@@ -7,7 +7,7 @@ import Button from '../Button/Button'
 
 import { X } from 'lucide-react'
 
-function Resume() {
+function Resume({ book, onClose }) {
 
 const [isVisible, setIsVisible] = useState(true);
 
@@ -21,12 +21,10 @@ const [isVisible, setIsVisible] = useState(true);
 
 
 
-
-
     return (
         <section className="Section-Resume">
             <div className="Top-resume">
-                <h2>Titre du livre</h2>
+                <h2>{book.title}</h2>
                 <X className="cross" size={20} onClick={handleClose}/>
             </div>
             <div className="Resume">
@@ -34,37 +32,29 @@ const [isVisible, setIsVisible] = useState(true);
                     <h3 id="title-resume">Résume</h3>
 
                     <p id='resume-book'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nihil
-                        exercitationem nisi ut tempore eaque aut aliquam doloremque quisquam ullam.
-                        Necessitatibus qui dolor culpa provident quasi porro quia facere iste.
+                        {book.description}
                     </p>
                 </div>
                 <div className="Resume-img">
-                    <Card />
-                    <p>Chp : 24</p>
+                    <Card Book={book} onClick={undefined}/> 
+                    <p>Chp : {book.chapters}</p>
                 </div> 
                  <div className="Categorie">
                   
-                        <Tags />
-                        <Tags />
-                        <Tags />
+                      {book.categories?.map((category, index) => (
+                        <Tags key={index} text={category} />
+                    ))}
                         
                     </div>
                 <div className="chapter-available">
                     <div className="last-chapter">
-                        <h4 id='last-chap'>Dernier chapitre lu : </h4><Tags />
+                        <h4 id='last-chap'>Dernier chapitre lu : </h4>
+                        <Tags text={`Chapitre ${book.lastChapter || 1}`}/>
                     </div>
                    
                     <div className="all-chapter">
                         <Tags />
-                        <Tags />
-                        <Tags />
-                        <Tags />
-                        <Tags />
-                        <Tags />
-                        <Tags />
-                        <Tags />
-                        <Tags />
+                        
                        
                     </div>
                 </div>
