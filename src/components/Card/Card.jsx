@@ -15,7 +15,7 @@ function Card({ Book }) {
         
       </div>
     </div>
-    //   "cover": "/Images/Poisonous Love (Special Chapters).webp",
+   
   );
 }
 

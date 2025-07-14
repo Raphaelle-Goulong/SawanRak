@@ -23,5 +23,12 @@
         font-family: 'Mulish', sans-serif;
         font-weight: 300;
         font-size: 0.9rem;
+        h3 {
+            white-space: nowrap;       // Empêche le texte de passer à la ligne
+            overflow: hidden;         // Cache le texte qui dépasse
+            text-overflow: ellipsis;   // Ajoute "..." quand le texte est coupé
+            max-width: 100px;         // Largeur maximale égale à celle de la carte
+            text-align: center;      // Centre le texte
+        }
     }
 }

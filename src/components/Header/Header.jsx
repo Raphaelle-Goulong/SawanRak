@@ -1,16 +1,12 @@
-import '../Header/Header.scss'
+import '../Header/Header.scss';
+import Navbar from '../Navbar/Navbar';
 
-
-import Navbar from '../Navbar/Navbar'
-
-
-function Header() {
-    return (
-        <div className="Header">
-            
-            <Navbar />
-        </div>
-    )
+function Header({ searchTerm, setSearchTerm }) {
+  return (
+    <div className="Header">
+      <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+    </div>
+  );
 }
 
-export default Header
+export default Header;
