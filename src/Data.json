@@ -5,10 +5,11 @@
         "cover": "/Images/23.5 Degree.webp",
         "url": "/Books/23.5 Degree.docx",
         "auteur": "Nom de l'Auteur",
-        "categorie": "School",
+        "categorie": ["School", "Romance"],
         "descrisption": "",
         "note": "null",
         "date": "2024-12-01",
+        "chapters": 20,
         "type": "word"
         
     },
@@ -21,6 +22,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 43,
         "date": "2024-12-01",
         "type": "word"
         
@@ -34,6 +36,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -45,6 +48,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -56,6 +60,7 @@
         "categorie": "Entreprise",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -67,6 +72,7 @@
         "categorie": "School",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -78,6 +84,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -89,6 +96,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -100,6 +108,7 @@
         "categorie": "Ennemies to Lovers",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -111,6 +120,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -122,6 +132,7 @@
         "categorie": "Action",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -133,6 +144,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -144,6 +156,7 @@
         "categorie": "School",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -155,6 +168,7 @@
         "categorie": "Ennemies to Lovers",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -166,6 +180,7 @@
         "categorie": "Entreprise",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -177,6 +192,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -188,6 +204,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -199,6 +216,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -210,6 +228,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -221,6 +240,7 @@
         "categorie": "School",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -232,6 +252,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -243,6 +264,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -254,6 +276,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -265,6 +288,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -276,6 +300,7 @@
         "categorie": "Comédie",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -287,6 +312,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -298,6 +324,7 @@
         "categorie": "Comédie",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-02-19"
     },
     {
@@ -309,6 +336,7 @@
         "categorie": "School",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-02-19"
     },
     {
@@ -320,6 +348,7 @@
         "categorie": "Action",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -331,6 +360,7 @@
         "categorie": "Action",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -342,6 +372,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -353,6 +384,7 @@
         "categorie": "Ennemies to Lovers",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -364,6 +396,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -375,6 +408,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -386,6 +420,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -397,6 +432,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -408,6 +444,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -419,6 +456,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -430,6 +468,7 @@
         "categorie": "Red Flag",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -441,6 +480,7 @@
         "categorie": "Hospital",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -452,6 +492,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-01"
     },
     {
@@ -463,6 +504,7 @@
         "categorie": "Comédie",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-08"
     },
     {
@@ -474,6 +516,7 @@
         "categorie": "Red Flag",
         "descrisption": "",
         "note": "null",
+        "chapters": 40,
         "date": "2024-12-08"
     },
     {
@@ -485,6 +528,7 @@
         "categorie": "Entreprise",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-08"
     },
     {
@@ -496,6 +540,7 @@
         "categorie": "Hospital",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-08"
     },
     {
@@ -507,6 +552,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-08"
     },
     {
@@ -518,6 +564,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-08"
     },
     {
@@ -529,6 +576,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-08"
     },
     {
@@ -540,6 +588,7 @@
         "categorie": "Comédie",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-11"
     },
     {
@@ -551,6 +600,7 @@
         "categorie": "Ennemies to Lovers",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-11"
     },
     {
@@ -562,6 +612,7 @@
         "categorie": "Adulte",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-13"
     },
     {
@@ -573,6 +624,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-13"
     },
     {
@@ -584,6 +636,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-17"
     },
     {
@@ -595,6 +648,7 @@
         "categorie": "School",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2024-12-29"
     },
     {
@@ -606,6 +660,7 @@
         "categorie": "Mystique",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-02"
     },
     {
@@ -617,6 +672,7 @@
         "categorie": "Ennemies to Lovers",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-08"
     },
     {
@@ -628,6 +684,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-10"
     },
     {
@@ -639,6 +696,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-10"
     },
     {
@@ -650,6 +708,7 @@
         "categorie": "Comédie",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-10"
     },
     {
@@ -661,6 +720,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-10"
     },
     {
@@ -672,6 +732,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-11"
     },
     {
@@ -683,6 +744,7 @@
         "categorie": "Ennemies to Lovers",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-11"
     },
     {
@@ -694,6 +756,7 @@
         "categorie": "Comédie",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-11"
     },
     {
@@ -705,6 +768,7 @@
         "categorie": "Romance",
         "descrisption": "",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-11"
     },
     {
@@ -716,6 +780,7 @@
         "categorie": "Red Flag",
         "descrisption": "What happens when the woman who was your 'first love' becomes the new flame of your best friend? 'Kulaphat' is thrust back into the world of 'Lalin', her first love, now entwined with her close friend 'Irene'. As old wounds resurface and tangled emotions ignite, Kulaphat is driven by a burning desire for revenge, ready to go to any lengths to make her first love pay for the heartbreak of the past.",
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-24"
     },
     {
@@ -727,6 +792,7 @@
         "categorie" : "Red Flag",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-24"
     },
     {
@@ -738,6 +804,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-24"
     },
     {
@@ -749,6 +816,7 @@
         "categorie" : "Ennemies to Lovers",
         "descrisption" :"Ennemies to Lovers" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-25"
     },
     {
@@ -760,6 +828,7 @@
         "categorie" : "Ennemies to Lovers",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-25"
     },
     {
@@ -771,6 +840,7 @@
         "categorie" : "Comédie",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-26"
     },
     {
@@ -782,6 +852,7 @@
         "categorie" : "Action",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-26"
     },
     {
@@ -793,6 +864,7 @@
        "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-01-26"
     },
     {
@@ -804,6 +876,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-02-22"
     },
     {
@@ -815,6 +888,7 @@
         "categorie" : "Ennemies to Lovers",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-02-28"
     },
     {
@@ -826,6 +900,7 @@
         "categorie" : "Ennemies to Lovers",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-02-28"
     },
     {
@@ -837,6 +912,7 @@
         "categorie" : "Ennemies to Lovers",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-02-28"
     },
     {
@@ -848,6 +924,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-03-03"
     },
     {
@@ -859,6 +936,7 @@
        "categorie" : "Mystique",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-03-12"
     },
     {
@@ -870,6 +948,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-03-12"
     },
     {
@@ -881,6 +960,7 @@
         "categorie" : "Comédie",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-10"
     },
     {
@@ -892,6 +972,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-10"
     },
     {
@@ -903,6 +984,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2024-04-10"
     },
     {
@@ -914,6 +996,7 @@
         "categorie" : "Adulte",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-26"
     },
     {
@@ -925,6 +1008,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-26"
     },
     {
@@ -936,6 +1020,7 @@
        "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-26"
     },
     {
@@ -947,6 +1032,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-26"
     },
     {
@@ -958,6 +1044,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-26"
     },
     {
@@ -969,6 +1056,7 @@
         "categorie" : "Entreprise",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-26"
     },
     {
@@ -980,6 +1068,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-27"
     },
     {
@@ -991,6 +1080,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-04-27"
     },
     {
@@ -1002,6 +1092,7 @@
        "categorie" : "Adulte",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-05-18"
     },
     {
@@ -1013,6 +1104,7 @@
         "categorie" : "Adulte",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-05-18"
     },
     {
@@ -1024,6 +1116,7 @@
         "categorie" : "Adulte",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-05-18"
     },
     {
@@ -1035,6 +1128,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-05-26"
     },
     {
@@ -1046,6 +1140,7 @@
         "categorie" : "Adulte",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-05-26"
     },
     {
@@ -1057,6 +1152,7 @@
         "categorie" : "School",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-05-30"
     },
     {
@@ -1068,6 +1164,7 @@
         "categorie" : "Romance",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-06-13"
     },
     {
@@ -1079,6 +1176,7 @@
         "categorie" : "Mystique",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-06-14"
     },
     {
@@ -1090,6 +1188,7 @@
         "categorie" : "Comédie",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-06-19"
     },
     {
@@ -1101,6 +1200,7 @@
         "categorie" : "",
         "descrisption" :"Hospital" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-06-25"
     },
     {
@@ -1112,6 +1212,7 @@
         "categorie" : "Ennemies to Lovers",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-06-27"
     },
     {
@@ -1123,6 +1224,7 @@
         "categorie" : "Mystique",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-07-03"
     },
     {
@@ -1134,6 +1236,7 @@
         "categorie" : "Hospital",
         "descrisption" :"" ,
         "note": "null",
+        "chapters": 24,
         "date": "2025-07-03"
     }
 ]

@@ -3,7 +3,7 @@ import '../Carrousel/Carrousel.scss'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Card from '../Card/Card'
 
-function Carrousel({ category, books }) {
+function Carrousel({ category, books , onCardClick}) {
     const [startIndex, setStartIndex] = useState(0)
     const filteredBooks = books.filter((book) => book.categorie === category)
 
@@ -48,7 +48,11 @@ function Carrousel({ category, books }) {
             <div className="Cards-carrousel">
                 <ChevronLeft id="arrow-left" size={28} onClick={prevSlide} />
                 {getVisibleBooks().map((book) => (
-                    <Card key={book.id} Book={book} />
+                     <Card 
+                        key={book.id} 
+                        Book={book} 
+                        onClick={() => onCardClick(book)}  // Passez l'événement
+                    />
                 ))}
                 <ChevronRight id="arrow-right" size={28} onClick={nextSlide} />
             </div>

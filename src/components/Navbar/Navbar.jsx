@@ -2,7 +2,7 @@ import '../Navbar/Navbar.scss';
 import { Menu } from 'lucide-react';
 import Search from '../Search/Search';
 
-function Navbar({ searchTerm, setSearchTerm }) {
+function Navbar({ searchTerm, setSearchTerm , onFilterChange}) {
   return (
     <section className="Navbar-section">
       <nav className="Navbar">
@@ -11,7 +11,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
           <Menu className='menu'/>
         </div>
         <div className="Search-section">
-          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} onFilterChange={onFilterChange}/>
         </div>
       </nav>
     </section>

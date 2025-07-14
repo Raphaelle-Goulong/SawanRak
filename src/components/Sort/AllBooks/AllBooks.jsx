@@ -1,26 +1,17 @@
-import '../AllBooks/AllBooks.scss'
+import '../AllBooks/AllBooks.scss';
+import Card from '../../Card/Card';
 
-import Card from '../../Card/Card'
-
-function AllBooks() {
+function AllBooks({ books }) {
     return (
         <div className="Section-AllBooks">
-            <h2>Tous les Livres</h2>
-            <div className="AllBooks">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+            <h2>Tous les Livres ({books.length})</h2>
+            <div className="AllBooks-grid">
+                {books.map(book => (
+                    <Card key={book.id} Book={book} />
+                ))}
             </div>
         </div>
-    )
+    );
 }
 
-export default AllBooks
+export default AllBooks;

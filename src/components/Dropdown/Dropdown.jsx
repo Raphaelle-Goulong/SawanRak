@@ -1,42 +1,55 @@
+import { useState, useRef, useEffect } from 'react'
 import '../Dropdown/Dropdown.scss'
 import { ChevronRight } from 'lucide-react'
 
-function Dropdown() {
+function Dropdown({ onSelect }) {
+    const [isOpen, setIsOpen] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('Categories')
+    const dropdownRef = useRef(null)
+
+    // Fermer le dropdown quand on clique ailleurs
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
+    const handleSelect = (option) => {
+        setSelectedOption(option)
+        onSelect(option)
+        setIsOpen(false)
+    }
+
     return (
-        <>
-            <div className="Section-Dropdown">
-                {/* <!-- From Uiverse.io by 3bdel3ziz-T -->  */}
-                <div className="select">
-                    <div
-                        class="selected"
-                        data-default="All"
-                        data-one="option-1"
-                        data-two="option-2"
-                        data-three="option-3">
-                        <ChevronRight className="arrow" size={24} />
-                        <h5>Tri </h5>
-                    </div>
-                    <div class="options">
-                        <div title="all">
-                            <input id="all" name="option" type="radio" checked="" />
-                            <label class="option" for="all" data-txt="All"></label>
-                        </div>
-                        <div title="option-1">
-                            <input id="option-1" name="option" type="radio" />
-                            <label class="option" for="option-1" data-txt="option-1"></label>
-                        </div>
-                        <div title="option-2">
-                            <input id="option-2" name="option" type="radio" />
-                            <label class="option" for="option-2" data-txt="option-2"></label>
-                        </div>
-                        <div title="option-3">
-                            <input id="option-3" name="option" type="radio" />
-                            <label class="option" for="option-3" data-txt="option-3"></label>
-                        </div>
-                    </div>
+        <div className="select" ref={dropdownRef}>
+            <div className="selected" onClick={() => setIsOpen(!isOpen)}>
+                <span>{selectedOption}</span>
+                <ChevronRight className={`arrow ${isOpen ? 'open' : ''}`} />
+            </div>
+
+            <div className={`options ${isOpen ? 'show' : ''}`}>
+                <div
+                    className={`option ${selectedOption === 'All' ? 'selected' : ''}`}
+                    onClick={() => handleSelect('All')}>
+                    All
+                </div>
+                <div
+                    className={`option ${selectedOption === 'Author' ? 'selected' : ''}`}
+                    onClick={() => handleSelect('Author')}>
+                    Author
+                </div>
+                <div
+                    className={`option ${selectedOption === 'Categories' ? 'selected' : ''}`}
+                    onClick={() => handleSelect('Categories')}>
+                    Categories
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

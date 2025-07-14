@@ -8,13 +8,31 @@ import '../App/App.css';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('Categories');
+
+  const handleFilterChange = (type) => {
+    setFilterType(type);
+  };
 
   return (
     <BrowserRouter>
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Header 
+        searchTerm={searchTerm} 
+        setSearchTerm={setSearchTerm} 
+        onFilterChange={handleFilterChange} 
+      />
       <Routes>
-        <Route path="/" element={<Home searchTerm={searchTerm} />} />
-        <Route path="/home" element={<Home searchTerm={searchTerm} />} />
+        <Route 
+          path="/" 
+          element={
+            <Home 
+              searchTerm={searchTerm} 
+              filterType={filterType} 
+              setFilterType={setFilterType} 
+            />
+          } 
+        />
+        <Route path="/home" element={<Home searchTerm={searchTerm} filterType={filterType} />} />
         <Route path="/book" element={<Book />} />
       </Routes>
       <Footer />

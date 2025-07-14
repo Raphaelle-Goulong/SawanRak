@@ -1,82 +1,134 @@
-import { useState } from 'react';
-import Data from '../../Data.json';
-import '../Home/Home.scss';
-import Card from '../../components/Card/Card';
-import Carrousel from '../../components/Carrousel/Carrousel';
-import Resume from '../../components/Resume/Resume';
+import { useState } from 'react' // Ajoutez cette importation
+import Data from '../../Data.json'
+import '../Home/Home.scss'
+import Card from '../../components/Card/Card'
+import Carrousel from '../../components/Carrousel/Carrousel'
+import Resume from '../../components/Resume/Resume'
 
+function Home({ searchTerm, filterType, setFilterType }) {
+    const [selectedBook, setSelectedBook] = useState(null) // Ajoutez cet état
+    const sortedBooks = [...Data].sort((a, b) => new Date(b.date) - new Date(a.date))
 
-function Home({ searchTerm }) {
-   const sortedBooks = [...Data].sort((a, b) => new Date(b.date) - new Date(a.date));
-  
-  const filteredBooks = searchTerm
-    ? Data.filter(book => {
-        const searchLower = searchTerm.toLowerCase();
-        return (
-          book.title.toLowerCase().includes(searchLower) ||
-          (book.auteur && book.auteur.toLowerCase().includes(searchLower))
-        );
-      })
-    : sortedBooks;
+    const handleCardClick = (book) => {
+        setSelectedBook(book)
+    }
 
-  const displayBooks = searchTerm ? filteredBooks : sortedBooks.slice(0, 3);
-// affichage 3 dernier livres 
+    const handleCloseResume = () => {
+        setSelectedBook(null)
+    }
+
+    const filteredBooks = searchTerm
+        ? Data.filter((book) => {
+              const searchLower = searchTerm.toLowerCase()
+              return (
+                  book.title.toLowerCase().includes(searchLower) ||
+                  (book.auteur && book.auteur.toLowerCase().includes(searchLower))
+              )
+          })
+        : sortedBooks
+
+    const displayBooks = searchTerm ? filteredBooks : sortedBooks.slice(0, 3)
 
     const categories = [
-        "Comédie", "Romance", "Entreprise", "Mystique", 
-        "School", "Hospital", "Ennemies to Lovers", 
-        "Action", "Red Flag", "Adulte"
-    ];
+        'Comédie',
+        'Romance',
+        'Entreprise',
+        'Mystique',
+        'School',
+        'Hospital',
+        'Ennemies to Lovers',
+        'Action',
+        'Red Flag',
+        'Adulte'
+    ]
+
+    const getFilteredBooks = () => {
+        let filtered = [...Data]
+
+        if (searchTerm) {
+            filtered = filtered.filter(
+                (book) =>
+                    book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    (book.auteur && book.auteur.toLowerCase().includes(searchTerm.toLowerCase()))
+            )
+        }
+
+        switch (filterType) {
+            case 'Author':
+                return filtered.sort((a, b) => a.auteur?.localeCompare(b.auteur))
+            case 'Categories':
+                return filtered.sort((a, b) => a.categorie?.localeCompare(b.categorie))
+            default:
+                return filtered
+        }
+    }
+
+    const finalBooks = getFilteredBooks()
 
     return (
-        <>
-            <section className="Section-Home">
-                <div className="Home">
-                    {!searchTerm ? (
-                        <>
-                            <section id="New-book">
-                                <div className="Title-Section">
-                                    <h2>Récents Ajouts</h2>
-                                </div>
-                                <div className="New-book-card">
-                                    {displayBooks.map((Book) => (
-                                        <Card key={Book.id} Book={Book} />
-                                    ))}
-                                </div>
-                            </section>
-
-                            <section className="Home-Books-section">
-                                <div className="Home-Books">
-                                    {categories.map(category => (
-                                        <Carrousel 
-                                            key={category} 
-                                            category={category} 
-                                            books={Data} 
-                                        />
-                                    ))}
-                                </div>
-                            </section>
-                        </>
-                    ) : (
-                        <section className="Search-results">
+        <section className="Section-Home">
+            <div className="Home">
+                {!searchTerm ? (
+                    <>
+                        <section id="New-book">
                             <div className="Title-Section">
-                                <h2>Résultats de recherche ({filteredBooks.length})</h2>
+                                <h2>Récents Ajouts</h2>
                             </div>
-                            <div className="Results-grid">
-                                {filteredBooks.map((Book) => (
-                                    <Card key={Book.id} Book={Book} />
+                            <div className="New-book-card">
+                                {displayBooks.map((book) => (
+                                    <Card
+                                        key={book.id}
+                                        Book={book}
+                                        onClick={() => handleCardClick(book)} // Cette méthode est correcte
+                                    />
                                 ))}
                             </div>
-                            {filteredBooks.length === 0 && (
-                                <p className="No-results">Aucun résultat trouvé</p>
-                            )}
                         </section>
-                    )}
+
+                        <section className="Home-Books-section">
+                            <div className="Home-Books">
+                                {categories.map((category) => (
+                                     <Carrousel 
+                key={category} 
+                category={category} 
+                books={Data}
+                onCardClick={handleCardClick}  // Passez la fonction de gestion du clic
+            />
+                                ))}
+                            </div>
+                        </section>
+                    </>
+                ) : (
+                    <section className="Search-results">
+                        <div className="Title-Section">
+                            <h2>Résultats de recherche ({finalBooks.length})</h2>
+                        </div>
+                        <div className="Results-grid">
+                            {finalBooks.map((book) => (
+                                <Card
+                                    key={book.id}
+                                    Book={book}
+                                    onClick={() => handleCardClick(book)} // Remplacez la div wrapper par cette version
+                                />
+                            ))}
+                        </div>
+                        {finalBooks.length === 0 && (
+                            <p className="No-results">Aucun résultat trouvé</p>
+                        )}
+                    </section>
+                )}
+            </div>
+
+            {/* Affiche le Resume si un livre est sélectionné */}
+            {selectedBook && (
+                <div className="resume-modal-overlay" onClick={() => setSelectedBook(null)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <Resume book={selectedBook} onClose={() => setSelectedBook(null)} />
+                    </div>
                 </div>
-                {!searchTerm && <Resume />}
-            </section>
-        </>
-    );
+            )}
+        </section>
+    )
 }
 
-export default Home;
+export default Home

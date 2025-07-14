@@ -1,18 +1,22 @@
-import '../Grip/Grip.scss'
+import { useState } from 'react';
+import '../Grip/Grip.scss';
+import Dropdown from '../Dropdown/Dropdown';
+import { Grip as GripIcon } from 'lucide-react';
 
-import Dropdown from '../Dropdown/Dropdown'
+function Grip({ onFilterChange }) {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-import { Grip as GripIcon } from 'lucide-react'
-
-function Grip() {
     return (
-        <>
-            <div className="Section-Grip">
-                <GripIcon />
-                {/* <Dropdown /> */}
-            </div>
-        </>
-    )
+        <div className="Section-Grip">
+            <GripIcon 
+                className="grip-icon" 
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+            />
+            {isDropdownOpen && (
+                <Dropdown onSelect={onFilterChange} />
+            )}
+        </div>
+    );
 }
 
-export default Grip
+export default Grip;
