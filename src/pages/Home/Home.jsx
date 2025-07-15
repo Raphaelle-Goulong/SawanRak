@@ -3,9 +3,10 @@ import Data from '../../Data.json'
 import '../Home/Home.scss'
 import Card from '../../components/Card/Card'
 import Carrousel from '../../components/Carrousel/Carrousel'
+import Categories from '../../components/Sort/Categories/Categories'
 import Resume from '../../components/Resume/Resume'
 
-function Home({ searchTerm, filterType, setFilterType }) {
+function Home({ searchTerm, filterType, setFilterType, }) {
     const [selectedBook, setSelectedBook] = useState(null) // Ajoutez cet état
     const sortedBooks = [...Data].sort((a, b) => new Date(b.date) - new Date(a.date))
 
@@ -87,16 +88,10 @@ function Home({ searchTerm, filterType, setFilterType }) {
 
                         <section className="Home-Books-section">
                             <div className="Home-Books">
-                                {categories.map((category) => (
-                                    <Carrousel
-                                        key={category}
-                                        category={category}
-                                        books={Data}
-                                        onCardClick={handleCardClick} // Passez la fonction de gestion du clic
-                                    />
-                                ))}
+                                <Categories filterType={filterType} onCardClick={handleCardClick}/>
                             </div>
                         </section>
+                    
                     </>
                 ) : (
                     <section className="Search-results">

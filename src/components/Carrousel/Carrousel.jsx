@@ -51,7 +51,7 @@ function Carrousel({ category, books , onCardClick}) {
                      <Card 
                         key={book.id} 
                         Book={book} 
-                        onClick={() => onCardClick(book)}  // Passez l'événement
+                        onClick={() => onCardClick(book)}   // Passez l'événement
                     />
                 ))}
                 <ChevronRight id="arrow-right" size={28} onClick={nextSlide} />
