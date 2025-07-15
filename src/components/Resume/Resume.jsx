@@ -41,9 +41,13 @@ const [isVisible, setIsVisible] = useState(true);
                 </div> 
                  <div className="Categorie">
                   
-                      {book.categories?.map((category, index) => (
-                        <Tags key={index} text={category} />
-                    ))}
+                     {(Array.isArray(book.categorie) 
+                    ? book.categorie 
+                    : [book.categorie].filter(Boolean)
+                ).map((category, index) => (
+                    <Tags key={index} text={category} />
+                ))}
+                  
                         
                     </div>
                 <div className="chapter-available">

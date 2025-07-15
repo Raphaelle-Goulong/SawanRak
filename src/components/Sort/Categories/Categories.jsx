@@ -21,14 +21,20 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
     const books = Data
 
     // Grouper les livres par auteur
-    const booksByAuthor = Data.reduce((acc, book) => {
-        const author = book.auteur || 'Inconnu' // Gère les auteurs non spécifiés
-        if (!acc[author]) {
-            acc[author] = []
-        }
-        acc[author].push(book)
-        return acc
-    }, {})
+     // Récupération DYNAMIQUE de toutes les catégories existantes
+    const allCategories = [...new Set(
+        books.flatMap(book => 
+            Array.isArray(book.categorie) ? book.categorie : [book.categorie]
+        ).filter(Boolean) // Filtre les valeurs nulles/undefined
+    )].sort(); // Tri alphabétique
+
+    // Grouper les livres par auteur (votre version est bonne)
+    const booksByAuthor = books.reduce((acc, book) => {
+        const author = book.auteur || 'Inconnu';
+        if (!acc[author]) acc[author] = [];
+        acc[author].push(book);
+        return acc;
+    }, {});
 
     const sortedAuthors = Object.keys(booksByAuthor).sort()
 
@@ -38,15 +44,18 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
             {filterType === 'Categories' && (
                 <div className="Section-Categories">
                     <h2 className='Title-Categories'>Catégories</h2>
-                    {categories.map((category) => (
+                    {allCategories.map((category) => (
                         <div key={category} className="Category-group">
-                            {/* <h3 className="Category-title">{category}</h3> */}
                             <div className="Category-books">
-                                <Carrousel
+                                 <Carrousel
                                     category={category}
-                                    books={books}
+                                    books={books.filter(book => 
+                                        Array.isArray(book.categorie) 
+                                            ? book.categorie.includes(category)
+                                            : book.categorie === category
+                                    )}
                                     onCardClick={onClick}
-                                />
+                                    />
                             </div>
                         </div>
                     ))}
