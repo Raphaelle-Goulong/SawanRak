@@ -1,27 +1,115 @@
 .Carrousel {
-    margin: 50px 0px;
+    margin: 50px 0;
+    // padding: 0 20px;
+    position: relative;
+    
     .Title-carrousel {
-        margin: 40px 0px;
+        margin: 0 0 20px 20px;
         font-family: 'Marcellus', serif;
-        font-size: large;
+        font-size: 1.5rem;
+        color: #fff;
     }
-    .Cards-carrousel {
+    
+    .carrousel-container {
         display: flex;
-        justify-content: space-around;
         align-items: center;
-        // gap: 20px;
         position: relative;
-        #arrow-left{
+        
+        .nav-button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: absolute;
-            left: 1px;
-            // background-color: red;
-
+            z-index: 10;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(1.1);
+            }
+            
+            &.left {
+                left: 0;
+            }
+            
+            &.right {
+                right: 0;
+            }
         }
-        #arrow-right{
-            position: absolute;
-            right: 1px;
-            // background-color: rgb(0, 132, 255);
+        
+        .cards-container {
+            display: flex;
+            gap: 15px;
+            padding: 10px 40px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            
+            &.animating {
+                transition: transform 0.5s ease;
+            }
+            
+            .card-wrapper {
+                transition: transform 0.3s ease;
+                flex: 0 0 auto;
+                
+                &:hover {
+                    transform: scale(1.05);
+                    z-index: 5;
+                }
+                
+                &.center {
+                    transform: scale(1.1);
+                    
+                    &:hover {
+                        transform: scale(1.15);
+                    }
+                }
+            }
+        }
+    }
+}
 
+// Responsive
+@media (max-width: 768px) {
+    .Carrousel {
+        .carrousel-container {
+            .cards-container {
+                padding: 10px 30px;
+                gap: 10px;
+                
+                .card-wrapper {
+                    &.center {
+                        transform: scale(1.05);
+                        
+                        &:hover {
+                            transform: scale(1.08);
+                        }
+                    }
+                }
+            }
+            
+            .nav-button {
+                height: 30px;
+                width: 30px;
+                
+                svg {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
         }
     }
 }

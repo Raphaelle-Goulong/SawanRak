@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import '../Resume/Resume.scss'
 
 import Card from '../../components/Card/Card'
@@ -8,6 +10,14 @@ import Button from '../Button/Button'
 import { X } from 'lucide-react'
 
 function Resume({ book, onClose }) {
+
+
+const navigate = useNavigate();
+
+    const handleReadBook = () => {
+        navigate(`/book/${book.id}`, { state: { book } });
+        console.log("Navigation déclenchée", book.id); // Vérifiez dans la console
+    };
 
 const [isVisible, setIsVisible] = useState(true);
 
@@ -22,6 +32,7 @@ const [isVisible, setIsVisible] = useState(true);
 
 
     return (
+        
         <section className="Section-Resume">
             <div className="Top-resume">
                 <h2>{book.title}</h2>
@@ -63,7 +74,7 @@ const [isVisible, setIsVisible] = useState(true);
                     </div>
                 </div>
             </div>
-            <div className='Btn-start'>
+            <div className='Btn-start'onClick={handleReadBook}>
                <Button />
             </div>
             

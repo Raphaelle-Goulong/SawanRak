@@ -1,5 +1,4 @@
 .Navbar-section {
-
     .Navbar {
         display: flex;
         flex-direction: column;
@@ -9,13 +8,18 @@
             justify-content: space-between;
             align-items: center;
             color: white;
+            cursor: pointer;
+            .navbar-logo {
+                text-decoration: none;
+            color: white;
 
+            }
             h1 {
                 font-family: 'Marcellus', serif;
                 font-size: 20px;
                 padding: 10px;
             }
-            .menu{
+            .menu {
                 padding: 10px;
             }
         }
@@ -24,7 +28,6 @@
             // background-color: grey;
             height: 50px;
             color: white;
-            
         }
     }
 }

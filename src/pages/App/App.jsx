@@ -33,7 +33,7 @@ function App() {
           } 
         />
         <Route path="/home" element={<Home searchTerm={searchTerm} filterType={filterType} />} />
-        <Route path="/book" element={<Book />} />
+        <Route path="/book/:id" element={<Book />} />
       </Routes>
       <Footer />
     </BrowserRouter>

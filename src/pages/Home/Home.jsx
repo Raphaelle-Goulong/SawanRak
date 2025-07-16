@@ -1,4 +1,4 @@
-import { useState } from 'react' // Ajoutez cette importation
+import { useState } from 'react'
 import Data from '../../Data.json'
 import '../Home/Home.scss'
 import Card from '../../components/Card/Card'
@@ -6,9 +6,16 @@ import Carrousel from '../../components/Carrousel/Carrousel'
 import Categories from '../../components/Sort/Categories/Categories'
 import Resume from '../../components/Resume/Resume'
 
-function Home({ searchTerm, filterType, setFilterType, }) {
-    const [selectedBook, setSelectedBook] = useState(null) // Ajoutez cet état
-    const sortedBooks = [...Data].sort((a, b) => new Date(b.date) - new Date(a.date))
+function Home({ searchTerm, filterType, setFilterType }) {
+    const [selectedBook, setSelectedBook] = useState(null)
+    
+    // Normalisation des catégories (transformer les strings en tableaux)
+    const normalizedBooks = Data.map(book => ({
+        ...book,
+        categorie: Array.isArray(book.categorie) ? book.categorie : [book.categorie]
+    }))
+
+    const sortedBooks = [...normalizedBooks].sort((a, b) => new Date(b.date) - new Date(a.date))
 
     const handleCardClick = (book) => {
         setSelectedBook(book)
@@ -19,7 +26,7 @@ function Home({ searchTerm, filterType, setFilterType, }) {
     }
 
     const filteredBooks = searchTerm
-        ? Data.filter((book) => {
+        ? normalizedBooks.filter((book) => {
               const searchLower = searchTerm.toLowerCase()
               return (
                   book.title.toLowerCase().includes(searchLower) ||
@@ -30,21 +37,13 @@ function Home({ searchTerm, filterType, setFilterType, }) {
 
     const displayBooks = searchTerm ? filteredBooks : sortedBooks.slice(0, 3)
 
-    const categories = [
-        'Comédie',
-        'Romance',
-        'Entreprise',
-        'Mystique',
-        'School',
-        'Hospital',
-        'Ennemies to Lovers',
-        'Action',
-        'Red Flag',
-        'Adulte'
-    ]
+    // Liste de toutes les catégories uniques
+    const allCategories = [...new Set(
+        normalizedBooks.flatMap(book => book.categorie)
+    )].filter(Boolean) // Filtrer les valeurs nulles/undefined
 
     const getFilteredBooks = () => {
-        let filtered = [...Data]
+        let filtered = [...normalizedBooks]
 
         if (searchTerm) {
             filtered = filtered.filter(
@@ -58,14 +57,16 @@ function Home({ searchTerm, filterType, setFilterType, }) {
             case 'Author':
                 return filtered.sort((a, b) => a.auteur?.localeCompare(b.auteur))
             case 'Categories':
-                return filtered.sort((a, b) => a.categorie?.localeCompare(b.categorie))
+                return filtered.sort((a, b) => a.categorie[0]?.localeCompare(b.categorie[0]))
             default:
                 return filtered
         }
     }
 
     const finalBooks = getFilteredBooks()
-
+console.log("Données brutes:", Data);
+console.log("Livres normalisés:", normalizedBooks);
+console.log("Catégories uniques:", allCategories);
     return (
         <section className="Section-Home">
             <div className="Home">
@@ -80,7 +81,7 @@ function Home({ searchTerm, filterType, setFilterType, }) {
                                     <Card
                                         key={book.id}
                                         Book={book}
-                                        onClick={() => handleCardClick(book)} // Cette méthode est correcte
+                                        onClick={() => handleCardClick(book)}
                                     />
                                 ))}
                             </div>
@@ -88,10 +89,16 @@ function Home({ searchTerm, filterType, setFilterType, }) {
 
                         <section className="Home-Books-section">
                             <div className="Home-Books">
-                                <Categories filterType={filterType} onCardClick={handleCardClick}/>
+                                {allCategories.map(category => (
+                                    <Carrousel 
+                                        key={category}
+                                        category={category}
+                                        books={normalizedBooks}
+                                        onCardClick={handleCardClick}
+                                    />
+                                ))}
                             </div>
                         </section>
-                    
                     </>
                 ) : (
                     <section className="Search-results">
@@ -103,7 +110,7 @@ function Home({ searchTerm, filterType, setFilterType, }) {
                                 <Card
                                     key={book.id}
                                     Book={book}
-                                    onClick={() => handleCardClick(book)} // Remplacez la div wrapper par cette version
+                                    onClick={() => handleCardClick(book)}
                                 />
                             ))}
                         </div>
@@ -114,7 +121,6 @@ function Home({ searchTerm, filterType, setFilterType, }) {
                 )}
             </div>
 
-            {/* Affiche le Resume si un livre est sélectionné */}
             {selectedBook && (
                 <div className="resume-modal-overlay" onClick={() => setSelectedBook(null)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
