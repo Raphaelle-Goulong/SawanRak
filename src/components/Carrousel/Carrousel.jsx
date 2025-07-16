@@ -1,24 +1,39 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import '../Carrousel/Carrousel.scss'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Card from '../Card/Card'
 
 function Carrousel({ category, books, onCardClick }) {
-    const [startIndex, setStartIndex] = useState(0)
+       const [startIndex, setStartIndex] = useState(0)
     const [isAnimating, setIsAnimating] = useState(false)
     const carrouselRef = useRef(null)
     
-    // Filtre des livres corrigé pour gérer les tableaux de catégories
-    const filteredBooks = books.filter((book) => {
-        if (Array.isArray(book.categorie)) {
-            return book.categorie.includes(category)
-        } else {
-            return book.categorie === category
-        }
-    })
-    
-    const visibleItems = 5 // Nombre d'éléments visibles
+    // Filtrage des livres - Correction ici (parenthèse manquante)
+    const filteredBooks = books.filter(book => 
+        book.categorie && 
+        (Array.isArray(book.categorie) 
+            ? book.categorie.includes(category) 
+            : book.categorie === category)
+    ) // Parenthèse fermante ajoutée ici
 
+    // Calcul dynamique du nombre d'éléments visibles
+    const [visibleItems, setVisibleItems] = useState(5)
+    const containerRef = useRef(null)
+
+    useEffect(() => {
+        const calculateVisibleItems = () => {
+            if (containerRef.current) {
+                const containerWidth = containerRef.current.offsetWidth
+                const cardWidth = 180 // Largeur approximative de vos cartes + margin
+                const newVisibleItems = Math.floor(containerWidth / cardWidth)
+                setVisibleItems(Math.max(1, newVisibleItems))
+            }
+        }
+
+        calculateVisibleItems()
+        window.addEventListener('resize', calculateVisibleItems)
+        return () => window.removeEventListener('resize', calculateVisibleItems)
+    }, [])
     // Fonction pour passer au slide suivant
     const nextSlide = () => {
         if (isAnimating || filteredBooks.length <= visibleItems) return

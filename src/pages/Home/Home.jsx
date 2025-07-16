@@ -62,11 +62,9 @@ function Home({ searchTerm, filterType, setFilterType }) {
                 return filtered
         }
     }
-
-    const finalBooks = getFilteredBooks()
-console.log("Données brutes:", Data);
-console.log("Livres normalisés:", normalizedBooks);
-console.log("Catégories uniques:", allCategories);
+    
+const finalBooks = getFilteredBooks()
+  
     return (
         <section className="Section-Home">
             <div className="Home">
@@ -89,14 +87,18 @@ console.log("Catégories uniques:", allCategories);
 
                         <section className="Home-Books-section">
                             <div className="Home-Books">
-                                {allCategories.map(category => (
+                                {/* {allCategories.map(category => (
                                     <Carrousel 
                                         key={category}
                                         category={category}
                                         books={normalizedBooks}
                                         onCardClick={handleCardClick}
                                     />
-                                ))}
+                                ))} */}
+                                 <Categories 
+                                filterType={filterType}
+                                onCardClick={handleCardClick}
+                            />
                             </div>
                         </section>
                     </>
