@@ -1,3 +1,27 @@
-// .dropdown{
-//     display: none;
-// }
+.Section-Grip {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .grip-icon {
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+// Assurez-vous que le dropdown a une position absolue
+.dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 100;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-width: 150px;
+    padding: 8px 0;
+}

@@ -2,19 +2,19 @@
     margin: 50px 0;
     // padding: 0 20px;
     position: relative;
-    
+
     .Title-carrousel {
         margin: 0 0 20px 20px;
         font-family: 'Marcellus', serif;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         color: #fff;
     }
-    
+
     .carrousel-container {
         display: flex;
         align-items: center;
         position: relative;
-        
+
         .nav-button {
             background: rgba(0, 0, 0, 0.5);
             border: none;
@@ -29,50 +29,50 @@
             position: absolute;
             z-index: 10;
             transition: all 0.3s ease;
-            
+
             &:hover {
                 background: rgba(255, 255, 255, 0.2);
                 transform: scale(1.1);
             }
-            
+
             &.left {
                 left: 0;
             }
-            
+
             &.right {
                 right: 0;
             }
         }
-        
+
         .cards-container {
             display: flex;
             gap: 15px;
-            padding: 10px 10px;
+            // padding: 10px 30px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            
+
             &::-webkit-scrollbar {
                 display: none;
             }
-            
+
             &.animating {
                 transition: transform 0.5s ease;
             }
-            
+
             .card-wrapper {
                 transition: transform 0.3s ease;
                 flex: 0 0 auto;
-                
+
                 &:hover {
                     transform: scale(1.05);
                     z-index: 5;
                 }
-                
+
                 &.center {
                     transform: scale(1.1);
-                    
+
                     &:hover {
                         transform: scale(1.15);
                     }
@@ -87,24 +87,24 @@
     .Carrousel {
         .carrousel-container {
             .cards-container {
-                padding: 10px 30px;
+                padding: 10px 10px;
                 gap: 10px;
-                
+
                 .card-wrapper {
                     &.center {
                         transform: scale(1.05);
-                        
+
                         &:hover {
                             transform: scale(1.08);
                         }
                     }
                 }
             }
-            
+
             .nav-button {
                 height: 30px;
                 width: 30px;
-                
+
                 svg {
                     width: 18px;
                     height: 18px;

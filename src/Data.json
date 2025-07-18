@@ -19,7 +19,7 @@
         "url": "/Books/AFFAIR.docx",
         "auteur": "Chao Planoy",
         "categorie": ["Drame", "Romance"],
-        "description": "",
+        "description": "Je suis Pleng, née avec une vie parfaite, mais tout a basculé très vite après la faillite de ma famille. Ma vie n'était pas si mal quand j'avais mon amie d'enfance, Wan Viva, avec qui j'ai grandi. Mais pour une raison malheureuse, j'ai dû partir. Plus d'une décennie plus tard, le destin a joué son rôle en nous réunissant. Tous les souvenirs ont refait surface, et les sentiments sont plus forts qu'avant. C'est indéniable, mais nous sommes toutes les deux des femmes et les meilleures amies du monde, et en plus de ça, elle n'est pas disponible...",
         "note": "4",
         "chapters": 43,
         "date": "2024-12-01",
@@ -32,7 +32,7 @@
         "url": "/Books/APPLE.docx",
         "auteur": "Chao Planoy",
         "categorie": ["Comédie", "Romance"],
-        "description": "",
+        "description": "Chris, après une greffe de cornée, est hantée par des yeux vus en rêve. En les dessinant, elle découvre qu'ils appartiennent à Aontakarn, une athlète. Obsédée, Chris devient sa fan secrète et lui écrit des lettres signées 'APPLE', racontant son amour pour une autre femme.",
         "note": "4",
         "chapters": 40,
         "date": "2024-12-01"
@@ -798,9 +798,9 @@
         "title": "Shh... Or they'll find out",
         "cover": "/Images/Shh... Or they'll find out.webp",
         "url": "/Books/Shh... Or they'll find out.docx",
-        "auteur": "Zezeho",
-        "categorie": "Romance",
-        "description": "",
+        "auteur": "Aki_Kaze",
+        "categorie": ["Romance"],
+        "description": "Alice, étudiante thaïlandaise en Master à Middlesbrough, Angleterre, rêve de trouver l'amour. Elle tombe éperdument amoureuse de sa colocataire britannique, Daphne, charismatique et attentionnée. Cependant, Alice craint que des aveux ne rendent leur vie en résidence insupportable si elle est rejetée. Le roman explore la durée de son secret, les sentiments de Daphne, et la vie étudiante riche en études, voyages, gastronomie et amour au cœur de Middlesbrough.",
         "note": "null",
         "chapters": 24,
         "date": "2025-01-24"
@@ -847,10 +847,10 @@
         "cover": "/Images/Operation 13.webp",
         "url": "/Books/Operation 13.docx",
         "auteur": "Nalan",
-        "categorie": "Action",
-        "description": "",
+        "categorie": ["Romance","Adulte","Action"],
+        "description": "L'agent spécial Yanin, cheffe de l'équipe antiterroriste, doit faire face à des événements inattendus qui surviennent au travail, surtout lorsqu'elle est forcée d'accepter un nouvel agent dans son équipe. Yanin pourra-t-elle gérer cette situation qui pourrait mettre sa vie en péril ?",
         "note": "null",
-        "chapters": 24,
+        "chapters": 35,
         "date": "2025-01-26"
     },
     {
@@ -859,10 +859,10 @@
         "cover": "/Images/Love or Lust.webp",
         "url": "/Books/Love Or Lust.docx",
         "auteur": "Sarsaparilla",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance","Adulte"],
+        "description": "Parce que je n'ai jamais été aimé et que je n'ai jamais été désiré, j'ai finalement arrêté d'attendre... La luxure et le désir sont les seules choses qui peuvent combler le vide dans mon cœur.",
         "note": "3",
-        "chapters": 24,
+        "chapters": 18,
         "date": "2025-01-26"
     },
     {
@@ -871,10 +871,10 @@
         "cover": "/Images/Little bit little more.webp",
         "url": "/Books/Little bit little more.docx",
         "auteur": "Chao Planoy",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance","Comédie"],
+        "description": "Meen Meena, une femme indépendante et célibataire, cache depuis toujours son amour pour Yiwha Wanyiwha, une ancienne camarade courageuse et éprise de justice. Sa lâcheté l'a empêchée d'agir par le passé. La réunion des anciens élèves les réunit, ravivant leur lien. Cependant, de nombreux obstacles menacent leur amour naissant. La question demeure : Meen, la femme 'cool', aura-t-elle la force de surmonter ces défis pour vivre cet amour ?",
         "note": "3",
-        "chapters": 24,
+        "chapters": 36,
         "date": "2025-02-22"
     },
     {
@@ -883,10 +883,10 @@
         "cover": "/Images/The Secret of Us (Special Chapters).webp",
         "url": "/Books/The Secret of Us (Special Chapters).docx",
         "auteur": "Mee Nam",
-        "categorie": "Ennemies to Lovers",
-        "description": "",
+        "categorie": ["Romance","Ennemies to Lovers"],
+        "description": "Ils vous manquent ? L'histoire du Dr Fahlada et de Sanithada se poursuit dans des chapitres remplis de doux moments, attendant votre retour et témoin de leur amour.",
         "note": "3",
-        "chapters": 24,
+        "chapters": 5,
         "date": "2025-02-28"
     },
     {
@@ -895,10 +895,10 @@
         "cover": "/Images/Harmony Secret.webp",
         "url": "/Books/Harmony Secret.docx",
         "auteur": "Serenista",
-        "categorie": "Ennemies to Lovers",
-        "description": "",
+        "categorie": ["Romance","Ennemies to Lovers"],
+        "description": "Nous nous connaissons comme des concurrents en affaires. Puis, nous réalisons qu'il y a des moments où nous voulons être aimables en privé et entre nous.",
         "note": "3",
-        "chapters": 24,
+        "chapters": 37,
         "date": "2025-02-28"
     },
     {
@@ -907,10 +907,10 @@
         "cover": "/Images/Harmony Secret(Special).webp",
         "url": "/Books/Harmony Secret(Special).docx",
         "auteur": "Serenista",
-        "categorie": "Ennemies to Lovers",
-        "description": "",
+        "categorie": ["Romance","Ennemies to Lovers"],
+        "description": "Ayant été rivales lors d'une féroce vente aux enchères, Aiwarin et Maevika deviennent un couple officiel, révélant leur relation cachée. Leur partenariat s'étend du travail au partage de moments privilégiés. Malgré cette révélation publique, leurs moments intimes restent un secret exclusif à leur couple, soulignant une couche de confidentialité préservée au sein de leur union désormais ouverte.",
         "note": "3",
-        "chapters": 24,
+        "chapters": 6,
         "date": "2025-02-28"
     },
     {
@@ -919,10 +919,10 @@
         "cover": "/Images/Love Begins with a Terrible Kiss.webp",
         "url": "/Books/Love Begins with a Terrible Kiss.docx",
         "auteur": "Northern Red Panda",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance"],
+        "description": "Après une terrible rupture....  ",
         "note": "2",
-        "chapters": 24,
+        "chapters": 35,
         "date": "2025-03-03"
     },
     {
@@ -931,10 +931,10 @@
         "cover": "/Images/Mirror.webp",
         "url": "/Books/Mirror.docx",
         "auteur": "Chao Planoy",
-        "categorie": "Mystique",
-        "description": "",
+        "categorie": ["Romance","Mystique"],
+        "description": "Fuen, une femme au cœur opéré, est socialement maladroite. Elle est courtisée par sa patronne, Melada ('Khun Mui'), dont l'amour sans raison apparente trouble Fuen. Fuen doute de la sincérité de Melada. Un jour, Fuen découvre Faen, son double exact mais avec une personnalité différente, avec qui elle communique via des miroirs. Elles vivent dans des mondes parallèles. Cependant, l'arrivée inattendue de Faen dans le monde de Fuen déclenche une série de problèmes.",
         "note": "3",
-        "chapters": 24,
+        "chapters": 45,
         "date": "2025-03-12"
     },
     {
@@ -943,10 +943,10 @@
         "cover": "/Images/Like A Palette.webp",
         "url": "/Books/Like A Palette.docx",
         "auteur": "Zezeho",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance"],
+        "description": "Like a Palette: All Eyes on Jane est une comédie romantique universitaire où Jane, étudiante en Beaux-Arts, maladroite et dramatique, rencontre Dai, une aînée en architecture et ancienne Miss University Star. Jane pense que Dai la déteste. Cependant, suite à un baiser accidentel et un mentorat forcé, elles se rapprochent. Finalement, Dai révèle ses véritables sentiments : elle aime Jane. S'ensuit une série de flirts maladroits et de situations comiques, tissant une histoire d'amour inattendue mais parfaite.",
         "note": "null",
-        "chapters": 24,
+        "chapters": 21,
         "date": "2025-03-12"
     },
     {
@@ -955,10 +955,10 @@
         "cover": "/Images/Midnight Fligh.webp",
         "url": "/Books/MIDNIGHT FLIGHT.docx",
         "auteur": "Chao Planoy",
-        "categorie": "Comédie",
-        "description": "",
+        "categorie": ["Romance","Adulte","Mystique"],
+        "description": "Saisi, dont la profession est moralement ambiguë (elle aide ou exploite la faiblesse d'autrui), rencontre India, une décoratrice qui la considère comme une arnaqueuse. Poussée par l'envie de la 'vaincre', Saisi se réveille mystérieusement dans le corps de Narin, l'homme qu'India déteste et qu'elle s'apprête à quitter. Cette expérience révèle à Saisi la vérité sur India, ravivant des sentiments de culpabilité et un désir de réparation. Son but change, passant de la 'victoire' au réconfort. Elle veut être le soutien silencieux qui apaise India, comme un tournesol devant le soleil.",
         "note": "4",
-        "chapters": 24,
+        "chapters": 45,
         "date": "2025-04-10"
     },
     {
@@ -967,23 +967,23 @@
         "cover": "/Images/My Only Sunshine.webp",
         "url": "/Books/My Only Sunshine.docx",
         "auteur": "Flower of memory",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance"],
+        "description": "Comme le soleil, brillant et aveuglant, dans le ciel... le seul et unique, toujours présent dans le cœur.",
         "note": "2",
-        "chapters": 24,
+        "chapters": 26,
         "date": "2025-04-10"
     },
     {
         "id": "82",
-        "title": "My Sweet Love",
-        "cover": "/Images/My Sweet Love.webp",
-        "url": "/Books/My Sweet Love.docx",
-        "auteur": "Anonymous",
-        "categorie": "Romance",
-        "description": "",
+        "title": "Rollercoaster",
+        "cover": "/Images/Rollercoaster.webp",
+        "url": "/Books/Rollercoaster.docx",
+        "auteur": "Reallyb",
+        "categorie": ["Romance","Adulte"],
+        "description": "Vivre sans aucune prudence commence à avoir des répercussions considérables. Se jeter dans des relations aussi turbulentes qu'une balade en montagnes russes est en train de faire goûter aux amateurs de sensations fortes d'autres sentiments, au-delà du simple plaisir.",
         "note": "null",
-        "chapters": 24,
-        "date": "2024-04-10"
+        "chapters": 32,
+        "date": "2025-07-17"
     },
     {
         "id": "83",
@@ -991,11 +991,11 @@
         "cover": "/Images/ClaireBell.webp",
         "url": "/Books/ClaireBell.docx",
         "auteur": "KA9ESAMA",
-        "categorie": "Adulte",
-        "description": "",
+        "categorie": ["Romance","Adulte"],
+        "description": "Bell, incarcérée pour quinze mois à tort pour possession de drogue, se retrouve dans un monde carcéral brutal. Confrontée à la cruauté des détenues et à l'indifférence du personnel, elle est au bord du gouffre. Son seul espoir de survie repose sur Claire 'Dix-neuf Cicatrices', la figure la plus redoutée de la prison, mystérieuse et intouchable. Cependant, la confiance est un luxe rare derrière les barreaux, et tomber amoureuse de Claire pourrait bien être le danger ultime pour Bell.",
         "note": "null",
-        "chapters": 24,
-        "date": "2025-04-26"
+        "chapters": 11,
+        "date": "2025-07-17"
     },
     {
         "id": "84",
@@ -1003,8 +1003,8 @@
         "cover": "/Images/STOP YOUR HEART (FOR ME).webp",
         "url": "/Books/STOP YOUR HEART (FOR ME).docx",
         "auteur": "Flower of memory",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance"],
+        "description": "Perçue comme une femme blasée en raison de sa carrière jugée salace, elle attire deux types d'admirateurs : l'un, attiré uniquement par le désir physique, l'autre, prêt à tout sacrifier par amour. Cette dualité met en lumière le contraste entre le jugement superficiel et l'amour véritable qu'elle inspire.",
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1015,8 +1015,8 @@
         "cover": "/Images/UNCERTAINTY.webp",
         "url": "/Books/UNCERTAINTY.docx",
         "auteur": "Flower of memory",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance"],
+        "description": "Perçue comme une femme blasée en raison de sa carrière jugée salace, elle attire deux types d'admirateurs : l'un, attiré uniquement par le désir physique, l'autre, prêt à tout sacrifier par amour. Cette dualité met en lumière le contraste entre le jugement superficiel et l'amour véritable qu'elle inspire.",
         "note": "null",
         "chapters": 24,
         "date": "2025-04-26"
@@ -1027,23 +1027,23 @@
         "cover": "/Images/WARM EYES.webp",
         "url": "/Books/WARM EYES.docx",
         "auteur": "Pillow_Mark",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance"],
+        "description": "Nara avait un faux mariage avec Khun Plengphrin, une femme aveugle. Plengphrin cherchait une protection contre les chasseurs de fortune, tandis que Nara visait la sécurité aux États-Unis. Leur arrangement de cinq mois, basé sur l'intérêt mutuel, s'est terminé par le retour de Nara en Thaïlande pour une vie authentique. Cinq ans plus tard, Plengphrin réapparaît comme cliente majeure de Nara, ses yeux, autrefois aveugles, étant maintenant brillants et voyants, marquant une réunion inattendue et transformée.",
         "note": "null",
-        "chapters": 24,
+        "chapters": 30,
         "date": "2025-04-26"
     },
     {
         "id": "87",
-        "title": "STOP BEING EVIL (TO YOUR LOVER)",
-        "cover": "/Images/STOP BEING EVIL (TO YOUR LOVER).webp",
-        "url": "/Books/STOP BEING EVIL.docx",
+        "title": "REMAIN Vol 01",
+        "cover": "/Images/REMAIN.webp",
+        "url": "/Books/Remain Vol.01.docx",
         "auteur": "Flower of memory",
-        "categorie": "Romance",
-        "description": "",
+        "categorie": ["Romance"],
+        "description": "Dans cette interaction tendue, un homme propose une relation basée sur le sexe et l'argent, sans limite de paiement. La femme, malgré sa proposition de statut de 'petite amie', est rapidement ramenée à la réalité par l'homme qui sous-entend qu'elle devrait être plus réaliste quant à leurs 'négociations'. Son sourire n'est qu'une façade masquant l'amertume et le fait qu'elle n'est pas insensible à ses propos. Finalement, elle accepte, admettant ouvertement que la promesse de richesse est irrésistible.",
         "note": "null",
-        "chapters": 24,
-        "date": "2025-04-26"
+        "chapters": 28,
+        "date": "2025-07-26"
     },
     {
         "id": "88",
@@ -1054,7 +1054,7 @@
         "categorie": ["Romance", "Entreprise"],
         "description": "Sadanun, une chercheuse en alimentation 'hot nerd', avait un plan de 'coup d'un soir' avec une femme qu'elle ne connaissait pas. La condition était claire : pas de sentiments au-delà de l'acte. Mais l'autre personne a rompu cet accord en cherchant à établir une relation émotionnelle. Sadanun a donc mis fin à leur nuit passionnée et l'a quittée. Cependant, le monde est petit. La femme avec qui elle avait eu cette nuit torride était Piangrawin, la fille du président de l'entreprise où Sadanun travaille. Piangrawin la poursuit et la dérange comme un petit chiot, s'accrochant à ses jambes au point de la faire trébucher tous les jours. Elle a même déjà choisi des noms pour leurs futurs enfants !",
         "note": "null",
-        "chapters": 24,
+        "chapters": 51,
         "date": "2025-04-26"
     },
     {
@@ -1099,8 +1099,8 @@
         "cover": "/Images/7 Years.webp",
         "url": "/Books/7 Years.docx",
         "auteur": "Chao Planoy",
-        "categorie": "Adulte",
-        "description": "",
+        "categorie": ["Adulte", "Romance"],
+        "description": "Mew et Egg sont un couple de femmes ensemble depuis sept ans, dont trois ans de vie commune par amour. Malgré leur forte relation, elles sont constamment mises en garde contre la 'malédiction du chiffre sept', qui prédit la rupture des couples après cette période. Cette superstition inquiète Egg. Cependant, Mew refuse de croire qu'un simple chiffre puisse briser leur amour profond, défiant l'idée que leur relation puisse être vaincue par une superstition.",
         "note": "3",
         "chapters": 28,
         "date": "2025-05-18"
@@ -1111,10 +1111,10 @@
         "cover": "/Images/Dangerous Queen.webp",
         "url": "/Books/Dangerous Queen.docx",
         "auteur": "คุณผู้หญิง",
-        "categorie": "Adulte",
-        "description": "",
+        "categorie": ["Adulte", "Romance"],
+        "description": "Dans ma vie, je n'ai qu'une seule personne préférée.",
         "note": "1",
-        "chapters": 24,
+        "chapters": 23,
         "date": "2025-05-18"
     },
     {
@@ -1122,11 +1122,11 @@
         "title": "Ferris Wheel",
         "cover": "/Images/Ferris Wheel.webp",
         "url": "/Books/Ferris Wheel.docx",
-        "auteur": "reallyb",
-        "categorie": "Romance",
-        "description": "",
+        "auteur": "Reallyb",
+        "categorie": ["Adulte", "Romance"],
+        "description": "Un petit accident en décembre change la vie d'une femme. L'aide apportée à une lycéenne débouche sur une offre de repas de remerciement. En acceptant, elle trouve un nouveau 'chez-soi' et rompt trois années de solitude et de nostalgie de son amour passé. Cette année, le mois de décembre n'est plus synonyme de tristesse. Elle ne passera plus Noël seule, à penser à Pure. Une invitation à célébrer ensemble marque un nouveau départ.",
         "note": "null",
-        "chapters": 24,
+        "chapters": 3,
         "date": "2025-05-26"
     },
     {
@@ -1135,8 +1135,8 @@
         "cover": "/Images/The Girl to Khun Yai.webp",
         "url": "/Books/The Girl to Khun Yai.docx",
         "auteur": "ยี่สิบแปดบวกสอง",
-        "categorie": "Adulte",
-        "description": "",
+        "categorie": ["Adulte", "Romance"],
+        "description": "Anueng, étudiante en 4ème année, finance ses études secrètement via un compte Twitter où elle vend du contenu exclusif. Elle ignore que parmi ses abonnés silencieux se trouve 'Khun Yai', un PDG de 35 ans. Leur relation inattendue est basée sur la discrétion et le secret.",
         "note": "3",
         "chapters": 24,
         "date": "2025-05-26"
@@ -1147,10 +1147,10 @@
         "cover": "/Images/Be my Universe.webp",
         "url": "/Books/Be my Universe.docx",
         "auteur": "khunphuying",
-        "categorie": "School",
-        "description": "",
+        "categorie": ["School", "Romance"],
+        "description": "La personne devant qui j'ose pleurer et faire des caprices sans honte. La personne qui était prête à me laisser casser son crayon de couleur préféré. La personne qui me faisait monter à l'arrière de son vélo. La personne qui partageait toujours ses écouteurs quand il pleuvait. La personne qui restera à mes côtés, comme la Terre aux côtés de la Lune. Cette personne ne peut être personne d'autre que toi.'L'amour arrive vite, comme quelqu'un l'a dit, et parfois si vite que nous ne réalisons même pas que c'est de l'amour.'",
         "note": "null",
-        "chapters": 24,
+        "chapters": 4,
         "date": "2025-05-30"
     },
     {
@@ -1159,10 +1159,10 @@
         "cover": "/Images/Hello! How Are You.webp",
         "url": "/Books/Hello! How Are You.docx",
         "auteur": "SIIX",
-        "categorie": "Romance",
+        "categorie": ["Adulte", "Romance"],
         "description": "« Non, ça va tacher. » « Mais ils disent que ce modèle est waterproof. » « Non, finis d'abord de m'apprendre. » Le son de nos rires résonnait jadis, léger et taquin, dans notre pièce privée. « C'est aussi dans la leçon, sous le thème 'Comment tester la durabilité d'un rouge à lèvres'. » Le premier baiser fut déposé sur l'intérieur de mon poignet. « Arrête de jouer, finis d'abord. On n'aura plus le temps après. » « C'est fini. C'est un cours intensif. » Le deuxième baiser effleura mon décolleté. « Fini quoi ? Je n'ai même pas encore fait mes sourcils. » Elle s'avançait, me poursuivant, mais plus je reculais, plus je me retrouvais allongée, lui offrant l'avantage. La marque rouge du rouge à lèvres du troisième baiser fut imprimée sous mon oreille. ... Et puis je l'ai laissée m'embrasser, la laisser m'embrasser, m'embrasser.",
         "note": "null",
-        "chapters": 24,
+        "chapters": 26,
         "date": "2025-06-13"
     },
     {
@@ -1184,7 +1184,7 @@
         "url": "/Books/NOPE! Je ne taime pas.docx",
         "auteur": "khunphuying",
         "categorie": ["Comédie", "Romance"],
-        "description": "",
+        "description": "N'y a-t-il pas de règle qui interdise de tomber amoureux de la meilleure amie de sa sœur ? Eiffel ne veut plus rester dans l'ombre de sa condition de petite sœur. 'Eiffel, je suis ta sœur !' 'Tu as demandé à Ai si elle voulait une sœur supplémentaire ?'Je veux qu'elle m'aime, comme je veux aimer.",
         "note": "null",
         "chapters": 26,
         "date": "2025-06-19"

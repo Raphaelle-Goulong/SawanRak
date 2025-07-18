@@ -1,5 +1,5 @@
 .Categories-Container {
-    
+    margin: 40px 0;
     .Title-Categories {
         margin: 20px 0px;
         font-family: 'Marcellus', serif;
@@ -18,10 +18,10 @@
         gap: 20px;
         padding: 0px 5px;
     }
-    h2 {
-        font-size: 1.2rem;
+    .Title-Categories{
+        font-size: 1.6rem;
         font-family: 'Marcellus', serif;
-        margin: 40px 0;
+        margin: 50px 0;
     }
     .Section-Author {
         h2 {
@@ -52,6 +52,11 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        h2{
+            font-family: "Marcellus", serif;
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+        }
         .AllBooks-grid {
             justify-content: center;
 
