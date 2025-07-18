@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import mammoth from 'mammoth'
 import ChaptersDropdown from '../../components/ChaptersDropdown/ChaptersDropdown'
@@ -19,6 +19,17 @@ function Book() {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
+    const [showEndingModal, setShowEndingModal] = useState(false)
+
+    const handleNextChapter = () => {
+        if (currentChapterIndex === chapters.length - 1) {
+            // Si on est déjà au dernier chapitre
+            setShowEndingModal(true) // Affiche la modale
+        } else {
+            // Sinon, passe au chapitre suivant normalement
+            handleSelectChapter(currentChapterIndex + 1)
+        }
+    }
     useEffect(() => {
         const fetchBookContent = async () => {
             try {
@@ -88,7 +99,6 @@ function Book() {
                 </div>
 
                 <div className="top-book">
-                 
                     <ChaptersDropdown
                         items={chapters.map((chap, i) => ({
                             id: i, // L'ID doit correspondre à l'index du chapitre
@@ -123,15 +133,22 @@ function Book() {
                     Précédent
                 </Button>
                 <Button
-                    onClick={() =>
-                        handleSelectChapter(Math.min(chapters.length - 1, currentChapterIndex + 1))
-                    }
-                    disabled={currentChapterIndex === chapters.length - 1}>
+                    onClick={handleNextChapter}
+                    disabled={false} // On ne désactive plus le bouton pour le dernier chapitre
+                >
                     Suivant
                 </Button>
             </div>
 
-            {/* <Ending /> () */}
+            {showEndingModal && (
+                <div
+                    className={`modal-overlay ${showEndingModal ? 'show' : ''}`}
+                    onClick={() => setShowEndingModal(false)}>
+                    <div className="modal-content">
+                        <Ending onClose={() => setShowEndingModal(false)} />
+                    </div>
+                </div>
+            )}
         </section>
     )
 }

@@ -1,6 +1,6 @@
 import '../Button/Button.scss';
 
-function Button({ onClick, children, disabled = false }) {
+function Button({ onClick, children, disabled = false ,text}) {
     return (
         <div className="Btn" onClick={!disabled ? onClick : undefined}>
             <button 
@@ -8,7 +8,7 @@ function Button({ onClick, children, disabled = false }) {
                 className={`btn ${disabled ? 'disabled' : ''}`}
                 disabled={disabled}
             >
-                <strong>{children || "Commencer"}</strong>
+                <strong>{text || children}</strong>
                 <div id="container-stars">
                     <div id="stars"></div>
                 </div>
