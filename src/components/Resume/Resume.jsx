@@ -6,45 +6,49 @@ import Tags from '../Tags/Tags'
 import Button from '../Button/Button'
 import { X } from 'lucide-react'
 
-
 function Resume({ book, onClose }) {
-    // Hook pour la navigation entre pages
     const navigate = useNavigate()
-    
-    // État pour stocker les infos du dernier chapitre lu
     const [lastChapterInfo, setLastChapterInfo] = useState(null)
-    
-    // État pour gérer la visibilité du composant
     const [isVisible, setIsVisible] = useState(true)
-    
-    // État pour stocker la liste de tous les chapitres
     const [allChapters, setAllChapters] = useState([])
 
-    // Effet qui s'exécute au montage et quand book.id ou book.chapters change
+    // 1. Chargement du dernier chapitre (séparé)
     useEffect(() => {
-        // 1. Récupération du dernier chapitre lu depuis le localStorage
         const savedInfo = localStorage.getItem(`book-${book.id}-lastChapterLink`)
         if (savedInfo) {
-            setLastChapterInfo(JSON.parse(savedInfo))
-        }
-
-        // 2. Création de la liste des chapitres
-        const chaptersList = []
-        for (let i = 1; i <= book.chapters; i++) {
-            chaptersList.push({
-                number: i,         // Numéro du chapitre (commence à 1)
-                title: `Chapitre ${i}` // Titre formaté
+            const info = JSON.parse(savedInfo)
+            setLastChapterInfo({
+                ...info,
+                chapterTitle: info.chapterTitle.replace('Introduction', 'Chapitre 0')
             })
         }
+    }, [book.id])
+
+    // 2. Génération des chapitres (séparé)
+    useEffect(() => {
+        const startsWithZero = book.description?.toLowerCase().includes('intro')
+        const chaptersList = []
+
+        if (startsWithZero) {
+            chaptersList.push({ number: 0, title: 'Chapitre 0' })
+        }
+
+        for (let i = 1; i <= book.chapters; i++) {
+            chaptersList.push({
+                number: startsWithZero ? i : i - 1,
+                title: `Chapitre ${i}`
+            })
+        }
+
         setAllChapters(chaptersList)
-    }, [book.id, book.chapters]) 
+    }, [book.chapters, book.description])
 
     // Handler pour clic sur un chapitre
     const handleChapterClick = (chapterNumber) => {
         navigate(`/book/${book.id}`, {
             state: {
                 book,
-                chapterIndex: chapterNumber - 1 // Conversion en index (commence à 0)
+                chapterIndex: chapterNumber // Plus besoin de -1 car on gère déjà l'index
             }
         })
     }
@@ -65,7 +69,6 @@ function Resume({ book, onClose }) {
         return null
     }
 
-    
     return (
         <section className="Section-Resume">
             {/* En-tête avec titre et bouton fermer */}
@@ -105,19 +108,17 @@ function Resume({ book, onClose }) {
                     <div className="last-chapter">
                         <h4 id="last-chap">Dernier chapitre lu : </h4>
                         {lastChapterInfo ? (
-                            // Si un chapitre a été sauvegardé
                             <a
                                 href={`/book/${book.id}?chapter=${lastChapterInfo.chapterIndex}`}
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    handleChapterClick(lastChapterInfo.chapterIndex + 1)
+                                    handleChapterClick(lastChapterInfo.chapterIndex)
                                 }}
                                 className="chapter-link">
                                 <Tags text={lastChapterInfo.chapterTitle} />
                             </a>
                         ) : (
-                            // Sinon affiche le chapitre 1 par défaut
-                            <Tags text={`Chapitre ${book.lastChapter || 1}`} />
+                            <Tags text={allChapters[0]?.title || 'Chapitre 1'} />
                         )}
                     </div>
 
@@ -126,10 +127,9 @@ function Resume({ book, onClose }) {
                         <h4>Tous les chapitres :</h4>
                         <div className="chapters-list">
                             {allChapters.map((chapter) => (
-                                // Lien cliquable pour chaque chapitre
                                 <a
                                     key={chapter.number}
-                                    href={`/book/${book.id}?chapter=${chapter.number - 1}`}
+                                    href={`/book/${book.id}?chapter=${chapter.number}`}
                                     onClick={(e) => {
                                         e.preventDefault()
                                         handleChapterClick(chapter.number)
@@ -143,7 +143,6 @@ function Resume({ book, onClose }) {
                 </div>
             </div>
 
-            
             <div className="Btn-start" onClick={handleReadBook}>
                 {/* Change le texte selon si on a un historique de lecture */}
                 <Button text={lastChapterInfo ? 'Continuer la lecture' : 'Commencer'} />

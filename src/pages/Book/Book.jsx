@@ -5,6 +5,7 @@ import ChaptersDropdown from '../../components/ChaptersDropdown/ChaptersDropdown
 import Button from '../../components/Button/Button'
 import Ending from '../../components/Ending/Ending'
 import '../Book/Book.scss'
+import Loading from '../../components/Loading/Loading'
 
 function Book() {
     const { state } = useLocation()
@@ -65,36 +66,45 @@ function Book() {
     }, [book.id, state?.chapterIndex])
 
     const convertToJsonStructure = (content) => {
-        const paragraphs = content.split('\n')
-        const chapters = []
-        let currentChapter = { title: '', content: '' }
+    const paragraphs = content.split('\n')
+    const chapters = []
+    let currentChapter = { title: '', content: '' }
+    let hasChapterZero = false
 
-        paragraphs.forEach((paragraph) => {
-            const trimmed = paragraph.trim()
+    paragraphs.forEach((paragraph) => {
+        const trimmed = paragraph.trim()
 
-            if (
-                trimmed.toLowerCase().startsWith('chapter') ||
-                trimmed.toLowerCase().startsWith('chapitre')
-            ) {
-                if (currentChapter.title || currentChapter.content) {
-                    chapters.push({ ...currentChapter })
-                }
-                currentChapter = {
-                    title: trimmed,
-                    content: ''
-                }
-            } else if (trimmed) {
-                currentChapter.content += trimmed + '\n\n'
+        // Détection du chapitre 0
+        if (trimmed.match(/^chapitre 0|^chapter 0|^introduction/i)) {
+            hasChapterZero = true
+            if (currentChapter.title || currentChapter.content) {
+                chapters.push({ ...currentChapter })
             }
-        })
-
-        // Ajouter le dernier chapitre
-        if (currentChapter.title || currentChapter.content) {
-            chapters.push(currentChapter)
+            currentChapter = {
+                title: 'Chapitre 0', // Standardisation du nom
+                content: ''
+            }
+        } 
+        // Détection des autres chapitres
+        else if (trimmed.match(/^chapitre|^chapter/i)) {
+            if (currentChapter.title || currentChapter.content) {
+                chapters.push({ ...currentChapter })
+            }
+            currentChapter = {
+                title: trimmed,
+                content: ''
+            }
+        } else if (trimmed) {
+            currentChapter.content += trimmed + '\n\n'
         }
+    })
 
-        return chapters
+    if (currentChapter.title || currentChapter.content) {
+        chapters.push(currentChapter)
     }
+
+    return chapters
+}
 
     const handleSelectChapter = (index) => {
         setCurrentChapterIndex(index)
@@ -112,7 +122,7 @@ function Book() {
         }
     }
 
-    if (isLoading) return <div className="loading">Chargement...</div>
+    if (isLoading) return <div className="loading"> <Loading/></div>
     if (error) return <div className="error">{error}</div>
 
     return (

@@ -1,6 +1,7 @@
 .Section-Ending {
     background-color: rgba(54, 54, 54, 0.918);
-    width: 90%;
+    // width: 90%;
+    // padding: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -174,9 +175,13 @@
             justify-content: center;
             gap: 10px;
             margin: 25px 0;
+            padding: 10px;
         }
     }
     .btn-quit {
         margin: 20px;
+      .home-link{
+        text-decoration: none;
+      }
     }
 }

@@ -16,7 +16,6 @@
             justify-content: center;
             align-items: center;
             margin: 20px 0 40px;
-            
         }
     }
     .top-book {
@@ -46,57 +45,67 @@
         display: flex;
         gap: 10px;
         margin: 40px 0 20px 0;
-       .Btn {
-        
-        width: 9rem; 
-        height: 2.5rem; 
-        
-        .btn {
-            
-            width: 100%;
-            height: 100%;
-            padding: 0.5rem 1rem; 
-            
-            strong {
-                font-size: 0.8rem; 
-                letter-spacing: 3px; 
-            }
-            
-            #glow {
-                width: 8rem; 
-                
-                .circle {
-                    height: 25px; 
+        .Btn {
+            width: 9rem;
+            height: 2.5rem;
+
+            .btn {
+                width: 100%;
+                height: 100%;
+                padding: 0.5rem 1rem;
+
+                strong {
+                    font-size: 0.8rem;
+                    letter-spacing: 3px;
+                }
+
+                #glow {
+                    width: 8rem;
+
+                    .circle {
+                        height: 25px;
+                    }
                 }
             }
         }
     }
-    }
     /* Book.scss ou un fichier global */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    // background-color: rgba(167, 63, 63, 0.7);
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // background-color: rgba(167, 63, 63, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+    }
+
+    .modal-content {
+        // background-color: #2a2f3b;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 80%;
+        max-height: 90vh;
+        overflow-y: auto;
+      
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
+}
+
+.loading {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
-}
-
-.modal-content {
-    // background-color: #2a2f3b;
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 80%;
-    max-height: 90vh;
-    overflow-y: auto;
-    // margin: auto; // Centre horizontalement
-    display: flex;
-    flex-direction: column;
-    align-items: center; // Centre le contenu à l'intérieur
-}
-
+    height: 100vh; 
+    width: 100vw; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(5, 5, 5, 0.911); 
+    z-index: 1000;
 }

@@ -8,9 +8,9 @@ import Resume from '../../components/Resume/Resume'
 
 function Home({ searchTerm, filterType, setFilterType }) {
     const [selectedBook, setSelectedBook] = useState(null)
-    
+
     // Normalisation des catégories (transformer les strings en tableaux)
-    const normalizedBooks = Data.map(book => ({
+    const normalizedBooks = Data.map((book) => ({
         ...book,
         categorie: Array.isArray(book.categorie) ? book.categorie : [book.categorie]
     }))
@@ -38,9 +38,9 @@ function Home({ searchTerm, filterType, setFilterType }) {
     const displayBooks = searchTerm ? filteredBooks : sortedBooks.slice(0, 3)
 
     // Liste de toutes les catégories uniques
-    const allCategories = [...new Set(
-        normalizedBooks.flatMap(book => book.categorie)
-    )].filter(Boolean) // Filtrer les valeurs nulles/undefined
+    const allCategories = [...new Set(normalizedBooks.flatMap((book) => book.categorie))].filter(
+        Boolean
+    ) // Filtrer les valeurs nulles/undefined
 
     const getFilteredBooks = () => {
         let filtered = [...normalizedBooks]
@@ -62,9 +62,9 @@ function Home({ searchTerm, filterType, setFilterType }) {
                 return filtered
         }
     }
-    
-const finalBooks = getFilteredBooks()
-  
+
+    const finalBooks = getFilteredBooks()
+
     return (
         <section className="Section-Home">
             <div className="Home">
@@ -87,11 +87,7 @@ const finalBooks = getFilteredBooks()
 
                         <section className="Home-Books-section">
                             <div className="Home-Books">
-                              
-                                 <Categories 
-                                filterType={filterType}
-                                onCardClick={handleCardClick}
-                            />
+                                <Categories filterType={filterType} onCardClick={handleCardClick} />
                             </div>
                         </section>
                     </>

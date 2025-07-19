@@ -1,13 +1,41 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import Data from '../../Data.json'; // Importez vos données de livres
+import '../Ending/Ending.scss';
+import Card from '../../components/Card/Card';
+import Button from '../../components/Button/Button';
+import { X, Frown } from 'lucide-react';
 
-import '../Ending/Ending.scss'
-
-import Card from '../../components/Card/Card'
-import Button from '../../components/Button/Button'
-
-import { X, Frown } from 'lucide-react'
 
 function Ending({ onClose }) {
+
+    const location = useLocation();
+    const currentBook = location.state?.book; // Récupérez le livre actuel
+    const [similarBooks, setSimilarBooks] = useState([]);
+
+ useEffect(() => {
+        if (currentBook && currentBook.categorie) {
+            // Trouvez des livres de la même catégorie
+            const sameCategoryBooks = Data.filter(book => {
+                // Gère à la fois les catégories sous forme de string ou d'array
+                const bookCategories = Array.isArray(book.categorie) 
+                    ? book.categorie 
+                    : [book.categorie];
+                const currentCategories = Array.isArray(currentBook.categorie) 
+                    ? currentBook.categorie 
+                    : [currentBook.categorie];
+                
+                return book.id !== currentBook.id && 
+                       bookCategories.some(cat => currentCategories.includes(cat));
+            });
+
+            // Mélangez et sélectionnez 3 livres maximum
+            const shuffled = [...sameCategoryBooks].sort(() => 0.5 - Math.random());
+            setSimilarBooks(shuffled.slice(0, 3));
+        }
+    }, [currentBook]);
+
+
     return (
         <section className="Section-Ending">
             <X className="cross" size={20} />
@@ -32,7 +60,7 @@ function Ending({ onClose }) {
                         </label>
 
                         <input id="rating-4" type="radio" name="rating" value="4" />
-                        <label for="rating-4" title="4 stars">
+                        <label htmlFor="rating-4" title="4 stars">
                             <svg
                                 viewBox="0 0 576 512"
                                 height="1em"
@@ -42,7 +70,7 @@ function Ending({ onClose }) {
                         </label>
 
                         <input id="rating-3" type="radio" name="rating" value="3" />
-                        <label for="rating-3" title="3 stars">
+                        <label htmlFor="rating-3" title="3 stars">
                             <svg
                                 viewBox="0 0 576 512"
                                 height="1em"
@@ -52,7 +80,7 @@ function Ending({ onClose }) {
                         </label>
 
                         <input id="rating-2" type="radio" name="rating" value="2" />
-                        <label for="rating-2" title="2 stars">
+                        <label htmlFor="rating-2" title="2 stars">
                             <svg
                                 viewBox="0 0 576 512"
                                 height="1em"
@@ -62,7 +90,7 @@ function Ending({ onClose }) {
                         </label>
 
                         <input id="rating-1" type="radio" name="rating" value="1" />
-                        <label for="rating-1" title="1 star">
+                        <label htmlFor="rating-1" title="1 star">
                             <svg
                                 viewBox="0 0 576 512"
                                 height="1em"
@@ -78,14 +106,22 @@ function Ending({ onClose }) {
                     <h3>Livre qui pourrait te plaire</h3>
                 </div>
                 <div className="book-cat">
-                    <Card />
-                    <Card />
-                    <Card />
+                    {similarBooks.length > 0 ? (
+                        similarBooks.map(book => (
+                            <Card 
+                                key={book.id} 
+                                Book={book} 
+                                onClick={() => window.location.reload()} // Ou une meilleure gestion de navigation
+                            />
+                        ))
+                    ) : (
+                        <p>Aucune suggestion disponible</p>
+                    )}
                 </div>
             </div>
             <div className="btn-quit">
                 <Link to="/" className="home-link">
-                    <Button onClick={onClose} text="Retourner a la page d'acceuil" />
+                    <Button onClick={onClose} text="Retour Page Home" />
                 </Link>
             </div>
         </section>
