@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import '../Dropdown/Dropdown.scss';
+import '../ChaptersDropdown/ChaptersDropdown.scss';
 import { ChevronDown } from 'lucide-react';
 
 function ChaptersDropdown({ items = [], onSelect, selectedId = 0 }) {
