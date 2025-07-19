@@ -13,6 +13,8 @@ function Ending({ onClose }) {
     const currentBook = location.state?.book; // Récupérez le livre actuel
     const [similarBooks, setSimilarBooks] = useState([]);
 
+
+    
  useEffect(() => {
         if (currentBook && currentBook.categorie) {
             // Trouvez des livres de la même catégorie

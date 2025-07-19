@@ -65,46 +65,42 @@ function Book() {
         }
     }, [book.id, state?.chapterIndex])
 
-    const convertToJsonStructure = (content) => {
-    const paragraphs = content.split('\n')
-    const chapters = []
-    let currentChapter = { title: '', content: '' }
-    let hasChapterZero = false
+//     
+const convertToJsonStructure = (content) => {
+    const lines = content.split('\n');
+    const chapters = [];
+    let currentChapter = { title: '', content: '' };
 
-    paragraphs.forEach((paragraph) => {
-        const trimmed = paragraph.trim()
+    for (const line of lines) {
+        const trimmed = line.trim();
 
-        // Détection du chapitre 0
-        if (trimmed.match(/^chapitre 0|^chapter 0|^introduction/i)) {
-            hasChapterZero = true
+        // Détection des titres (plus robuste)
+        if (
+            trimmed.match(/^(chapitre|chapter)\s+[0-9ivx]+/i) || // "Chapitre 1", "Chapter IV"
+            trimmed.match(/^(prologue|épilogue|introduction|conclusion)/i) // Autres sections
+        ) {
+            // Si on a déjà un chapitre en cours, on l'ajoute
             if (currentChapter.title || currentChapter.content) {
-                chapters.push({ ...currentChapter })
+                chapters.push(currentChapter);
             }
-            currentChapter = {
-                title: 'Chapitre 0', // Standardisation du nom
-                content: ''
-            }
-        } 
-        // Détection des autres chapitres
-        else if (trimmed.match(/^chapitre|^chapter/i)) {
-            if (currentChapter.title || currentChapter.content) {
-                chapters.push({ ...currentChapter })
-            }
+            // On commence un nouveau chapitre
             currentChapter = {
                 title: trimmed,
                 content: ''
-            }
-        } else if (trimmed) {
-            currentChapter.content += trimmed + '\n\n'
+            };
+        } else {
+            // Sinon, on ajoute la ligne au contenu
+            currentChapter.content += (currentChapter.content ? '\n\n' : '') + trimmed;
         }
-    })
-
-    if (currentChapter.title || currentChapter.content) {
-        chapters.push(currentChapter)
     }
 
-    return chapters
-}
+    // On ajoute le dernier chapitre
+    if (currentChapter.title || currentChapter.content) {
+        chapters.push(currentChapter);
+    }
+
+    return chapters;
+};
 
     const handleSelectChapter = (index) => {
         setCurrentChapterIndex(index)
@@ -179,7 +175,7 @@ function Book() {
                     className={`modal-overlay ${showEndingModal ? 'show' : ''}`}
                     onClick={() => setShowEndingModal(false)}>
                     <div className="modal-content">
-                        <Ending onClose={() => setShowEndingModal(false)} />
+                        <Ending onClose={() => setShowEndingModal(false)} book={book}/>
                     </div>
                 </div>
             )}

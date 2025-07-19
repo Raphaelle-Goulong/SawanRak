@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Data from '../../Data.json'
+import { useLocation } from 'react-router-dom'
 import '../Home/Home.scss'
 import Card from '../../components/Card/Card'
 import Carrousel from '../../components/Carrousel/Carrousel'
@@ -8,7 +9,7 @@ import Resume from '../../components/Resume/Resume'
 
 function Home({ searchTerm, filterType, setFilterType }) {
     const [selectedBook, setSelectedBook] = useState(null)
-
+    const location = useLocation()
     // Normalisation des catégories (transformer les strings en tableaux)
     const normalizedBooks = Data.map((book) => ({
         ...book,
@@ -65,6 +66,13 @@ function Home({ searchTerm, filterType, setFilterType }) {
 
     const finalBooks = getFilteredBooks()
 
+    useEffect(() => {
+        if (location.state?.fromEnding && location.state?.book) {
+            setSelectedBook(location.state.book);
+            // Nettoyer l'état pour éviter de rouvrir à chaque navigation
+            window.history.replaceState({}, document.title);
+        }
+    }, [location.state]);
     return (
         <section className="Section-Home">
             <div className="Home">

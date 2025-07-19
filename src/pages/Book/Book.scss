@@ -109,3 +109,23 @@
     background-color: rgba(5, 5, 5, 0.911); 
     z-index: 1000;
 }
+.Text-Book {
+    font-family: "Mulish", sans-serif;
+    line-height: 1.5;
+    text-align: justify;
+    padding: 2em;
+    max-width: 800px;
+    margin: 0 auto;
+
+    .chapter-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 1em;
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 1em;
+        text-indent: 1.5em; /* Alignement à la Word */
+    }
+}
