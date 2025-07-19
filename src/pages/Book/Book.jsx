@@ -51,6 +51,19 @@ function Book() {
         if (book.url) fetchBookContent()
     }, [book.url])
 
+    useEffect(() => {
+        if (book.id) {
+            // Récupérer la progression sauvegardée
+            const savedProgress = localStorage.getItem(`book-${book.id}-progress`)
+
+            // Vérifier si un chapitre spécifique est passé dans le state de navigation
+            const initialChapter =
+                state?.chapterIndex || (savedProgress ? parseInt(savedProgress, 10) : 0)
+
+            setCurrentChapterIndex(initialChapter)
+        }
+    }, [book.id, state?.chapterIndex])
+
     const convertToJsonStructure = (content) => {
         const paragraphs = content.split('\n')
         const chapters = []
@@ -86,6 +99,17 @@ function Book() {
     const handleSelectChapter = (index) => {
         setCurrentChapterIndex(index)
         window.scrollTo(0, 0)
+        // Sauvegarde la progression et le lien du chapitre
+        if (book.id) {
+            localStorage.setItem(`book-${book.id}-progress`, index.toString())
+            localStorage.setItem(
+                `book-${book.id}-lastChapterLink`,
+                JSON.stringify({
+                    chapterIndex: index,
+                    chapterTitle: chapters[index]?.title || `Chapitre ${index + 1}`
+                })
+            )
+        }
     }
 
     if (isLoading) return <div className="loading">Chargement...</div>

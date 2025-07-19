@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import '../Ending/Ending.scss'
 
 import Card from '../../components/Card/Card'
@@ -82,7 +84,9 @@ function Ending({ onClose }) {
                 </div>
             </div>
             <div className="btn-quit">
-                <Button  onClick={onClose} text="Retourner a la page d'acceuil"/>
+                <Link to="/" className="home-link">
+                    <Button onClick={onClose} text="Retourner a la page d'acceuil" />
+                </Link>
             </div>
         </section>
     )

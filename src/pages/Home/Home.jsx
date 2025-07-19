@@ -87,14 +87,7 @@ const finalBooks = getFilteredBooks()
 
                         <section className="Home-Books-section">
                             <div className="Home-Books">
-                                {/* {allCategories.map(category => (
-                                    <Carrousel 
-                                        key={category}
-                                        category={category}
-                                        books={normalizedBooks}
-                                        onCardClick={handleCardClick}
-                                    />
-                                ))} */}
+                              
                                  <Categories 
                                 filterType={filterType}
                                 onCardClick={handleCardClick}
