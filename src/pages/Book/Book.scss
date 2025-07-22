@@ -112,7 +112,8 @@
 .Text-Book {
     font-family: "Mulish", sans-serif;
     line-height: 1.5;
-    text-align: justify;
+    // text-align: justify;
+    text-align:start;
     padding: 2em;
     max-width: 800px;
     // margin: 0 auto;
@@ -129,5 +130,6 @@ margin: 0 5px;
     p {
         margin-bottom: 1em;
         text-indent: 1.5em; /* Alignement à la Word */
+        font-size:0.9rem;
     }
 }
