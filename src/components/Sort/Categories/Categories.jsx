@@ -4,20 +4,7 @@ import Data from '../../../Data.json'
 import Card from '../../Card/Card'
 
 function Categories({ filterType = 'Categories', onCardClick: onClick }) {
-    // Valeur par défaut : 'Categories'
-    // const categories = [
-    //     'Comédie',
-    //     'Romance',
-    //     'Entreprise',
-    //     'Mystique',
-    //     'School',
-    //     'Hospital',
-    //     'Ennemies to Lovers',
-    //     'Action',
-    //     'Red Flag',
-    //     'Adulte',
-    //     'Drame'
-    // ]
+   
     const books = Data
 
     // Grouper les livres par auteur
