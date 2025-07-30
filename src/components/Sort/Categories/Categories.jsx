@@ -8,14 +8,14 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
     const books = Data
 
     // Grouper les livres par auteur
-     // Récupération DYNAMIQUE de toutes les catégories existantes
+    // Récupération DYNAMIQUE de toutes les catégories existantes
     const allCategories = [...new Set(
         books.flatMap(book => 
             Array.isArray(book.categorie) ? book.categorie : [book.categorie]
         ).filter(Boolean) // Filtre les valeurs nulles/undefined
     )].sort(); // Tri alphabétique
 
-    // Grouper les livres par auteur (votre version est bonne)
+    // Grouper les livres par auteur
     const booksByAuthor = books.reduce((acc, book) => {
         const author = book.auteur || 'Inconnu';
         if (!acc[author]) acc[author] = [];
@@ -23,7 +23,24 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
         return acc;
     }, {});
 
+    // Trier les auteurs par ordre alphabétique
     const sortedAuthors = Object.keys(booksByAuthor).sort()
+    
+    // Trier les livres de chaque auteur par titre (avec gestion des titres manquants)
+    sortedAuthors.forEach(author => {
+        booksByAuthor[author].sort((a, b) => {
+            const titleA = a.titre || '';
+            const titleB = b.titre || '';
+            return titleA.localeCompare(titleB);
+        });
+    })
+
+    // Trier tous les livres par titre pour la section "All Books" (avec gestion des titres manquants)
+    const sortedBooks = [...books].sort((a, b) => {
+        const titleA = a.titre || '';
+        const titleB = b.titre || '';
+        return titleA.localeCompare(titleB);
+    });
 
     return (
         <div className="Categories-Container">
@@ -69,7 +86,7 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
                 <div className="Section-AllBooks">
                     <h2>Tous les Livres ({books.length})</h2>
                     <div className="AllBooks-grid">
-                        {books.map((book) => (
+                        {sortedBooks.map((book) => (
                             <Card key={book.id} Book={book} onClick={() => onClick(book)} />
                         ))}
                     </div>
