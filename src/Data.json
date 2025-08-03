@@ -675,14 +675,14 @@
     },
     {
         "id": "57",
-        "title": "Secret Affair",
-        "cover": "/Images/Secret Affair.webp",
-        "url": "/Books/Secret Affair.docx",
-        "auteur": "มีนาม",
+        "title": "Kiss",
+        "cover": "/Images/KISS.webp",
+        "url": "/Books/KISS.docx",
+        "auteur": "SIIX",
         "categorie": [ "Romance"],
         "description": "",
         "note": "null",
-        "chapters": 24,
+        "chapters": 30,
         "date": "2025-01-10"
     },
     {
