@@ -4,62 +4,80 @@ import Data from '../../../Data.json'
 import Card from '../../Card/Card'
 
 function Categories({ filterType = 'Categories', onCardClick: onClick }) {
-   
     const books = Data
 
     // Grouper les livres par auteur
     // Récupération DYNAMIQUE de toutes les catégories existantes
-    const allCategories = [...new Set(
-        books.flatMap(book => 
-            Array.isArray(book.categorie) ? book.categorie : [book.categorie]
-        ).filter(Boolean) // Filtre les valeurs nulles/undefined
-    )].sort(); // Tri alphabétique
+    const allCategories = [
+        ...new Set(
+            books
+                .flatMap((book) =>
+                    Array.isArray(book.categorie) ? book.categorie : [book.categorie]
+                )
+                .filter(Boolean) // Filtre les valeurs nulles/undefined
+        )
+    ].sort() // Tri alphabétique
 
     // Grouper les livres par auteur
     const booksByAuthor = books.reduce((acc, book) => {
-        const author = book.auteur || 'Inconnu';
-        if (!acc[author]) acc[author] = [];
-        acc[author].push(book);
-        return acc;
-    }, {});
+        const author = book.auteur || 'Inconnu'
+        if (!acc[author]) acc[author] = []
+        acc[author].push(book)
+        return acc
+    }, {})
 
     // Trier les auteurs par ordre alphabétique
     const sortedAuthors = Object.keys(booksByAuthor).sort()
-    
+
     // Trier les livres de chaque auteur par titre (avec gestion des titres manquants)
-    sortedAuthors.forEach(author => {
+    sortedAuthors.forEach((author) => {
         booksByAuthor[author].sort((a, b) => {
-            const titleA = a.titre || '';
-            const titleB = b.titre || '';
-            return titleA.localeCompare(titleB);
-        });
+            const titleA = a.titre || ''
+            const titleB = b.titre || ''
+            return titleA.localeCompare(titleB)
+        })
     })
 
     // Trier tous les livres par titre pour la section "All Books" (avec gestion des titres manquants)
-    const sortedBooks = [...books].sort((a, b) => {
-        const titleA = a.titre || '';
-        const titleB = b.titre || '';
-        return titleA.localeCompare(titleB);
-    });
+
+    const sortedBooks = [...Data].sort((a, b) => {
+        const titleA = (a.title || '').toString()
+        const titleB = (b.title || '').toString()
+
+        // Normalisation pour ignorer la casse, les accents et caractères spéciaux
+        const normalizedA = titleA
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9 ]/g, '')
+
+        const normalizedB = titleB
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9 ]/g, '')
+
+        return normalizedA.localeCompare(normalizedB)
+    })
 
     return (
         <div className="Categories-Container">
             {/* Afficher seulement la section correspondant au filtre */}
             {filterType === 'Categories' && (
                 <div className="Section-Categories">
-                    <h2 className='Title-Categories'>Catégories</h2>
+                    <h2 className="Title-Categories">Catégories</h2>
                     {allCategories.map((category) => (
                         <div key={category} className="Category-group">
                             <div className="Category-books">
-                                 <Carrousel
+                                <Carrousel
                                     category={category}
-                                    books={books.filter(book => 
-                                        Array.isArray(book.categorie) 
+                                    books={books.filter((book) =>
+                                        Array.isArray(book.categorie)
                                             ? book.categorie.includes(category)
                                             : book.categorie === category
                                     )}
                                     onCardClick={onClick}
-                                    />
+                                />
                             </div>
                         </div>
                     ))}
