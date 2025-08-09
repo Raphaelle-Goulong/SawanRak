@@ -103,6 +103,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
             margin: 10px;
         }
         .chapter-available {
@@ -139,7 +140,6 @@
                 width: 100%;
                 margin: 5px 0;
                 padding: 5px;
-            //  background-color: red;
                 border-bottom: 1px solid rgb(100, 100, 100);
                 padding-bottom: 15px;
                 a {
