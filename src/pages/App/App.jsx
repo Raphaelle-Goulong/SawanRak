@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BooksProvider } from '../../contexts/BooksContext';
 import Home from '../Home/Home';
 import Book from '../Book/Book';
 import Header from '../../components/Header/Header';
@@ -15,6 +16,7 @@ function App() {
   };
 
   return (
+    <BooksProvider> 
     <BrowserRouter>
       <Header 
         searchTerm={searchTerm} 
@@ -37,6 +39,7 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
+     </BooksProvider>
   );
 }
 

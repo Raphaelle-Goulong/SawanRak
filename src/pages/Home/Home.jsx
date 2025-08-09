@@ -7,6 +7,7 @@ import Carrousel from '../../components/Carrousel/Carrousel'
 import Categories from '../../components/Sort/Categories/Categories'
 import Resume from '../../components/Resume/Resume'
 
+
 function Home({ searchTerm, filterType, setFilterType }) {
     const [selectedBook, setSelectedBook] = useState(null)
     const [showModal, setShowModal] = useState(false)

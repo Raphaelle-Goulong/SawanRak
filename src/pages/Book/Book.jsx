@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import mammoth from 'mammoth'
+import { useBooksContext } from '../../contexts/BooksContext' // 👈 Ajouter cet import
 import ChaptersDropdown from '../../components/ChaptersDropdown/ChaptersDropdown'
 import Button from '../../components/Button/Button'
 import Ending from '../../components/Ending/Ending'
@@ -9,6 +9,8 @@ import Loading from '../../components/Loading/Loading'
 
 function Book() {
     const { state } = useLocation()
+    const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext() // 👈 Utiliser le Context
+
     const book = state?.book || {
         title: 'Titre par défaut',
         chapters: 1,
@@ -18,113 +20,72 @@ function Book() {
     const [chapters, setChapters] = useState([])
     const [currentChapterIndex, setCurrentChapterIndex] = useState(0)
     const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
-
     const [showEndingModal, setShowEndingModal] = useState(false)
 
     const handleNextChapter = () => {
         if (currentChapterIndex === chapters.length - 1) {
-            // Si on est déjà au dernier chapitre
-            setShowEndingModal(true) // Affiche la modale
+            setShowEndingModal(true)
         } else {
-            // Sinon, passe au chapitre suivant normalement
             handleSelectChapter(currentChapterIndex + 1)
         }
     }
+
+    // 👈 Remplacer tout le useEffect de chargement par celui-ci
     useEffect(() => {
-        const fetchBookContent = async () => {
+        const fetchChapters = async () => {
             try {
-                const response = await fetch(book.url)
-                const arrayBuffer = await response.arrayBuffer()
+                // Vérifier d'abord le cache
+                const cachedChapters = getBookChapters(book.id)
+                if (cachedChapters) {
+                    setChapters(cachedChapters)
+                    return
+                }
 
-                const result = await mammoth.extractRawText({ arrayBuffer })
-                const extractedChapters = convertToJsonStructure(result.value)
-
-                setChapters(extractedChapters)
+                // Sinon charger via le Context
+                const loadedChapters = await loadBookChapters(book)
+                setChapters(loadedChapters)
             } catch (err) {
                 setError(err.message)
                 console.error('Erreur de chargement:', err)
-            } finally {
-                setIsLoading(false)
             }
         }
 
-        if (book.url) fetchBookContent()
-    }, [book.url])
+        if (book.url) {
+            fetchChapters()
+        }
+    }, [book, loadBookChapters, getBookChapters])
 
     useEffect(() => {
-    if (book.id) {
-        // Récupérer la progression sauvegardée
-        const savedProgress = localStorage.getItem(`book-${book.id}-progress`)
+        if (book.id) {
+            const savedProgress = localStorage.getItem(`book-${book.id}-progress`)
+            const initialChapter = 
+                state?.chapterIndex !== undefined 
+                    ? state.chapterIndex 
+                    : (savedProgress ? parseInt(savedProgress, 10) : 0)
 
-        // Vérifier si un chapitre spécifique est passé dans le state de navigation
-        // Utiliser !== undefined au lieu de || pour gérer le cas où chapterIndex = 0
-        const initialChapter = 
-            state?.chapterIndex !== undefined 
-                ? state.chapterIndex 
-                : (savedProgress ? parseInt(savedProgress, 10) : 0)
+            setCurrentChapterIndex(initialChapter)
+        }
+    }, [book.id, state?.chapterIndex])
 
-        setCurrentChapterIndex(initialChapter)
-    }
-}, [book.id, state?.chapterIndex])
-
-
-//     
-const convertToJsonStructure = (content) => {
-    const lines = content.split('\n');
-    const chapters = [];
-    let currentChapter = { title: '', content: '' };
-
-    for (const line of lines) {
-        const trimmed = line.trim();
-
-        // Détection des titres (plus robuste)
-        if (
-            trimmed.match(/^(chapitre|chapter)\s+[0-9ivx]+/i) || // "Chapitre 1", "Chapter IV"
-            trimmed.match(/^(prologue|épilogue|introduction|conclusion)/i) // Autres sections
-        ) {
-            // Si on a déjà un chapitre en cours, on l'ajoute
-            if (currentChapter.title || currentChapter.content) {
-                chapters.push(currentChapter);
-            }
-            // On commence un nouveau chapitre
-            currentChapter = {
-                title: trimmed,
-                content: ''
-            };
-        } else {
-            // Sinon, on ajoute la ligne au contenu
-            currentChapter.content += (currentChapter.content ? '\n\n' : '') + trimmed;
+    const handleSelectChapter = (index) => {
+        setCurrentChapterIndex(index)
+        window.scrollTo(0, 0)
+        
+        if (book.id) {
+            localStorage.setItem(`book-${book.id}-progress`, index.toString())
+            localStorage.setItem(
+                `book-${book.id}-lastChapterLink`,
+                JSON.stringify({
+                    chapterIndex: index,
+                    chapterTitle: chapters[index]?.title || `Chapitre ${index + 1}`,
+                    timestamp: Date.now()
+                })
+            )
         }
     }
 
-    // On ajoute le dernier chapitre
-    if (currentChapter.title || currentChapter.content) {
-        chapters.push(currentChapter);
-    }
-
-    return chapters;
-};
-
-    const handleSelectChapter = (index) => {
-    setCurrentChapterIndex(index)
-    window.scrollTo(0, 0)
-    
-    // Sauvegarde la progression et le lien du chapitre avec timestamp
-    if (book.id) {
-        localStorage.setItem(`book-${book.id}-progress`, index.toString())
-        localStorage.setItem(
-            `book-${book.id}-lastChapterLink`,
-            JSON.stringify({
-                chapterIndex: index,
-                chapterTitle: chapters[index]?.title || `Chapitre ${index + 1}`,
-                timestamp: Date.now() // Ajout du timestamp
-            })
-        )
-    }
-}
-
-    if (isLoading) return <div className="loading"> <Loading/></div>
+    // 👈 Utiliser le loading du Context
+    if (isLoadingBook(book.id)) return <div className="loading"><Loading/></div>
     if (error) return <div className="error">{error}</div>
 
     return (
@@ -137,16 +98,14 @@ const convertToJsonStructure = (content) => {
                 <div className="top-book">
                     <ChaptersDropdown
                         items={chapters.map((chap, i) => ({
-                            id: i, // L'ID doit correspondre à l'index du chapitre
+                            id: i,
                             label: chap.title || `Chapitre ${i + 1}`
                         }))}
-                        selectedId={currentChapterIndex} // Doit être l'index actuel
+                        selectedId={currentChapterIndex}
                         onSelect={(id) => {
-                            setCurrentChapterIndex(id)
-                            localStorage.setItem(`progress-${id}`, id)
+                            handleSelectChapter(id) // 👈 Utiliser handleSelectChapter au lieu de setCurrentChapterIndex
                         }}
                     />
-                    {/* <span>Chapitre {currentChapterIndex + 1}/{chapters.length}</span> */}
                 </div>
 
                 <div className="Text-Book">
@@ -170,8 +129,7 @@ const convertToJsonStructure = (content) => {
                 </Button>
                 <Button
                     onClick={handleNextChapter}
-                    disabled={false} // On ne désactive plus le bouton pour le dernier chapitre
-                >
+                    disabled={false}>
                     Suivant
                 </Button>
             </div>
