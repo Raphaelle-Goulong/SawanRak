@@ -3,6 +3,7 @@ import '../Navbar/Navbar.scss';
 import { Menu } from 'lucide-react';
 import Search from '../Search/Search';
 
+
 function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
   return (
     <section className="Navbar-section">

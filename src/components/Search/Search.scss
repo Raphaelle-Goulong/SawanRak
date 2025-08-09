@@ -17,19 +17,20 @@
         padding: 10px 0px 10px 40px;
         border-radius: 25px;
         border: solid 1px #333;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         transition: all 0.2s ease-in-out;
         outline: none;
         opacity: 0.8;
         font-family: 'Mulish', sans-serif;
         background: rgb(83, 83, 83);
         color: white;
-
     }
 
+   
     .container-input svg {
         position: absolute;
         top: 50%;
-        left: 10px;
+        right: 10px;
         transform: translate(0, -50%);
     }
 
@@ -37,13 +38,19 @@
         opacity: 1;
         width: 250px;
         background: linear-gradient(135deg, #f0c8c8, #ebab8b, #FAD17A);
-       
-
     }
+
     input::placeholder {
         font-weight: bold;
-        //   opacity: 0.5;
         color: white;
         font-family: 'Mulish', sans-serif;
+    }
+
+    .clear-icon{
+        cursor: 'pointer'; 
+        color: white;
+        position: relative;
+        // right: 10px;
+        
     }
 }

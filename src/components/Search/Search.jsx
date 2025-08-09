@@ -1,11 +1,15 @@
 import '../Search/Search.scss'
-import { Search as SearchIcon } from 'lucide-react'
+import { Search as SearchIcon, X } from 'lucide-react'
 import Grip from '../Grip/Grip'
 
 function Search({ searchTerm, setSearchTerm, onFilterChange }) {
+    const handleClearSearch = () => {
+        setSearchTerm('')
+    }
+
     return (
         <div className="Search">
-            <div className="container-input ">
+            <div className="container-input">
                 <input
                     type="text"
                     placeholder="Rechercher"
@@ -13,7 +17,15 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="input"
                 />
-                <SearchIcon className="search-icon" />
+                {!searchTerm ? (
+                    <SearchIcon className="search-icon" />
+                ) : (
+                    <X 
+                        className="clear-icon" 
+                        onClick={handleClearSearch}
+
+                    />
+                )}
             </div>
             <Grip onFilterChange={onFilterChange} />
         </div>

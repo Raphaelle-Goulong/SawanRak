@@ -38,10 +38,7 @@ function Home({ searchTerm, filterType, setFilterType }) {
 
     const displayBooks = searchTerm ? filteredBooks : sortedBooks.slice(0, 3)
 
-    // // Liste de toutes les catégories uniques
-    // const allCategories = [...new Set(normalizedBooks.flatMap((book) => book.categorie))].filter(
-    //     Boolean
-    // ) // Filtrer les valeurs nulles/undefined
+   
 
     const getFilteredBooks = () => {
         let filtered = [...normalizedBooks]
