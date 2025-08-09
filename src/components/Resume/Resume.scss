@@ -1,5 +1,5 @@
 .Section-Resume {
-    background-color: #000000;
+    background-color: #000000d0;
     // background-image: repeating-linear-gradient(157.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(67.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(143,33%,50%),hsl(215,33%,50%),hsl(287,33%,50%),hsl(359,33%,50%),hsl(71,33%,50%));
     backdrop-filter: blur(5px);
     position: relative;
@@ -11,7 +11,7 @@
     align-items: center;
     border-radius: 10px;
     flex-wrap: wrap;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(236, 236, 236, 0.24) 0px 3px 8px;
     .Top-resume {
         display: flex;
         justify-content: center;
@@ -75,7 +75,7 @@
                 }
 
                 &::-webkit-scrollbar-thumb {
-                    background-color: rgba(0, 0, 0, 0.2);
+                    background-color: rgba(241, 240, 240, 0.2);
                     border-radius: 4px;
                 }
 
@@ -181,25 +181,131 @@
     }
 }
 // Dans Home.scss ou Resume.scss
+// .resume-modal-overlay {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+    
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     z-index: 1000;
+//     //   backdrop-filter: blur(5px);
+// }
+
+// .Section-Resume {
+//     transform: scale(0.9);
+//     transition: transform 0.3s ease;
+
+//     &.visible {
+//         transform: scale(1);
+//     }
+// }
+// Animation "Morphing depuis la carte" - La plus impressionnante !
 .resume-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    //   background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(155, 16, 16, 0.007);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    //   backdrop-filter: blur(5px);
+    backdrop-filter: blur(0px);
+    
+    // Animation du fond
+    transition: all 0.4s ease;
+    
+    &.show {
+        background-color: rgba(202, 39, 39, 0);
+        backdrop-filter: blur(5px);
+    }
 }
 
 .Section-Resume {
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-
+    // État initial (taille d'une carte)
+    width: 200px;
+    height: 300px;
+    transform: scale(0.5) rotate(-5deg);
+    opacity: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    
+    // Transition fluide
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    // État final (modale complète)
     &.visible {
+        width: auto;
+        height: auto;
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        border-radius: 10px;
+    }
+    
+    // Animation des éléments internes
+    .Top-resume,
+    .Resume,
+    .Btn-start {
+        transform: scale(0.8);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    &.visible {
+        .Top-resume {
+            transform: scale(1);
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+        
+        .Resume {
+            transform: scale(1);
+            opacity: 1;
+            transition-delay: 0.3s;
+        }
+        
+        .Btn-start {
+            transform: scale(1);
+            opacity: 1;
+            transition-delay: 0.4s;
+        }
+    }
+}
+
+// Animation pour les cartes
+.card-container {
+    transition: transform 0.3s ease;
+    
+    &.clicked {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+    }
+}
+
+// Animation de fermeture
+.Section-Resume.closing {
+    transform: scale(0.8) translateY(50px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+// Effet de pulsation pour le bouton
+.Btn-start {
+    &.visible {
+        animation: pulse 2s infinite 1s;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
         transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
     }
 }

@@ -103,20 +103,22 @@ const convertToJsonStructure = (content) => {
 };
 
     const handleSelectChapter = (index) => {
-        setCurrentChapterIndex(index)
-        window.scrollTo(0, 0)
-        // Sauvegarde la progression et le lien du chapitre
-        if (book.id) {
-            localStorage.setItem(`book-${book.id}-progress`, index.toString())
-            localStorage.setItem(
-                `book-${book.id}-lastChapterLink`,
-                JSON.stringify({
-                    chapterIndex: index,
-                    chapterTitle: chapters[index]?.title || `Chapitre ${index + 1}`
-                })
-            )
-        }
+    setCurrentChapterIndex(index)
+    window.scrollTo(0, 0)
+    
+    // Sauvegarde la progression et le lien du chapitre avec timestamp
+    if (book.id) {
+        localStorage.setItem(`book-${book.id}-progress`, index.toString())
+        localStorage.setItem(
+            `book-${book.id}-lastChapterLink`,
+            JSON.stringify({
+                chapterIndex: index,
+                chapterTitle: chapters[index]?.title || `Chapitre ${index + 1}`,
+                timestamp: Date.now() // Ajout du timestamp
+            })
+        )
     }
+}
 
     if (isLoading) return <div className="loading"> <Loading/></div>
     if (error) return <div className="error">{error}</div>

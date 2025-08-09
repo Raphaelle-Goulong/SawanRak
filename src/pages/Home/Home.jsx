@@ -9,8 +9,11 @@ import Resume from '../../components/Resume/Resume'
 
 function Home({ searchTerm, filterType, setFilterType }) {
     const [selectedBook, setSelectedBook] = useState(null)
+    const [showModal, setShowModal] = useState(false)
+    const [isClosing, setIsClosing] = useState(false)
     const location = useLocation()
-    // Normalisation des catégories (transformer les strings en tableaux)
+
+    // Normalisation des catégories
     const normalizedBooks = Data.map((book) => ({
         ...book,
         categorie: Array.isArray(book.categorie) ? book.categorie : [book.categorie]
@@ -20,12 +23,40 @@ function Home({ searchTerm, filterType, setFilterType }) {
 
     const handleCardClick = (book) => {
         setSelectedBook(book)
+        setShowModal(true)
+        
+        // Ajouter la classe visible après un court délai
+        setTimeout(() => {
+            const modal = document.querySelector('.Section-Resume')
+            if (modal) {
+                modal.classList.add('visible')
+            }
+        }, 50)
     }
 
     const handleCloseResume = () => {
-        setSelectedBook(null)
+        setIsClosing(true)
+        const modal = document.querySelector('.Section-Resume')
+        const overlay = document.querySelector('.resume-modal-overlay')
+        
+        if (modal) {
+            modal.classList.remove('visible')
+            modal.classList.add('closing')
+        }
+        
+        if (overlay) {
+            overlay.classList.remove('show')
+        }
+        
+        // Attendre la fin de l'animation avant de fermer
+        setTimeout(() => {
+            setSelectedBook(null)
+            setShowModal(false)
+            setIsClosing(false)
+        }, 300)
     }
 
+    // Gestion des filtres et recherche (ton code existant)
     const filteredBooks = searchTerm
         ? normalizedBooks.filter((book) => {
               const searchLower = searchTerm.toLowerCase()
@@ -37,8 +68,6 @@ function Home({ searchTerm, filterType, setFilterType }) {
         : sortedBooks
 
     const displayBooks = searchTerm ? filteredBooks : sortedBooks.slice(0, 3)
-
-   
 
     const getFilteredBooks = () => {
         let filtered = [...normalizedBooks]
@@ -65,11 +94,32 @@ function Home({ searchTerm, filterType, setFilterType }) {
 
     useEffect(() => {
         if (location.state?.fromEnding && location.state?.book) {
-            setSelectedBook(location.state.book);
-            // Nettoyer l'état pour éviter de rouvrir à chaque navigation
-            window.history.replaceState({}, document.title);
+            setSelectedBook(location.state.book)
+            setShowModal(true)
+            
+            setTimeout(() => {
+                const modal = document.querySelector('.Section-Resume')
+                if (modal) {
+                    modal.classList.add('visible')
+                }
+            }, 100)
+            
+            window.history.replaceState({}, document.title)
         }
-    }, [location.state]);
+    }, [location.state])
+
+    // Ajouter la classe 'show' à l'overlay après le montage
+    useEffect(() => {
+        if (showModal) {
+            setTimeout(() => {
+                const overlay = document.querySelector('.resume-modal-overlay')
+                if (overlay) {
+                    overlay.classList.add('show')
+                }
+            }, 10)
+        }
+    }, [showModal])
+
     return (
         <section className="Section-Home">
             <div className="Home">
@@ -117,10 +167,10 @@ function Home({ searchTerm, filterType, setFilterType }) {
                 )}
             </div>
 
-            {selectedBook && (
-                <div className="resume-modal-overlay" onClick={() => setSelectedBook(null)}>
+            {showModal && selectedBook && (
+                <div className="resume-modal-overlay" onClick={handleCloseResume}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <Resume book={selectedBook} onClose={() => setSelectedBook(null)} />
+                        <Resume book={selectedBook} onClose={handleCloseResume} />
                     </div>
                 </div>
             )}
