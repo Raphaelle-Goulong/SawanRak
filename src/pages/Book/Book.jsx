@@ -53,17 +53,21 @@ function Book() {
     }, [book.url])
 
     useEffect(() => {
-        if (book.id) {
-            // Récupérer la progression sauvegardée
-            const savedProgress = localStorage.getItem(`book-${book.id}-progress`)
+    if (book.id) {
+        // Récupérer la progression sauvegardée
+        const savedProgress = localStorage.getItem(`book-${book.id}-progress`)
 
-            // Vérifier si un chapitre spécifique est passé dans le state de navigation
-            const initialChapter =
-                state?.chapterIndex || (savedProgress ? parseInt(savedProgress, 10) : 0)
+        // Vérifier si un chapitre spécifique est passé dans le state de navigation
+        // Utiliser !== undefined au lieu de || pour gérer le cas où chapterIndex = 0
+        const initialChapter = 
+            state?.chapterIndex !== undefined 
+                ? state.chapterIndex 
+                : (savedProgress ? parseInt(savedProgress, 10) : 0)
 
-            setCurrentChapterIndex(initialChapter)
-        }
-    }, [book.id, state?.chapterIndex])
+        setCurrentChapterIndex(initialChapter)
+    }
+}, [book.id, state?.chapterIndex])
+
 
 //     
 const convertToJsonStructure = (content) => {

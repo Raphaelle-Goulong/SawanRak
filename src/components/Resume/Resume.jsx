@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import mammoth from 'mammoth'
 import '../Resume/Resume.scss'
 import Card from '../../components/Card/Card'
 import Tags from '../Tags/Tags'
@@ -11,6 +12,71 @@ function Resume({ book, onClose }) {
     const [lastChapterInfo, setLastChapterInfo] = useState(null)
     const [isVisible, setIsVisible] = useState(true)
     const [allChapters, setAllChapters] = useState([])
+    const [realChapters, setRealChapters] = useState([])
+    const [isLoadingChapters, setIsLoadingChapters] = useState(false)
+
+    // Fonction pour extraire les chapitres du fichier Word (même que dans Book.js)
+    const convertToJsonStructure = (content) => {
+        const lines = content.split('\n');
+        const chapters = [];
+        let currentChapter = { title: '', content: '' };
+
+        for (const line of lines) {
+            const trimmed = line.trim();
+
+            // Détection des titres (même logique que Book.js)
+            if (
+                trimmed.match(/^(chapitre|chapter)\s+[0-9ivx]+/i) || // "Chapitre 1", "Chapter IV"
+                trimmed.match(/^(prologue|épilogue|introduction|conclusion)/i) // Autres sections
+            ) {
+                // Si on a déjà un chapitre en cours, on l'ajoute
+                if (currentChapter.title || currentChapter.content) {
+                    chapters.push(currentChapter);
+                }
+                // On commence un nouveau chapitre
+                currentChapter = {
+                    title: trimmed,
+                    content: ''
+                };
+            } else {
+                // Sinon, on ajoute la ligne au contenu
+                currentChapter.content += (currentChapter.content ? '\n\n' : '') + trimmed;
+            }
+        }
+
+        // On ajoute le dernier chapitre
+        if (currentChapter.title || currentChapter.content) {
+            chapters.push(currentChapter);
+        }
+
+        return chapters;
+    };
+
+    // Chargement des vrais chapitres depuis le fichier Word
+    useEffect(() => {
+        const fetchRealChapters = async () => {
+            if (!book.url) return;
+            
+            setIsLoadingChapters(true);
+            try {
+                const response = await fetch(book.url);
+                const arrayBuffer = await response.arrayBuffer();
+                
+                const result = await mammoth.extractRawText({ arrayBuffer });
+                const extractedChapters = convertToJsonStructure(result.value);
+                
+                setRealChapters(extractedChapters);
+            } catch (error) {
+                console.error('Erreur lors du chargement des chapitres:', error);
+                // En cas d'erreur, utiliser les chapitres génériques
+                setRealChapters([]);
+            } finally {
+                setIsLoadingChapters(false);
+            }
+        };
+
+        fetchRealChapters();
+    }, [book.url]);
 
     // 1. Chargement du dernier chapitre (séparé)
     useEffect(() => {
@@ -24,31 +90,41 @@ function Resume({ book, onClose }) {
         }
     }, [book.id])
 
-    // 2. Génération des chapitres (séparé)
+    // 2. Génération des chapitres - utilise les vrais chapitres si disponibles
     useEffect(() => {
-        const startsWithZero = book.description?.toLowerCase().includes('intro')
-        const chaptersList = []
+        if (realChapters.length > 0) {
+            // Utiliser les vrais chapitres extraits du fichier
+            const chaptersList = realChapters.map((chapter, index) => ({
+                number: index,
+                title: chapter.title || `Chapitre ${index + 1}`
+            }));
+            setAllChapters(chaptersList);
+        } else {
+            // Fallback vers les chapitres génériques
+            const startsWithZero = book.description?.toLowerCase().includes('intro')
+            const chaptersList = []
 
-        if (startsWithZero) {
-            chaptersList.push({ number: 0, title: 'Chapitre 0' })
+            if (startsWithZero) {
+                chaptersList.push({ number: 0, title: 'Chapitre 0' })
+            }
+
+            for (let i = 1; i <= book.chapters; i++) {
+                chaptersList.push({
+                    number: startsWithZero ? i : i - 1,
+                    title: `Chapitre ${i}`
+                })
+            }
+
+            setAllChapters(chaptersList)
         }
-
-        for (let i = 1; i <= book.chapters; i++) {
-            chaptersList.push({
-                number: startsWithZero ? i : i - 1,
-                title: `Chapitre ${i}`
-            })
-        }
-
-        setAllChapters(chaptersList)
-    }, [book.chapters, book.description])
+    }, [realChapters, book.chapters, book.description])
 
     // Handler pour clic sur un chapitre
     const handleChapterClick = (chapterNumber) => {
         navigate(`/book/${book.id}`, {
             state: {
                 book,
-                chapterIndex: chapterNumber // Plus besoin de -1 car on gère déjà l'index
+                chapterIndex: chapterNumber
             }
         })
     }
@@ -61,7 +137,7 @@ function Resume({ book, onClose }) {
     // Handler pour fermer le composant
     const handleClose = () => {
         setIsVisible(false)
-        if (onClose) onClose() // Appelle la prop onClose si elle existe
+        if (onClose) onClose()
     }
 
     // Si le composant est invisible, on ne rend rien
@@ -93,7 +169,6 @@ function Resume({ book, onClose }) {
 
                 {/* Liste des catégories */}
                 <div className="Categorie">
-                    {/* Gère à la fois les catégories sous forme de string ou d'array */}
                     {(Array.isArray(book.categorie)
                         ? book.categorie
                         : [book.categorie].filter(Boolean)
@@ -125,26 +200,29 @@ function Resume({ book, onClose }) {
                     {/* Liste de tous les chapitres */}
                     <div className="all-chapter">
                         <h4>Tous les chapitres :</h4>
-                        <div className="chapters-list">
-                            {allChapters.map((chapter) => (
-                                <a
-                                    key={chapter.number}
-                                    href={`/book/${book.id}?chapter=${chapter.number}`}
-                                    onClick={(e) => {
-                                        e.preventDefault()
-                                        handleChapterClick(chapter.number)
-                                    }}
-                                    className="chapter-link">
-                                    <Tags text={chapter.title} />
-                                </a>
-                            ))}
-                        </div>
+                        {isLoadingChapters ? (
+                            <p>Chargement des chapitres...</p>
+                        ) : (
+                            <div className="chapters-list">
+                                {allChapters.map((chapter) => (
+                                    <a
+                                        key={chapter.number}
+                                        href={`/book/${book.id}?chapter=${chapter.number}`}
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            handleChapterClick(chapter.number)
+                                        }}
+                                        className="chapter-link">
+                                        <Tags text={chapter.title.slice(0, 11)} />
+                                    </a>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
 
             <div className="Btn-start" onClick={handleReadBook}>
-                {/* Change le texte selon si on a un historique de lecture */}
                 <Button text={lastChapterInfo ? 'Continuer la lecture' : 'Commencer'} />
             </div>
         </section>
