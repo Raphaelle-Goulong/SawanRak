@@ -1,57 +1,99 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import Data from '../../Data.json'; // Importez vos données de livres
-import '../Ending/Ending.scss';
-import Card from '../../components/Card/Card';
-import Button from '../../components/Button/Button';
-import { X, Frown } from 'lucide-react';
-
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import Data from '../../Data.json'
+import '../Ending/Ending.scss'
+import Card from '../../components/Card/Card'
+import Button from '../../components/Button/Button'
+import { X, Frown } from 'lucide-react'
 
 function Ending({ onClose }) {
+    const location = useLocation()
+    const currentBook = location.state?.book
+    const [similarBooks, setSimilarBooks] = useState([])
+    const [userRating, setUserRating] = useState(0)
+    const [hasRated, setHasRated] = useState(false)
 
-    const location = useLocation();
-    const currentBook = location.state?.book; // Récupérez le livre actuel
-    const [similarBooks, setSimilarBooks] = useState([]);
-
-
-    
- useEffect(() => {
-        if (currentBook && currentBook.categorie) {
-            // Trouvez des livres de la même catégorie
-            const sameCategoryBooks = Data.filter(book => {
-                // Gère à la fois les catégories sous forme de string ou d'array
-                const bookCategories = Array.isArray(book.categorie) 
-                    ? book.categorie 
-                    : [book.categorie];
-                const currentCategories = Array.isArray(currentBook.categorie) 
-                    ? currentBook.categorie 
-                    : [currentBook.categorie];
-                
-                return book.id !== currentBook.id && 
-                       bookCategories.some(cat => currentCategories.includes(cat));
-            });
-
-            // Mélangez et sélectionnez 3 livres maximum
-            const shuffled = [...sameCategoryBooks].sort(() => 0.5 - Math.random());
-            setSimilarBooks(shuffled.slice(0, 3));
+    // Charger la note existante depuis localStorage
+    useEffect(() => {
+        if (currentBook?.id) {
+            const savedRating = localStorage.getItem(`book-${currentBook.id}-rating`)
+            if (savedRating) {
+                setUserRating(parseInt(savedRating, 10))
+                setHasRated(true)
+            }
         }
-    }, [currentBook]);
+    }, [currentBook])
 
+    // Gestion des livres similaires (code existant)
+    useEffect(() => {
+        if (currentBook && currentBook.categorie) {
+            const sameCategoryBooks = Data.filter((book) => {
+                const bookCategories = Array.isArray(book.categorie)
+                    ? book.categorie
+                    : [book.categorie]
+                const currentCategories = Array.isArray(currentBook.categorie)
+                    ? currentBook.categorie
+                    : [currentBook.categorie]
+
+                return (
+                    book.id !== currentBook.id &&
+                    bookCategories.some((cat) => currentCategories.includes(cat))
+                )
+            })
+
+            const shuffled = [...sameCategoryBooks].sort(() => 0.5 - Math.random())
+            setSimilarBooks(shuffled.slice(0, 3))
+        }
+    }, [currentBook])
+
+    // Fonction pour gérer le changement de note
+    const handleRatingChange = (rating) => {
+        const newRating = parseInt(rating, 10)
+        setUserRating(newRating)
+        setHasRated(true)
+
+        if (currentBook?.id) {
+            // Sauvegarder dans localStorage
+            localStorage.setItem(`book-${currentBook.id}-rating`, newRating.toString())
+
+            // Optionnel : Sauvegarder aussi la date de notation
+            localStorage.setItem(`book-${currentBook.id}-rating-date`, new Date().toISOString())
+
+            console.log(`Note sauvegardée pour "${currentBook.title}": ${newRating} étoiles`)
+        }
+    }
 
     return (
         <section className="Section-Ending">
-            <X className="cross" size={20} />
+            <X className="cross" size={20} onClick={onClose} />
             <h2>Tu es arrivée à la fin du livre</h2>
+            {/* <Frown />
             <Frown />
-            <Frown />
-            <Frown />
+            <Frown /> */}
+            <div class="melting-text-container">
+                <h1 class="melting-text">Bye Bye !</h1>
+            </div>
+
             <div className="Note">
                 <div className="title">
-                    <h3>N'oublie pas de noter</h3>
+                    <h3>
+                        {hasRated
+                            ? `Merci pour ta note : ${userRating} étoile${
+                                  userRating > 1 ? 's' : ''
+                              } !`
+                            : "N'oublie pas de noter"}
+                    </h3>
                 </div>
                 <div className="star">
                     <div className="radio">
-                        <input id="rating-5" type="radio" name="rating" value="5" />
+                        <input
+                            id="rating-5"
+                            type="radio"
+                            name="rating"
+                            value="5"
+                            checked={userRating === 5}
+                            onChange={(e) => handleRatingChange(e.target.value)}
+                        />
                         <label htmlFor="rating-5" title="5 stars">
                             <svg
                                 viewBox="0 0 576 512"
@@ -61,7 +103,14 @@ function Ending({ onClose }) {
                             </svg>
                         </label>
 
-                        <input id="rating-4" type="radio" name="rating" value="4" />
+                        <input
+                            id="rating-4"
+                            type="radio"
+                            name="rating"
+                            value="4"
+                            checked={userRating === 4}
+                            onChange={(e) => handleRatingChange(e.target.value)}
+                        />
                         <label htmlFor="rating-4" title="4 stars">
                             <svg
                                 viewBox="0 0 576 512"
@@ -71,7 +120,14 @@ function Ending({ onClose }) {
                             </svg>
                         </label>
 
-                        <input id="rating-3" type="radio" name="rating" value="3" />
+                        <input
+                            id="rating-3"
+                            type="radio"
+                            name="rating"
+                            value="3"
+                            checked={userRating === 3}
+                            onChange={(e) => handleRatingChange(e.target.value)}
+                        />
                         <label htmlFor="rating-3" title="3 stars">
                             <svg
                                 viewBox="0 0 576 512"
@@ -81,7 +137,14 @@ function Ending({ onClose }) {
                             </svg>
                         </label>
 
-                        <input id="rating-2" type="radio" name="rating" value="2" />
+                        <input
+                            id="rating-2"
+                            type="radio"
+                            name="rating"
+                            value="2"
+                            checked={userRating === 2}
+                            onChange={(e) => handleRatingChange(e.target.value)}
+                        />
                         <label htmlFor="rating-2" title="2 stars">
                             <svg
                                 viewBox="0 0 576 512"
@@ -91,7 +154,14 @@ function Ending({ onClose }) {
                             </svg>
                         </label>
 
-                        <input id="rating-1" type="radio" name="rating" value="1" />
+                        <input
+                            id="rating-1"
+                            type="radio"
+                            name="rating"
+                            value="1"
+                            checked={userRating === 1}
+                            onChange={(e) => handleRatingChange(e.target.value)}
+                        />
                         <label htmlFor="rating-1" title="1 star">
                             <svg
                                 viewBox="0 0 576 512"
@@ -103,17 +173,21 @@ function Ending({ onClose }) {
                     </div>
                 </div>
             </div>
+
             <div className="other-books">
                 <div className="title">
                     <h3>Livre qui pourrait te plaire</h3>
                 </div>
                 <div className="book-cat">
                     {similarBooks.length > 0 ? (
-                        similarBooks.map(book => (
-                            <Card 
-                                key={book.id} 
-                                Book={book} 
-                                onClick={() => window.location.reload()} // Ou une meilleure gestion de navigation
+                        similarBooks.map((book) => (
+                            <Card
+                                key={book.id}
+                                Book={book}
+                                onClick={(e) => {
+                                    e.stopPropagation() // Empêche la propagation vers l'overlay
+                                    window.location.reload()
+                                }}
                             />
                         ))
                     ) : (
@@ -121,6 +195,7 @@ function Ending({ onClose }) {
                     )}
                 </div>
             </div>
+
             <div className="btn-quit">
                 <Link to="/" className="home-link">
                     <Button onClick={onClose} text="Retour Page Home" />

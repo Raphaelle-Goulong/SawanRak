@@ -58,10 +58,12 @@ function Book() {
     useEffect(() => {
         if (book.id) {
             const savedProgress = localStorage.getItem(`book-${book.id}-progress`)
-            const initialChapter = 
-                state?.chapterIndex !== undefined 
-                    ? state.chapterIndex 
-                    : (savedProgress ? parseInt(savedProgress, 10) : 0)
+            const initialChapter =
+                state?.chapterIndex !== undefined
+                    ? state.chapterIndex
+                    : savedProgress
+                    ? parseInt(savedProgress, 10)
+                    : 0
 
             setCurrentChapterIndex(initialChapter)
         }
@@ -70,7 +72,7 @@ function Book() {
     const handleSelectChapter = (index) => {
         setCurrentChapterIndex(index)
         window.scrollTo(0, 0)
-        
+
         if (book.id) {
             localStorage.setItem(`book-${book.id}-progress`, index.toString())
             localStorage.setItem(
@@ -85,7 +87,12 @@ function Book() {
     }
 
     // 👈 Utiliser le loading du Context
-    if (isLoadingBook(book.id)) return <div className="loading"><Loading/></div>
+    if (isLoadingBook(book.id))
+        return (
+            <div className="loading">
+                <Loading />
+            </div>
+        )
     if (error) return <div className="error">{error}</div>
 
     return (
@@ -127,9 +134,7 @@ function Book() {
                     disabled={currentChapterIndex === 0}>
                     Précédent
                 </Button>
-                <Button
-                    onClick={handleNextChapter}
-                    disabled={false}>
+                <Button onClick={handleNextChapter} disabled={false}>
                     Suivant
                 </Button>
             </div>
@@ -137,9 +142,13 @@ function Book() {
             {showEndingModal && (
                 <div
                     className={`modal-overlay ${showEndingModal ? 'show' : ''}`}
-                    onClick={() => setShowEndingModal(false)}>
-                    <div className="modal-content">
-                        <Ending onClose={() => setShowEndingModal(false)} book={book}/>
+                    onClick={() => setShowEndingModal(false)} // Ferme si on clique sur l'overlay
+                >
+                    <div
+                        className="modal-content"
+                        onClick={(e) => e.stopPropagation()} // Empêche la fermeture si on clique sur le contenu
+                    >
+                        <Ending onClose={() => setShowEndingModal(false)} book={book} />
                     </div>
                 </div>
             )}

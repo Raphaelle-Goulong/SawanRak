@@ -1,22 +1,32 @@
 .Section-Ending {
-    background-color: rgba(54, 54, 54, 0.918);
-    // width: 90%;
-    // padding: 20px;
+    background-color: #000000d0;
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     border-radius: 10px;
     position: relative;
+
     .cross {
         position: absolute;
         top: 10px;
         right: 20px;
+        cursor: pointer;
+        color: #fff;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #ff6b6b;
+        }
     }
+
     h2 {
         font-family: 'Marcellus', serif;
         margin: 40px;
         font-size: 1.2rem;
+        color: #fff;
     }
+
     .Note {
         display: flex;
         justify-content: center;
@@ -24,6 +34,7 @@
         flex-wrap: wrap;
         height: 100px;
         margin: 20px 0 20px 0;
+
         .title {
             font-family: 'Marcellus', serif;
             font-size: 1rem;
@@ -31,9 +42,11 @@
             width: 100%;
             display: flex;
             justify-content: center;
+            color: #fff;
         }
     }
-    /* From Uiverse.io by LeonKohli */
+
+    /* Système d'étoiles avec dégradé chaud */
     .radio {
         display: flex;
         justify-content: center;
@@ -48,29 +61,96 @@
 
     .radio > label {
         cursor: pointer;
-        font-size: 30px;
+        font-size: 20px;
         position: relative;
         display: inline-block;
         transition: transform 0.3s ease;
     }
 
     .radio > label > svg {
-        fill: #666;
-        transition: fill 0.3s ease;
+        fill: #535353;
+        transition: fill 0.3s ease, filter 0.3s ease;
     }
 
+    /* Couleurs spécifiques pour chaque étoile - dégradé du jaune au rouge */
+    .radio > input[value='1']:checked + label > svg,
+    .radio > input[value='1']:checked + label ~ label > svg {
+        fill: #ffeb3b; /* Jaune vif */
+        filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8));
+    }
+
+    .radio > input[value='2']:checked + label > svg,
+    .radio > input[value='2']:checked + label ~ label > svg {
+        fill: #ffc107; /* Jaune-orange */
+        filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.8));
+    }
+
+    .radio > input[value='3']:checked + label > svg,
+    .radio > input[value='3']:checked + label ~ label > svg {
+        fill: #ff9800; /* Orange */
+        filter: drop-shadow(0 0 15px rgba(255, 152, 0, 0.8));
+    }
+
+    .radio > input[value='4']:checked + label > svg,
+    .radio > input[value='4']:checked + label ~ label > svg {
+        fill: #ff5722; /* Orange-rouge */
+        filter: drop-shadow(0 0 15px rgba(255, 87, 34, 0.8));
+    }
+
+    .radio > input[value='5']:checked + label > svg,
+    .radio > input[value='5']:checked + label ~ label > svg {
+        fill: #f44336; /* Rouge */
+        filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.8));
+    }
+
+    /* Effets de hover avec les mêmes couleurs */
+    .radio > label:hover > svg {
+        transform: scale(1.2);
+        transition: transform 0.3s ease, fill 0.3s ease;
+    }
+
+    /* Hover pour chaque étoile avec sa couleur */
+    .radio > label[for='rating-1']:hover > svg,
+    .radio > label[for='rating-1']:hover ~ label > svg {
+        fill: #ffeb3b !important;
+        filter: drop-shadow(0 0 20px rgba(255, 235, 59, 1)) !important;
+    }
+
+    .radio > label[for='rating-2']:hover > svg,
+    .radio > label[for='rating-2']:hover ~ label > svg {
+        fill: #ffc107 !important;
+        filter: drop-shadow(0 0 20px rgba(255, 193, 7, 1)) !important;
+    }
+
+    .radio > label[for='rating-3']:hover > svg,
+    .radio > label[for='rating-3']:hover ~ label > svg {
+        fill: #ff9800 !important;
+        filter: drop-shadow(0 0 20px rgba(255, 152, 0, 1)) !important;
+    }
+
+    .radio > label[for='rating-4']:hover > svg,
+    .radio > label[for='rating-4']:hover ~ label > svg {
+        fill: #ff5722 !important;
+        filter: drop-shadow(0 0 20px rgba(255, 87, 34, 1)) !important;
+    }
+
+    .radio > label[for='rating-5']:hover > svg,
+    .radio > label[for='rating-5']:hover ~ label > svg {
+        fill: #f44336 !important;
+        filter: drop-shadow(0 0 20px rgba(244, 67, 54, 1)) !important;
+    }
+
+    /* Particules animées avec couleurs correspondantes */
     .radio > label::before,
     .radio > label::after {
         content: '';
         position: absolute;
         width: 6px;
         height: 6px;
-        background-color: #ff9e0b;
         border-radius: 50%;
         opacity: 0;
         transform: scale(0);
         transition: transform 0.4s ease, opacity 0.4s ease;
-        animation: particle-explosion 1s ease-out;
     }
 
     .radio > label::before {
@@ -85,32 +165,68 @@
         transform: translateX(-50%) scale(0);
     }
 
+    /* Couleurs des particules selon l'étoile */
+    .radio > label[for='rating-1']::before,
+    .radio > label[for='rating-1']::after {
+        background: linear-gradient(45deg, #ffeb3b, #fff59d);
+    }
+
+    .radio > label[for='rating-2']::before,
+    .radio > label[for='rating-2']::after {
+        background: linear-gradient(45deg, #ffc107, #ffecb3);
+    }
+
+    .radio > label[for='rating-3']::before,
+    .radio > label[for='rating-3']::after {
+        background: linear-gradient(45deg, #ff9800, #ffcc80);
+    }
+
+    .radio > label[for='rating-4']::before,
+    .radio > label[for='rating-4']::after {
+        background: linear-gradient(45deg, #ff5722, #ff8a65);
+    }
+
+    .radio > label[for='rating-5']::before,
+    .radio > label[for='rating-5']::after {
+        background: linear-gradient(45deg, #f44336, #ef5350);
+    }
+
     .radio > label:hover::before,
     .radio > label:hover::after {
         opacity: 1;
         transform: translateX(-50%) scale(1.5);
+        animation: particle-twinkle 0.8s ease-out;
     }
 
-    .radio > label:hover {
-        transform: scale(1.2);
-        animation: pulse 0.6s infinite alternate;
+    /* Animations améliorées */
+    @keyframes particle-twinkle {
+        0% {
+            opacity: 0;
+            transform: translateX(-50%) scale(0) rotate(0deg);
+        }
+        50% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1.8) rotate(180deg);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5) rotate(360deg);
+        }
     }
 
-    .radio > label:hover > svg,
-    .radio > label:hover ~ label > svg {
-        fill: #ff9e0b;
-        filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
-        animation: shimmer 1s ease infinite alternate;
+    @keyframes warm-glow {
+        0% {
+            filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.5));
+        }
+        50% {
+            filter: drop-shadow(0 0 25px rgba(255, 152, 0, 0.8));
+        }
+        100% {
+            filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.6));
+        }
     }
 
-    .radio > input:checked + label > svg,
-    .radio > input:checked + label ~ label > svg {
-        fill: #ff9e0b;
-        filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
-        animation: pulse 0.8s infinite alternate;
-    }
-
-    @keyframes pulse {
+    @keyframes pulse-warm {
         0% {
             transform: scale(1);
         }
@@ -119,42 +235,9 @@
         }
     }
 
-    @keyframes particle-explosion {
-        0% {
-            opacity: 0;
-            transform: scale(0.5);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-        100% {
-            opacity: 0;
-            transform: scale(0.5);
-        }
-    }
-
-    @keyframes shimmer {
-        0% {
-            filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.5));
-        }
-        100% {
-            filter: drop-shadow(0 0 20px rgba(255, 158, 11, 1));
-        }
-    }
-
-    .radio > input:checked + label:hover > svg,
-    .radio > input:checked + label:hover ~ label > svg {
-        fill: #e58e09;
-    }
-
-    .radio > label:hover > svg,
-    .radio > label:hover ~ label > svg {
-        fill: #ff9e0b;
-    }
-
-    .radio input:checked ~ label svg {
-        fill: #ffa723;
+    /* Animation générale pour les étoiles sélectionnées */
+    .radio > input:checked + label > svg {
+        animation: pulse-warm 0.8s infinite alternate, warm-glow 2s infinite alternate;
     }
 
     .other-books {
@@ -162,6 +245,7 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+
         .title {
             width: 100%;
             font-family: 'Marcellus', serif;
@@ -169,7 +253,9 @@
             margin: 15px;
             display: flex;
             justify-content: center;
+            color: #fff;
         }
+
         .book-cat {
             display: flex;
             justify-content: center;
@@ -178,10 +264,87 @@
             padding: 10px;
         }
     }
+
     .btn-quit {
         margin: 20px;
-      .home-link{
-        text-decoration: none;
-      }
+
+        .home-link {
+            text-decoration: none;
+        }
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #1a1a1a;
+        overflow: hidden;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .melting-text-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .melting-text {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        position: relative;
+        animation: melt 3s infinite ease-in-out;
+        background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .melting-text::before,
+    .melting-text::after {
+        content: 'Bye Bye !';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        z-index: -1;
+        transform: scaleY(1);
+        opacity: 0.5;
+        animation: drip 3s infinite ease-in-out;
+    }
+
+    .melting-text::after {
+        filter: blur(10px);
+        opacity: 0.3;
+    }
+
+    /* Keyframes for melting effect */
+    @keyframes melt {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(20px);
+        }
+    }
+
+    @keyframes drip {
+        0%,
+        100% {
+            transform: scaleY(1);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scaleY(1.5);
+            opacity: 0.7;
+        }
     }
 }
