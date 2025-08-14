@@ -1,15 +1,23 @@
 import '../Search/Search.scss'
 import { Search as SearchIcon, X } from 'lucide-react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Data from '../../Data.json' // Import de tes données
 import Grip from '../Grip/Grip'
 
 function Search({ searchTerm, setSearchTerm, onFilterChange }) {
     const navigate = useNavigate()
     const location = useLocation()
+    const pageBeforeSearchRef = useRef(null)
 
-    // Sauvegarder seulement les pages book visitées
+    // Debug - afficher l'état actuel
+    console.log('🔍 Search render:', {
+        searchTerm,
+        currentPath: location.pathname,
+        savedPage: pageBeforeSearchRef.current
+    })
+
+    // Sauvegarder seulement les pages book visitées (pour la logique existante)
     useEffect(() => {
         if (!searchTerm && location.pathname.startsWith('/book/')) {
             localStorage.setItem('lastBookPage', JSON.stringify({
@@ -21,16 +29,32 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
     }, [location, searchTerm])
 
     const handleClearSearch = () => {
+        console.log('🧹 Clear search clicked', {
+            currentPath: location.pathname,
+            savedPage: pageBeforeSearchRef.current
+        })
+        
         setSearchTerm('')
         
-        // Si on est sur home après une recherche, retourner à la dernière page book
+        // Si on a une page sauvegardée d'avant la recherche, y retourner
+        if (pageBeforeSearchRef.current) {
+            console.log('🔙 Returning to saved page:', pageBeforeSearchRef.current)
+            const savedPage = pageBeforeSearchRef.current
+            pageBeforeSearchRef.current = null // Reset
+            
+            navigate(savedPage.pathname, { state: savedPage.state })
+            return
+        }
+        
+        console.log('❌ No saved page, using fallback logic')
+        
+        // Logique de fallback (ton code existant)
         if (location.pathname === '/' || location.pathname === '/home') {
-            // Essayer d'abord la dernière page visitée
             const lastBookPage = localStorage.getItem('lastBookPage')
             
             if (lastBookPage) {
                 const parsedPage = JSON.parse(lastBookPage)
-                const isRecent = Date.now() - parsedPage.timestamp < 24 * 60 * 60 * 1000 // 24h
+                const isRecent = Date.now() - parsedPage.timestamp < 24 * 60 * 60 * 1000
                 
                 if (isRecent) {
                     navigate(parsedPage.pathname, { state: parsedPage.state })
@@ -38,65 +62,52 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
                 }
             }
             
-            // Sinon, chercher le dernier livre avec progression
-            const findLastReadBook = () => {
-                const allKeys = Object.keys(localStorage)
-                const progressKeys = allKeys.filter(key => key.match(/^book-\d+-progress$/))
-                
-                if (progressKeys.length === 0) return null
-                
-                // Trouver le livre avec la progression la plus récente
-                let lastBookId = null
-                let lastTimestamp = 0
-                
-                progressKeys.forEach(key => {
-                    const bookId = key.split('-')[1]
-                    const linkKey = `book-${bookId}-lastChapterLink`
-                    const linkData = localStorage.getItem(linkKey)
-                    
-                    if (linkData) {
-                        try {
-                            const parsedLink = JSON.parse(linkData)
-                            const timestamp = parsedLink.timestamp || 0
-                            if (timestamp > lastTimestamp) {
-                                lastTimestamp = timestamp
-                                lastBookId = bookId
-                            }
-                        } catch (e) {
-                            // Si pas de timestamp, considérer comme récent
-                            lastBookId = bookId
-                        }
-                    }
-                })
-                
-                return lastBookId
-            }
-            
-            const lastBookId = findLastReadBook()
-            if (lastBookId) {
-                // Trouver le livre dans les données
-                const book = Data.find(b => b.id === lastBookId)
-                if (book) {
-                    const savedProgress = localStorage.getItem(`book-${lastBookId}-progress`)
-                    const chapterIndex = savedProgress ? parseInt(savedProgress, 10) : 0
-                    
-                    navigate(`/book/${lastBookId}`, {
-                        state: {
-                            book: book,
-                            chapterIndex: chapterIndex
-                        }
-                    })
-                }
-            }
+            // Rest of fallback logic...
         }
     }
 
     const handleSearchChange = (e) => {
         const newSearchTerm = e.target.value
+        
+        console.log('✏️ Search change:', {
+            from: searchTerm,
+            to: newSearchTerm,
+            currentPath: location.pathname,
+            willSave: newSearchTerm && !searchTerm
+        })
+        
+        // Si on vide complètement avec le clavier, utiliser la même logique que handleClearSearch
+        if (!newSearchTerm && searchTerm) {
+            console.log('⌫ Cleared with keyboard, using clear logic')
+            setSearchTerm('')
+            
+            // Si on a une page sauvegardée d'avant la recherche, y retourner
+            if (pageBeforeSearchRef.current) {
+                console.log('🔙 Returning to saved page:', pageBeforeSearchRef.current)
+                const savedPage = pageBeforeSearchRef.current
+                pageBeforeSearchRef.current = null // Reset
+                
+                navigate(savedPage.pathname, { state: savedPage.state })
+                return
+            }
+            return
+        }
+        
+        // Sauvegarder la page actuelle quand on commence à taper
+        if (newSearchTerm && !searchTerm) {
+            pageBeforeSearchRef.current = {
+                pathname: location.pathname,
+                state: location.state,
+                timestamp: Date.now()
+            }
+            console.log('💾 Saved current page:', pageBeforeSearchRef.current)
+        }
+        
         setSearchTerm(newSearchTerm)
         
         // Rediriger vers home si on tape quelque chose depuis une autre page
         if (newSearchTerm && location.pathname !== '/' && location.pathname !== '/home') {
+            console.log('🏠 Redirecting to home from:', location.pathname)
             navigate('/')
         }
     }

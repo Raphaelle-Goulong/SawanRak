@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Data from '../../Data.json'
 import '../Ending/Ending.scss'
 import Card from '../../components/Card/Card'
@@ -8,6 +8,7 @@ import { X, Frown } from 'lucide-react'
 
 function Ending({ onClose }) {
     const location = useLocation()
+    const navigate = useNavigate()
     const currentBook = location.state?.book
     const [similarBooks, setSimilarBooks] = useState([])
     const [userRating, setUserRating] = useState(0)
@@ -24,20 +25,22 @@ function Ending({ onClose }) {
         }
     }, [currentBook])
 
-    // Gestion des livres similaires (code existant)
+    // Gestion des livres similaires - Prendre la PREMIÈRE catégorie
     useEffect(() => {
         if (currentBook && currentBook.categorie) {
+            // Récupérer la première catégorie du livre actuel
+            const firstCategory = Array.isArray(currentBook.categorie) 
+                ? currentBook.categorie[0] 
+                : currentBook.categorie
+
             const sameCategoryBooks = Data.filter((book) => {
                 const bookCategories = Array.isArray(book.categorie)
                     ? book.categorie
                     : [book.categorie]
-                const currentCategories = Array.isArray(currentBook.categorie)
-                    ? currentBook.categorie
-                    : [currentBook.categorie]
 
                 return (
                     book.id !== currentBook.id &&
-                    bookCategories.some((cat) => currentCategories.includes(cat))
+                    bookCategories.includes(firstCategory) // Chercher seulement la première catégorie
                 )
             })
 
@@ -61,6 +64,17 @@ function Ending({ onClose }) {
 
             console.log(`Note sauvegardée pour "${currentBook.title}": ${newRating} étoiles`)
         }
+    }
+
+    // Fonction pour gérer le clic sur un livre suggéré
+    const handleBookClick = (book) => {
+        // Naviguer vers la page Home avec les informations du livre pour ouvrir la modale Resume
+        navigate('/', {
+            state: {
+                fromEnding: true,
+                book: book
+            }
+        })
     }
 
     return (
@@ -185,8 +199,8 @@ function Ending({ onClose }) {
                                 key={book.id}
                                 Book={book}
                                 onClick={(e) => {
-                                    e.stopPropagation() // Empêche la propagation vers l'overlay
-                                    window.location.reload()
+                                    // e.stopPropagation() // Empêche la propagation vers l'overlay
+                                    handleBookClick(book) // Utilise la nouvelle fonction
                                 }}
                             />
                         ))
