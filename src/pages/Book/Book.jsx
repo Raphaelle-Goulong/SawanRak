@@ -10,7 +10,7 @@ import Loading from '../../components/Loading/Loading'
 function Book() {
     const { state } = useLocation()
     const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext() // 👈 Utiliser le Context
-
+ const [initialLoading, setInitialLoading] = useState(true) // État pour le chargement initial
     const book = state?.book || {
         title: 'Titre par défaut',
         chapters: 1,
@@ -29,6 +29,18 @@ function Book() {
             handleSelectChapter(currentChapterIndex + 1)
         }
     }
+
+ // Effet pour le chargement initial de 2 secondes
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setInitialLoading(false)
+        }, 2000)
+        
+        return () => clearTimeout(timer)
+    }, [])
+
+
+
 
     // 👈 Remplacer tout le useEffect de chargement par celui-ci
     useEffect(() => {
@@ -86,6 +98,17 @@ function Book() {
         }
     }
 
+
+
+// Afficher le loading initial pendant 2 secondes
+    if (initialLoading) {
+        return (
+            <div className="loading">
+                <Loading />
+            </div>
+        )
+    }
+    
     // 👈 Utiliser le loading du Context
     if (isLoadingBook(book.id))
         return (
