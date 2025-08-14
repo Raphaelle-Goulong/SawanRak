@@ -34,7 +34,7 @@ function Book() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setInitialLoading(false)
-        }, 2000)
+        }, 2500)
         
         return () => clearTimeout(timer)
     }, [])
