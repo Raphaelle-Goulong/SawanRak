@@ -571,7 +571,7 @@
         "cover": "/Images/No 5.webp",
         "url": "/Books/N° 5.docx",
         "auteur": "Chao Planoy",
-        "categorie": [ "Romance","Adulte"],
+        "categorie": [ "Adulte" ,"Romance"],
         "description": "Après cette demande en mariage, je me sentais perdue, incertaine de mon chemin. C'est là que j'ai revu Rattikarn, une ancienne camarade de lycée. Je lui avais parlé une seule fois, le jour où elle portait du Chanel N°5. Et c'est là que mes pensées ont commencé à changer. Son parfum réveille mes souvenirs et mes émotions, révélant la vérité la plus enfouie dans mon cœur : je l'aime.",
         "note": "4",
         "chapters": 29,
@@ -595,7 +595,7 @@
         "cover": "/Images/Bad Sugar.webp",
         "url": "/Books/Bad sugar.docx",
         "auteur": "Zezeho",
-        "categorie": [ "Romance","Comédie","Ennemies to Lovers"],
+        "categorie": [ "Ennemies to Lovers","Comédie","Romance"],
         "description": "Mon surnom définit ma méchanceté : P'Jeans.  Est-il possible de tomber amoureux d'une personne si cruelle ? Moi, Looknai, je n'avais jamais imaginé vivre de telles expériences en devenant étudiante en première année. Jusqu'au jour où j'ai commis l'erreur de me faire des ennemies : la bande des serpents frappeuses, menée par la fille du recteur. C'est elle qui a forcé mon casier pour voler mon carnet de signatures de seniors, qui a jeté mon téléphone à l'eau par plaisir, et qui me surnomme même 'petit canard' parce que je la suis partout... Mais c'est vrai, car :Je suis en train de tomber amoureuse d'une vilaine !",
         "note": "4",
         "chapters": 44,
@@ -607,7 +607,7 @@
         "cover": "/Images/Buy My Boss.webp",
         "url": "/Books/Buy My Boss.docx",
         "auteur": "FoxyFox",
-        "categorie": [ "Romance","Adulte","Drame"],
+        "categorie": [ "Adulte","Romance","Drame"],
         "description": "Même si j'étais sa subordonnée au travail, c'était moi qui menais la danse au lit. Qui aurait cru que cela puisse m'arriver ? Araya, qui était toujours si séduisante et me laissait sans voix, s'est avérée être Mme Isara, ma nouvelle patronne.",
         "note": "4",
         "chapters": 14,
@@ -615,15 +615,15 @@
     },
     {
         "id": "52",
-        "title": "Hello Neighbor",
-        "cover": "/Images/Hello Neighbor.webp",
-        "url": "/Books/Hello Neighbor.docx",
-        "auteur": "Velvet",
-        "categorie": [ "Romance"],
-        "description": "",
+        "title": "I love You",
+        "cover": "/Images/I LOVE YOU.webp",
+        "url": "/Books/I LOVE YOU.docx",
+        "auteur": "Chao Planoy",
+        "categorie": [ "Entreprise","Romance","Comédie"],
+        "description": "Je m'appelle Baicha, ou Chama, et je suis propriétaire d'une entreprise d'import-export si prospère que j'ai reçu plusieurs prix de femme d'affaires. À mesure que mon entreprise se développait, le besoin de personnel augmentait également, ce qui m'a amenée à rencontrer Ninmookda. C'était une jeune étudiante fraîchement diplômée qui avait postulé au département comptabilité. Dès que je l'ai vue, j'ai su que c'était le coup de foudre. Elle était faite pour moi. J'ai commencé à lui offrir des bouquets, à laisser des Post-it sur son bureau et à la couvrir de fruits et de cadeaux. Mais sa réaction n'a pas été celle que j'attendais. Elle est devenue paranoïaque, persuadée d'être observée. Oh, même si mes intentions étaient bonnes, sa réaction m'a fait perdre toute confiance !",
         "note": "null",
         "chapters": 24,
-        "date": "2024-12-13"
+        "date": "2025-08-16"
     },
     {
         "id": "53",
@@ -1237,4 +1237,5 @@
         "chapters": 24,
         "date": "2025-07-03"
     }
+    
 ]
