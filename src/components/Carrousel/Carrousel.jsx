@@ -35,7 +35,8 @@ function Carrousel({ category, books, onCardClick }) {
             )}
 
             <div className="Title-carrousel">
-                <h2>{category} ({filteredBooks.length})</h2>
+                <h2>{category} </h2>
+                {/* ({filteredBooks.length}) */}
             </div>
 
             {filteredBooks.length > 0 && (
