@@ -40,9 +40,9 @@ const LoadingModal = ({ onComplete }) => {
                     <span className="letter i">i</span>
                     <span className="letter a2">a</span>
                 </div>
-                <div className="loading-bar">
+                {/* <div className="loading-bar">
                     <div className="loading-progress"></div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
