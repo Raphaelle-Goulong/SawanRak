@@ -1,0 +1,185 @@
+// LoadingModal.scss
+.loading-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(ellipse at center, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+        animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+
+    // Animations d'entrée et de sortie
+    &.entering {
+        opacity: 0;
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    &.showing {
+        opacity: 1;
+    }
+
+    &.exiting {
+        animation: fadeOut 0.5s ease-out forwards;
+    }
+
+    .loading-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .glandia-logo {
+        font-family: 'Arial', sans-serif;
+        font-size: 4rem;
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 0 0 20px rgba(207, 207, 207, 0.5);
+        margin-bottom: 2rem;
+        letter-spacing: 0.1em;
+
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            animation: letterAppear 0.4s ease-out forwards;
+            
+            &.g { animation-delay: 0.2s; }
+            &.l { animation-delay: 0.35s; }
+            &.a1 { animation-delay: 0.5s; }
+            &.n { animation-delay: 0.65s; }
+            &.d { animation-delay: 0.8s; }
+            &.i { animation-delay: 0.95s; }
+            &.a2 { animation-delay: 1.1s; }
+        }
+
+        @media (max-width: 768px) {
+            font-size: 3rem;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 2.5rem;
+        }
+    }
+
+    .loading-bar {
+        width: 300px;
+        height: 4px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        overflow: hidden;
+        margin: 0 auto;
+        position: relative;
+
+        @media (max-width: 480px) {
+            width: 250px;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ffffff, #bebebe);
+            border-radius: 2px;
+            width: 0;
+            animation: loadingProgress 2.5s ease-out forwards;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+    }
+}
+
+// Animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes letterAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.808);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-5px) scale(1.1);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.815);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes loadingProgress {
+    0% {
+        width: 0%;
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 0.9;
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+// Animation supplémentaire pour un effet Netflix
+.loading-modal.entering .glandia-logo {
+    animation: logoEntrance 0.8s ease-out forwards;
+}
+
+@keyframes logoEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0px);
+    }
+}

@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.rglandia.sawanrak',
-  appName: 'glandia',
+  appName: 'GLandia',
   webDir: 'build',
    server: {
     url: 'https://sawan-rak.vercel.app/',  // ← URL de déploiement Vercel
