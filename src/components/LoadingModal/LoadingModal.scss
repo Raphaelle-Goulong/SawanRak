@@ -91,7 +91,8 @@
 
         .loading-progress {
             height: 100%;
-            background: linear-gradient(90deg, #ffffff, #bebebe);
+            background: linear-gradient(90deg, #949494, #ffffff);
+            
             border-radius: 2px;
             width: 0;
             animation: loadingProgress 2.5s ease-out forwards;
