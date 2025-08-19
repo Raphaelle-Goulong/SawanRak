@@ -34,5 +34,24 @@
         // align-items: center;
         flex-direction: column;
     }
+    
+    .Last-Title-Section{
+        margin: 20px 0px;
+        font-family: "Marcellus", serif;
+        font-size: large;
+    }
+    .Last-New-book-card{
+        display: flex;
+        margin: 40px 0px;
+        justify-content: space-around;
+    }
+    .Results-grid{
+        gap: 5px;
+        // background-color: red;
+        display: flex;
+        
+        // align-items: center;
+        flex-direction: column;
+    }
 }
 
