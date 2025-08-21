@@ -10,12 +10,8 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
     const location = useLocation()
     const pageBeforeSearchRef = useRef(null)
 
-    // Debug - afficher l'état actuel
-    console.log('🔍 Search render:', {
-        searchTerm,
-        currentPath: location.pathname,
-        savedPage: pageBeforeSearchRef.current
-    })
+    // Vérifier si on est sur une page Book
+    const isOnBookPage = location.pathname.startsWith('/book/')
 
     // Sauvegarder seulement les pages book visitées (pour la logique existante)
     useEffect(() => {
@@ -29,10 +25,6 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
     }, [location, searchTerm])
 
     const handleClearSearch = () => {
-        console.log('🧹 Clear search clicked', {
-            currentPath: location.pathname,
-            savedPage: pageBeforeSearchRef.current
-        })
         
         setSearchTerm('')
         
@@ -46,7 +38,6 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
             return
         }
         
-        console.log('❌ No saved page, using fallback logic')
         
         // Logique de fallback (ton code existant)
         if (location.pathname === '/' || location.pathname === '/home') {
@@ -69,16 +60,9 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
     const handleSearchChange = (e) => {
         const newSearchTerm = e.target.value
         
-        console.log('✏️ Search change:', {
-            from: searchTerm,
-            to: newSearchTerm,
-            currentPath: location.pathname,
-            willSave: newSearchTerm && !searchTerm
-        })
         
         // Si on vide complètement avec le clavier, utiliser la même logique que handleClearSearch
         if (!newSearchTerm && searchTerm) {
-            console.log('⌫ Cleared with keyboard, using clear logic')
             setSearchTerm('')
             
             // Si on a une page sauvegardée d'avant la recherche, y retourner
@@ -100,14 +84,14 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
                 state: location.state,
                 timestamp: Date.now()
             }
-            console.log('💾 Saved current page:', pageBeforeSearchRef.current)
+            
         }
         
         setSearchTerm(newSearchTerm)
         
         // Rediriger vers home si on tape quelque chose depuis une autre page
         if (newSearchTerm && location.pathname !== '/' && location.pathname !== '/home') {
-            console.log('🏠 Redirecting to home from:', location.pathname)
+            
             navigate('/')
         }
     }
@@ -135,7 +119,8 @@ function Search({ searchTerm, setSearchTerm, onFilterChange }) {
                     />
                 )}
             </div>
-            <Grip onFilterChange={onFilterChange} />
+            {/* Masquer le Grip sur les pages Book */}
+            {!isOnBookPage && <Grip onFilterChange={onFilterChange} />}
         </div>
     )
 }

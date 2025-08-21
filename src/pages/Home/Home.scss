@@ -14,7 +14,6 @@
 .Section-Home {
     height: auto;
     padding: 10px;
-    // background-color: red;
     color: white;
     .Title-Section{
         margin: 20px 0px;
@@ -28,10 +27,7 @@
     }
     .Results-grid{
         gap: 5px;
-        // background-color: red;
         display: flex;
-        
-        // align-items: center;
         flex-direction: column;
     }
     
@@ -47,10 +43,7 @@
     }
     .Results-grid{
         gap: 5px;
-        // background-color: red;
         display: flex;
-        
-        // align-items: center;
         flex-direction: column;
     }
 }
