@@ -22,9 +22,9 @@ function Home({ searchTerm, filterType, setFilterType }) {
                 const bookIds = JSON.parse(stored)
                 // Récupérer les détails complets des livres depuis Data.json
                 const books = bookIds
-                    .map(id => Data.find(book => book.id === id))
-                    .filter(book => book !== undefined) // Supprimer les livres qui n'existent plus
-                    .slice(0, 3) // Limiter à 3 livres
+                    .map((id) => Data.find((book) => book.id === id))
+                    .filter((book) => book !== undefined) // Supprimer les livres qui n'existent plus
+                    .slice(0, 1) // Limiter à 1 livre
                 return books
             }
         } catch (error) {
@@ -39,19 +39,19 @@ function Home({ searchTerm, filterType, setFilterType }) {
             // Récupérer la liste actuelle
             const stored = localStorage.getItem('lastViewedBooks')
             let viewedBooks = stored ? JSON.parse(stored) : []
-            
+
             // Supprimer le livre s'il existe déjà (pour éviter les doublons)
-            viewedBooks = viewedBooks.filter(id => id !== bookId)
-            
+            viewedBooks = viewedBooks.filter((id) => id !== bookId)
+
             // Ajouter le nouveau livre au début de la liste
             viewedBooks.unshift(bookId)
-            
+
             // Limiter à 10 livres maximum pour ne pas surcharger le localStorage
             viewedBooks = viewedBooks.slice(0, 10)
-            
+
             // Sauvegarder dans le localStorage
             localStorage.setItem('lastViewedBooks', JSON.stringify(viewedBooks))
-            
+
             // Mettre à jour l'état local pour re-render le composant
             setLastViewedBooks(getLastViewedBooks())
         } catch (error) {
@@ -181,6 +181,24 @@ function Home({ searchTerm, filterType, setFilterType }) {
     return (
         <section className="Section-Home">
             <div className="Home">
+                {/* Section pour les derniers livres consultés */}
+                {lastViewedBooks.length > 0 && (
+                    <section id="Last-book">
+                        <div className="Last-Title-Section">
+                            <h2>Dernier Livre Consulté</h2>
+                        </div>
+                        <div className="Last-New-book-card">
+                            {lastViewedBooks.map((book) => (
+                                <Card
+                                    key={`last-viewed-${book.id}`}
+                                    Book={book}
+                                    onClick={() => handleCardClick(book)}
+                                />
+                            ))}
+                        </div>
+                    </section>
+                )}
+
                 {!searchTerm ? (
                     <>
                         <section id="New-book">
@@ -197,24 +215,6 @@ function Home({ searchTerm, filterType, setFilterType }) {
                                 ))}
                             </div>
                         </section>
-
-                        {/* Section pour les derniers livres consultés */}
-                        {lastViewedBooks.length > 0 && (
-                            <section id="Last-book">
-                                <div className="Last-Title-Section">
-                                    <h2>Derniers Livres Consultés</h2>
-                                </div>
-                                <div className="Last-New-book-card">
-                                    {lastViewedBooks.map((book) => (
-                                        <Card
-                                            key={`last-viewed-${book.id}`}
-                                            Book={book}
-                                            onClick={() => handleCardClick(book)}
-                                        />
-                                    ))}
-                                </div>
-                            </section>
-                        )}
 
                         <section className="Home-Books-section">
                             <div className="Home-Books">

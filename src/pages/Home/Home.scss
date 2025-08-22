@@ -13,38 +13,55 @@
 // }
 .Section-Home {
     height: auto;
-    padding: 10px;
+    // padding: 10px;
     color: white;
-    .Title-Section{
-        margin: 20px 0px;
-        font-family: "Marcellus", serif;
-        font-size: large;
-    }
-    .New-book-card{
+    #Last-book {
+        width: 100%;
         display: flex;
-        margin: 40px 0px;
-        justify-content: space-around;
-    }
-    .Results-grid{
-        gap: 5px;
-        display: flex;
+        justify-content: center;
+        align-items: center;
         flex-direction: column;
-    }
+        // background-color: rgb(175, 175, 175);
+        border-bottom: solid 1px rgb(80, 79, 79);
     
-    .Last-Title-Section{
+        .Last-Title-Section {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0px;
+            font-family: 'Marcellus', serif;
+            font-size: 1.3rem;
+        }
+        .Last-New-book-card {
+            display: flex;
+            margin: 40px 0px;
+            justify-content: space-around;
+        }
+    }
+    #New-book{
+        display: flex;
+        // justify-content: center;
+        // align-items: center;
+        flex-direction: column;
+        background-color: rgb(71, 71, 71);
+        border-bottom: solid 1px rgb(80, 79, 79);
+    .Title-Section {
+        display: flex;
+        justify-content: center;
         margin: 20px 0px;
-        font-family: "Marcellus", serif;
+        font-family: 'Marcellus', serif;
         font-size: large;
     }
-    .Last-New-book-card{
+    .New-book-card {
         display: flex;
         margin: 40px 0px;
         justify-content: space-around;
-    }
-    .Results-grid{
-        gap: 5px;
-        display: flex;
-        flex-direction: column;
     }
 }
+    .Results-grid {
+        gap: 5px;
+        display: flex;
+        flex-direction: column;
+    }
 
+   
+}
