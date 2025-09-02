@@ -1,3 +1,364 @@
+// .Section-Resume {
+//     background-color: #000000d0;
+//     // background-image: repeating-linear-gradient(157.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(67.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(143,33%,50%),hsl(215,33%,50%),hsl(287,33%,50%),hsl(359,33%,50%),hsl(71,33%,50%));
+//     backdrop-filter: blur(5px);
+//     position: relative;
+//     width: 100%;
+//     z-index: 5;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: 10px;
+//     flex-wrap: wrap;
+//     box-shadow: rgba(236, 236, 236, 0.24) 0px 3px 8px;
+//     .Top-resume {
+//         display: flex;
+//         justify-content: center;
+
+//         h2 {
+//             display: flex;
+//             justify-content: center;
+//             text-align: center;
+//             font-family: 'Marcellus', serif;
+//             font-size: 1.5rem;
+//             margin: 20px 0;
+//             width: 250px;
+//         }
+//         .cross {
+//             position: relative;
+//             left: 35px;
+//             top: 10px;
+//             cursor: pointer;
+//         }
+//     }
+
+//     .Resume {
+//         display: flex;
+//         justify-content: center;
+//         width: 100%;
+//         position: relative;
+//         padding: 10px;
+//         z-index: 10;
+//         flex-wrap: wrap;
+
+//         .text-resume {
+//             background-color: rgba(92, 92, 92, 0.048);
+//             width: 50%;
+//             height: 250px;
+//             // padding: 5px;
+//             margin-bottom: 10px;
+//             margin-right: 10px;
+//             #title-resume {
+//                 font-family: 'Marcellus', serif;
+//                 padding: 20px 0;
+//                 font-size: 1.2rem;
+//             }
+//             #resume-book {
+//                 display: flex;
+//                 justify-content: center;
+//                 align-items: flex-start;
+//                 height: 150px;
+//                 padding: 15px;
+//                 border-radius: 10px;
+//                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+//                 font-family: 'Mulish', sans-serif;
+
+//                 /* Propriétés pour le défilement */
+//                 overflow-y: auto; /* Défilement vertical quand nécessaire */
+//                 cursor: ns-resize; /* Curseur "défilement vertical" */
+
+//                 /* Style de la barre de défilement */
+//                 &::-webkit-scrollbar {
+//                     width: 8px;
+//                 }
+
+//                 &::-webkit-scrollbar-thumb {
+//                     background-color: rgba(241, 240, 240, 0.2);
+//                     border-radius: 4px;
+//                 }
+
+//                 &::-webkit-scrollbar-thumb:hover {
+//                     background-color: rgba(0, 0, 0, 0.3);
+//                 }
+//             }
+//         }
+//         .Resume-img {
+//             width: 40%;
+//             display: flex;
+//             flex-direction: column;
+//             align-items: center;
+//             margin-left: 10px;
+//             pointer-events: none;
+//             cursor: default;
+//             &:hover {
+//                 transform: none !important;
+//             }
+//             p {
+//                 margin-top: 5px;
+//             }
+//         }
+//         .Categorie {
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             flex-wrap: wrap;
+//             margin: 10px;
+//         }
+//         .chapter-available {
+//             display: flex;
+//             align-items: center;
+//             background-color: rgba(54, 54, 54, 0.678);
+//             border-radius: 10px;
+//             width: 100%;
+//             height: 160px;
+//             flex-wrap: wrap;
+//             padding: 10px;
+//             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+//             overflow-y: auto; /* Défilement vertical quand nécessaire */
+//             cursor: ns-resize; /* Curseur "défilement vertical" */
+
+//             /* Style de la barre de défilement */
+//             &::-webkit-scrollbar {
+//                 width: 8px;
+//             }
+
+//             &::-webkit-scrollbar-thumb {
+//                 background-color: rgba(241, 240, 240, 0.2);
+//                 border-radius: 4px;
+//             }
+
+//             &::-webkit-scrollbar-thumb:hover {
+//                 background-color: rgba(0, 0, 0, 0.3);
+//             }
+//             .last-chapter {
+//                 display: flex;
+//                 align-items: center;
+//                 height: 30px;
+//                 justify-content: center;
+//                 width: 100%;
+//                 margin: 5px 0;
+//                 padding: 5px;
+//                 border-bottom: 1px solid rgb(100, 100, 100);
+//                 padding-bottom: 15px;
+//                 a {
+//                     text-decoration: none;
+//                     color: white;
+//                 }
+//                 #last-chap {
+//                     font-family: 'Mulish', sans-serif;
+//                     margin: 2px;
+//                 }
+//             }
+//             .all-chapter {
+//                 display: flex;
+//                 justify-content: center;
+//                 align-items: center;
+//                 flex-wrap: wrap;
+//                 border-radius: 10px;
+//                 padding-top: 10px;
+
+//                 .book-loading {
+//                     display: flex;
+//                     align-items: center;
+//                     gap: 15px;
+//                     justify-content: center;
+//                     padding: 10px;
+//                 }
+
+//                 .loading-bar {
+//                     width: 180px;
+//                     height: 6px;
+//                     background: rgba(255, 255, 255, 0.2);
+//                     border-radius: 3px;
+//                     overflow: hidden;
+//                     position: relative;
+//                 }
+
+//                 .loading-progress {
+//                     height: 100%;
+//                     background: linear-gradient(135deg, #f0c8c8, #ebab8b, #fad17a);
+//                     background-size: 200% 100%;
+//                     border-radius: 3px;
+//                     animation: loadingProgress 2.5s ease-in-out infinite;
+//                     width: 0%;
+//                 }
+
+//                 @keyframes loadingProgress {
+//                     0% {
+//                         width: 0%;
+//                         background-position: 0% 50%;
+//                     }
+//                     50% {
+//                         width: 70%;
+//                         background-position: 100% 50%;
+//                     }
+//                     100% {
+//                         width: 100%;
+//                         background-position: 0% 50%;
+//                     }
+//                 }
+
+//                 .book-icon {
+//                     font-size: 20px;
+//                     animation: bookFlip 2s infinite;
+//                 }
+
+//                 @keyframes bookFlip {
+//                     0%,
+//                     100% {
+//                         transform: rotateY(0deg);
+//                     }
+//                     25% {
+//                         transform: rotateY(-15deg);
+//                     }
+//                     75% {
+//                         transform: rotateY(15deg);
+//                     }
+//                 }
+
+//                 .chapters-list {
+//                     display: flex;
+//                     justify-content: space-around;
+//                     align-items: center;
+//                     flex-wrap: wrap;
+//                     // background-color: red;
+//                     margin: 10px 0;
+//                     // gap: 5px;
+//                     a {
+//                         text-decoration: none;
+//                         color: white;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     .Btn-start {
+//         display: flex;
+//         justify-content: center;
+//         margin: 20px 0;
+//     }
+// }
+
+// .resume-modal-overlay {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background-color: rgba(155, 16, 16, 0.007);
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     z-index: 1000;
+//     backdrop-filter: blur(0px);
+
+//     // Animation du fond
+//     transition: all 0.4s ease;
+
+//     &.show {
+//         background-color: rgba(0, 0, 0, 0);
+//         backdrop-filter: blur(5px);
+//     }
+// }
+
+// .Section-Resume {
+//     // État initial (taille d'une carte)
+//     width: 200px;
+//     height: 300px;
+//     transform: scale(0.5) rotate(-25deg);
+//     opacity: 0;
+//     border-radius: 15px;
+//     overflow: hidden;
+//     // Transition fluide
+//     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+//     // État final (modale complète)
+//     &.visible {
+//         width: auto;
+//         margin: 0 7px;
+//         height: auto;
+//         transform: scale(1) rotate(0deg);
+//         opacity: 1;
+//         border-radius: 10px;
+//     }
+
+//     // Animation des éléments internes
+//     .Top-resume,
+//     .Resume,
+//     .Btn-start {
+//         transform: scale(0.8);
+//         opacity: 0;
+//         transition: all 0.3s ease;
+//     }
+
+//     &.visible {
+//         .Top-resume {
+//             transform: scale(1);
+//             opacity: 1;
+//             transition-delay: 0.2s;
+//         }
+
+//         .Resume {
+//             transform: scale(1);
+//             opacity: 1;
+//             transition-delay: 0.3s;
+//         }
+
+//         .Btn-start {
+//             transform: scale(1);
+//             opacity: 1;
+//             transition-delay: 0.4s;
+//         }
+//     }
+// }
+
+// // Animation pour les cartes
+// .card-container {
+//     transition: transform 0.3s ease;
+
+//     &.clicked {
+//         transform: scale(1.05);
+//         filter: brightness(1.2);
+//     }
+// }
+
+// // Animation de fermeture
+// .Section-Resume.closing {
+//     transform: scale(0.8) translateY(50px);
+//     opacity: 0;
+//     transition: all 0.3s ease;
+// }
+
+// // Effet de pulsation pour le bouton
+// .Btn-start {
+//     &.visible {
+//         animation: pulse 2s infinite 1s;
+//     }
+// }
+
+// @keyframes pulse {
+//     0%,
+//     100% {
+//         transform: scale(1);
+//     }
+//     50% {
+//         transform: scale(1.05);
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .Section-Resume {
     background-color: #000000d0;
     // background-image: repeating-linear-gradient(157.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(67.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(143,33%,50%),hsl(215,33%,50%),hsl(287,33%,50%),hsl(359,33%,50%),hsl(71,33%,50%));
@@ -45,7 +406,6 @@
             background-color: rgba(92, 92, 92, 0.048);
             width: 50%;
             height: 250px;
-            // padding: 5px;
             margin-bottom: 10px;
             margin-right: 10px;
             #title-resume {
@@ -60,12 +420,12 @@
                 height: 150px;
                 padding: 15px;
                 border-radius: 10px;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                 font-family: 'Mulish', sans-serif;
 
                 /* Propriétés pour le défilement */
-                overflow-y: auto; /* Défilement vertical quand nécessaire */
-                cursor: ns-resize; /* Curseur "défilement vertical" */
+                overflow-y: auto; 
+                cursor: ns-resize; 
 
                 /* Style de la barre de défilement */
                 &::-webkit-scrollbar {
@@ -114,10 +474,9 @@
             flex-wrap: wrap;
             padding: 10px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            overflow-y: auto; /* Défilement vertical quand nécessaire */
-            cursor: ns-resize; /* Curseur "défilement vertical" */
+            overflow-y: auto; 
+            cursor: ns-resize; 
 
-            /* Style de la barre de défilement */
             &::-webkit-scrollbar {
                 width: 8px;
             }
@@ -221,9 +580,7 @@
                     justify-content: space-around;
                     align-items: center;
                     flex-wrap: wrap;
-                    // background-color: red;
                     margin: 10px 0;
-                    // gap: 5px;
                     a {
                         text-decoration: none;
                         color: white;
@@ -248,7 +605,7 @@
     background-color: rgba(155, 16, 16, 0.007);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; // Garde le centrage
     z-index: 1000;
     backdrop-filter: blur(0px);
 
@@ -262,24 +619,21 @@
 }
 
 .Section-Resume {
-    // État initial (taille d'une carte)
-    width: 200px;
-    height: 300px;
-    transform: scale(0.5) rotate(-25deg);
-    opacity: 0;
-    border-radius: 15px;
+    // État initial - Animation TikTok (vient du bas) mais centré
+    width: auto;
+    margin: 0 7px;
+    height: auto;
+    transform: translateY(100%); // Démarre en bas de l'écran
+    opacity: 1;
+    border-radius: 10px; // Garde le border-radius du deuxième code
     overflow: hidden;
     // Transition fluide
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    // État final (modale complète)
+    // État final (modale complète au centre)
     &.visible {
-        width: auto;
-        margin: 0 7px;
-        height: auto;
-        transform: scale(1) rotate(0deg);
+        transform: translateY(0); // Monte depuis le bas vers le centre
         opacity: 1;
-        border-radius: 10px;
     }
 
     // Animation des éléments internes
@@ -322,10 +676,10 @@
     }
 }
 
-// Animation de fermeture
+// Animation de fermeture TikTok
 .Section-Resume.closing {
-    transform: scale(0.8) translateY(50px);
-    opacity: 0;
+    transform: translateY(100%); // Redescend vers le bas
+    opacity: 1;
     transition: all 0.3s ease;
 }
 
