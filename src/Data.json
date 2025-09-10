@@ -1260,5 +1260,18 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-09-06"
+    },
+    {
+        "id": "106",
+        "title": "Hatthairampha",
+        "cover": "/Images/Hatthairampha.webp",
+        "url": "/Books/Hatthairampha.docx",
+        "auteur": "พิก้วย",
+        "categorie": ["Royal","Romance"],
+        "description":"Darin a grandi dans une famille chinoise aisée et traditionnelle, l'une des plus populaires du pays. Au début de la vingtaine, sa mère craignait qu'elle ne devienne une sheng nu, ou vieille fille. Elle a donc cherché à rencontrer des jeunes hommes influents dans toute la ville. Le dernier en date était un prince. L'histoire aurait dû se terminer aussi facilement qu'un roman fantastique si elle s'était arrêtée là . Certes, elle est tombée follement amoureuse d'un prince, mais il s'est avéré que c'était une princesse, sa plus jeune sœur. Alors comment pouvait-elle avouer que la personne dont elle tombait amoureuse n'était pas un prince, mais une princesse ?",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-09-09"
     }
+    
 ]
