@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; // 👈 Ajouter useLocation
 import { useState, useEffect } from 'react';
 import '../Navbar/Navbar.scss';
 import { Menu } from 'lucide-react';
@@ -6,6 +6,10 @@ import Search from '../Search/Search';
 
 function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const location = useLocation(); // 👈 Utiliser useLocation
+
+  // 👈 Détecter si on est sur une page Book
+  const isOnBookPage = location.pathname.startsWith('/book/');
 
   useEffect(() => {
     document.body.className = isDarkTheme ? 'dark-theme' : 'light-theme';
@@ -32,13 +36,17 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
             <span className="slider"></span>
           </label>
         </div>
-        <div className="Search-section">
-          <Search 
-            searchTerm={searchTerm} 
-            setSearchTerm={setSearchTerm} 
-            onFilterChange={onFilterChange}
-          />
-        </div>
+        
+        {/* 👈 Afficher Search seulement si on n'est pas sur une page Book */}
+        {!isOnBookPage && (
+          <div className="Search-section">
+            <Search 
+              searchTerm={searchTerm} 
+              setSearchTerm={setSearchTerm} 
+              onFilterChange={onFilterChange}
+            />
+          </div>
+        )}
       </nav>
     </section>
   );
