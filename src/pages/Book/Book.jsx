@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useBooksContext } from '../../contexts/BooksContext' // 👈 Ajouter cet import
+import { useBooksContext } from '../../contexts/BooksContext' 
 import ChaptersDropdown from '../../components/ChaptersDropdown/ChaptersDropdown'
 import Button from '../../components/Button/Button'
 import Ending from '../../components/Ending/Ending'
@@ -9,8 +9,8 @@ import Loading from '../../components/Loading/Loading'
 
 function Book() {
     const { state } = useLocation()
-    const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext() // 👈 Utiliser le Context
- const [initialLoading, setInitialLoading] = useState(true) // État pour le chargement initial
+    const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext() 
+ const [initialLoading, setInitialLoading] = useState(true) 
     const book = state?.book || {
         title: 'Titre par défaut',
         chapters: 1,
