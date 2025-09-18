@@ -1255,7 +1255,7 @@
         "cover": "/Images/Le Sortilège de Soumission.webp",
         "url": "/Books/Le Sortilège de Soumission.docx",
         "auteur": "Luxurious.W",
-        "categorie": ["Mystique","Romance"],
+        "categorie": ["Mystique", "Romance"],
         "description": "…Quand le temps… s'achemine vers le déclin de l'ère, ce ne sont pas seulement les méchants qui verront leur intelligence se détériorer au point de devenir immoraux. Mais s'il existe un sorcier à l'esprit perverti, ce sera un grand désastre pour tous. Khomklang, la section « Khomnang ».",
         "note": "null",
         "chapters": 24,
@@ -1267,8 +1267,8 @@
         "cover": "/Images/Hatthairampha.webp",
         "url": "/Books/Hatthairampha.docx",
         "auteur": "พิก้วย",
-        "categorie": ["Royal","Romance"],
-        "description":"Darin a grandi dans une famille chinoise aisée et traditionnelle, l'une des plus populaires du pays. Au début de la vingtaine, sa mère craignait qu'elle ne devienne une sheng nu, ou vieille fille. Elle a donc cherché à rencontrer des jeunes hommes influents dans toute la ville. Le dernier en date était un prince. L'histoire aurait dû se terminer aussi facilement qu'un roman fantastique si elle s'était arrêtée là . Certes, elle est tombée follement amoureuse d'un prince, mais il s'est avéré que c'était une princesse, sa plus jeune sœur. Alors comment pouvait-elle avouer que la personne dont elle tombait amoureuse n'était pas un prince, mais une princesse ?",
+        "categorie": ["Royal", "Romance"],
+        "description": "Darin a grandi dans une famille chinoise aisée et traditionnelle, l'une des plus populaires du pays. Au début de la vingtaine, sa mère craignait qu'elle ne devienne une sheng nu, ou vieille fille. Elle a donc cherché à rencontrer des jeunes hommes influents dans toute la ville. Le dernier en date était un prince. L'histoire aurait dû se terminer aussi facilement qu'un roman fantastique si elle s'était arrêtée là . Certes, elle est tombée follement amoureuse d'un prince, mais il s'est avéré que c'était une princesse, sa plus jeune sœur. Alors comment pouvait-elle avouer que la personne dont elle tombait amoureuse n'était pas un prince, mais une princesse ?",
         "note": "null",
         "chapters": 24,
         "date": "2025-09-09"
@@ -1279,11 +1279,22 @@
         "cover": "/Images/Ghost House.webp",
         "url": "/Books/Ghost House.docx",
         "auteur": "PEONY",
-        "categorie": ["Mystique","Romance", "Comédie"],
-        "description":"Parce qu'elle s'est obstinément rebellée contre l'avertissement de la guérisseuse qui disait 'Tu seras maudite à cause de choses mystérieuses', la femme à la langue bien pendue 'Apinya' s'est retrouvée avec une épouse fantôme dans une maison abandonnée qu'elle n'arrivait pas à chasser malgré tous ses efforts. En plus, cela lui causait des maux de tête constants sans répit, même si cette relation s'est formée sous la condition d'un 'échange de péchés et de mérites'. Cependant, l'amour entre ces deux femmes dans la fleur de l'âge a commencé à s'épanouir de plus en plus, jusqu'à ce qu'il semble que nous deux... sommes nées et mortes pour nous rencontrer.'N'achetez pas une maison où quelqu'un est mort''Parce que vous pourriez vous retrouver avec une épouse fantôme... avant même de vous en rendre compte'",
+        "categorie": ["Mystique", "Romance", "Comédie"],
+        "description": "Parce qu'elle s'est obstinément rebellée contre l'avertissement de la guérisseuse qui disait 'Tu seras maudite à cause de choses mystérieuses', la femme à la langue bien pendue 'Apinya' s'est retrouvée avec une épouse fantôme dans une maison abandonnée qu'elle n'arrivait pas à chasser malgré tous ses efforts. En plus, cela lui causait des maux de tête constants sans répit, même si cette relation s'est formée sous la condition d'un 'échange de péchés et de mérites'. Cependant, l'amour entre ces deux femmes dans la fleur de l'âge a commencé à s'épanouir de plus en plus, jusqu'à ce qu'il semble que nous deux... sommes nées et mortes pour nous rencontrer.'N'achetez pas une maison où quelqu'un est mort''Parce que vous pourriez vous retrouver avec une épouse fantôme... avant même de vous en rendre compte'",
         "note": "null",
         "chapters": 24,
         "date": "2025-09-14"
+    },
+    {
+        "id": "108",
+        "title": "Sun in the Sky",
+        "cover": "/Images/Sun in the Sky.webp",
+        "url": "/Books/Sun in the Sky.docx",
+        "auteur": "เถาไอวี",
+        "categorie": ["Adulte", "Romance", "Drame"],
+        "description": "L'amour n'a pas de prix, mais la virginité a de la valeur. Une prostituée… Phiangfa ne vaut que ça aux yeux de Klin.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-09-18"
     }
-    
 ]
