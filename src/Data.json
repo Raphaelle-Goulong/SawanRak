@@ -1296,5 +1296,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-09-18"
+    },
+    {
+        "id": "109",
+        "title": "Si : Si j'étais elle",
+        "cover": "/Images/If.webp",
+        "url": "/Books/If.docx",
+        "auteur": "Chao Planoy",
+        "categorie": ["Mystique","Romance", "Drame"],
+        "description": "Moi, « Aiyarin », j'écoutais en cachette mes deux patrons, « Khun Nicha » et « Khun Cher-aim », se disputer à propos de tricherie. Leur dispute était si violente que j'ai dû intervenir. Cependant, Khun Nicha nous a poussés, Khun Cher-aim et moi, sur la route en même temps. Mais avant même que je m'en aperçoive, une berline roulant à toute vitesse nous a percutés, les projetant dans les airs. À mon réveil, j'étais devenu Khun Cher-aim. Être dans le corps de quelqu'un d'autre n'était pas une bonne chose. Je devais trouver un moyen de retrouver mon propre corps. Ma famille et mon quotidien avaient tout bouleversé .C'était impossible… même si je devais me cogner la tête contre le sol pour retrouver mon corps originel, je le ferais !",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-09-26"
     }
 ]
