@@ -10,7 +10,6 @@ import { X } from 'lucide-react'
 function Resume({ book, onClose }) {
     const navigate = useNavigate()
     const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext()
-
     const [lastChapterInfo, setLastChapterInfo] = useState(null)
     const [isVisible, setIsVisible] = useState(true)
     const [allChapters, setAllChapters] = useState([])
