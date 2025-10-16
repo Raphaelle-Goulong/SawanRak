@@ -1320,5 +1320,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-10-02"
+    },
+    {
+        "id": "111",
+        "title": "Poisonous Love-5th Anniversary",
+        "cover": "/Images/Poisonous Love-5th Anniversary",
+        "url": "/Books/Poisonous Love-5th Anniversary.docx",
+        "auteur": "Mee Nam",
+        "categorie": ["Romance"],
+        "description": "Veux-tu dormir avec moi ? Qui aurait cru que les mots que j’ai prononcés, espérant seulement son corps à ce moment-là, me feraient aujourd’hui désirer bien plus son cœur que simplement son corps ? ",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-10-16"
     }
 ]
