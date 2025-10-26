@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useBooksContext } from '../../contexts/BooksContext' 
+import { useBooksContext } from '../../contexts/BooksContext'
 import ChaptersDropdown from '../../components/ChaptersDropdown/ChaptersDropdown'
 import Button from '../../components/Button/Button'
 import Ending from '../../components/Ending/Ending'
@@ -9,8 +9,8 @@ import Loading from '../../components/Loading/Loading'
 
 function Book() {
     const { state } = useLocation()
-    const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext() 
- const [initialLoading, setInitialLoading] = useState(true) 
+    const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext()
+    const [initialLoading, setInitialLoading] = useState(true)
     const book = state?.book || {
         title: 'Titre par défaut',
         chapters: 1,
@@ -30,17 +30,14 @@ function Book() {
         }
     }
 
- // Effet pour le chargement initial de 2 secondes
+    // Effet pour le chargement initial de 2 secondes
     useEffect(() => {
         const timer = setTimeout(() => {
             setInitialLoading(false)
         }, 2500)
-        
+
         return () => clearTimeout(timer)
     }, [])
-
-
-
 
     // 👈 Remplacer tout le useEffect de chargement par celui-ci
     useEffect(() => {
@@ -98,9 +95,7 @@ function Book() {
         }
     }
 
-
-
-// Afficher le loading initial pendant 2 secondes
+    // Afficher le loading initial pendant 2 secondes
     if (initialLoading) {
         return (
             <div className="loading">
@@ -108,7 +103,7 @@ function Book() {
             </div>
         )
     }
-    
+
     // 👈 Utiliser le loading du Context
     if (isLoadingBook(book.id))
         return (
@@ -152,12 +147,10 @@ function Book() {
             </div>
 
             <div className="btn-next">
-                <Button
-                    onClick={() => handleSelectChapter(Math.max(0, currentChapterIndex - 1))}
-                    disabled={currentChapterIndex === 0}>
+                <Button onClick={() => handleSelectChapter(Math.max(0, currentChapterIndex - 1))}>
                     Précédent
                 </Button>
-                <Button onClick={handleNextChapter} disabled={false}>
+                <Button onClick={handleNextChapter}>
                     Suivant
                 </Button>
             </div>
