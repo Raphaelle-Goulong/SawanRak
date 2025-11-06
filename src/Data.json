@@ -1315,7 +1315,7 @@
         "cover": "/Images/Me & You, qui accepterait ça.webp",
         "url": "/Books/Me & You, qui accepterait ça.docx",
         "auteur": "Hiiroda",
-        "categorie": ["Romance", "Drame"],
+        "categorie": [ "Drame","Romance"],
         "description": "Veux-tu dormir avec moi ? Qui aurait cru que les mots que j’ai prononcés, espérant seulement son corps à ce moment-là, me feraient aujourd’hui désirer bien plus son cœur que simplement son corps ? ",
         "note": "null",
         "chapters": 24,
@@ -1327,7 +1327,7 @@
         "cover": "/Images/Poisonous Love-5th Anniversary.webp",
         "url": "/Books/Poisonous Love-5th Anniversary.docx",
         "auteur": "Mee Nam",
-        "categorie": ["Romance","Hospital"],
+        "categorie": ["Hospital","Romance"],
         "description": "Veux-tu dormir avec moi ? Qui aurait cru que les mots que j’ai prononcés, espérant seulement son corps à ce moment-là, me feraient aujourd’hui désirer bien plus son cœur que simplement son corps ? ",
         "note": "null",
         "chapters": 24,
@@ -1344,5 +1344,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-10-26"
+    },
+    {
+        "id": "113",
+        "title": "Love On Hire",
+        "cover": "/Images/Love On Hire.webp",
+        "url": "/Books/Love On Hire.docx",
+        "auteur": "Yuufuku",
+        "categorie": ["Ennemies to Lovers","Romance","Entreprise"],
+        "description": "Une femme aussi parfaite qu'elle a vu son mariage gâché de façon si spectaculaire que l'affaire a fait la une des journaux. Elle a même été menacée par celle qui l'avait embauchée comme stagiaire. Mais comment une femme comme elle aurait-elle pu avoir peur ? Elle avait accepté son stage sans hésiter, attendant le jour où elle pourrait se venger. Mais l'autre femme semblait bien décidée à ne pas céder, compte tenu de ses insultes précédentes. « Qui voudrait de quelqu'un comme toi ? » « Alors pourquoi ne pas essayer de voir si tu ne tomberais pas amoureuse de moi en ma présence ? »",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-11-06"
     }
 ]
