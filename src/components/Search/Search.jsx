@@ -2,7 +2,6 @@ import '../Search/Search.scss'
 import { Search as SearchIcon, X } from 'lucide-react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
-import Data from '../../Data.json' // Import de tes données
 import Grip from '../Grip/Grip'
 
 function Search({ searchTerm, setSearchTerm, onFilterChange }) {

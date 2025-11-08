@@ -1,10 +1,9 @@
 import { useState, useRef } from 'react'
 import '../Carrousel/Carrousel.scss'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+
 import Card from '../Card/Card'
 
 function Carrousel({ category, books, onCardClick }) {
-    const [isAnimating, setIsAnimating] = useState(false)
     const carrouselRef = useRef(null)
     
     // Filtrage des livres

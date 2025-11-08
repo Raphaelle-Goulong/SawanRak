@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../Navbar/Navbar.scss';
-import { Menu } from 'lucide-react';
 import Search from '../Search/Search';
 
 function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
@@ -34,7 +33,7 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
         setIsDarkTheme(e.matches);
       }
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
