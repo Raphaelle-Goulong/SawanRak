@@ -1,19 +1,43 @@
-import { Link, useLocation } from 'react-router-dom'; // 👈 Ajouter useLocation
+import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../Navbar/Navbar.scss';
 import { Menu } from 'lucide-react';
 import Search from '../Search/Search';
 
 function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const location = useLocation(); // 👈 Utiliser useLocation
-
-  // 👈 Détecter si on est sur une page Book
+  // 👇 Initialise avec la préférence système ou sauvegardée
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved === 'dark';
+    
+    // Sinon, utilise la préférence système
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+  
+  const location = useLocation();
   const isOnBookPage = location.pathname.startsWith('/book/');
 
   useEffect(() => {
     document.body.className = isDarkTheme ? 'dark-theme' : 'light-theme';
+    // Sauvegarde la préférence
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
   }, [isDarkTheme]);
+
+  // 👇 Écoute les changements de préférence système
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const handleChange = (e) => {
+      // Change seulement si l'utilisateur n'a pas changé manuellement
+      const saved = localStorage.getItem('theme');
+      if (!saved) {
+        setIsDarkTheme(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   const handleThemeChange = () => {
     setIsDarkTheme(!isDarkTheme);
@@ -37,7 +61,6 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
           </label>
         </div>
         
-        {/* 👈 Afficher Search seulement si on n'est pas sur une page Book */}
         {!isOnBookPage && (
           <div className="Search-section">
             <Search 
