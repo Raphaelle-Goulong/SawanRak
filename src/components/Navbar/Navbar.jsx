@@ -34,7 +34,7 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
         setIsDarkTheme(e.matches);
       }
     };
-
+    
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
