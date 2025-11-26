@@ -1356,5 +1356,29 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-11-06"
+    },
+    {
+        "id": "114",
+        "title": "Moon Shadow",
+        "cover": "/Images/Moon Shadow.webp",
+        "url": "/Books/Moon Shadow.docx",
+        "auteur": "Flower of memory",
+        "categorie": ["Romance"],
+        "description": "Même si la Lune se couche à l’horizon, elle ne disparaît jamais du ciel. Tout comme la lune dans mon cœur — elle ne s’en va ni ne s’efface jamais…",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-11-26"
+    },
+    {
+        "id": "115",
+        "title": "When The Villainess Finds Love",
+        "cover": "/Images/When The Villainess Finds Love.webp",
+        "url": "/Books/When The Villainess Finds Love.docx",
+        "auteur": "Lee Ting",
+        "categorie": ["Ennemies to Lovers","Romance"],
+        "description": "Khemjira est décrite comme une 'antagoniste' qui sème souvent le trouble dans les histoires d’amour du protagoniste masculin, tandis que Pailin est la gentille amie toujours fidèle à l’héroïne. Toutes deux, blessées par l’amour, se retrouvent face à la possibilité de guérir ensemble. Une nuit, après un incident où l’une semble avoir profité de l’autre sous l’effet de l’alcool, une confrontation s’ensuit : l’une reproche son geste à l’autre, qui s’excuse sincèrement. Finalement, plutôt que de rompre tout lien, la personne blessée demande à l’autre d’« assumer ses actes » en sortant ensemble — marquant ainsi le début inattendu d’une relation amoureuse entre elles.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-11-26"
     }
 ]
