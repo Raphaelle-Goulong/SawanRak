@@ -1392,6 +1392,30 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-11-29"
+    },
+    {
+        "id": "117",
+        "title": "Because of Love",
+        "cover": "/Images/Because of Love.webp",
+        "url": "/Books/Because of Love.docx",
+        "auteur": "Mee Nam",
+        "categorie": ["Hospital","Romance"],
+        "description": "Attendre que nous retombions amoureux… ou Un nouvel amour, pour ne plus avoir à attendre en vain.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-12-02"
+    },
+     {
+        "id": "118",
+        "title": "Because of Love 2",
+        "cover": "/Images/Because of Love 2.webp",
+        "url": "/Books/Because of Love 2.docx",
+        "auteur": "Mee Nam",
+        "categorie": ["Hospital","Romance"],
+        "description": "Notre amour, nous trois . Choix . . Conclusion . Amour",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-12-02"
     }
 ]
 
