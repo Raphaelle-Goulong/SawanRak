@@ -1416,6 +1416,30 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-12-02"
+    },
+    {
+        "id": "119",
+        "title": "Like A Palette",
+        "cover": "/Images/Like A Palette.webp",
+        "url": "/Books/Like A Palette.docx",
+        "auteur": "Zezeho",
+        "categorie": ["School","Comédie","Romance", "Ennemies to Lovers"],
+        "description": "Qu'est-ce qui se passe? Moi, Jane, je m'apprête à entrer à l'université et à commencer ma paisible vie de première année. Mais soudain, tout bascule. J'ai l'impression que quelqu'un ne m'apprécie pas, alors que je ne lui ai absolument rien fait. Cette étudiante, c'est P. Dai, la star de l'université l'année dernière. Elle n'arrête pas de me fixer. Ce regard est très suspect. Le problème, c'est que je suis devenue, un peu par hasard, la star de la faculté des Beaux-Arts. Et elle est l'une des tutrices de la star de cette année. C'est donc inévitable. Et puis, regardez! Un étudiant de dernière année que je connais à peine, pourquoi est-il toujours souriant, en train d'éplucher des crevettes pour moi, de m'acheter des gâteaux et, parfois, de rougir? Je sais, j'ai regardé beaucoup de séries. Mais qui est ce P. Dai? Il n'est pas du tout fiable. Elle doit vraiment me détester!",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-12-09"
+    },
+    {
+        "id": "120",
+        "title": "Angel Theory",
+        "cover": "/Images/Angel Theory.webp",
+        "url": "/Books/Angel Theory.docx",
+        "auteur": "Serenista",
+        "categorie": ["Comédie","Romance"],
+        "description": "Une jeune mannequin tombe amoureuse de la beauté d'une hôtesse de l'air menue et angélique. De leur simple regard échangé naît une relation passionnée. Un événement inattendu transforme leur relation en conflit, puis en une idylle retrouvée.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-12-09"
     }
 ]
 
