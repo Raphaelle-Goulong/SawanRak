@@ -1464,5 +1464,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2025-12-28"
+    },
+    {
+        "id": "123",
+        "title": "The Water - Waves of Deception",
+        "cover": "/Images/The Water - Waves of Deception.webp",
+        "url": "/Books/The Water - Waves of Deception.docx",
+        "auteur": "Salmon",
+        "categorie": ["Ennemies to Lovers", "Romance"],
+        "description": "Comme l'eau qui façonne la terre, Chonlada Kunanon s'infiltre en territoire ennemi, au sein du Groupe Wathin, pour en saper le pouvoir de l'intérieur. Sa cible ? Apo Wathinwanit, la femme d'affaires froide et calculatrice qui a anéanti les ambitions de sa famille. Mais plus Chonlada s'enfonce, plus les courants l'entraînent vers le fond. Apo est bien différente de ce qu'elle imaginait : forte, inflexible et dangereusement captivante. Ce qui commence comme une mission de sabotage se transforme en une lutte acharnée contre ses propres émotions. Chonlada parviendra-t-elle à se maintenir à flot dans ce jeu dangereux, ou se laissera-t-elle engloutir par les flots ?",
+        "note": "null",
+        "chapters": 24,
+        "date": "2025-12-28"
     }
 ]
