@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../Navbar/Navbar.scss';
+import logo from "../../img/ic_launcher.png";
 import Search from '../Search/Search';
 
 function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
-  // 👇 Initialise avec la préférence système ou sauvegardée
+  // Initialise avec la préférence système ou sauvegardée
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
     if (saved) return saved === 'dark';
@@ -22,7 +23,7 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
   }, [isDarkTheme]);
 
-  // 👇 Écoute les changements de préférence système
+  //  Écoute les changements de préférence système
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
@@ -47,7 +48,7 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
       <nav className="Navbar">
         <div className="Navbar-title">
           <Link to="/" className="navbar-logo">
-            <h1>GLandia</h1>
+            <img src={logo} alt="logo" />
           </Link>
           
           <label className="switch-container">

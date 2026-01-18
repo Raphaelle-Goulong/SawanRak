@@ -1,56 +1,100 @@
 .Search {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: rgba(44, 44, 44, 0.568);
+    flex-direction: column;
+    padding: 20px;
     width: 100%;
+    height: 350px;
     position: relative;
+    background-image: url('../../img/fond.png');
+    // object-fit: cover;
+    background-size: cover;
+    background-position: center;
+
     .container-input {
         position: relative;
+        // top: 120px;
+        margin-top: 180px;
         display: flex;
         align-items: center;
+        flex-direction: column;
+        width: 100%;
+        z-index: 20;
+        // background-color: red;
     }
-
-    .input {
-        width: 120px;
-        padding: 10px 0px 10px 40px;
-        border-radius: 25px;
-        border: solid 1px #333;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        transition: all 0.2s ease-in-out;
-        outline: none;
-        opacity: 0.8;
-        font-family: 'Mulish', sans-serif;
-        background: rgb(83, 83, 83);
-        color: white;
-    }
-
-   
     .container-input svg {
         position: absolute;
-        top: 50%;
-        right: 10px;
+        bottom: 13px;
+        right: 60px;
         transform: translate(0, -50%);
     }
 
-    .input:focus {
-        opacity: 1;
-        width: 250px;
-        background: linear-gradient(135deg, #f0c8c8, #ebab8b, #FAD17A);
+    .text-section {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        h1 {
+            font-size: 2.8rem;
+            font-family: 'Marcellus', serif;
+            text-shadow: rgb(255, 123, 0) 1px 0 10px;
+            margin: 2px 0;
+
+            // text-shadow: 1px 1px 2px  rgb(255, 123, 0);
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-family: 'Mulish', sans-serif;
+            // background-color: orange;
+            text-shadow: 1px 1px 2px rgb(112, 99, 87);
+            margin-bottom: 10px;
+        }
     }
 
-    input::placeholder {
-        font-weight: bold;
-        color: white;
-        font-family: 'Mulish', sans-serif;
-    }
+    .input-search {
+        display: flex;
+        justify-content: center;
+        // background-color: yellowgreen;
+        width: 100%;
+        padding: 20px 0;
 
-    .clear-icon{
-        cursor: 'pointer'; 
-        color: white;
-        position: relative;
-        // right: 10px;
-        
+        .input {
+            width: 240px;
+            padding: 10px 0px 10px 40px;
+            border-radius: 10px;
+            border: solid 0px transparent;
+            // box-shadow: rgba(253, 253, 253, 0.24) 0px 3px 8px;
+            box-shadow: rgba(150, 96, 35, 0.25) 0px 13px 27px -5px,
+                rgba(126, 125, 125, 0.3) 0px 8px 16px -8px;
+            transition: all 0.2s ease-in-out;
+            outline: none;
+            opacity: 0.8;
+            font-family: 'Mulish', sans-serif;
+            background: #0f1115de;
+            color: white;
+        }
+
+        .input:focus {
+            opacity: 1;
+            width: 300px;
+            background: #0b132bf3;
+            // background: linear-gradient(135deg, #f0c8c8af, #ebab8ba2, #fad17a88);
+            // background: linear-gradient(135deg, #013d68af, #023595b9, #010431b2);
+            //  background: linear-gradient(135deg, #d6ba5dd8, #85854be0, #19362bc9);
+            
+        }
+
+        input::placeholder {
+            font-weight: bold;
+            color: white;
+            font-family: 'Mulish', sans-serif;
+        }
+
+        .clear-icon {
+            cursor: 'pointer';
+            color: #db9053;
+            // position: relative;
+        }
     }
 }

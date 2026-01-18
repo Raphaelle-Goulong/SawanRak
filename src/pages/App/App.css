@@ -5,7 +5,6 @@
     --navbar-bg: transparent;
     --card-bg: rgba(255, 255, 255, 0.1);
     --border-color: rgba(255, 255, 255, 0.2);
-    --search-bg: rgba(44, 44, 44, 0.568);
     --input-bg: rgb(83, 83, 83);
     --input-border: #333;
     --dropdown-bg: #2a2f3b;
@@ -30,7 +29,6 @@ body.dark-theme {
     --navbar-bg: transparent;
     --card-bg: rgba(255, 255, 255, 0.1);
     --border-color: rgba(255, 255, 255, 0.2);
-    --search-bg: rgba(20, 20, 20, 0.8);
     --input-bg: rgb(30, 30, 30);
     --input-border: #222;
     --dropdown-bg: #1a1a1a;
@@ -58,7 +56,6 @@ body.light-theme {
     --navbar-bg: rgba(19, 19, 19, 0.9);
     --card-bg: rgba(34, 34, 34, 0);
     --border-color: rgba(0, 0, 0, 0.1);
-    --search-bg: rgba(44, 44, 44, 0.568);
     --input-bg: rgb(83, 83, 83);
     --input-border: #333;
     --dropdown-bg: #2a2f3b;
@@ -84,22 +81,7 @@ body.light-theme {
     color: var(--text-color) !important;
 }
 
-/* Styles pour la section Search */
-.Search {
-    background-color: var(--search-bg) !important;
-    transition: background-color 0.3s ease;
-}
 
-.Search .input {
-    background: var(--input-bg) !important;
-    border: solid 1px var(--input-border) !important;
-    color: var(--text-color) !important;
-    transition: all 0.2s ease-in-out;
-}
-
-.Search .input:focus {
-    background: var(--focus-gradient) !important;
-}
 
 /* Styles pour le dropdown ChaptersDropDown */
 .select:hover .selected {
