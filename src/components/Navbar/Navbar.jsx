@@ -1,10 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
 import '../Navbar/Navbar.scss';
+
 import logo from "../../img/ic_launcher.png";
 import Search from '../Search/Search';
 
-function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
+
+
+
+function Navbar({ searchTerm, setSearchTerm, onFilterChange, onBookSelect }) {
   // Initialise avec la préférence système ou sauvegardée
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
@@ -23,7 +28,7 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
   }, [isDarkTheme]);
 
-  //  Écoute les changements de préférence système
+  // Écoute les changements de préférence système
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
@@ -67,6 +72,7 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange }) {
               searchTerm={searchTerm} 
               setSearchTerm={setSearchTerm} 
               onFilterChange={onFilterChange}
+              onBookSelect={onBookSelect}
             />
           </div>
         )}

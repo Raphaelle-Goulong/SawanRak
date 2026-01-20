@@ -1,16 +1,19 @@
-import '../Header/Header.scss';
 import Navbar from '../Navbar/Navbar';
 
+import '../Header/Header.scss';
 
-function Header({ searchTerm, setSearchTerm, onFilterChange }) {
+
+
+function Header({ searchTerm, setSearchTerm, onFilterChange, onBookSelect }) {
   return (
-    <div className="Header">
+    <header className="Header">
       <Navbar 
         searchTerm={searchTerm} 
         setSearchTerm={setSearchTerm} 
-        onFilterChange={onFilterChange} 
+        onFilterChange={onFilterChange}
+        onBookSelect={onBookSelect}
       />
-    </div>
+    </header>
   );
 }
 

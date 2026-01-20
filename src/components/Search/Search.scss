@@ -4,7 +4,7 @@
     flex-direction: column;
     padding: 20px;
     width: 100%;
-    height: 350px;
+    // height: 350px;
     position: relative;
     background-image: url('../../img/fond.png');
     // object-fit: cover;
@@ -55,7 +55,6 @@
     .input-search {
         display: flex;
         justify-content: center;
-        // background-color: yellowgreen;
         width: 100%;
         padding: 20px 0;
 
@@ -71,14 +70,14 @@
             outline: none;
             opacity: 0.8;
             font-family: 'Mulish', sans-serif;
-            background: #0f1115de;
+            background: #08080ade;
             color: white;
         }
 
         .input:focus {
             opacity: 1;
             width: 300px;
-            background: #0b132bf3;
+            background: #3a3a3ac0;
             // background: linear-gradient(135deg, #f0c8c8af, #ebab8ba2, #fad17a88);
             // background: linear-gradient(135deg, #013d68af, #023595b9, #010431b2);
             //  background: linear-gradient(135deg, #d6ba5dd8, #85854be0, #19362bc9);
@@ -91,10 +90,7 @@
             font-family: 'Mulish', sans-serif;
         }
 
-        .clear-icon {
-            cursor: 'pointer';
-            color: #db9053;
-            // position: relative;
-        }
+       
     }
+   
 }
