@@ -5,20 +5,11 @@ import { Search as SearchIcon, X } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
 
-import Grip from '../Grip/Grip'
 import ResultSearch from '../ResultSearch/ResultSearch'
 
-function Search({ searchTerm, setSearchTerm, onFilterChange, onBookSelect }) {
+function Search({ searchTerm, setSearchTerm, onBookSelect }) {
     const location = useLocation()
     const [isModalOpen, setIsModalOpen] = useState(false)
-
-    // Vérifier si on est sur une page Book
-    const isOnBookPage = location.pathname.startsWith('/book/')
-
-    const handleClearSearch = () => {
-        setSearchTerm('')
-        setIsModalOpen(false)
-    }
 
     const handleSearchChange = (e) => {
         const newSearchTerm = e.target.value
@@ -52,9 +43,6 @@ function Search({ searchTerm, setSearchTerm, onFilterChange, onBookSelect }) {
                         <SearchIcon className="search-icon" />
                     </div>
                 </div>
-
-                {/* Masquer le Grip sur les pages Book */}
-                {!isOnBookPage && <Grip onFilterChange={onFilterChange} />}
             </div>
 
             {/* Modale de résultats de recherche */}

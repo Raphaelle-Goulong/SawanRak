@@ -77,11 +77,11 @@
         .input:focus {
             opacity: 1;
             width: 300px;
-            background: #3a3a3ac0;
+            // background: #3a3a3ac0;
             // background: linear-gradient(135deg, #f0c8c8af, #ebab8ba2, #fad17a88);
             // background: linear-gradient(135deg, #013d68af, #023595b9, #010431b2);
             //  background: linear-gradient(135deg, #d6ba5dd8, #85854be0, #19362bc9);
-            
+            background: linear-gradient(135deg, #764ba2c9 0%, #667eeac5 100%);
         }
 
         input::placeholder {

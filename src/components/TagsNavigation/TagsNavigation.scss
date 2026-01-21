@@ -1,0 +1,165 @@
+
+.tags-navigation {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    position: relative;
+    margin: 0 20px;
+    .tags-container {
+        display: flex;
+        gap: 0.75rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding: 0.5rem 0;
+        flex: 1;
+        
+        // Masquer la scrollbar
+        scrollbar-width: none; // Firefox
+        -ms-overflow-style: none; // IE/Edge
+        
+        &::-webkit-scrollbar {
+            display: none; // Chrome/Safari
+        }
+
+        .tag-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 0.6rem 1.5rem;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            backdrop-filter: blur(10px);
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            &.active {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-color: transparent;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                transform: translateY(-2px);
+
+                &:hover {
+                    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+                }
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+}
+
+// Styles pour le contenu dynamique
+.dynamic-content {
+    margin-top: 2rem;
+    animation: fadeIn 0.4s ease-in-out;
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .no-books-message {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        padding: 3rem;
+        font-size: 1.1rem;
+    }
+
+    .Category-books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+
+    // Styles pour la section Découvertes du Jour
+    #Daily-discoveries {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        .Title-Section {
+            margin-bottom: 2rem;
+
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .subtitle {
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 0.95rem;
+                font-style: italic;
+            }
+        }
+
+        .Daily-books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .tags-navigation {
+        .tags-container {
+            .tag-item {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+    }
+
+    .dynamic-content {
+        .Category-books-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        #Daily-discoveries {
+            padding: 25px;
+            
+            .Title-Section {
+                h2 {
+                    font-size: 1.4rem;
+                }
+
+                .subtitle {
+                    font-size: 0.85rem;
+                }
+            }
+
+            .Daily-books-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    }
+}
