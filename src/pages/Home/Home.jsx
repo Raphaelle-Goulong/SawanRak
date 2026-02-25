@@ -148,7 +148,7 @@ function Home({ filterType, onBookSelectFromSearch }) {
                     <section id="Daily-discoveries">
                         <div className="Title-Section">
                             <h2>✨ Découvertes du Jour</h2>
-                            <p className="subtitle">20 livres sélectionnés pour vous aujourd'hui</p>
+                            <p className="subtitle">Quelques livres sélectionnés pour vous aujourd'hui</p>
                         </div>
                         <div className="Daily-books-grid">
                             {getDailyRandomBooks().map((book) => (
@@ -186,8 +186,8 @@ function Home({ filterType, onBookSelectFromSearch }) {
                     {/* Section Découvertes du Jour */}
                     <section id="Daily-discoveries">
                         <div className="Title-Section">
-                            <h2>✨ Découvertes du Jour</h2>
-                            <p className="subtitle">Quelques livres sélectionnés pour vous aujourd'hui</p>
+                            <h2>✨ Découvertes du Jour </h2>
+                            <p className="subtitle"> Quelques livres sélectionnés pour vous aujourd'hui</p>
                         </div>
                         <div className="Daily-books-grid">
                             {getDailyRandomBooks().map((book) => (
