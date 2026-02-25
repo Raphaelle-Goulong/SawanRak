@@ -59,7 +59,6 @@ function Resume({ book, onClose }) {
         fetchChapters()
     }, [book, loadBookChapters, getBookChapters])
 
-    // Le reste de ton code reste identique...
     useEffect(() => {
         const savedInfo = localStorage.getItem(`book-${book.id}-lastChapterLink`)
         if (savedInfo) {

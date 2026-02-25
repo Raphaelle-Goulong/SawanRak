@@ -81,7 +81,7 @@ function Home({ filterType, onBookSelectFromSearch }) {
         const shuffled = [...Data].sort(() => random() - 0.5);
         
         // Retourner 20 livres (ou moins si pas assez de livres)
-        return shuffled.slice(0, Math.min(20, Data.length));
+        return shuffled.slice(0, Math.min(9, Data.length));
     };
 
     const handleCardClick = (book) => {
@@ -187,7 +187,7 @@ function Home({ filterType, onBookSelectFromSearch }) {
                     <section id="Daily-discoveries">
                         <div className="Title-Section">
                             <h2>✨ Découvertes du Jour</h2>
-                            <p className="subtitle">20 livres sélectionnés pour vous aujourd'hui</p>
+                            <p className="subtitle">Quelques livres sélectionnés pour vous aujourd'hui</p>
                         </div>
                         <div className="Daily-books-grid">
                             {getDailyRandomBooks().map((book) => (

@@ -102,7 +102,7 @@
         "title": "Built in Love",
         "cover": "/Images/Built in love.webp",
         "url": "/Books/BUILT IN LOVE.docx",
-        "auteur": "SalmonLover",
+        "auteur": "Salmon",
         "categorie": ["Ennemies to Lovers", "Romance"],
         "description": "Tantiya, architecte talentueuse, a rencontré l'ennemie jurée de sa profession. Renita, maîtresse Feng Shui prospère, spécialisée dans l'apport de bien-être aux habitants. Ainsi commença la bataille, comme chien et chat, l'eau et le feu, le yin et le yang. Avec leurs personnalités opposées et la maison qu'elles devaient construire… Y aurait-il un espace vide dans leurs cœurs pour que l'amour puisse fleurir ?",
         "note": "3",
@@ -390,7 +390,7 @@
         "title": "Queendom",
         "cover": "/Images/QUEENDOM.webp",
         "url": "/Books/QUEENDOM (END).docx",
-        "auteur": "SalmonLover",
+        "auteur": "Salmon",
         "categorie": ["Romance", "Adulte", "Mystique"],
         "description": "Nous sommes rivales depuis toujours. Nous nous sommes affrontées à chaque étape : concours de beauté en maternelle, cheffe de la fanfare en primaire, meneuse de claque au lycée, Princesse de la faculté de communication à l'université, et maintenant, le prix de la meilleure actrice. Nous nous détestons cordialement, mais le destin en a décidé autrement : nos âmes ont été échangées suite à un accident sur le plateau. Mon Dieu, sais-tu à quel point je déteste cette fille ?!!!",
         "note": "3",
@@ -714,7 +714,7 @@
         "title": "I see you (From One To You)",
         "cover": "/Images/I SEE YOU.webp",
         "url": "/Books/I SEE YOU.docx",
-        "auteur": "SalmonLover",
+        "auteur": "Salmon",
         "categorie": ["Drame", "Romance"],
         "description": "Lorsque la lieutenante de police Rapatsa, en charge de l'affaire, rencontre Kaokarat, le seul survivant d'un crime mystérieux, leur première interaction est loin d'être ordinaire. Kaokarat est en fait un esprit qui a quitté son corps. Pour découvrir la vérité et trouver le cerveau derrière le crime, ils doivent faire équipe. En parallèle, ils devront surmonter de nombreux obstacles pour que Kaokarat puisse réintégrer son corps, tout en protégeant l'amour naissant qui grandit entre eux.",
         "note": "null",
@@ -1488,5 +1488,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-01-21"
+    },
+    {
+        "id": "125",
+        "title": "My wife",
+        "cover": "/Images/My wife.webp",
+        "url": "/Books/My wife.docx",
+        "auteur": "Salmon",
+        "categorie": ["Marriage first","Romance"],
+        "description": "« Lorsque Warisa doit absolument sauver l'usine de kitchawanit de son père, elle accepte un marché qui permet de rembourser la dette et de sauver l'entreprise: épouser Waranit, la fille à problèmes d'un homme politique influent. Mais une relation née d'un intérêt mutuel se transformera-t-elle en un véritable amour, ou n'était-ce qu'une illusion depuis le début?",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-02-25"
     }
 ]
