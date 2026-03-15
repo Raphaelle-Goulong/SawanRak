@@ -1524,5 +1524,29 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-03-07"
+    },
+    {
+        "id": "128",
+        "title": "Villain Star",
+        "cover": "/Images/Villain Star.webp",
+        "url": "/Books/Villain Star.docx",
+        "auteur": "Salmon",
+        "categorie": ["StarShip","Romance"],
+        "description": "Keow est la méchante que tout le monde adore détester. Jao-oei est la coqueluche des projecteurs, une étoile montante intouchable. Mais que se passe-t-il lorsque des étincelles jaillissent hors caméra ? L’actrice chevronnée Keerati (Keow) en a vu de toutes les couleurs : ragots, trahisons, amourettes télévisées. Mais elle ne s’attendait pas à ce que Dujdara (Jao-oei), sa jeune et belle partenaire, sa prétendue rivale à l’écran, se blottisse contre elle comme contre un oreiller, lui murmure des mots taquins imprévus et brouille la frontière entre fiction et réalité. Entre signaux manqués, caresses prolongées et surprises nocturnes, Keerati se retrouve emportée dans une scène improvisée, une scène qui pourrait bien bouleverser sa vision de l’amour. Une fois les caméras éteintes, la véritable histoire commence. Une romance saphique à combustion lente, à la fois tendre et sulfureuse, pleine de malice, de quiproquos et d’une alchimie si magnétique qu’elle est impossible à ignorer.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-03-14"
+    },
+    {
+        "id": "129",
+        "title": "The Earth",
+        "cover": "/Images/The Earth - Vows of the Land.webp",
+        "url": "/Books/The Earth.docx",
+        "auteur": "Salmon",
+        "categorie": ["Marriage first","Policier","Romance"],
+        "description": "Au cœur des collines du nord de la Thaïlande, deux femmes issues de fermes rivales sont réunies par le destin, liées par l'amour et menacées par le poids d'un conflit ancestral. Din Kasama, la propriétaire résiliente et farouchement loyale de la ferme Saenrak, a juré de protéger Rose, l'héritière rayonnante de la ferme florale Chomjan. Mais lorsque des secrets longtemps enfouis et les pressions familiales prennent une tournure mortelle, Din se dresse, prête à se battre pour Rose, même au péril de sa vie. Alors que les ombres du passé se referment et que la vérité se dévoile, Din et Rose doivent affronter la profondeur de leurs sentiments et les dangers qui les guettent. Leurs familles sont engagées dans une guerre silencieuse, et leur amour est une rébellion contre des forces qui les dépassent. La confiance mise à l'épreuve, les loyautés remises en question, et leur avenir en suspens, elles doivent choisir : défieront-elles les forces qui cherchent à les séparer, ou leur amour sera-t-il un sacrifice de plus pour cette terre impitoyable qui les lie ? Dans un monde où chaque décision peut faire basculer la balance entre la vie et la mort, ils doivent se demander si l'amour peut véritablement tout vaincre, ou s'il sera enseveli sous le poids de la terre ?",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-03-15"
     }
 ]
