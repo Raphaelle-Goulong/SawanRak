@@ -1539,7 +1539,7 @@
     },
     {
         "id": "129",
-        "title": "The Earth",
+        "title": "The Earth - Vows of the Land",
         "cover": "/Images/The Earth - Vows of the Land.webp",
         "url": "/Books/The Earth.docx",
         "auteur": "Salmon",
@@ -1548,5 +1548,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-03-15"
+    },
+    {
+        "id": "129",
+        "title": "Villain Star+",
+        "cover": "/Images/Villain Star+.webp",
+        "url": "/Books/Villain Star+.docx",
+        "auteur": "Salmon",
+        "categorie": ["StarShip","Romance"],
+        "description": "VILLAIN STAR #NongKaYaYueSpecialEdition contient des chapitres spéciaux qui retracent différents moments marquants de leur vie, de leurs 21 et 30 ans à leurs 40 et 30 ans.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-03-16"
     }
 ]
