@@ -1552,8 +1552,8 @@
     {
         "id": "129",
         "title": "Villain Star+",
-        "cover": "/Images/Villain Star+.webp",
-        "url": "/Books/Villain Star+.docx",
+        "cover": "/Images/Villain Star plus.webp",
+        "url": "/Books/Villain Star plus.docx",
         "auteur": "Salmon",
         "categorie": ["StarShip","Romance"],
         "description": "VILLAIN STAR #NongKaYaYueSpecialEdition contient des chapitres spéciaux qui retracent différents moments marquants de leur vie, de leurs 21 et 30 ans à leurs 40 et 30 ans.",
@@ -1572,5 +1572,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-03-18"
+    },
+    {
+        "id": "131",
+        "title": "Please Love - Special ",
+        "cover": "/Images/Pls Love Special.webp",
+        "url": "/Books/Pls Love Special.docx",
+        "auteur": "REVERSE",
+        "categorie": ["Marriage first","Adulte","Romance"],
+        "description": "Beaucoup pensent que le mariage marque un aboutissement, le jour où l'on revêt une robe de mariée et où l'on participe à une cérémonie fastueuse dont rêvent tant de couples. Ces moments sont perçus comme l'apogée d'une vie conjugale parfaite. Pourtant, c'est une erreur. Pour Pakinee et Panapsorn, ce mariage pourrait bien être le début d'une nouvelle occasion de prouver leur amour.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-03-21"
     }
 ]
