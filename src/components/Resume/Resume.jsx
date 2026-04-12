@@ -1,167 +1,158 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useBooksContext } from '../../contexts/BooksContext'
+import Data from '../../Data.json'
 import '../Resume/Resume.scss'
 import Card from '../../components/Card/Card'
-import Tags from '../Tags/Tags'
-import Button from '../Button/Button'
-import { X } from 'lucide-react'
+import StarRating from '../../components/StarRating/StarRating'
+import Heart from '../Heart/Heart'
+import ButtonRead from '../ButtonRead/ButtonRead'
+import { ArrowLeft } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 
+// Modale qui s'affiche quand on clique sur une Card
+// Affiche les infos du livre : cover, titre, auteur, étoiles, synopsis, livres du même auteur
+// Props : book (objet livre), onClose (fonction pour fermer la modale)
 function Resume({ book, onClose }) {
     const navigate = useNavigate()
-    const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext()
+
+    // Stocke les infos du dernier chapitre lu (récupéré depuis le localStorage)
     const [lastChapterInfo, setLastChapterInfo] = useState(null)
+
+    // Contrôle la visibilité du composant (false = démontage)
     const [isVisible, setIsVisible] = useState(true)
-    const [allChapters, setAllChapters] = useState([])
 
-    // Chargement des chapitres avec le context
-    useEffect(() => {
-        const fetchChapters = async () => {
-            // Vérifier d'abord le cache
-            const cachedChapters = getBookChapters(book.id)
-            if (cachedChapters) {
-                updateChaptersList(cachedChapters)
-                return
-            }
-
-            // Sinon charger
-            const chapters = await loadBookChapters(book)
-            updateChaptersList(chapters)
-        }
-
-        const updateChaptersList = (realChapters) => {
-            if (realChapters.length > 0) {
-                const chaptersList = realChapters.map((chapter, index) => ({
-                    number: index,
-                    title: chapter.title || `Chapitre ${index + 1}`
-                }))
-                setAllChapters(chaptersList)
-            } else {
-                // Fallback vers les chapitres génériques
-                const startsWithZero = book.description?.toLowerCase().includes('intro')
-                const chaptersList = []
-
-                if (startsWithZero) {
-                    chaptersList.push({ number: 0, title: 'Chapitre 0' })
-                }
-
-                for (let i = 1; i <= book.chapters; i++) {
-                    chaptersList.push({
-                        number: startsWithZero ? i : i - 1,
-                        title: `Chapitre ${i}`
-                    })
-                }
-
-                setAllChapters(chaptersList)
-            }
-        }
-
-        fetchChapters()
-    }, [book, loadBookChapters, getBookChapters])
-
+    // Récupère le dernier chapitre lu depuis le localStorage au montage
     useEffect(() => {
         const savedInfo = localStorage.getItem(`book-${book.id}-lastChapterLink`)
         if (savedInfo) {
             const info = JSON.parse(savedInfo)
             setLastChapterInfo({
                 ...info,
+                // Renomme "Introduction" en "Chapitre 0" pour l'affichage
                 chapterTitle: info.chapterTitle.replace('Introduction', 'Chapitre 0')
             })
         }
     }, [book.id])
 
-    const handleChapterClick = (chapterNumber) => {
+    // Navigue vers le livre en forçant le chapitre 0 (début)
+    const handleReadBook = () => {
+        navigate(`/book/${book.id}`, { state: { book, chapterIndex: 0 } })
+    }
+
+    // Navigue vers le livre au dernier chapitre lu
+    const handleResumeBook = () => {
         navigate(`/book/${book.id}`, {
-            state: { book, chapterIndex: chapterNumber }
+            state: { book, chapterIndex: lastChapterInfo.chapterIndex }
         })
     }
 
-    const handleReadBook = () => {
-        navigate(`/book/${book.id}`, { state: { book } })
-    }
-
+    // Ferme la modale en cachant le composant et en appelant le callback parent
     const handleClose = () => {
         setIsVisible(false)
         if (onClose) onClose()
     }
 
+    // Quand on clique sur un livre "Du Même Auteur"
+    // Navigue vers la Home avec le livre sélectionné pour ouvrir sa modale Resume
+    const handleCardClick = (selectedBook) => {
+        navigate('/', {
+            state: { fromEnding: true, book: selectedBook }
+        })
+    }
+
+    // Ne rien afficher si la modale est fermée
     if (!isVisible) return null
 
     return (
         <section className="Section-Resume">
             <div className="Top-resume">
-                <h2>{book.title}</h2>
-                <X className="cross" size={20} onClick={handleClose} />
-            </div>
+                <div className="resume-book">
 
-            <div className="Resume">
-                <div className="text-resume">
-                    <h3 id="title-resume">Résumé</h3>
-                    <p id="resume-book">{book.description}</p>
-                </div>
-
-                <div className="Resume-img">
-                    <Card Book={book} onClick={undefined} />
-                    <p>Total chapitres : {allChapters.length > 0 ? allChapters.length : book.chapters}</p>
-                </div>
-
-                <div className="Categorie">
-                    {(Array.isArray(book.categorie)
-                        ? book.categorie
-                        : [book.categorie].filter(Boolean)
-                    ).map((category, index) => (
-                        <Tags key={index} text={category} />
-                    ))}
-                </div>
-
-                <div className="chapter-available">
-                    <div className="last-chapter">
-                        <h4 id="last-chap">Dernier chapitre lu : </h4>
-                        {lastChapterInfo ? (
-                            <a
-                                href={`/book/${book.id}?chapter=${lastChapterInfo.chapterIndex}`}
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    handleChapterClick(lastChapterInfo.chapterIndex)
-                                }}
-                                className="chapter-link">
-                                <Tags text={lastChapterInfo.chapterTitle.slice(0, 11)} />
-                            </a>
-                        ) : (
-                            <Tags text={allChapters[0]?.title.slice(0, 11) || 'Chapitre 1'} />
-                        )}
+                    {/* Barre du haut : flèche retour + bouton favoris */}
+                    <div className="icon-top-resume">
+                        <ArrowLeft className="cross" size={30} onClick={handleClose} />
+                        <Heart bookId={book.id} />
                     </div>
 
-                    <div className="all-chapter">
-                        <h4>Tous les chapitres :</h4>
-                        {isLoadingBook(book.id) ? (
-                            <div className="book-loading">
-                                <div className="loading-bar">
-                                    <div className="loading-progress"></div>
+                    {/* Bloc principal : cover + infos du livre */}
+                    <div className="info-resume">
+
+                        {/* Couverture du livre */}
+                        <div className="Resume-img-book">
+                            <img
+                                src={book.cover}
+                                alt={`Couverture de ${book.title}`}
+                                className="img-book"
+                            />
+                        </div>
+
+                        {/* Infos texte : titre, étoiles, auteur, genre, boutons */}
+                        <div className="in-resume-book">
+                            <h2>{book.title}</h2>
+
+                            {/* Étoiles interactives — lit et sauvegarde la note dans le localStorage */}
+                            <StarRating bookId={book.id} />
+
+                            <p id="author-name-resume">Auteur : {book.auteur}</p>
+
+                            {/* Genre(s) du livre — gère le cas où categorie est un tableau ou une string */}
+                            <p id="gender-resume">
+                                <BookOpen id="icon-book-open" size={15} />
+                                {(Array.isArray(book.categorie)
+                                    ? book.categorie
+                                    : [book.categorie].filter(Boolean)
+                                ).join(', ')}
+                            </p>
+
+                            {/* Boutons de lecture */}
+                            <div className="buttons-start">
+                                {/* Toujours visible — repart du chapitre 0 */}
+                                <div onClick={handleReadBook}>
+                                    <ButtonRead text="Lire" />
                                 </div>
-                            </div>
-                        ) : (
-                            <div className="chapters-list">
-                                {allChapters.map((chapter) => (
-                                    <a
-                                        key={chapter.number}
-                                        href={`/book/${book.id}?chapter=${chapter.number}`}
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            handleChapterClick(chapter.number)
-                                        }}
-                                        className="chapter-link">
-                                        <Tags text={chapter.title.slice(0, 11)} />
-                                    </a>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
 
-            <div className="Btn-start" onClick={handleReadBook}>
-                <Button text={lastChapterInfo ? 'Continuer la lecture' : 'Commencer'} />
+                                {/* Visible seulement si un chapitre a déjà été lu */}
+                                {lastChapterInfo && (
+                                    <div onClick={handleResumeBook}>
+                                        <ButtonRead text="Reprendre" />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Synopsis du livre */}
+                    <div className="Resume">
+                        <div className="text-resume">
+                            <h3 id="title-resume">Synopsis</h3>
+                            <p id="resume-book">{book.description}</p>
+                        </div>
+                    </div>
+
+                    {/* Autres livres du même auteur
+                        Filtre Data.json pour exclure le livre actuel
+                        Clic sur une card → ouvre sa modale Resume depuis la Home */}
+                    <div className="Resume">
+                        <div className="text-resume">
+                            <h3 id="title-resume">Du Même Auteur</h3>
+                            <div className="same-author-books">
+                                {Data.filter((b) => b.auteur === book.auteur && b.id !== book.id)
+                                    .slice(0, 50)
+                                    .map((b) => (
+                                        <Card key={b.id} Book={b} onClick={() => handleCardClick(b)} />
+                                    ))}
+                                {/* Message si l'auteur n'a pas d'autres livres */}
+                                {Data.filter((b) => b.auteur === book.auteur && b.id !== book.id)
+                                    .length === 0 && (
+                                    <p className="no-books-message">
+                                        Aucun autre livre de cet auteur
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
     )

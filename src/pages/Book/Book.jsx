@@ -104,7 +104,7 @@ function Book() {
         )
     }
 
-    // 👈 Utiliser le loading du Context
+    //  Utiliser le loading du Context
     if (isLoadingBook(book.id))
         return (
             <div className="loading">
@@ -128,7 +128,7 @@ function Book() {
                         }))}
                         selectedId={currentChapterIndex}
                         onSelect={(id) => {
-                            handleSelectChapter(id) // 👈 Utiliser handleSelectChapter au lieu de setCurrentChapterIndex
+                            handleSelectChapter(id) // Utiliser handleSelectChapter au lieu de setCurrentChapterIndex
                         }}
                     />
                 </div>

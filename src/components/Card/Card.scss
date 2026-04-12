@@ -6,15 +6,31 @@
     color: white;
 
     .Img-books {
+        position: relative; // ← nécessaire pour positionner le coeur
+
         img {
             width: 100px;
             height: 150px;
             border-radius: 7px;
             object-fit: cover;
-            // box-shadow: rgba(255, 255, 255, 0.19) 0px 10px 20px, rgba(255, 255, 255, 0.23) 0px 3px 4px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
+
+        // Coeur en haut à droite de la cover
+        .heart-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+
+            svg {
+                width: 14px;
+                height: 14px;
+                fill: rgb(255, 50, 50);
+                filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+            }
+        }
     }
+
     .Title-books {
         display: flex;
         justify-content: center;
@@ -23,12 +39,13 @@
         font-family: 'Mulish', sans-serif;
         font-weight: 300;
         font-size: 0.9rem;
+
         h3 {
-            white-space: nowrap;       // Empêche le texte de passer à la ligne
-            overflow: hidden;         // Cache le texte qui dépasse
-            text-overflow: ellipsis;   // Ajoute "..." quand le texte est coupé
-            max-width: 100px;         // Largeur maximale égale à celle de la carte
-            text-align: center;      // Centre le texte
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+            text-align: center;
         }
     }
 }

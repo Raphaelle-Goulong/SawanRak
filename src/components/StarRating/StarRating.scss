@@ -5,120 +5,116 @@
     .radio {
         display: flex;
         justify-content: center;
-        gap: 5px;
+        gap: 4px;
         flex-direction: row-reverse;
+    }
 
-        > input {
-            position: absolute;
-            appearance: none;
+    .radio > input {
+        position: absolute;
+        appearance: none;
+    }
+
+    .radio > label {
+        cursor: pointer;
+        font-size: 20px;
+        position: relative;
+        display: inline-block;
+        transition: transform 0.3s ease;
+
+        svg {
+            fill: #535353;
+            transition: fill 0.3s ease, filter 0.3s ease;
         }
+    }
 
-        > div {
-            position: relative;
-        }
+    // ✅ Le sélecteur clé qui manquait — colorie l'étoile ET toutes celles après
+    .radio > input[value='1']:checked + label > svg,
+    .radio > input[value='1']:checked + label ~ label > svg {
+        fill: #ffeb3b;
+        filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8));
+    }
 
-        label {
-            cursor: pointer;
-            font-size: 30px;
-            position: relative;
-            display: inline-block;
-            transition: transform 0.3s ease;
+    .radio > input[value='2']:checked + label > svg,
+    .radio > input[value='2']:checked + label ~ label > svg {
+        fill: #ffc107;
+        filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.8));
+    }
 
-            svg {
-                fill: #666;
-                transition: fill 0.3s ease, filter 0.3s ease;
-            }
+    .radio > input[value='3']:checked + label > svg,
+    .radio > input[value='3']:checked + label ~ label > svg {
+        fill: #ff9800;
+        filter: drop-shadow(0 0 15px rgba(255, 152, 0, 0.8));
+    }
 
-            &::before,
-            &::after {
-                content: '';
-                position: absolute;
-                width: 6px;
-                height: 6px;
-                background-color: #ff9e0b;
-                border-radius: 50%;
-                opacity: 0;
-                transform: scale(0);
-                transition: transform 0.4s ease, opacity 0.4s ease;
-            }
+    .radio > input[value='4']:checked + label > svg,
+    .radio > input[value='4']:checked + label ~ label > svg {
+        fill: #ff5722;
+        filter: drop-shadow(0 0 15px rgba(255, 87, 34, 0.8));
+    }
 
-            &::before {
-                top: -15px;
-                left: 50%;
-                transform: translateX(-50%) scale(0);
-            }
+    .radio > input[value='5']:checked + label > svg,
+    .radio > input[value='5']:checked + label ~ label > svg {
+        fill: #f44336;
+        filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.8));
+    }
 
-            &::after {
-                bottom: -15px;
-                left: 50%;
-                transform: translateX(-50%) scale(0);
-            }
+    // Hover
+    .radio > label:hover > svg {
+        transform: scale(1.2);
+    }
 
-            &:hover {
-                transform: scale(1.2);
-                animation: pulse 0.6s infinite alternate;
+    .radio > label[for$='-1']:hover > svg,
+    .radio > label[for$='-1']:hover ~ label > svg {
+        fill: #ffeb3b !important;
+        filter: drop-shadow(0 0 20px rgba(255, 235, 59, 1)) !important;
+    }
 
-                &::before,
-                &::after {
-                    opacity: 1;
-                    transform: translateX(-50%) scale(1.5);
-                    animation: particle-explosion 1s ease-out;
-                }
+    .radio > label[for$='-2']:hover > svg,
+    .radio > label[for$='-2']:hover ~ label > svg {
+        fill: #ffc107 !important;
+        filter: drop-shadow(0 0 20px rgba(255, 193, 7, 1)) !important;
+    }
 
-                svg {
-                    fill: #ff9e0b;
-                    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
-                    animation: shimmer 1s ease infinite alternate;
-                }
-            }
+    .radio > label[for$='-3']:hover > svg,
+    .radio > label[for$='-3']:hover ~ label > svg {
+        fill: #ff9800 !important;
+        filter: drop-shadow(0 0 20px rgba(255, 152, 0, 1)) !important;
+    }
 
-            &.active svg,
-            &.active ~ label svg {
-                fill: #ffa723;
-                filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
-            }
+    .radio > label[for$='-4']:hover > svg,
+    .radio > label[for$='-4']:hover ~ label > svg {
+        fill: #ff5722 !important;
+        filter: drop-shadow(0 0 20px rgba(255, 87, 34, 1)) !important;
+    }
 
-            &.active {
-                animation: pulse 0.8s infinite alternate;
+    .radio > label[for$='-5']:hover > svg,
+    .radio > label[for$='-5']:hover ~ label > svg {
+        fill: #f44336 !important;
+        filter: drop-shadow(0 0 20px rgba(244, 67, 54, 1)) !important;
+    }
 
-                &::before,
-                &::after {
-                    opacity: 1;
-                    transform: translateX(-50%) scale(1.5);
-                    animation: particle-explosion 1s ease-out;
-                }
-            }
-        }
-
-        input:checked + label {
-            svg {
-                fill: #ff9e0b;
-                filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
-                animation: pulse 0.8s infinite alternate;
-            }
-
-            &::before,
-            &::after {
-                opacity: 1;
-                transform: translateX(-50%) scale(1.5);
-                animation: particle-explosion 1s ease-out;
-            }
-        }
+    .radio > input:checked + label > svg {
+        animation: pulse-warm 0.8s infinite alternate, warm-glow 2s infinite alternate;
     }
 }
 
-@keyframes pulse {
+@keyframes pulse-warm {
     0% { transform: scale(1); }
     100% { transform: scale(1.1); }
 }
 
-@keyframes particle-explosion {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1.2); }
-    100% { opacity: 0; transform: scale(0.5); }
+@keyframes warm-glow {
+    0% { filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.5)); }
+    50% { filter: drop-shadow(0 0 25px rgba(255, 152, 0, 0.8)); }
+    100% { filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.6)); }
 }
+.star-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-@keyframes shimmer {
-    0% { filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.5)); }
-    100% { filter: drop-shadow(0 0 20px rgba(255, 158, 11, 1)); }
+    .rating-number {
+        font-size: 0.9rem;
+        color: #aaa;
+    }
 }

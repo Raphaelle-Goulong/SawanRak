@@ -1,9 +1,11 @@
+// Modale d'affichage des infos d'un livre
+// S'anime depuis le bas (style TikTok) via les classes .visible et .closing
 .Section-Resume {
     background-color: #000000d0;
-    // background-image: repeating-linear-gradient(157.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(67.5deg, rgb(0,0,0) 0px, rgb(0,0,0) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(143,33%,50%),hsl(215,33%,50%),hsl(287,33%,50%),hsl(359,33%,50%),hsl(71,33%,50%));
     backdrop-filter: blur(5px);
     position: relative;
     width: 100%;
+    padding: 10px 0 ;
     z-index: 5;
     display: flex;
     justify-content: center;
@@ -11,27 +13,90 @@
     border-radius: 10px;
     flex-wrap: wrap;
     box-shadow: rgba(236, 236, 236, 0.24) 0px 3px 8px;
+
+    // Barre du haut avec flèche + cover + infos
     .Top-resume {
         display: flex;
         justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+        width: 100%;
 
-        h2 {
+        .resume-book {
             display: flex;
-            justify-content: center;
-            text-align: center;
-            font-family: 'Marcellus', serif;
-            font-size: 1.5rem;
-            margin: 20px 0;
-            width: 250px;
-        }
-        .cross {
-            position: relative;
-            left: 35px;
-            top: 10px;
-            cursor: pointer;
+            flex-wrap: wrap;
+            width: 100%;
+
+            // Ligne flèche retour / bouton coeur
+            .icon-top-resume {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                margin: 0px 10px 20px 10px;
+
+                .cross { cursor: pointer; }
+            }
+
+            // Bloc cover + infos texte côte à côte
+            .info-resume {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                font-family: 'Mulish', sans-serif;
+
+                h2 {
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    font-family: 'Marcellus', serif;
+                    font-size: 1.4rem;
+                    width: 200px;
+                }
+
+                // Couverture du livre
+                .Resume-img-book {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+
+                    .img-book {
+                        width: 150px;
+                        border-radius: 15px;
+                    }
+                }
+
+                // Bloc texte à droite de la cover
+                // Surcharge la taille des étoiles uniquement dans Resume
+                .in-resume-book {
+                    .star-rating {
+                        .radio { gap: 2px; }
+                        .radio > label { font-size: 12px; } // Plus petit que dans Ending
+                    }
+                }
+
+                #author-name-resume {
+                    padding: 0 5px;
+                    margin-bottom: 15px;
+                }
+
+                #gender-resume {
+                    display: flex;
+                    align-items: center;
+                    padding: 5px;
+                    margin-bottom: 10px;
+
+                    #icon-book-open { padding-right: 5px; }
+                }
+
+                // Conteneur des boutons Lire / Reprendre
+                .buttons-start { display: flex; }
+            }
         }
     }
 
+    // Sections Synopsis et Du Même Auteur
     .Resume {
         display: flex;
         justify-content: center;
@@ -42,199 +107,81 @@
         flex-wrap: wrap;
 
         .text-resume {
-            background-color: rgba(92, 92, 92, 0.048);
-            width: 50%;
-            height: 250px;
-            margin-bottom: 10px;
+            width: 100%;
+            height: 150px;
             margin-right: 10px;
+            border-radius: 15px;
+
+            // Titre de section (Synopsis / Du Même Auteur)
             #title-resume {
                 font-family: 'Marcellus', serif;
-                padding: 20px 0;
+                padding: 10px 0;
                 font-size: 1.2rem;
             }
+
+            // Texte du synopsis avec scroll si trop long
             #resume-book {
                 display: flex;
                 justify-content: center;
                 align-items: flex-start;
-                height: 150px;
-                padding: 15px;
+                height: 90px;
+                padding: 8px;
                 border-radius: 10px;
-                // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                 font-family: 'Mulish', sans-serif;
+                font-size: 0.9rem;
+                overflow-y: auto;
+                cursor: ns-resize;
 
-                /* Propriétés pour le défilement */
-                overflow-y: auto; 
-                cursor: ns-resize; 
-
-                /* Style de la barre de défilement */
-                &::-webkit-scrollbar {
-                    width: 8px;
+                &::-webkit-scrollbar { width: 8px; }
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(241, 240, 240, 0.2);
+                    border-radius: 4px;
                 }
+                &::-webkit-scrollbar-thumb:hover {
+                    background-color: rgba(0, 0, 0, 0.3);
+                }
+            }
 
+            // Grille des livres du même auteur
+            // Cards réduites par rapport à la taille par défaut
+            .same-author-books {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                overflow-y: auto;
+                max-height: 140px;
+
+                &::-webkit-scrollbar { width: 8px; }
                 &::-webkit-scrollbar-thumb {
                     background-color: rgba(241, 240, 240, 0.2);
                     border-radius: 4px;
                 }
 
-                &::-webkit-scrollbar-thumb:hover {
-                    background-color: rgba(0, 0, 0, 0.3);
-                }
-            }
-        }
-        .Resume-img {
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: 10px;
-            pointer-events: none;
-            cursor: default;
-            &:hover {
-                transform: none !important;
-            }
-            p {
-                margin-top: 5px;
-            }
-        }
-        .Categorie {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin: 10px;
-        }
-        .chapter-available {
-            display: flex;
-            align-items: center;
-            background-color: rgba(54, 54, 54, 0.678);
-            border-radius: 10px;
-            width: 100%;
-            height: 160px;
-            flex-wrap: wrap;
-            padding: 10px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            overflow-y: auto; 
-            cursor: ns-resize; 
-
-            &::-webkit-scrollbar {
-                width: 8px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background-color: rgba(241, 240, 240, 0.2);
-                border-radius: 4px;
-            }
-
-            &::-webkit-scrollbar-thumb:hover {
-                background-color: rgba(0, 0, 0, 0.3);
-            }
-            .last-chapter {
-                display: flex;
-                align-items: center;
-                height: 30px;
-                justify-content: center;
-                width: 100%;
-                margin: 5px 0;
-                padding: 5px;
-                border-bottom: 1px solid rgb(100, 100, 100);
-                padding-bottom: 15px;
-                a {
-                    text-decoration: none;
-                    color: white;
-                }
-                #last-chap {
+                // Message affiché si l'auteur n'a pas d'autres livres
+                .no-books-message {
                     font-family: 'Mulish', sans-serif;
-                    margin: 2px;
-                }
-            }
-            .all-chapter {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-wrap: wrap;
-                border-radius: 10px;
-                padding-top: 10px;
-
-                .book-loading {
-                    display: flex;
-                    align-items: center;
-                    gap: 15px;
-                    justify-content: center;
-                    padding: 10px;
+                    color: #aaa;
+                    font-size: 0.85rem;
                 }
 
-                .loading-bar {
-                    width: 180px;
-                    height: 6px;
-                    background: rgba(255, 255, 255, 0.2);
-                    border-radius: 3px;
-                    overflow: hidden;
-                    position: relative;
-                }
-
-                .loading-progress {
-                    height: 100%;
-                    background: linear-gradient(135deg, #f0c8c8, #ebab8b, #fad17a);
-                    background-size: 200% 100%;
-                    border-radius: 3px;
-                    animation: loadingProgress 2.5s ease-in-out infinite;
-                    width: 0%;
-                }
-
-                @keyframes loadingProgress {
-                    0% {
-                        width: 0%;
-                        background-position: 0% 50%;
+                // Surcharge de la taille des Cards uniquement ici
+                .Card {
+                    .Img-books img {
+                        width: 100px;
+                        height: 130px;
                     }
-                    50% {
-                        width: 70%;
-                        background-position: 100% 50%;
-                    }
-                    100% {
-                        width: 100%;
-                        background-position: 0% 50%;
-                    }
-                }
-
-                .book-icon {
-                    font-size: 20px;
-                    animation: bookFlip 2s infinite;
-                }
-
-                @keyframes bookFlip {
-                    0%,
-                    100% {
-                        transform: rotateY(0deg);
-                    }
-                    25% {
-                        transform: rotateY(-15deg);
-                    }
-                    75% {
-                        transform: rotateY(15deg);
-                    }
-                }
-
-                .chapters-list {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    margin: 10px 0;
-                    a {
-                        text-decoration: none;
-                        color: white;
+                    .Title-books h3 {
+                        font-size: 0.6rem;
+                        max-width: 60px;
                     }
                 }
             }
         }
-    }
-    .Btn-start {
-        display: flex;
-        justify-content: center;
-        margin: 20px 0;
     }
 }
 
+// Overlay sombre derrière la modale
+// S'active avec la classe .show (ajoutée par Home.jsx)
 .resume-modal-overlay {
     position: fixed;
     top: 0;
@@ -244,11 +191,9 @@
     background-color: rgba(155, 16, 16, 0.007);
     display: flex;
     justify-content: center;
-    align-items: center; // Garde le centrage
+    align-items: center;
     z-index: 1000;
     backdrop-filter: blur(0px);
-
-    // Animation du fond
     transition: all 0.4s ease;
 
     &.show {
@@ -257,28 +202,27 @@
     }
 }
 
+// Animation d'entrée/sortie de la modale (style TikTok — monte depuis le bas)
+// Géré par Home.jsx qui ajoute/retire les classes .visible et .closing
 .Section-Resume {
-    // État initial - Animation TikTok (vient du bas) mais centré
     width: auto;
     margin: 0 7px;
     height: auto;
-    transform: translateY(100%); // Démarre en bas de l'écran
+    transform: translateY(100%); // Position initiale : hors écran en bas
     opacity: 1;
-    border-radius: 10px; // Garde le border-radius du deuxième code
+    border-radius: 10px;
     overflow: hidden;
-    // Transition fluide
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    // État final (modale complète au centre)
+    // État visible : remonte au centre
     &.visible {
-        transform: translateY(0); // Monte depuis le bas vers le centre
+        transform: translateY(0);
         opacity: 1;
     }
 
-    // Animation des éléments internes
+    // Animation en cascade des sections internes
     .Top-resume,
-    .Resume,
-    .Btn-start {
+    .Resume {
         transform: scale(0.8);
         opacity: 0;
         transition: all 0.3s ease;
@@ -288,53 +232,25 @@
         .Top-resume {
             transform: scale(1);
             opacity: 1;
-            transition-delay: 0.2s;
+            transition-delay: 0.2s; // Apparaît en premier
         }
-
         .Resume {
             transform: scale(1);
             opacity: 1;
-            transition-delay: 0.3s;
-        }
-
-        .Btn-start {
-            transform: scale(1);
-            opacity: 1;
-            transition-delay: 0.4s;
+            transition-delay: 0.3s; // Apparaît après Top-resume
         }
     }
 }
 
-// Animation pour les cartes
-.card-container {
-    transition: transform 0.3s ease;
-
-    &.clicked {
-        transform: scale(1.05);
-        filter: brightness(1.2);
-    }
-}
-
-// Animation de fermeture TikTok
+// Animation de fermeture : redescend hors écran
 .Section-Resume.closing {
-    transform: translateY(100%); // Redescend vers le bas
+    transform: translateY(100%);
     opacity: 1;
     transition: all 0.3s ease;
 }
 
-// Effet de pulsation pour le bouton
-.Btn-start {
-    &.visible {
-        animation: pulse 2s infinite 1s;
-    }
-}
-
+// Animation de pulsation légère (utilisable sur n'importe quel élément)
 @keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
