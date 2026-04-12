@@ -132,7 +132,7 @@ function Resume({ book, onClose }) {
                     {/* Autres livres du même auteur
                         Filtre Data.json pour exclure le livre actuel
                         Clic sur une card → ouvre sa modale Resume depuis la Home */}
-                    <div className="Resume">
+                    <div className="Resume" id="resume-author">
                         <div className="text-resume">
                             <h3 id="title-resume">Du Même Auteur</h3>
                             <div className="same-author-books">

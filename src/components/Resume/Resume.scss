@@ -5,7 +5,7 @@
     backdrop-filter: blur(5px);
     position: relative;
     width: 100%;
-    padding: 10px 0 ;
+    padding: 10px 0;
     z-index: 5;
     display: flex;
     justify-content: center;
@@ -19,7 +19,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px 0;
         width: 100%;
 
         .resume-book {
@@ -35,7 +34,9 @@
                 width: 100%;
                 margin: 0px 10px 20px 10px;
 
-                .cross { cursor: pointer; }
+                .cross {
+                    cursor: pointer;
+                }
             }
 
             // Bloc cover + infos texte côte à côte
@@ -71,8 +72,12 @@
                 // Surcharge la taille des étoiles uniquement dans Resume
                 .in-resume-book {
                     .star-rating {
-                        .radio { gap: 2px; }
-                        .radio > label { font-size: 12px; } // Plus petit que dans Ending
+                        .radio {
+                            gap: 2px;
+                        }
+                        .radio > label {
+                            font-size: 12px;
+                        } // Plus petit que dans Ending
                     }
                 }
 
@@ -87,11 +92,15 @@
                     padding: 5px;
                     margin-bottom: 10px;
 
-                    #icon-book-open { padding-right: 5px; }
+                    #icon-book-open {
+                        padding-right: 5px;
+                    }
                 }
 
                 // Conteneur des boutons Lire / Reprendre
-                .buttons-start { display: flex; }
+                .buttons-start {
+                    display: flex;
+                }
             }
         }
     }
@@ -132,7 +141,9 @@
                 overflow-y: auto;
                 cursor: ns-resize;
 
-                &::-webkit-scrollbar { width: 8px; }
+                &::-webkit-scrollbar {
+                    width: 8px;
+                }
                 &::-webkit-scrollbar-thumb {
                     background-color: rgba(241, 240, 240, 0.2);
                     border-radius: 4px;
@@ -151,7 +162,9 @@
                 overflow-y: auto;
                 max-height: 140px;
 
-                &::-webkit-scrollbar { width: 8px; }
+                &::-webkit-scrollbar {
+                    width: 8px;
+                }
                 &::-webkit-scrollbar-thumb {
                     background-color: rgba(241, 240, 240, 0.2);
                     border-radius: 4px;
@@ -165,21 +178,29 @@
                 }
 
                 // Surcharge de la taille des Cards uniquement ici
-                .Card {
-                    .Img-books img {
-                        width: 100px;
-                        height: 130px;
-                    }
-                    .Title-books h3 {
-                        font-size: 0.6rem;
-                        max-width: 60px;
-                    }
-                }
+                // .Card {
+                //     .Img-books img {
+                //         width: 100px;
+                //         height: 130px;
+                //     }
+                //     .Title-books h3 {
+                //         font-size: 0.6rem;
+                //         max-width: 60px;
+                //     }
+                // }
             }
         }
     }
 }
+#resume-author {
+    .text-resume {
+        height: 260px;
 
+        .same-author-books {
+            max-height: 200px;
+        }
+    }
+}
 // Overlay sombre derrière la modale
 // S'active avec la classe .show (ajoutée par Home.jsx)
 .resume-modal-overlay {
@@ -251,6 +272,11 @@
 
 // Animation de pulsation légère (utilisable sur n'importe quel élément)
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
