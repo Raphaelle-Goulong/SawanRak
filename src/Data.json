@@ -1620,5 +1620,29 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-04-11"
+    },
+    {
+        "id": "136",
+        "title": "Enemies With Benefits Special !",
+        "cover": "/Images/Enemies With Benefits Special.webp",
+        "url": "/Books/Enemies With Benefits Special.docx",
+        "auteur": "Snow Leopard",
+        "categorie": ["Ennemies to Lovers","Romance"],
+        "description": "L'amour n'a pas besoin d'être ostentatoire. Il suffit d'être une source de réconfort et de sérénité l'un pour l'autre au quotidien. C'est tout ce qui compte.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-05-06"
+    },
+    {
+        "id": "137",
+        "title": "Enemies With Benefits Special Working Days",
+        "cover": "/Images/Enemies With Benefits Special Working Days.webp",
+        "url": "/Books/Enemies With Benefits Special Working Days.docx",
+        "auteur": "Snow Leopard",
+        "categorie": ["Ennemies to Lovers","Romance"],
+        "description": "Notre entreprise est un endroit formidable où travailler. Le service RH est sympa et les employés ne sont pas du genre à faire des bêtises. On adore tous aller travailler ! « Madame Lal, pourriez-vous réparer ce fichier ? J’en ai besoin avant 10 h. » Rien qu’en entendant cette voix, ma bonne humeur a disparu. Typique de Vethaka, la voleuse de sourires… Je retire ce que j’ai dit. Je ne veux plus travailler ! Je veux rentrer chez moi !",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-05-06"
     }
 ]

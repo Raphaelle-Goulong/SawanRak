@@ -39,7 +39,7 @@ function Book() {
         return () => clearTimeout(timer)
     }, [])
 
-    // 👈 Remplacer tout le useEffect de chargement par celui-ci
+    //  Remplacer tout le useEffect de chargement par celui-ci
     useEffect(() => {
         const fetchChapters = async () => {
             try {
