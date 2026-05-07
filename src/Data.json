@@ -1644,5 +1644,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-05-06"
+    },
+    {
+        "id": "138",
+        "title": "The goal in my life is you",
+        "cover": "/Images/The goal in my life is you.webp",
+        "url": "/Books/The goal in my life is you.docx",
+        "auteur": "Hiiroda",
+        "categorie": ["Hospital","Romance"],
+        "description": "Je déteste le mot « docteur » au plus profond de mon être, mais la personne qui me met le plus mal à l'aise… est en réalité un médecin.",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-05-07"
     }
 ]
