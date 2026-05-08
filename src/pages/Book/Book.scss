@@ -125,7 +125,7 @@ $desktop        : 1024px;
     height: 2px;
     background: $gradient;
     border-radius: 2px;
-    margin: 18px 0 80px 0;
+    margin: 18px 0 50px 0;
   }
 
   // Corps du texte
@@ -208,23 +208,7 @@ $desktop        : 1024px;
   }
 }
 
-.modal-content {
-  background: #1a1a1f;
-  border: 0.5px solid $border-subtle;
-  border-radius: $radius $radius 0 0;
-  padding: 24px 20px calc(env(safe-area-inset-bottom, 0px) + 24px);
-  width: 100%;
-  max-width: 480px;
-  max-height: 90dvh;
-  overflow-y: auto;
-  animation: slide-up .3s cubic-bezier(.4,0,.2,1);
 
-  @media (min-width: $mobile) {
-    border-radius: $radius;
-    padding: 28px 24px;
-    animation: fade-in .2s ease;
-  }
-}
 
 // ── Animations ────────────────────────────────────────────────────────────────
 @keyframes fade-in {
