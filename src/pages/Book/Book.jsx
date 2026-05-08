@@ -113,63 +113,85 @@ function Book() {
         )
     if (error) return <div className="error">{error}</div>
 
-    return (
-        <section className="Section-Book">
-            <div className="Book">
-                <div className="title-book">
-                    <h2>{book.title}</h2>
-                </div>
+   return (
+    <section className="Section-Book">
+        <div className="Book">
 
-                <div className="top-book">
-                    <ChaptersDropdown
-                        items={chapters.map((chap, i) => ({
-                            id: i,
-                            label: chap.title || `Chapitre ${i + 1}`
-                        }))}
-                        selectedId={currentChapterIndex}
-                        onSelect={(id) => {
-                            handleSelectChapter(id) // Utiliser handleSelectChapter au lieu de setCurrentChapterIndex
-                        }}
-                    />
-                </div>
-
-                <div className="Text-Book">
-                    <h2 className="chapter-title">
-                        {chapters[currentChapterIndex]?.title ||
-                            `Chapitre ${currentChapterIndex + 1}`}
-                    </h2>
-                    <div className="chapter-content">
-                        {chapters[currentChapterIndex]?.content.split('\n\n').map((para, i) => (
-                            <p key={i}>{para}</p>
-                        ))}
+            {/* Header : titre du livre + progression */}
+            <header className="book-header">
+                <h1 className="book-title">{book.title}</h1>
+                <div className="book-progress">
+                    <div className="book-progress__bar">
+                        <div
+                            className="book-progress__fill"
+                            style={{ width: `${((currentChapterIndex + 1) / chapters.length) * 100}%` }}
+                        />
                     </div>
+                    <span className="book-progress__label">
+                        {currentChapterIndex + 1} / {chapters.length}
+                    </span>
+                </div>
+            </header>
+
+            {/* Sélecteur de chapitre */}
+            <div className="top-book">
+                <ChaptersDropdown
+                    items={chapters.map((chap, i) => ({
+                        id: i,
+                        number: i > 0 && i < chapters.length - 1 ? String(i) : '',
+                        label: chap.title || `Chapitre ${i + 1}`
+                    }))}
+                    selectedId={currentChapterIndex}
+                    onSelect={handleSelectChapter}
+                />
+            </div>
+
+            {/* Corps du chapitre */}
+            <div className="Text-Book">
+                <h2 className="chapter-title">
+                    {chapters[currentChapterIndex]?.title || `Chapitre ${currentChapterIndex + 1}`}
+                </h2>
+                <div className="chapter-divider" aria-hidden="true" />
+
+                <div className="chapter-content">
+                    {chapters[currentChapterIndex]?.content
+                        .split('\n\n')
+                        .map((para, i) => <p key={i}>{para}</p>)
+                    }
                 </div>
             </div>
+        </div>
 
-            <div className="btn-next">
-                <Button onClick={() => handleSelectChapter(Math.max(0, currentChapterIndex - 1))}>
-                    Précédent
-                </Button>
-                <Button onClick={handleNextChapter}>
-                    Suivant
-                </Button>
-            </div>
+        {/* Navigation */}
+        <div className="btn-next">
+            <Button
+                onClick={() => handleSelectChapter(Math.max(0, currentChapterIndex - 1))}
+                disabled={currentChapterIndex === 0}
+            >
+                Précédent
+            </Button>
+            <Button onClick={handleNextChapter}>
+                Suivant
+            </Button>
+        </div>
 
-            {showEndingModal && (
+        {/* Modal de fin */}
+        {showEndingModal && (
+            <div
+                className="modal-overlay"
+                onClick={() => setShowEndingModal(false)}
+            >
                 <div
-                    className={`modal-overlay ${showEndingModal ? 'show' : ''}`}
-                    onClick={() => setShowEndingModal(false)} // Ferme si on clique sur l'overlay
+                    className="modal-content"
+                    onClick={(e) => e.stopPropagation()}
                 >
-                    <div
-                        className="modal-content"
-                        onClick={(e) => e.stopPropagation()} // Empêche la fermeture si on clique sur le contenu
-                    >
-                        <Ending onClose={() => setShowEndingModal(false)} book={book} />
-                    </div>
+                    <Ending onClose={() => setShowEndingModal(false)} book={book} />
                 </div>
-            )}
-        </section>
-    )
+            </div>
+        )}
+    </section>
+)
+
 }
 
 export default Book

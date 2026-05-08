@@ -44,13 +44,13 @@
             }
 
             &.active {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
                 border-color: transparent;
                 box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
                 transform: translateY(-2px);
 
                 &:hover {
-                    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+                    background: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
                 }
             }
 
@@ -103,7 +103,7 @@
             h2 {
                 font-size: 1.8rem;
                 margin-bottom: 0.5rem;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
