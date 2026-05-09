@@ -14,6 +14,7 @@
 .Section-Home {
     height: auto;
     color: white;
+    background-color: #0000006c;
     #Last-book {
         width: 100%;
         display: flex;
@@ -21,7 +22,7 @@
         align-items: center;
         flex-direction: column;
         border-bottom: solid 1px rgb(80, 79, 79);
-    
+
         .Last-Title-Section {
             display: flex;
             justify-content: center;
@@ -35,29 +36,25 @@
             justify-content: space-around;
         }
     }
-    #New-book{
+    #New-book {
         display: flex;
         flex-direction: column;
-        // background-color: rgb(22, 22, 22);
-        // border-bottom: solid 1px rgb(80, 79, 79);
-    .Title-Section {
-        display: flex;
-        justify-content: center;
-        margin: 20px 0px;
-        font-family: 'Marcellus', serif;
-        font-size: large;
+        .Title-Section {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0px;
+            font-family: 'Marcellus', serif;
+            font-size: large;
+        }
+        .New-book-card {
+            display: flex;
+            margin: 40px 0px;
+            justify-content: space-around;
+        }
     }
-    .New-book-card {
-        display: flex;
-        margin: 40px 0px;
-        justify-content: space-around;
-    }
-}
     .Results-grid {
         gap: 5px;
         display: flex;
         flex-direction: column;
     }
-
-   
 }

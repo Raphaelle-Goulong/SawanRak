@@ -1,117 +1,42 @@
-/* Variables CSS pour les thèmes */
-:root {
-    --bg-color: rgb(14, 14, 14);
-    --text-color: white;
-    --navbar-bg: transparent;
-    --card-bg: rgba(255, 255, 255, 0.1);
-    --border-color: rgba(255, 255, 255, 0.2);
-    --input-bg: rgb(83, 83, 83);
-    --input-border: #333;
-    --dropdown-bg: #2a2f3b;
-    --dropdown-selected: #636262a9;
-    --dropdown-options-bg: #232424;
-    --hover-gradient: linear-gradient(135deg, #f0c8c8, #ebab8b, #fad17a);
-    --hover-gradient-subtle: linear-gradient(
-        135deg,
-        rgba(240, 200, 200, 0.1),
-        rgba(235, 171, 139, 0.1),
-        rgba(250, 209, 122, 0.1)
-    );
-    --focus-gradient: linear-gradient(135deg, #f0c8c8, #ebab8b, #fad17a);
-    --chapters-selected-bg: linear-gradient(135deg, #f0c8c8, #ebab8b, #fad17a);
-    --chapters-hover-bg: #7a7979a9;
+#aurora-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -500;
+  pointer-events: none;
 }
 
-/* Thème sombre */
-body.dark-theme {
-    --bg-color: rgb(0, 0, 0);
-    --text-color: white;
-    --navbar-bg: transparent;
-    --card-bg: rgba(255, 255, 255, 0.1);
-    --border-color: rgba(255, 255, 255, 0.2);
-    --input-bg: rgb(30, 30, 30);
-    --input-border: #222;
-    --dropdown-bg: #1a1a1a;
-    --dropdown-selected: #2a2a2a;
-    --dropdown-options-bg: #151515;
-    --hover-gradient: linear-gradient(135deg, #4a4a4a, #3a3a3a, #2a2a2a);
-    --hover-gradient-subtle: linear-gradient(
-        135deg,
-        rgba(74, 74, 74, 0.1),
-        rgba(58, 58, 58, 0.1),
-        rgba(42, 42, 42, 0.1)
-    );
-    --focus-gradient: linear-gradient(135deg, #555, #444, #333);
-    --chapters-selected-bg: linear-gradient(135deg, #4a4a4a, #3a3a3a, #2a2a2a);
-    --chapters-hover-bg: #3a3a3a;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+.grain-overlay {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: -100;
+  animation: shiftGrain 0.08s steps(1) infinite;
 }
 
-/* Thème clair */
-body.light-theme {
-    --bg-color: rgb(46, 46, 46);
-    --text-color: #ffffff;
-    --navbar-bg: rgba(19, 19, 19, 0.9);
-    --card-bg: rgba(34, 34, 34, 0);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --input-bg: rgb(83, 83, 83);
-    --input-border: #333;
-    --dropdown-bg: #2a2f3b;
-    --dropdown-selected: #636262a9;
-    --hover-gradient: linear-gradient(135deg, #f0c8c8, #ebab8b, #fad17a);
-    --focus-gradient: linear-gradient(135deg, #f0c8c8, #ebab8b, #fad17a);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+@keyframes shiftGrain {
+  0%{transform:translate(0,0)} 10%{transform:translate(-5%,2%)} 20%{transform:translate(3%,-4%)}
+  30%{transform:translate(-2%,6%)} 40%{transform:translate(5%,-1%)} 50%{transform:translate(-4%,3%)}
+  60%{transform:translate(2%,-6%)} 70%{transform:translate(-6%,1%)} 80%{transform:translate(4%,4%)}
+  90%{transform:translate(-1%,-5%)}
 }
 
-/* Appliquer les variables aux éléments */
-.Navbar-section {
-    background-color: var(--navbar-bg);
-    color: var(--text-color);
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.65) 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 
-.Navbar-title {
-    color: var(--text-color) !important;
-}
-
-.navbar-logo {
-    color: var(--text-color) !important;
-}
-
-
-
-/* Styles pour le dropdown ChaptersDropDown */
-.select:hover .selected {
-    background-color: var(--chapters-hover-bg) !important;
-}
-
-.select .selected {
-    background: var(--chapters-selected-bg) !important;
-    color: var(--text-color) !important;
-    transition: all 0.2s ease;
-}
-
-.select .options {
-    background-color: var(--dropdown-options-bg) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.select .option:hover {
-    background: var(--hover-gradient-subtle) !important;
-    color: var(--text-color) !important;
-}
-
-.select .option:hover::before {
-    background: var(--hover-gradient) !important;
-}
-
-.select .option.selected {
-    background: var(--chapters-selected-bg) !important;
-    color: var(--text-color) !important;
-}
+body { background: #020810; }
+#root { position: relative; z-index: 3; }
 
 /* Reset CSS existant (gardez votre reset actuel) */
 html,

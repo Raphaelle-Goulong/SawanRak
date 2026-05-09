@@ -6,6 +6,7 @@ import { BooksProvider } from '../../contexts/BooksContext';
 import Home from '../Home/Home';
 import Book from '../Book/Book';
 
+import AuroraBackground from '../../components/Aurora/Aurora';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import LoadingModal from '../../components/LoadingModal/LoadingModal';
@@ -47,6 +48,10 @@ function App() {
   }, []);
 
   return (
+    <>
+    <AuroraBackground />
+    <div className="grain-overlay"></div>
+    <div className="vignette"></div>
     <BooksProvider> 
       <BrowserRouter>
         {/* Modale de chargement */}
@@ -87,6 +92,7 @@ function App() {
         )}
       </BrowserRouter>
     </BooksProvider>
+     </>
   );
 }
 

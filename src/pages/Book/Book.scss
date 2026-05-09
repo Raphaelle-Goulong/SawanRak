@@ -1,14 +1,15 @@
 
 // ── Tokens ────────────────────────────────────────────────────────────────────
 $gradient       : linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
-$text-primary   : #c1e1ebc2;
-$text-body      : #a8a8c0;
-$text-muted     : rgba(255,255,255,.3);
+$text-primary   : #ffffff;
+$text-body      : #b8bdd4c9;
+$text-muted     : rgb(255, 255, 255);
 $border-subtle  : rgba(255,255,255,.07);
 $surface        : rgba(255,255,255,.03);
 $radius         : 12px;
 $mobile         : 640px;
 $desktop        : 1024px;
+$background     : #0000006c;
 
 // ── Loading overlay ───────────────────────────────────────────────────────────
 .loading {
@@ -33,12 +34,14 @@ $desktop        : 1024px;
   color: $text-body;
   padding-bottom: 3rem;
   padding: 20px;
+  background-color: $background;
 }
 
 // ── Book container ────────────────────────────────────────────────────────────
 .Book {
   width: 100%;
   max-width: 680px;
+  z-index: 300;
 //   padding: 0 1rem;
 
   @media (min-width: $desktop) {
@@ -138,7 +141,6 @@ $desktop        : 1024px;
     text-indent: 1.5em;
     margin-bottom: 1.1em;
 
-
     &:first-of-type { text-indent: 0; } // Pas d'alinéa en début de chapitre
   }
 
@@ -197,7 +199,7 @@ $desktop        : 1024px;
   inset: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-end; // bottom sheet sur mobile
+  align-items: flex-end; 
   z-index: 2000;
   background: rgba(0,0,0,.6);
   backdrop-filter: blur(4px);

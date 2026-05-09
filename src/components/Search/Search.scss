@@ -4,23 +4,18 @@
     flex-direction: column;
     padding: 20px;
     width: 100%;
-    // height: 350px;
     position: relative;
     background-image: url('../../img/fond.png');
-    // object-fit: cover;
     background-size: cover;
     background-position: center;
-
     .container-input {
         position: relative;
-        // top: 120px;
         margin-top: 180px;
         display: flex;
         align-items: center;
         flex-direction: column;
         width: 100%;
         z-index: 20;
-        // background-color: red;
     }
     .container-input svg {
         position: absolute;
@@ -33,7 +28,8 @@
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-
+        color: white;
+        z-index: 20;
         h1 {
             font-size: 2.8rem;
             font-family: 'Marcellus', serif;
@@ -55,19 +51,20 @@
         justify-content: center;
         width: 100%;
         padding: 20px 0;
-
+        color: white;
         .input {
             width: 240px;
             padding: 10px 0px 10px 40px;
             border-radius: 10px;
-            border: solid 0px transparent;           
-            box-shadow: rgba(150, 96, 35, 0.25) 0px 13px 27px -5px,
+            border: solid 0px transparent;
+            box-shadow:
+                rgba(150, 96, 35, 0.25) 0px 13px 27px -5px,
                 rgba(126, 125, 125, 0.3) 0px 8px 16px -8px;
             transition: all 0.2s ease-in-out;
             outline: none;
             opacity: 0.8;
             font-family: 'Mulish', sans-serif;
-            background: #08080ade;
+            background: #08090ade;
             color: white;
         }
 
@@ -82,8 +79,5 @@
             color: white;
             font-family: 'Mulish', sans-serif;
         }
-
-       
     }
-   
 }

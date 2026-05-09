@@ -293,6 +293,7 @@ function Home({ filterType, onBookSelectFromSearch }) {
                 {/* Contenu dynamique selon le tag sélectionné */}
                 <div className="dynamic-content">
                     {renderContent()}
+                    
                 </div>
             </div>
 
