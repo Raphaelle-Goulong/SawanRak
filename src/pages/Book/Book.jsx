@@ -120,6 +120,11 @@ function Book() {
             {/* Header : titre du livre + progression */}
             <header className="book-header">
                 <h1 className="book-title">{book.title}</h1>
+                <img
+                                src={book.cover}
+                                alt={`Couverture de ${book.title}`}
+                                className="img-book"
+                            />
                 <div className="book-progress">
                     <div className="book-progress__bar">
                         <div
