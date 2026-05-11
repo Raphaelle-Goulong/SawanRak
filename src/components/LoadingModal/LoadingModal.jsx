@@ -93,6 +93,7 @@ const LoadingModal = ({ onComplete }) => {
           </div>
         </div>
         <p className="loading-tagline">Ma bibliothèque</p>
+        
       </div>
     </div>
   );
