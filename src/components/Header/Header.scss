@@ -1,8 +1,9 @@
-.Header{
+.Header {
     background-color: transparent;
     width: 100%;
     height: auto;
     box-shadow: rgba(83, 83, 83, 0.24) 0px 3px 8px;
 
-
+    // Pousse le contenu sous la caméra / barre de statut
+    padding-top: env(safe-area-inset-top);
 }
