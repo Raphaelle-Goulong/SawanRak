@@ -1,0 +1,51 @@
+.cardDaily-section {
+    .cardDaily-card {
+        width: 370px;
+        height: 160px;
+        background-color: rgba(12, 146, 146, 0.336);
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+
+        .cardDaily-img {
+            img {
+                width: 100px;
+                height: 140px;
+                border-radius: 7px;
+                padding: 5px;
+            }
+        }
+
+        .cardDaily-resume {
+            padding: 0 9px;
+            min-width: 0;
+            overflow: hidden; 
+
+            h2 {
+                font-family: 'Marcellus', serif;
+                font-size: 1.2rem;
+                text-overflow: ellipsis;
+            }
+
+            h3 {
+                font-family: 'Mulish', sans-serif;
+                font-size: 1rem;
+                margin-top: 5px;
+
+                color: rgb(0, 255, 191);
+            }
+
+            .cardDaily-text {
+                width: 100%;
+                height: 80px;
+                overflow-y: auto;
+                
+                p {
+                    margin-top: 5px;
+                    font-size: 0.9rem;
+                    overflow-y: auto;
+                }
+            }
+        }
+    }
+}
