@@ -1680,5 +1680,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-06-04"
+    },
+    {
+        "id": "141",
+        "title": "Did You Know: It’s Always You",
+        "cover": "/Images/Did You Know.webp",
+        "url": "/Books/Did You Know.docx",
+        "auteur": "PSSN",
+        "categorie": ["Ennemies to Lovers","Hospital","Romance"],
+        "description": "L'une n'a fréquenté que des hommes. L'autre est une professeure de médecine sublime et charmeuse, une véritable séductrice qui n'a aucune intention de se caser. Lorsque le destin réunit Praewa et Keeta dans la même pièce lors d'une soirée tendue, des étincelles jaillissent au milieu de l'alcool et du chaos ambiant. Ils ne se sont jamais entendus et leur relation semble totalement improbable, pourtant, ils se retrouvent pris dans un imbroglio complexe qu'aucun des deux ne peut nier. Des sentiments sincères, dissimulés derrière une façade de séductrice, peuvent-ils vraiment faire fondre un cœur de glace ? Surtout quand un amour particulier couve entre eux depuis l'enfance, resté insoupçonné. Car peu importe à quel point je fuis cet amour… « c'est toujours toi ».",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-07-10"
     }
 ]
