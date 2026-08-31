@@ -1704,5 +1704,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-07-21"
+    },
+    {
+        "id": "143",
+        "title": "Ma très chère épouse...",
+        "cover": "/Images/Ma très chère épouse.webp",
+        "url": "/Books/Ma très chère épouse.docx",
+        "auteur": "คนละโลก",
+        "categorie": ["Marriage first","Romance"],
+        "description": "Soudain, une inconnue me proposa de l'épouser en échange d'avantages commerciaux. Belle et charmante, elle était convoitée par beaucoup, mais elle m'avait choisie pour une raison qui m'échappait. Soucieuse de protéger l'entreprise de mon père, j'acceptai… Mademoiselle Prangrawee, la femme avec qui j'allais bientôt vivre comme mari et femme…",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-08-31"
     }
 ]
