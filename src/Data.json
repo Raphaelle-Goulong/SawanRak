@@ -1740,5 +1740,17 @@
         "note": "null",
         "chapters": 24,
         "date": "2026-09-19"
+    },
+     {
+        "id": "146",
+        "title": "Third Person",
+        "cover": "/Images/Third Person.webp",
+        "url": "/Books/Third Person.docx",
+        "auteur": "SIIX",
+        "categorie": ["First Love", "Drame", "Romance"],
+        "description": "Parce qu'elle était mon premier et unique amour. Je ne peux accepter que quiconque essaie de me la prendre. Je... Ai, une jeune femme de 25 ans qui réalise soudain que la fille qu'elle aime a déjà une petite amie. À cette nouvelle, j'ai le cœur brisé et je ne comprends pas pourquoi elle me fait ça. Pour empêcher leur amour de s'épanouir, je fais équipe avec « Khaofang », un nouveau personnage qui est entré dans ma vie et qui m'a dit comment les séparer. Elle... Nuclear, un nom comme une bombe atomique prête à exploser dès que je la vois. Mon amour, mon premier et peut-être mon dernier, est en couple, et elle ignore que quelqu'un complote pour les séparer. Ne crois pas que tu obtiendras ce que tu veux tant que je serai là. Tant que je serai en vie, tu ne pourras être avec personne d'autre que moi, qui t'aime de tout mon cœur !",
+        "note": "null",
+        "chapters": 24,
+        "date": "2026-09-20"
     }
 ]
