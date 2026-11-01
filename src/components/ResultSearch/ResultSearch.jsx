@@ -1,19 +1,36 @@
-import { useEffect } from 'react'
-
+import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 
-import Data from '../../Data.json'
+// import Data from '../../Data.json'
 import Card from '../Card/Card'
 
 import './ResultSearch.scss'
 
-
-
-
 function ResultSearch({ searchTerm, isOpen, onClose, onBookSelect }) {
+    const [data, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/livres');
+                if (!response.ok) throw new Error('Erreur réseau')
+                const json = await response.json()
+
+                // Si ton API renvoie { "livres": [...] }, utilise json.livres
+                const livres = json.livres || json
+                setData(livres)
+            } catch (error) {
+                console.error('Erreur de chargement des livres:', error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        fetchData()
+    }, [])
 
     // Normalisation des catégories
-    const normalizedBooks = Data.map((book) => ({
+    const normalizedBooks = data.map((book) => ({
         ...book,
         categorie: Array.isArray(book.categorie) ? book.categorie : [book.categorie]
     }))
@@ -22,13 +39,13 @@ function ResultSearch({ searchTerm, isOpen, onClose, onBookSelect }) {
     const filteredBooks = searchTerm
         ? normalizedBooks.filter((book) => {
               const searchLower = searchTerm.toLowerCase().trim()
-              
+
               // Recherche dans le titre
               const titleMatch = book.title.toLowerCase().includes(searchLower)
-              
+
               // Recherche dans l'auteur
               const authorMatch = book.auteur && book.auteur.toLowerCase().includes(searchLower)
-              
+
               return titleMatch || authorMatch
           })
         : []
@@ -99,16 +116,17 @@ function ResultSearch({ searchTerm, isOpen, onClose, onBookSelect }) {
                     <div className="modal-body">
                         {filteredBooks.length > 0 ? (
                             <>
-                                <p className="results-count">{filteredBooks.length} livre(s) trouvé(s)</p>
+                                <p className="results-count">
+                                    {filteredBooks.length} livre(s) trouvé(s)
+                                </p>
                                 <div className="results-grid">
                                     {filteredBooks.map((book, index) => (
-                                        <div 
+                                        <div
                                             key={book.id}
                                             style={{
                                                 animationDelay: `${index * 0.05}s`
                                             }}
-                                            className="result-item"
-                                        >
+                                            className="result-item">
                                             <Card
                                                 Book={book}
                                                 onClick={() => handleCardClick(book)}

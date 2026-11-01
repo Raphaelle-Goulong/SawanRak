@@ -1,10 +1,31 @@
+import { useState, useEffect } from 'react'
 import '../Categories/Categories.scss'
 import Carrousel from '../../Carrousel/Carrousel'
-import Data from '../../../Data.json'
+// import Data from '../../../Data.json'
 import Card from '../../Card/Card'
 
 function Categories({ filterType = 'Categories', onCardClick: onClick }) {
-    const books = Data
+    const [data, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/livres');
+                if (!response.ok) throw new Error('Erreur réseau')
+                const json = await response.json()
+                const livres = json.livres || json
+                setData(livres)
+            } catch (error) {
+                console.error('Erreur de chargement des livres:', error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        fetchData()
+    }, [])
+
+    const books = data
 
     // Grouper les livres par auteur
     // Récupération DYNAMIQUE de toutes les catégories existantes
@@ -40,7 +61,7 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
 
     // Trier tous les livres par titre pour la section "All Books" (avec gestion des titres manquants)
 
-    const sortedBooks = [...Data].sort((a, b) => {
+    const sortedBooks = [...data].sort((a, b) => {
         const titleA = (a.title || '').toString()
         const titleB = (b.title || '').toString()
 

@@ -5,6 +5,7 @@ import { BooksProvider } from '../../contexts/BooksContext';
 
 import Home from '../Home/Home';
 import Book from '../Book/Book';
+import Error from '../Error/Error'; 
 
 import AuroraBackground from '../../components/Aurora/Aurora';
 import Header from '../../components/Header/Header';
@@ -86,6 +87,7 @@ function App() {
                 } 
               />
               <Route path="/book/:id" element={<Book />} />
+              <Route path="*" element={<Error />} /> 
             </Routes>
             <Footer />
           </>

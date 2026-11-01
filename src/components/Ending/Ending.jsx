@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Data from '../../Data.json'
+// import Data from '../../Data.json'
 import '../Ending/Ending.scss'
 import Card from '../../components/Card/Card'
 import Button from '../../components/Button/Button'
@@ -14,6 +14,44 @@ function Ending({ onClose }) {
     const [similarBooks, setSimilarBooks] = useState([])
     const [userRating, setUserRating] = useState(0)
     const [hasRated, setHasRated] = useState(false)
+    const [data, setData] = useState([])
+
+    // Ajoute ce useEffect pour charger les livres
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/livres');
+                if (!response.ok) throw new Error('Erreur réseau')
+                const json = await response.json()
+                const livres = json.livres || json
+                setData(livres)
+            } catch (error) {
+                console.error('Erreur de chargement des livres:', error)
+            }
+        }
+        fetchData()
+    }, [])
+
+    // Et modifie ton useEffect existant pour utiliser "data" au lieu de "Data"
+    useEffect(() => {
+        if (currentBook && currentBook.categorie && data.length > 0) {
+            const firstCategory = Array.isArray(currentBook.categorie)
+                ? currentBook.categorie[0]
+                : currentBook.categorie
+
+            const sameCategoryBooks = data.filter((book) => {
+                // <-- data ici
+                const bookCategories = Array.isArray(book.categorie)
+                    ? book.categorie
+                    : [book.categorie]
+
+                return book.id !== currentBook.id && bookCategories.includes(firstCategory)
+            })
+
+            const shuffled = [...sameCategoryBooks].sort(() => 0.5 - Math.random())
+            setSimilarBooks(shuffled.slice(0, 3))
+        }
+    }, [currentBook, data]) // <-- ajoute "data" dans les dépendances
 
     // Charger la note existante depuis localStorage
     useEffect(() => {

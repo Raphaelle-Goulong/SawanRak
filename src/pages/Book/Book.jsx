@@ -9,8 +9,16 @@ import Loading from '../../components/Loading/Loading'
 
 function Book() {
     const { state } = useLocation()
-    const { loadBookChapters, getBookChapters, isLoadingBook } = useBooksContext()
+    
+    // 1. On ajoute saveChapterCorrection ici
+    const { loadBookChapters, getBookChapters, isLoadingBook, saveChapterCorrection } = useBooksContext()
+    
     const [initialLoading, setInitialLoading] = useState(true)
+    
+    // 2. Nouveaux états pour l'édition
+    const [isEditing, setIsEditing] = useState(false)
+    const [editedContent, setEditedContent] = useState('')
+
     const book = state?.book || {
         title: 'Titre par défaut',
         chapters: 1,
@@ -39,18 +47,15 @@ function Book() {
         return () => clearTimeout(timer)
     }, [])
 
-    //  Remplacer tout le useEffect de chargement par celui-ci
     useEffect(() => {
         const fetchChapters = async () => {
             try {
-                // Vérifier d'abord le cache
                 const cachedChapters = getBookChapters(book.id)
                 if (cachedChapters) {
                     setChapters(cachedChapters)
                     return
                 }
 
-                // Sinon charger via le Context
                 const loadedChapters = await loadBookChapters(book)
                 setChapters(loadedChapters)
             } catch (err) {
@@ -80,6 +85,7 @@ function Book() {
 
     const handleSelectChapter = (index) => {
         setCurrentChapterIndex(index)
+        setIsEditing(false) // On annule l'édition si on change de chapitre
         window.scrollTo(0, 0)
 
         if (book.id) {
@@ -95,7 +101,21 @@ function Book() {
         }
     }
 
-    // Afficher le loading initial pendant 2 secondes
+    // 3. La fonction pour sauvegarder
+    const handleSaveCorrection = async () => {
+        const success = await saveChapterCorrection(book.id, currentChapterIndex, editedContent);
+        if (success) {
+            // Mettre à jour l'affichage local
+            const updatedChapters = [...chapters];
+            updatedChapters[currentChapterIndex].content = editedContent;
+            setChapters(updatedChapters);
+            setIsEditing(false);
+            alert('Texte sauvegardé sur le NAS !');
+        } else {
+            alert('Erreur de sauvegarde');
+        }
+    }
+
     if (initialLoading) {
         return (
             <div className="loading">
@@ -104,7 +124,6 @@ function Book() {
         )
     }
 
-    //  Utiliser le loading du Context
     if (isLoadingBook(book.id))
         return (
             <div className="loading">
@@ -113,90 +132,113 @@ function Book() {
         )
     if (error) return <div className="error">{error}</div>
 
-   return (
-    <section className="Section-Book">
-        <div className="Book">
-
-            {/* Header : titre du livre + progression */}
-            <header className="book-header">
-                <h1 className="book-title">{book.title}</h1>
-                <img
-                                src={book.cover}
-                                alt={`Couverture de ${book.title}`}
-                                className="img-book"
+    return (
+        <section className="Section-Book">
+            <div className="Book">
+                <header className="book-header">
+                    <h1 className="book-title">{book.title}</h1>
+                    <img
+                        src={book.cover}
+                        alt={`Couverture de ${book.title}`}
+                        className="img-book"
+                    />
+                    <div className="book-progress">
+                        <div className="book-progress__bar">
+                            <div
+                                className="book-progress__fill"
+                                style={{ width: `${((currentChapterIndex + 1) / chapters.length) * 100}%` }}
                             />
-                <div className="book-progress">
-                    <div className="book-progress__bar">
-                        <div
-                            className="book-progress__fill"
-                            style={{ width: `${((currentChapterIndex + 1) / chapters.length) * 100}%` }}
-                        />
+                        </div>
+                        <span className="book-progress__label">
+                            {currentChapterIndex + 1} / {chapters.length}
+                        </span>
                     </div>
-                    <span className="book-progress__label">
-                        {currentChapterIndex + 1} / {chapters.length}
-                    </span>
-                </div>
-            </header>
+                </header>
 
-            {/* Sélecteur de chapitre */}
-            <div className="top-book">
-                <ChaptersDropdown
-                    items={chapters.map((chap, i) => ({
-                        id: i,
-                        number: i > 0 && i < chapters.length - 1 ? String(i) : '',
-                        label: chap.title || `Chapitre ${i + 1}`
-                    }))}
-                    selectedId={currentChapterIndex}
-                    onSelect={handleSelectChapter}
-                />
+                <div className="top-book">
+                    <ChaptersDropdown
+                        items={chapters.map((chap, i) => ({
+                            id: i,
+                            number: i > 0 && i < chapters.length - 1 ? String(i) : '',
+                            label: chap.title || `Chapitre ${i + 1}`
+                        }))}
+                        selectedId={currentChapterIndex}
+                        onSelect={handleSelectChapter}
+                    />
+                </div>
+
+                <div className="Text-Book">
+                    <h2 className="chapter-title">
+                        {chapters[currentChapterIndex]?.title || `Chapitre ${currentChapterIndex + 1}`}
+                    </h2>
+                    <div className="chapter-divider" aria-hidden="true" />
+
+                    {/* 4. Le bloc modifié pour l'édition */}
+                    <div className="chapter-content">
+                        {isEditing ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+                                <textarea
+                                    value={editedContent}
+                                    onChange={(e) => setEditedContent(e.target.value)}
+                                    style={{ 
+                                        width: '100%', 
+                                        minHeight: '400px', 
+                                        padding: '1rem',
+                                        fontSize: '1rem',
+                                        lineHeight: '1.6',
+                                        fontFamily: 'inherit'
+                                    }}
+                                />
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <Button onClick={() => setIsEditing(false)}>Annuler</Button>
+                                    <Button onClick={handleSaveCorrection}>💾 Sauvegarder</Button>
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                {chapters[currentChapterIndex]?.content
+                                    .split('\n\n')
+                                    .map((para, i) => <p key={i}>{para}</p>)
+                                }
+                                <div style={{ marginTop: '2rem' }}>
+                                    <Button onClick={() => {
+                                        setEditedContent(chapters[currentChapterIndex]?.content || '');
+                                        setIsEditing(true);
+                                    }}>✏️ Modifier ce chapitre</Button>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
             </div>
 
-            {/* Corps du chapitre */}
-            <div className="Text-Book">
-                <h2 className="chapter-title">
-                    {chapters[currentChapterIndex]?.title || `Chapitre ${currentChapterIndex + 1}`}
-                </h2>
-                <div className="chapter-divider" aria-hidden="true" />
-
-                <div className="chapter-content">
-                    {chapters[currentChapterIndex]?.content
-                        .split('\n\n')
-                        .map((para, i) => <p key={i}>{para}</p>)
-                    }
-                </div>
-            </div>
-        </div>
-
-        {/* Navigation */}
-        <div className="btn-next">
-            <Button
-                onClick={() => handleSelectChapter(Math.max(0, currentChapterIndex - 1))}
-                disabled={currentChapterIndex === 0}
-            >
-                Précédent
-            </Button>
-            <Button onClick={handleNextChapter}>
-                Suivant
-            </Button>
-        </div>
-
-        {/* Modal de fin */}
-        {showEndingModal && (
-            <div
-                className="modal-overlay"
-                onClick={() => setShowEndingModal(false)}
-            >
-                <div
-                    className="modal-content"
-                    onClick={(e) => e.stopPropagation()}
+            <div className="btn-next">
+                <Button
+                    onClick={() => handleSelectChapter(Math.max(0, currentChapterIndex - 1))}
+                    disabled={currentChapterIndex === 0}
                 >
-                    <Ending onClose={() => setShowEndingModal(false)} book={book} />
-                </div>
+                    Précédent
+                </Button>
+                <Button onClick={handleNextChapter}>
+                    Suivant
+                </Button>
             </div>
-        )}
-    </section>
-)
 
+            {showEndingModal && (
+                <div
+                    className="modal-overlay"
+                    onClick={() => setShowEndingModal(false)}
+                >
+                    <div
+                        className="modal-content"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <Ending onClose={() => setShowEndingModal(false)} book={book} />
+                    </div>
+                </div>
+            )}
+        </section>
+    )
 }
 
 export default Book

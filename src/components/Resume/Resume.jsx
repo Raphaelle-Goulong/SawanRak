@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Data from '../../Data.json'
+// import Data from '../../Data.json'
 import '../Resume/Resume.scss'
 import Card from '../../components/Card/Card'
 import StarRating from '../../components/StarRating/StarRating'
@@ -20,6 +20,24 @@ function Resume({ book, onClose }) {
 
     // Contrôle la visibilité du composant (false = démontage)
     const [isVisible, setIsVisible] = useState(true)
+
+    // récup data
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://192.168.1.7:8091/api/livres')
+                if (!response.ok) throw new Error('Erreur réseau')
+                const json = await response.json()
+                const livres = json.livres || json
+                setData(livres)
+            } catch (error) {
+                console.error('Erreur de chargement des livres:', error)
+            }
+        }
+        fetchData()
+    }, [])
 
     // Récupère le dernier chapitre lu depuis le localStorage au montage
     useEffect(() => {
@@ -67,7 +85,6 @@ function Resume({ book, onClose }) {
         <section className="Section-Resume">
             <div className="Top-resume">
                 <div className="resume-book">
-
                     {/* Barre du haut : flèche retour + bouton favoris */}
                     <div className="icon-top-resume">
                         <ArrowLeft className="cross" size={30} onClick={handleClose} />
@@ -76,7 +93,6 @@ function Resume({ book, onClose }) {
 
                     {/* Bloc principal : cover + infos du livre */}
                     <div className="info-resume">
-
                         {/* Couverture du livre */}
                         <div className="Resume-img-book">
                             <img
@@ -136,13 +152,18 @@ function Resume({ book, onClose }) {
                         <div className="text-resume">
                             <h3 id="title-resume">Du Même Auteur</h3>
                             <div className="same-author-books">
-                                {Data.filter((b) => b.auteur === book.auteur && b.id !== book.id)
+                                {data
+                                    .filter((b) => b.auteur === book.auteur && b.id !== book.id)
                                     .slice(0, 50)
                                     .map((b) => (
-                                        <Card key={b.id} Book={b} onClick={() => handleCardClick(b)} />
+                                        <Card
+                                            key={b.id}
+                                            Book={b}
+                                            onClick={() => handleCardClick(b)}
+                                        />
                                     ))}
                                 {/* Message si l'auteur n'a pas d'autres livres */}
-                                {Data.filter((b) => b.auteur === book.auteur && b.id !== book.id)
+                                {data.filter((b) => b.auteur === book.auteur && b.id !== book.id)
                                     .length === 0 && (
                                     <p className="no-books-message">
                                         Aucun autre livre de cet auteur
@@ -151,7 +172,6 @@ function Resume({ book, onClose }) {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>

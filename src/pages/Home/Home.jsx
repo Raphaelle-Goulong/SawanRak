@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-import Data from '../../Data.json'
+// import Data from '../../Data.json'
 import '../Home/Home.scss'
 
 import Card from '../../components/Card/Card'
@@ -17,6 +17,8 @@ function Home({ filterType, onBookSelectFromSearch }) {
     const [lastViewedBooks, setLastViewedBooks] = useState([])
     const [activeTag, setActiveTag] = useState('last-viewed')
     const location = useLocation()
+    const [data, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     // Fonction pour récupérer les derniers livres consultés
     const getLastViewedBooks = () => {
@@ -25,7 +27,7 @@ function Home({ filterType, onBookSelectFromSearch }) {
             if (stored) {
                 const bookIds = JSON.parse(stored)
                 const books = bookIds
-                    .map((id) => Data.find((book) => book.id === id))
+                    .map((id) => data.find((book) => book.id === id))
                     .filter((book) => book !== undefined)
                     .slice(0, 10)
                 return books
@@ -53,7 +55,7 @@ function Home({ filterType, onBookSelectFromSearch }) {
 
     // Récupérer les 3 derniers livres ajoutés
     const getRecentBooks = () => {
-        return [...Data].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
+        return [...data].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
     }
 
     // Fonction pour obtenir 20 livres aléatoires qui changent chaque jour
@@ -77,10 +79,10 @@ function Home({ filterType, onBookSelectFromSearch }) {
         const random = seedRandom(today)
 
         // Mélanger les livres avec le seed du jour
-        const shuffled = [...Data].sort(() => random() - 0.5)
+        const shuffled = [...data].sort(() => random() - 0.5)
 
         // Retourner 5 livres (ou moins si pas assez de livres)
-        return shuffled.slice(0, Math.min(5, Data.length))
+        return shuffled.slice(0, Math.min(5, data.length))
     }
 
     const handleCardClick = (book) => {
@@ -240,10 +242,38 @@ function Home({ filterType, onBookSelectFromSearch }) {
         }
     }
 
-    // Charger les derniers livres consultés au démarrage
+    // Charger les données depuis l'API et les derniers livres consultés au démarrage
     useEffect(() => {
-        const books = getLastViewedBooks()
-        setLastViewedBooks(books)
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/livres');
+                if (!response.ok) throw new Error('Erreur réseau')
+                const json = await response.json()
+
+                // Si ton API renvoie { "livres": [...] }, utilise json.livres
+                // Si ton API renvoie directement [...], utilise json
+                const livres = json.livres || json
+
+                setData(livres)
+
+                // Maintenant qu'on a les données, on peut charger les derniers consultés
+                const stored = localStorage.getItem('lastViewedBooks')
+                if (stored) {
+                    const bookIds = JSON.parse(stored)
+                    const books = bookIds
+                        .map((id) => livres.find((book) => book.id === id))
+                        .filter((book) => book !== undefined)
+                        .slice(0, 10)
+                    setLastViewedBooks(books)
+                }
+            } catch (error) {
+                console.error('Erreur de chargement des livres:', error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchData()
     }, [])
 
     // Gérer l'ouverture de la modale Resume depuis la recherche
@@ -284,6 +314,10 @@ function Home({ filterType, onBookSelectFromSearch }) {
             }, 10)
         }
     }, [showModal])
+
+    if (isLoading) {
+        return <div style={{ padding: '2rem', textAlign: 'center' }}>Chargement des livres...</div>
+    }
 
     return (
         <section className="Section-Home">
