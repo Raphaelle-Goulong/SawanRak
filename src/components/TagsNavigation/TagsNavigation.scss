@@ -1,3 +1,10 @@
+// Variables pour le drapeau lesbien
+$lb-orange: #D52D00;
+$lb-peach: #EF7627;
+$lb-pink: #D162A4;
+$lb-magenta: #B55690;
+$lb-purple: #A30262;
+
 .tags-navigation {
     display: flex;
     align-items: center;
@@ -5,6 +12,7 @@
     margin-bottom: 2rem;
     position: relative;
     margin: 0 20px;
+    
     .tags-container {
         display: flex;
         gap: 0.75rem;
@@ -14,66 +22,94 @@
         flex: 1;
 
         // Masquer la scrollbar
-        scrollbar-width: none; // Firefox
-        -ms-overflow-style: none; // IE/Edge
-
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         &::-webkit-scrollbar {
-            display: none; // Chrome/Safari
+            display: none;
         }
 
         .tag-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 25px;
             padding: 0.6rem 1.5rem;
-            color: #fff;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.95rem;
+            font-family: 'Mulish', sans-serif;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             flex-shrink: 0;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative; // Nécessaire pour l'animation interne
+            overflow: hidden; // Nécessaire pour l'animation interne
 
             &:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-color: rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.2);
+                color: #fff;
                 transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             }
 
+            // ✅ Le tag actif
             &.active {
-                background: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
-                border-color: transparent;
-                box-shadow: 0 2px 3px rgba(23, 30, 54, 0.4);
+                border: 1px solid transparent;
+                
+                // 1️⃣ LA BORDURE DÉGRADÉE
+                background: 
+                    linear-gradient(rgba(20, 15, 25, 0.8), rgba(20, 15, 25, 0.8)) padding-box,
+                    linear-gradient(135deg, $lb-orange, $lb-peach, $lb-pink, $lb-magenta, $lb-purple) border-box;
+                
+                color: #fff;
+                font-weight: 600;
                 transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba($lb-magenta, 0.2);
+
+                // 2️⃣ L'EFFET DE LUMIÈRE QUI GLISSE (Pseudo-élément)
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    border-radius: 25px;
+                    background: linear-gradient(
+                        90deg,
+                        transparent 0%,
+                        rgba($lb-pink, 0.15) 50%,
+                        transparent 100%
+                    );
+                    transform: translateX(-100%);
+                    animation: shimmer 3s infinite ease-in-out;
+                    pointer-events: none;
+                }
 
                 &:hover {
-                    background: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
+                    box-shadow: 0 6px 20px rgba($lb-pink, 0.35);
                 }
             }
 
             &:active {
-                transform: translateY(0);
+                transform: translateY(0) scale(0.96);
             }
         }
     }
 }
 
-// Styles pour le contenu dynamique
+// Animation pour la lumière qui glisse
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+// ... (Le reste de ton code .dynamic-content ne change pas, je le remets ci-dessous pour que tu aies tout)
 .dynamic-content {
     margin-top: 2rem;
     animation: fadeIn 0.4s ease-in-out;
 
     @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .no-books-message {
@@ -90,19 +126,18 @@
         padding: 1rem 0;
     }
 
-    // Styles pour la section Découvertes du Jour
     #Daily-discoveries {
         margin-top: 3rem;
         padding-top: 2rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
-        // background-color: #0000006c;
+        
         .Title-Section {
             margin-bottom: 2rem;
 
             h2 {
                 font-size: 1.8rem;
                 margin-bottom: 0.5rem;
-                background: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
+                background: linear-gradient(135deg, $lb-orange, $lb-peach, $lb-pink, $lb-magenta, $lb-purple);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
@@ -144,13 +179,8 @@
             padding: 25px;
 
             .Title-Section {
-                h2 {
-                    font-size: 1.4rem;
-                }
-
-                .subtitle {
-                    font-size: 0.85rem;
-                }
+                h2 { font-size: 1.4rem; }
+                .subtitle { font-size: 0.85rem; }
             }
 
             .Daily-books-grid {

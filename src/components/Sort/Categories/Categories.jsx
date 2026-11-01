@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import '../Categories/Categories.scss'
 import Carrousel from '../../Carrousel/Carrousel'
-// import Data from '../../../Data.json'
 import Card from '../../Card/Card'
 
 function Categories({ filterType = 'Categories', onCardClick: onClick }) {
@@ -11,7 +10,7 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/livres');
+                const response = await fetch('/api/livres')
                 if (!response.ok) throw new Error('Erreur réseau')
                 const json = await response.json()
                 const livres = json.livres || json
@@ -27,17 +26,16 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
 
     const books = data
 
-    // Grouper les livres par auteur
-    // Récupération DYNAMIQUE de toutes les catégories existantes
+    // Récupération dynamique des catégories
     const allCategories = [
         ...new Set(
             books
                 .flatMap((book) =>
                     Array.isArray(book.categorie) ? book.categorie : [book.categorie]
                 )
-                .filter(Boolean) // Filtre les valeurs nulles/undefined
+                .filter(Boolean)
         )
-    ].sort() // Tri alphabétique
+    ].sort()
 
     // Grouper les livres par auteur
     const booksByAuthor = books.reduce((acc, book) => {
@@ -47,46 +45,35 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
         return acc
     }, {})
 
-    // Trier les auteurs par ordre alphabétique
     const sortedAuthors = Object.keys(booksByAuthor).sort()
 
-    // Trier les livres de chaque auteur par titre (avec gestion des titres manquants)
+    // Trier les livres de chaque auteur par titre (Corrigé)
     sortedAuthors.forEach((author) => {
         booksByAuthor[author].sort((a, b) => {
-            const titleA = a.titre || ''
-            const titleB = b.titre || ''
+            const titleA = (a.title || '').toString().toLowerCase()
+            const titleB = (b.title || '').toString().toLowerCase()
             return titleA.localeCompare(titleB)
         })
     })
 
-    // Trier tous les livres par titre pour la section "All Books" (avec gestion des titres manquants)
-
+    // Trier tous les livres par titre
     const sortedBooks = [...data].sort((a, b) => {
         const titleA = (a.title || '').toString()
         const titleB = (b.title || '').toString()
-
-        // Normalisation pour ignorer la casse, les accents et caractères spéciaux
-        const normalizedA = titleA
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^a-z0-9 ]/g, '')
-
-        const normalizedB = titleB
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^a-z0-9 ]/g, '')
-
+        const normalizedA = titleA.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        const normalizedB = titleB.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         return normalizedA.localeCompare(normalizedB)
     })
 
+    if (isLoading) {
+        return <div className="Categories-Loading">Chargement de la bibliothèque...</div>
+    }
+
     return (
         <div className="Categories-Container">
-            {/* Afficher seulement la section correspondant au filtre */}
             {filterType === 'Categories' && (
                 <div className="Section-Categories">
-                    <h2 className="Title-Categories">Catégories</h2>
+                    <h2 className="Title-Categories">Explorer par Catégories</h2>
                     {allCategories.map((category) => (
                         <div key={category} className="Category-group">
                             <div className="Category-books">
@@ -107,7 +94,7 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
 
             {filterType === 'Author' && (
                 <div className="Section-Author">
-                    <h2>Auteurs</h2>
+                    <h2 className="Title-Section">Nos Auteurs</h2>
                     {sortedAuthors.map((author) => (
                         <div key={author} className="Author-group">
                             <h3 className="Author-name">{author}</h3>
@@ -123,7 +110,7 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
 
             {filterType === 'All' && (
                 <div className="Section-AllBooks">
-                    <h2>Tous les Livres ({books.length})</h2>
+                    <h2 className="Title-Section">Tous les Livres <span>({books.length})</span></h2>
                     <div className="AllBooks-grid">
                         {sortedBooks.map((book) => (
                             <Card key={book.id} Book={book} onClick={() => onClick(book)} />

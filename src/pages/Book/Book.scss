@@ -1,14 +1,19 @@
+// Variables pour le drapeau lesbien
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-magenta: #b55690;
+$lb-purple: #a30262;
+
 // ── Tokens ────────────────────────────────────────────────────────────────────
-$gradient: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
-$text-primary: #ffffff;
-$text-body: #b8bdd4c9;
-$text-muted: rgb(255, 255, 255);
-$border-subtle: rgba(255, 255, 255, 0.07);
-$surface: rgba(255, 255, 255, 0.03);
-$radius: 12px;
+$gradient: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
+$text-primary: #f0e6ee; // Blanc cassé, plus doux
+$text-body: rgba(240, 230, 238, 0.75); // Couleur du texte de lecture
+$text-muted: rgba(255, 255, 255, 0.5);
+$border-subtle: rgba(255, 255, 255, 0.08);
+$radius: 16px;
 $mobile: 640px;
 $desktop: 1024px;
-$background: #0000006c;
 
 // ── Loading overlay ───────────────────────────────────────────────────────────
 .loading {
@@ -19,9 +24,9 @@ $background: #0000006c;
     width: 100vw;
     position: fixed;
     inset: 0;
-    background: rgba(5, 5, 5, 0.92);
+    background: rgba(10, 6, 18, 0.95);
     z-index: 1000;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -30,18 +35,16 @@ $background: #0000006c;
     flex-direction: column;
     align-items: center;
     min-height: 100dvh;
-    color: $text-body;
-    padding-bottom: 3rem;
+    padding-bottom: 4rem;
     padding: 20px;
-    background-color: $background;
+    position: relative;
 }
 
 // ── Book container ────────────────────────────────────────────────────────────
 .Book {
     width: 100%;
-    max-width: 680px;
+    max-width: 720px; // Un peu plus large pour la lecture
     z-index: 300;
-    //   padding: 0 1rem;
 
     @media (min-width: $desktop) {
         padding: 0 2rem;
@@ -54,34 +57,43 @@ $background: #0000006c;
     align-items: center;
     justify-content: space-between;
     padding: 20px 0 16px;
-    border-bottom: 0.5px solid $border-subtle;
-    margin-bottom: 20px;
+    border-bottom: 1px solid $border-subtle;
+    margin-bottom: 30px;
     flex-wrap: wrap;
+    gap: 15px;
+
     .book-title {
         font-family: 'Marcellus', serif;
-        font-size: clamp(1.5rem, 3vw, 1.25rem);
+        font-size: clamp(1.4rem, 3vw, 1.8rem);
         color: $text-primary;
         letter-spacing: 0.04em;
-        opacity: 0.8;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 60%;
-        margin: 50px 0;
+        margin: 0;
+        text-shadow: 0 4px 15px rgba($lb-magenta, 0.3);
     }
+
     .img-book {
-        height: 150px;
+        height: 120px;
         border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     }
+
     .book-progress {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
         flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
 
         &__bar {
-            width: 70px;
-            height: 3px;
+            width: 80px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
             overflow: hidden;
@@ -92,89 +104,124 @@ $background: #0000006c;
             background: $gradient;
             border-radius: 2px;
             transition: width 0.4s ease;
+            box-shadow: 0 0 10px rgba($lb-pink, 0.5); // Petite lueur
         }
 
         &__label {
-            font-size: 11px;
-            color: $text-muted;
+            font-size: 0.8rem;
+            color: $text-primary;
             font-family: 'Mulish', sans-serif;
+            font-weight: 600;
         }
     }
 }
 
 // ── Dropdown row ──────────────────────────────────────────────────────────────
 .top-book {
-    margin-bottom: 32px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
 }
 
 // ── Contenu du chapitre ───────────────────────────────────────────────────────
 .Text-Book {
-    max-width: 680px;
+    max-width: 680px; // Largeur idéale pour la lecture
     margin: 0 auto;
     padding: 0;
 
     .chapter-title {
         font-family: 'Marcellus', serif;
-        font-size: clamp(1.4rem, 4vw, 2rem);
-        color: $text-muted;
-        line-height: 1.2;
-        margin-bottom: 6px;
-        letter-spacing: 0.14em;
-        margin: 80px 0 0 0;
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        color: $text-primary;
+        line-height: 1.3;
+        letter-spacing: 0.05em;
+        margin: 60px 0 0 0;
+        text-align: center;
     }
 
     // Séparateur décoratif sous le titre
     .chapter-divider {
-        width: 36px;
-        height: 2px;
+        width: 60px;
+        height: 3px;
         background: $gradient;
         border-radius: 2px;
-        margin: 18px 0 50px 0;
+        margin: 20px auto 50px auto; // Centré
     }
 
     // Corps du texte
-    p {
-        font-family: 'Mulish', sans-serif;
-        font-size: clamp(1rem, 2.5vw, 1.1rem);
-        line-height: 1.9;
+    .chapter-content {
+        // ✅ NOUVELLE POLICE DE LECTURE & ALIGNEMENT
+        font-family: 'Lora', serif; // Police littéraire
+        font-size: clamp(1.05rem, 2.5vw, 1.15rem); // Un peu plus grand
+        line-height: 1.9; // Interligne très aéré
         color: $text-body;
-        text-align: justify;
-        text-indent: 1.5em;
-        margin-bottom: 1.1em;
-        text-shadow: 1px 1px 5px rgb(0, 0, 0);
+        text-align: left; // ✅ Aligné à gauche (plus facile à lire)
+        letter-spacing: 0.01em;
 
-        &:first-of-type {
-            text-indent: 0;
-        } // Pas d'alinéa en début de chapitre
-    }
+        p {
+            margin-bottom: 1.5em; // Espace entre les paragraphes
+            text-indent: 0; // On enlève l'alinéa, on utilise l'espacement
+        }
 
-    // Citation / extrait mis en valeur
-    blockquote {
-        border-left: 2px solid rgba(240, 200, 200, 0.3);
-        margin: 1.8rem 0;
-        padding: 0 0 0 18px;
-        font-style: italic;
-        color: rgba(191, 191, 214, 0.55);
-        font-size: 0.95rem;
-        line-height: 1.65;
-        border-radius: 0;
+        // On met en valeur la première lettre du chapitre (Lettrine)
+        p:first-of-type::first-letter {
+            font-family: 'Marcellus', serif;
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 10px;
+            margin-top: 5px;
+            color: $lb-pink;
+            text-shadow: 0 0 10px rgba($lb-pink, 0.3);
+        }
+
+        blockquote {
+            border-left: 3px solid rgba($lb-pink, 0.5);
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.05rem;
+        }
+
+        // ── Mode Édition (Textarea) ──
+        textarea {
+            background: rgba(15, 10, 20, 0.8) !important;
+            border: 1px solid rgba($lb-pink, 0.3) !important;
+            border-radius: 12px !important;
+            color: $text-primary !important;
+            font-family: 'Lora', serif !important;
+            line-height: 1.8 !important;
+            padding: 20px !important;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+            &:focus {
+                border-color: $lb-pink !important;
+                box-shadow: 0 0 15px rgba($lb-pink, 0.2) !important;
+            }
+        }
     }
 }
 
 // ── Navigation bas de page ────────────────────────────────────────────────────
 .btn-next {
     display: flex;
-    gap: 10px;
-    margin: 40px 0 20px 0;
-    @media (min-width: 1024px) {
-        display: flex;
-        justify-content: center;
-        gap: 100px;
-        width: 100%;
+    gap: 15px;
+    margin: 50px auto;
+    max-width: 680px;
+    width: 100%;
+
+    @media (min-width: $desktop) {
+        justify-content: space-between;
     }
+
     .Btn {
-        width: 9rem;
-        height: 2.5rem;
+        flex: 1;
+        max-width: 200px;
+        height: 3rem;
 
         .btn {
             width: 100%;
@@ -182,16 +229,8 @@ $background: #0000006c;
             padding: 0.5rem 1rem;
 
             strong {
-                font-size: 0.8rem;
-                letter-spacing: 3px;
-            }
-
-            #glow {
-                width: 8rem;
-
-                .circle {
-                    height: 25px;
-                }
+                font-size: 0.9rem;
+                letter-spacing: 2px;
             }
         }
     }
@@ -205,9 +244,9 @@ $background: #0000006c;
     justify-content: center;
     align-items: flex-end;
     z-index: 2000;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    animation: fade-in 0.2s ease;
+    background: rgba(5, 3, 8, 0.7);
+    backdrop-filter: blur(8px);
+    animation: fade-in 0.3s ease;
 
     @media (min-width: $mobile) {
         align-items: center;
@@ -216,19 +255,6 @@ $background: #0000006c;
 
 // ── Animations ────────────────────────────────────────────────────────────────
 @keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slide-up {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0);
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

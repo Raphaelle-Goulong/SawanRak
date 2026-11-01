@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-// import Data from '../../Data.json'
 import '../Home/Home.scss'
 
 import Card from '../../components/Card/Card'
@@ -125,29 +124,33 @@ function Home({ filterType, onBookSelectFromSearch }) {
 
     // Déterminer le contenu à afficher selon le tag actif
     const renderContent = () => {
-        if (activeTag === 'last-viewed') {
+                if (activeTag === 'last-viewed') {
             return (
                 <section id="Last-book">
-                    <div className="Last-Title-Section">
+                    {/* Le titre de la section */}
+                    <div className="Title-Section">
                         <h2>Dernier Livre Consulté</h2>
                     </div>
+
+                    {/* Le conteneur de la carte */}
                     <div className="Last-New-book-card">
                         {lastViewedBooks.length > 0 ? (
                             lastViewedBooks
                                 .slice(0, 1)
                                 .map((book) => (
-                                    <Card
-                                        key={`last-viewed-${book.id}`}
-                                        Book={book}
-                                        onClick={() => handleCardClick(book)}
-                                    />
+                                    <div key={`last-viewed-${book.id}`} className="last-book-wrapper">
+                                        <Card
+                                            Book={book}
+                                            onClick={() => handleCardClick(book)}
+                                        />
+                                    </div>
                                 ))
                         ) : (
                             <p className="no-books-message">Aucun livre consulté récemment</p>
                         )}
                     </div>
 
-                    {/* Section Découvertes du Jour */}
+                    {/* Section Découvertes du Jour - On garde ton code tel quel */}
                     <section id="Daily-discoveries">
                         <div className="Title-Section">
                             <h2>✨ Découvertes du Jour</h2>

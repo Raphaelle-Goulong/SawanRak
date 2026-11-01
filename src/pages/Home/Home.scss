@@ -1,60 +1,241 @@
-// écriture
+// Variables pour le drapeau lesbien
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-magenta: #b55690;
+$lb-purple: #a30262;
 
-// .marcellus-regular {
-//   font-family: "Marcellus", serif;
-//   font-weight: 400;
-//   font-style: normal;
-// }
-// .mulish-<uniquifier> {
-//   font-family: "Mulish", sans-serif;
-//   font-optical-sizing: auto;
-//   font-weight: <weight>;
-//   font-style: normal;
-// }
 .Section-Home {
     height: auto;
     color: white;
-    background-color: #0000006c;
+    background-color: transparent; // On laisse le fond animé global agir
+
+    // ── 1. DERNIER LIVRE CONSULTÉ (MODERNISÉ) ──
     #Last-book {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        border-bottom: solid 1px rgb(80, 79, 79);
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 30px;
+        box-sizing: border-box;
+        
+        // Le même conteneur en verre dépoli que les autres sections
+        background: rgba(15, 10, 20, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        // Bordure dégradée
+        border: 1px solid transparent;
+        background-image: 
+            linear-gradient(rgba(15, 10, 20, 0.6), rgba(15, 10, 20, 0.6)), 
+            linear-gradient(135deg, rgba($lb-orange, 0.3), rgba($lb-pink, 0.3), rgba($lb-purple, 0.3));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
-        .Last-Title-Section {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0px;
-            font-family: 'Marcellus', serif;
-            font-size: 1.3rem;
-        }
-        .Last-New-book-card {
-            display: flex;
-            margin: 40px 0px;
-            justify-content: space-around;
-        }
-    }
-    #New-book {
-        display: flex;
-        flex-direction: column;
         .Title-Section {
             display: flex;
-            justify-content: center;
-            margin: 20px 0px;
-            font-family: 'Marcellus', serif;
-            font-size: large;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            
+            h2 {
+                font-family: 'Playfair Display', serif; // ou 'Marcellus'
+                font-size: 1.8rem;
+                margin: 0;
+                // Le même dégradé de texte
+                background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
         }
-        .New-book-card {
+
+        .Last-New-book-card {
             display: flex;
-            margin: 40px 0px;
-            justify-content: space-around;
+            justify-content: center;
+            width: 100%;
+
+            // L'écrin de la carte
+            .last-book-wrapper {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                border-radius: 20px;
+                
+                // Un fond un peu plus sombre pour faire ressortir la carte
+                background: rgba(10, 5, 15, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                
+                // Animation de flottaison au survol
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-5px) scale(1.02);
+                    box-shadow: 0 15px 30px rgba($lb-magenta, 0.2);
+                    border-color: rgba($lb-pink, 0.3);
+                }
+            }
         }
     }
+
+    // ── 2. RÉCENTS AJOUTS ──
+    #New-book {
+        width: 100%;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 30px;
+        box-sizing: border-box;
+        
+        background: rgba(15, 10, 20, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        border: 1px solid transparent;
+        background-image: 
+            linear-gradient(rgba(15, 10, 20, 0.6), rgba(15, 10, 20, 0.6)), 
+            linear-gradient(135deg, rgba($lb-orange, 0.3), rgba($lb-pink, 0.3), rgba($lb-purple, 0.3));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+        .Title-Section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            
+            h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                margin: 0;
+                background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+        }
+
+        .New-book-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 160px); 
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    // ── 3. DÉCOUVERTES DU JOUR ──
+    #Daily-discoveries {
+        width: 100%;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 30px;
+        box-sizing: border-box;
+        
+        background: rgba(15, 10, 20, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        border: 1px solid transparent;
+        background-image: 
+            linear-gradient(rgba(15, 10, 20, 0.6), rgba(15, 10, 20, 0.6)), 
+            linear-gradient(135deg, rgba($lb-orange, 0.3), rgba($lb-pink, 0.3), rgba($lb-purple, 0.3));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+        .Title-Section {
+            margin-bottom: 30px;
+            
+            h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                color: rgba(255, 255, 255, 0.5);
+                font-family: 'Outfit', sans-serif; // ou 'Mulish'
+                font-size: 0.95rem;
+                font-style: italic;
+            }
+        }
+
+        .Daily-books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 320px); 
+            gap: 24px; 
+            width: 100%;
+            justify-content: center; 
+        }
+    }
+
+    // ── Autres styles que tu avais ──
     .Results-grid {
         gap: 5px;
         display: flex;
         flex-direction: column;
+    }
+}
+
+// ── Responsive Mobile ──
+@media (max-width: 769px) {
+    .Section-Home {
+        #Last-book {
+            padding: 20px 15px;
+            margin: 20px auto;
+            border-radius: 16px;
+            
+            .Title-Section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .Last-New-book-card .last-book-wrapper {
+                padding: 15px;
+                border-radius: 16px;
+            }
+        }
+
+        #New-book {
+            padding: 20px 15px;
+            margin: 20px auto;
+            border-radius: 16px;
+
+            .Title-Section h2 {
+                font-size: 1.5rem;
+            }
+
+            .New-book-card {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        #Daily-discoveries {
+            padding: 20px 15px;
+            margin: 20px auto;
+            border-radius: 16px;
+
+            .Title-Section {
+                h2 { font-size: 1.5rem; }
+            }
+
+            .Daily-books-grid {
+                grid-template-columns: 1fr; 
+                gap: 15px;
+            }
+        }
     }
 }

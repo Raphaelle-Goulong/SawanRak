@@ -1,3 +1,10 @@
+// Variables pour le drapeau lesbien
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-magenta: #b55690;
+$lb-purple: #a30262;
+
 .Search {
     display: flex;
     align-items: center;
@@ -5,44 +12,90 @@
     padding: 20px;
     width: 100%;
     position: relative;
-    background-image: url('../../img/fond.png');
-    background-size: cover;
-    background-position: center;
+    background: transparent;
+    overflow: hidden;
+
+    // ✅ Un halo de lumière derrière le contenu
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        height: 80vw;
+        max-width: 800px;
+        max-height: 800px;
+        background: radial-gradient(circle, rgba($lb-purple, 0.15) 0%, transparent 60%);
+        z-index: 1;
+        pointer-events: none;
+        filter: blur(40px);
+    }
+
     .container-input {
         position: relative;
-        margin-top: 180px;
+        margin-top: 150px;
         display: flex;
         align-items: center;
         flex-direction: column;
         width: 100%;
         z-index: 20;
     }
-    .container-input svg {
-        position: absolute;
-        bottom: 13px;
-        right: 60px;
-        transform: translate(0, -50%);
-    }
 
     .text-section {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
         width: 100%;
-        color: white;
         z-index: 20;
+        margin-bottom: 30px;
+
+        // ✅ Le halo derrière le titre
+        .title-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 120%;
+                height: 120%;
+                background: linear-gradient(90deg, $lb-orange, $lb-pink, $lb-purple);
+                filter: blur(25px);
+                opacity: 0.2;
+                z-index: -1;
+                border-radius: 50%;
+            }
+        }
+
         h1 {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-family: 'Marcellus', serif;
-            text-shadow: #1b1b1bc2 1px 0 10px;
-            margin: 2px 0;
+            color: #f0e6ee;
+            text-shadow: 0 4px 15px rgba($lb-magenta, 0.4);
+            margin: 0;
+            letter-spacing: 2px;
+            animation: floatTitle 6s ease-in-out infinite;
         }
 
         p {
             font-size: 1.2rem;
             font-family: 'Mulish', sans-serif;
-            // background-color: orange;
-            text-shadow: 1px 1px 2px rgb(112, 99, 87);
-            margin-bottom: 10px;
+            color: rgba(240, 230, 238, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            margin: 0;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            
+            // ✅ L'animation est bien ici
+            animation: fadeInText 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px); // On part un peu plus bas
         }
     }
 
@@ -50,34 +103,153 @@
         display: flex;
         justify-content: center;
         width: 100%;
-        padding: 20px 0;
-        color: white;
-        .input {
-            width: 240px;
-            padding: 10px 0px 10px 40px;
-            border-radius: 10px;
-            border: solid 0px transparent;
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 280px;
+        height: 52px;
+        border-radius: 26px;
+
+        background: rgba(15, 10, 20, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+
+        transition:
+            width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+            border-color 0.3s ease,
+            box-shadow 0.3s ease,
+            background 0.3s ease;
+
+        &:focus-within {
+            width: 360px;
+            border-color: transparent;
+            background:
+                linear-gradient(rgba(20, 15, 25, 0.85), rgba(20, 15, 25, 0.85)) padding-box,
+                linear-gradient(135deg, $lb-orange, $lb-peach, $lb-pink, $lb-magenta, $lb-purple)
+                    border-box;
+
             box-shadow:
-                rgba(150, 96, 35, 0.25) 0px 13px 27px -5px,
-                rgba(126, 125, 125, 0.3) 0px 8px 16px -8px;
-            transition: all 0.2s ease-in-out;
-            outline: none;
-            opacity: 0.8;
-            font-family: 'Mulish', sans-serif;
-            background: #08090ade;
-            color: white;
+                0 0 20px rgba($lb-pink, 0.3),
+                0 15px 35px rgba($lb-purple, 0.2);
+
+            .search-icon {
+                color: $lb-pink;
+            }
+        }
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 20px;
+        color: rgba(255, 255, 255, 0.4);
+        transition: color 0.3s ease;
+        pointer-events: none;
+    }
+
+    .input {
+        width: 100%;
+        height: 100%;
+        padding: 0 20px 0 55px;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-family: 'Mulish', sans-serif;
+        font-size: 1rem;
+        color: #f0e6ee;
+        border-radius: 26px;
+        z-index: 2;
+
+        &::placeholder {
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.4);
+            transition: color 0.3s ease;
         }
 
-        .input:focus {
-            opacity: 1;
-            width: 300px;
-            background: linear-gradient(135deg, #5befa0b9, #00c3ffc2, #946fe9bb);
+        &:focus::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    .clear-btn {
+        position: absolute;
+        right: 18px;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+        z-index: 2;
+
+        &:hover {
+            color: $lb-pink;
+            background: rgba(255, 255, 255, 0.1);
+        }
+    }
+}
+
+// ── ANIMATIONS (À la racine du fichier) ──
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+// ✅ J'ai renommé en "fadeInText" pour éviter le conflit avec d'autres fichiers
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ── Responsive Mobile ──
+@media (max-width: 768px) {
+    .Search {
+        padding: 15px;
+
+        &::before {
+            width: 100vw;
+            height: 100vw;
         }
 
-        input::placeholder {
-            font-weight: bold;
-            color: white;
-            font-family: 'Mulish', sans-serif;
+        .container-input {
+            margin-top: 100px;
+        }
+
+        .text-section h1 {
+            font-size: 2.6rem;
+        }
+
+        .text-section p {
+            font-size: 1rem;
+            padding: 0 10px;
+        }
+
+        .input-wrapper {
+            width: 90%;
+            height: 48px;
+
+            &:focus-within {
+                width: 100%;
+            }
+        }
+
+        .input {
+            font-size: 16px; // Empêche le zoom iOS
         }
     }
 }

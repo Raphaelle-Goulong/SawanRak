@@ -7,7 +7,8 @@ import Home from '../Home/Home';
 import Book from '../Book/Book';
 import Error from '../Error/Error'; 
 
-import AuroraBackground from '../../components/Aurora/Aurora';
+// import AuroraBackground from '../../components/background/Aurora/Aurora';
+import AmbientBackground from '../../components/background/AmbientBackground/AmbientBackground';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import LoadingModal from '../../components/LoadingModal/LoadingModal';
@@ -50,11 +51,13 @@ function App() {
 
   return (
     <>
-    <AuroraBackground />
+    {/* <AuroraBackground /> */}
+    {/* <AmbientBackground /> */}
     <div className="grain-overlay"></div>
     <div className="vignette"></div>
     <BooksProvider> 
       <BrowserRouter>
+      <AmbientBackground />
         {/* Modale de chargement */}
         {isLoading && <LoadingModal onComplete={handleLoadingComplete} />}
         

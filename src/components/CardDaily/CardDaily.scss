@@ -1,50 +1,140 @@
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-magenta: #b55690;
+$lb-purple: #a30262;
+
 .cardDaily-section {
-    // padding: 0 10px; 
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 100%; // S'assure que la section ne dépasse pas
+    min-width: 0; // ✅ CRUCIAL pour que la carte se rétrécisse dans la grille
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+
     .cardDaily-card {
         width: 100%; 
-        height: 160px;
-        background-color: rgba(12, 146, 146, 0.336);
+        height: 100%;
+        min-height: 160px;
         display: flex;
         align-items: center;
-        border-radius: 5px;
+        border-radius: 16px;
+        padding: 10px;
+        
+        
+        background: rgba(15, 10, 20, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba(20, 15, 25, 0.8);
+            border-color: rgba($lb-pink, 0.4);
+            box-shadow: 0 8px 25px rgba($lb-magenta, 0.15);
+        }
 
         .cardDaily-img {
+            flex-shrink: 0;
             img {
                 width: 100px;
                 height: 140px;
-                border-radius: 7px;
-                padding: 5px;
+                border-radius: 10px;
+                object-fit: cover;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             }
         }
 
         .cardDaily-resume {
-            // padding: 0 9px;
-            min-width: 0;
-            overflow: hidden; 
+            flex: 1;
+            min-width: 0; // ✅ CRUCIAL : permet à ce bloc de rétrécir
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: center;
 
             h2 {
                 font-family: 'Marcellus', serif;
                 font-size: 1.2rem;
-                text-overflow: ellipsis;
+                color: #f0e6ee;
+                margin: 0 0 4px 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; // ✅ Coupe le texte trop long avec "..."
             }
 
             h3 {
                 font-family: 'Mulish', sans-serif;
-                font-size: 1rem;
-                margin-top: 5px;
-
-                color: rgb(0, 255, 191);
+                font-size: 0.95rem;
+                margin: 0 0 10px 0;
+                color: $lb-pink;
+                font-weight: 600;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; // ✅ Coupe le texte trop long avec "..."
             }
 
             .cardDaily-text {
                 width: 100%;
-                height: 80px;
+                flex: 1;
                 overflow-y: auto;
+                padding-right: 5px;
+                
+                &::-webkit-scrollbar { width: 4px; }
+                &::-webkit-scrollbar-track { background: transparent; }
+                &::-webkit-scrollbar-thumb { 
+                    background: rgba(255, 255, 255, 0.1); 
+                    border-radius: 4px; 
+                }
                 
                 p {
-                    margin-top: 5px;
-                    font-size: 0.9rem;
-                    overflow-y: auto;
+                    margin: 0;
+                    font-size: 0.85rem;
+                    line-height: 1.4;
+                    color: rgba(255, 255, 255, 0.6);
+                    
+                    // ✅ TRONCATURE DU TEXTE
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    line-clamp: 3; 
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    // Optionnel : coupe les mots trop longs
+                    word-break: break-word; 
+                }
+            }
+        }
+    }
+}
+
+// Responsive pour mobile
+@media (max-width: 768px) {
+    .cardDaily-section {
+        .cardDaily-card {
+            height: auto;
+            min-height: 140px;
+            padding: 8px;
+
+            .cardDaily-img img {
+                width: 80px;
+                height: 110px;
+            }
+
+            .cardDaily-resume {
+                padding: 0 10px;
+                
+                h2 { font-size: 1rem; }
+                h3 { font-size: 0.85rem; margin-bottom: 6px; }
+                
+                .cardDaily-text p {
+                    font-size: 0.8rem;
+                    -webkit-line-clamp: 2; 
+                    line-clamp: 2; 
                 }
             }
         }

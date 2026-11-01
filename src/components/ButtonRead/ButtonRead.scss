@@ -1,75 +1,113 @@
+// Variables pour le drapeau lesbien
+$lb-orange: #D52D00;
+$lb-peach: #EF7627;
+$lb-pink: #D162A4;
+$lb-magenta: #B55690;
+$lb-purple: #A30262;
+
 .rainbow-hover {
     font-family: 'Mulish', sans-serif;
-    height: 40px;
+    height: 44px;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     font-size: 13px;
-    font-weight: 700;
-    color: #ff7576;
-    background-color: #034547;
-    border: none;
-    outline: none;
+    font-weight: 800; // Un peu plus gras pour la lisibilité
+    letter-spacing: 0.5px;
+    
+    // Fond un peu plus lumineux (effet verre dépoli sur fond sombre)
+    background: rgba(20, 10, 25, 0.7);
+    backdrop-filter: blur(8px); // Floute ce qu'il y a derrière pour laisser passer la lumière
+    
+    // Bordure lumineuse (le dégradé du drapeau)
+    border: 1px solid transparent;
+    background-image: linear-gradient(rgba(20, 10, 25, 0.8), rgba(20, 10, 25, 0.8)), 
+                      linear-gradient(135deg, $lb-orange, $lb-pink, $lb-magenta, $lb-purple);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    
     cursor: pointer;
-    padding: 0 20px;
+    padding: 0 24px;
     margin: 5px;
     position: relative;
-    line-height: 24px;
     border-radius: 25px;
-    box-shadow: 0px 1px 2px #056e72, 0px 4px 16px #012e30;
-    transform-style: preserve-3d;
-    transform: scale(var(--s, 1)) perspective(600px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-    perspective: 600px;
-    transition: transform 0.1s;
-    overflow: hidden; // ← important pour cacher le faisceau hors du bouton
+    
+    // Lueur de base
+    box-shadow: 0px 0px 10px rgba($lb-magenta, 0.2), 
+                inset 0px 0px 10px rgba($lb-pink, 0.1);
+    
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+    overflow: hidden;
 
-    // ✅ Le faisceau lumineux
-    &::after {
+    // ✅ Nouvelle animation : Lueur qui pulse doucement
+    &::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: -100%;
-        width: 60px;
-        height: 100%;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.281),
-            transparent
-        );
-        transform: skewX(-20deg); // légère inclinaison pour effet dynamique
-        animation: beam 2.5s infinite ease-in-out;
+        inset: -2px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-magenta, $lb-purple);
+        z-index: -1;
+        filter: blur(10px);
+        opacity: 0.3;
+        animation: pulse-glow 3s infinite alternate ease-in-out;
+    }
+
+    // Effet de survol : on augmente la lumière
+    &:hover {
+        transform: translateY(-2px); // Le bouton se soulève légèrement
+        box-shadow: 0px 0px 20px rgba($lb-pink, 0.5), 
+                    inset 0px 0px 15px rgba($lb-pink, 0.2);
+        
+        &::before {
+            opacity: 0.6;
+            filter: blur(15px);
+        }
+    }
+
+    // Effet au clic
+    &:active {
+        transform: translateY(1px) scale(0.97);
+        box-shadow: 0px 0px 8px rgba($lb-magenta, 0.4);
     }
 }
 
+// Le texte avec le dégradé animé
 .sp {
     background: linear-gradient(
         90deg,
-        #866ee7,
-        #ea60da,
-        #ed8f57,
-        #fbd41d,
-        #2cca91
+        $lb-orange,
+        $lb-peach,
+        $lb-pink,
+        $lb-magenta,
+        $lb-purple,
+        $lb-pink,
+        $lb-orange
     );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: block;
     position: relative;
-    z-index: 1; // ← texte au dessus du faisceau
+    z-index: 1;
+    animation: text-shimmer 4s linear infinite;
 }
 
-.rainbow-hover:active {
-    transition: 0.3s;
-    transform: scale(0.93);
-}
-
-@keyframes beam {
-    0% {
-        left: -100%;
+// Les animations
+@keyframes text-shimmer {
+    to {
+        background-position: 200% center;
     }
-    50% {
-        left: 150%;
+}
+
+// Animation de la lueur qui respire
+@keyframes pulse-glow {
+    0% {
+        opacity: 0.2;
+        transform: scale(1);
     }
     100% {
-        left: 150%;
+        opacity: 0.5;
+        transform: scale(1.05);
     }
 }

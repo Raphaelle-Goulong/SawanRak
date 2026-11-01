@@ -1,13 +1,15 @@
-import '../ButtonRead/ButtonRead.scss'
+import '../ButtonRead/ButtonRead.scss';
 
-function ButtonRead({text , children}) {
+function ButtonRead({ text, children, onClick, type = "button" }) {
     return (
-        <>
-            <button data-label="Register" className="rainbow-hover">
-                <span className="sp">{text || children}</span>
-            </button>
-        </>
-    )
+        <button 
+            type={type} 
+            className="rainbow-hover" 
+            onClick={onClick}
+        >
+            <span className="sp">{text || children}</span>
+        </button>
+    );
 }
 
-export default ButtonRead
+export default ButtonRead;

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 
-// import Data from '../../Data.json'
 import Card from '../Card/Card'
 
 import './ResultSearch.scss'

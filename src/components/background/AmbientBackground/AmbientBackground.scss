@@ -1,0 +1,238 @@
+$c-red: #D52D00;
+$c-orange: #EF7627;
+$c-peach: #FF9A56;
+$c-pink: #D162A4;
+$c-mauve: #B55690;
+$c-magenta: #A30262;
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  background: #08050c;
+  contain: paint;
+
+  // ── Réglages par format (ordinateur par défaut) ──
+  --intensity-base: 1;
+  --orb-main: clamp(520px, 150vmin, 1100px);
+  --orb-soft: clamp(380px, 105vmin, 800px);
+  --orb-edge: clamp(360px, 60vmin, 720px);
+  --main-x: 90%;   // orbe principal : en bas à droite
+  --main-y: 100%;
+  --soft-x: 6%;    // orbe secondaire : en haut à gauche
+  --soft-y: 0%;
+  --edge-x: 100%;  // 3e orbe : sur le bord, à mi-hauteur
+  --edge-y: 38%;
+  --motion: 0.8;          // multiplicateur de durée : plus petit = plus rapide
+  --scroll-turn: 80deg;   // rotation des couleurs sur toute la page
+  --ripple-period: calc(12s * var(--motion));
+
+  // Tablette
+  @media (min-width: 640px) and (max-width: 1023px) {
+    --intensity-base: 0.9;
+    --orb-main: clamp(480px, 100vmin, 800px);
+    --orb-soft: clamp(340px, 70vmin, 560px);
+    --orb-edge: clamp(300px, 60vmin, 520px);
+    --main-x: 95%;
+    --soft-x: 4%;
+    --edge-y: 42%;
+    --motion: 0.7;
+    --scroll-turn: 100deg;
+  }
+
+  // Mobile en portrait + téléphones en paysage
+  @media (max-width: 639px), (max-height: 500px) {
+    --intensity-base: 1;
+    --orb-main: clamp(460px, 135vmin, 700px);
+    --orb-soft: clamp(340px, 100vmin, 520px);
+    --orb-edge: clamp(280px, 80vmin, 420px);
+    --main-x: 98%;
+    --soft-x: 0%;
+    --edge-x: 0%;
+    --edge-y: 55%;
+    --motion: 0.5;
+    --scroll-turn: 160deg;
+  }
+
+  // Intensité globale (le mode lecture la divise par deux) + progression de lecture
+  --ambient-intensity: var(--intensity-base);
+  --scroll: 0;
+
+  &.is-reading {
+    --ambient-intensity: calc(var(--intensity-base) * 0.5);
+
+    .ambient__orb,
+    .ambient__core,
+    .ambient__ring,
+    .ambient__ripple {
+      animation-play-state: paused;
+    }
+
+    // Les ondes disparaissent en fondu pendant la lecture
+    .ambient__ripples {
+      opacity: 0;
+    }
+  }
+
+  // ── Orbes ──
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    rotate: calc(var(--scroll) * var(--scroll-turn));
+    transition: rotate 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+    animation: ambient-breathe calc(42s * var(--motion)) ease-in-out infinite;
+
+    &--main {
+      width: var(--orb-main);
+      height: var(--orb-main);
+      left: calc(var(--main-x) - var(--orb-main) / 2);
+      top: calc(var(--main-y) - var(--orb-main) / 2);
+    }
+
+    &--soft {
+      width: var(--orb-soft);
+      height: var(--orb-soft);
+      left: calc(var(--soft-x) - var(--orb-soft) / 2);
+      top: calc(var(--soft-y) - var(--orb-soft) / 2);
+      animation-duration: calc(58s * var(--motion));
+      animation-direction: reverse;
+    }
+
+    &--edge {
+      width: var(--orb-edge);
+      height: var(--orb-edge);
+      left: calc(var(--edge-x) - var(--orb-edge) / 2);
+      top: calc(var(--edge-y) - var(--orb-edge) / 2);
+      animation-duration: calc(34s * var(--motion));
+    }
+  }
+
+  // Cœur de l'orbe : dégradé conique dont les bords s'effacent
+  &__core {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      $c-red, $c-orange, $c-peach, $c-pink, $c-mauve, $c-magenta, $c-red
+    );
+    -webkit-mask-image: radial-gradient(
+      circle closest-side,
+      #000 0%,
+      rgba(0, 0, 0, 0.55) 35%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle closest-side,
+      #000 0%,
+      rgba(0, 0, 0, 0.55) 35%,
+      transparent 100%
+    );
+    opacity: calc(var(--ambient-intensity) * 0.24);
+    transition: opacity 1.2s ease;
+    animation: ambient-spin calc(90s * var(--motion)) linear infinite;
+
+    &--alt {
+      background: conic-gradient(
+        from 140deg,
+        $c-pink, $c-mauve, $c-magenta, $c-red, $c-orange, $c-peach, $c-pink
+      );
+      opacity: calc(var(--ambient-intensity) * 0.17);
+      animation-duration: calc(120s * var(--motion));
+      animation-direction: reverse;
+    }
+  }
+
+  // Anneau fin, écho de l'anneau de la page de chargement
+  &__ring {
+    position: absolute;
+    inset: 10%;
+    width: 80%;
+    height: 80%;
+    overflow: visible;
+    opacity: calc(var(--ambient-intensity) * 0.26);
+    transition: opacity 1.2s ease;
+    animation: ambient-spin calc(150s * var(--motion)) linear infinite reverse;
+
+    circle {
+      fill: none;
+      stroke-width: 0.16;
+      stroke-linecap: round;
+    }
+  }
+
+  // ── Ondes qui naissent des orbes ──
+  &__ripples {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 1.2s ease;
+  }
+
+  &__ripple {
+    position: absolute;
+    inset: 14%;
+    border-radius: 50%;
+    border: 1px solid var(--ripple-color);
+    opacity: 0;
+    animation: ambient-ripple var(--ripple-period) ease-out infinite;
+    // Décalage négatif : les ondes sont déjà réparties dès l'arrivée sur la page
+    animation-delay: calc(var(--i) * var(--ripple-period) / var(--n) * -1);
+  }
+
+  // ── Canvas : bokehs, fils, poussière, étoiles filantes ──
+  &__dust {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  // ── Finitions ──
+  &__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 42%, transparent 35%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  // Grain statique : évite l'effet de bandes dans les dégradés sombres
+  &__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__orb,
+    &__core,
+    &__ring,
+    &__ripple {
+      animation: none;
+    }
+
+    &__ripples {
+      display: none;
+    }
+  }
+}
+
+@keyframes ambient-breathe {
+  0%, 100% { transform: scale(1, 1) translate3d(0, 0, 0); }
+  33%      { transform: scale(1.08, 0.94) translate3d(-2%, 3%, 0); }
+  66%      { transform: scale(0.95, 1.06) translate3d(3%, -2%, 0); }
+}
+
+@keyframes ambient-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ambient-ripple {
+  0%   { transform: scale(0.3);  opacity: 0; }
+  15%  { opacity: calc(var(--ambient-intensity) * 0.4); }
+  100% { transform: scale(1.25); opacity: 0; }
+}

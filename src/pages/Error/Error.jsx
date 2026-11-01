@@ -1,30 +1,53 @@
-import '../Error/Error.scss'
-import '../Error/_Animation.scss'
-// Importation du composant Link depuis react-router-dom pour créer un lien vers la page d'accueil
-import { Link } from 'react-router-dom'
+import '../Error/Error.scss';
+import { Link } from 'react-router-dom';
 
 function Error() {
-    return (
-        <>
-            <div className="container-error">
-                {/* Titre de l'erreur */}
-                <div className="section-Title-error bounce-in-right">
-                    <h2 className="loading hinge">4</h2>
-                    <h2 className="loading">0</h2>
-                    <h2 className="loading">4</h2>
-                </div>
-                {/* Message d'erreur */}
-                <p className="Text-error gradient bounce-in-right">
-                    Oups! La page que vous demandez n'existe pas.
-                </p>
-                {/* Lien pour retourner à la page d'accueil */}
+    // Génère 20 particules avec des positions/couleurs/délais aléatoires
+    const particles = Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        duration: `${6 + Math.random() * 6}s`,
+        size: `${6 + Math.random() * 10}px`,
+    }));
 
-                <Link to="/" className="Link-error  bounce-in-right ">
-                    Retourner sur la page d’accueil
+    return (
+        <div className="container-error">
+            {/* Particules flottantes en arrière-plan */}
+            <div className="particles" aria-hidden="true">
+                {particles.map((p) => (
+                    <span
+                        key={p.id}
+                        className="particle"
+                        style={{
+                            left: p.left,
+                            width: p.size,
+                            height: p.size,
+                            animationDelay: p.delay,
+                            animationDuration: p.duration,
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* Contenu */}
+            <div className="error-content">
+                <h1 className="error-title">
+                    <span className="digit">4</span>
+                    <span className="digit">0</span>
+                    <span className="digit">4</span>
+                </h1>
+
+                <p className="error-text">
+                    Oups ! La page que vous cherchez s'est envolée…
+                </p>
+
+                <Link to="/" className="error-link">
+                    Retourner à l'accueil
                 </Link>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 
-export default Error
+export default Error;
