@@ -1,60 +1,171 @@
-/* From Uiverse.io by Subaashbala */ 
-/* Prior to using this loader, please ensure that you have set a background image or background color, as the text is transparent and not designed with a solid color. */
+// ── Palette ──
+$c-red: #D52D00;
+$c-orange: #EF7627;
+$c-peach: #FF9A56;
+$c-pink: #D162A4;
+$c-mauve: #B55690;
+$c-magenta: #A30262;
+
+$font-modern: 'Sora', 'Outfit', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
 .loader {
-  --ANIMATION-DELAY-MULTIPLIER: 70ms;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  
-}
-.loader span {
-  padding: 0;
-  margin: 0;
-  letter-spacing: -5rem;
-  animation-delay: 0s;
-  transform: translateY(4rem);
-  animation: hideAndSeek 1s alternate infinite cubic-bezier(0.86, 0, 0.07, 1);
-}
-.loader .l {
-  animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 0);
-}
-.loader .o {
-  animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 1);
-}
-.loader .a {
-  animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 2);
-}
-.loader .d {
-  animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 3);
-}
-.loader .ispan {
-  animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 4);
-}
-.loader .n {
-  animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 5);
-}
-.loader .g {
-  animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 6);
-}
-.letter {
-  width: fit-content;
-  height: 3rem;
-}
-.i {
-  margin-inline: 5px;
-}
-@keyframes hideAndSeek {
-  0% {
-    transform: translateY(4rem);
-  }
-  100% {
-    transform: translateY(0rem);
-  }
+    // Tailles responsives : en variables CSS, Sass n'y touche pas
+    --loader-size: clamp(112px, 38vw, 168px);
+    --label-size: clamp(0.66rem, 2.4vw, 0.76rem);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--loader-size) * 0.22);
+    font-family: $font-modern;
+    color: #efe4de;
+    user-select: none;
+
+    &__visual {
+        position: relative;
+        width: var(--loader-size);
+        height: var(--loader-size);
+    }
+
+    // ── Orbes liquides ──
+    &__orb {
+        position: absolute;
+        inset: 16%;
+        border-radius: 50%;
+        background: conic-gradient(
+            from 0deg,
+            $c-red, $c-orange, $c-peach, $c-pink, $c-mauve, $c-magenta, $c-red
+        );
+        filter: blur(calc(var(--loader-size) * 0.1));
+        opacity: 0.6;
+        mix-blend-mode: screen;
+        will-change: transform, border-radius;
+        animation:
+            loader-morph 7s ease-in-out infinite,
+            loader-spin 12s linear infinite;
+
+        &--two {
+            inset: 30%;
+            opacity: 0.5;
+            filter: blur(calc(var(--loader-size) * 0.08));
+            background: conic-gradient(from 180deg, $c-peach, $c-pink, $c-orange, $c-peach);
+            animation-duration: 5.5s, 8s;
+            animation-direction: reverse, reverse;
+        }
+    }
+
+    // ── Anneau : un arc qui tourne en s'allongeant et se raccourcissant ──
+    &__ring {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        overflow: visible;
+        animation: loader-ring-spin 1.8s linear infinite;
+    }
+
+    &__track {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.07);
+        stroke-width: 0.6;
+    }
+
+    &__arc {
+        fill: none;
+        stroke-width: 1.1;
+        stroke-linecap: round;
+        stroke-dasharray: 60 241.6;
+        filter: drop-shadow(0 0 1.2px rgba(255, 170, 120, 0.7));
+        animation: loader-arc 2.4s ease-in-out infinite alternate;
+    }
+
+    // ── Monogramme ──
+    &__mark {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding-bottom: 0.12em;
+        font-weight: 600;
+        line-height: 1;
+        font-size: calc(var(--loader-size) * 0.36);
+        letter-spacing: -0.03em;
+        color: #f6ede8;
+        text-shadow: 0 0 22px rgba(255, 160, 120, 0.4);
+        animation: loader-pulse 2.4s ease-in-out infinite;
+    }
+
+    // ── Texte : les lettres montent en vague ──
+    &__label {
+        display: flex;
+        margin: 0;
+        padding-left: 0.32em;
+        font-size: var(--label-size);
+        font-weight: 400;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: rgba(239, 228, 222, 0.6);
+    }
+
+    &__char {
+        display: inline-block;
+        overflow: hidden;
+        padding-bottom: 0.15em;
+        margin-bottom: -0.15em;
+
+        > span {
+            display: inline-block;
+            transform: translateY(115%);
+            animation: loader-wave 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+            animation-delay: calc(var(--i) * 0.06s);
+        }
+    }
+
+    // ── Accessibilité : animations réduites ──
+    @media (prefers-reduced-motion: reduce) {
+        &__orb,
+        &__ring,
+        &__arc,
+        &__mark {
+            animation: none;
+        }
+
+        &__char > span {
+            animation: none;
+            transform: none;
+        }
+    }
 }
 
+// ── Keyframes ──
+@keyframes loader-spin {
+    to { transform: rotate(360deg); }
+}
 
+@keyframes loader-morph {
+    0%, 100% { border-radius: 60% 40% 55% 45% / 55% 60% 40% 45%; }
+    33%      { border-radius: 45% 55% 40% 60% / 60% 45% 55% 40%; }
+    66%      { border-radius: 55% 45% 60% 40% / 45% 55% 45% 55%; }
+}
 
+@keyframes loader-ring-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes loader-arc {
+    from { stroke-dasharray: 30 271.6; }
+    to   { stroke-dasharray: 150 151.6; }
+}
+
+@keyframes loader-pulse {
+    0%, 100% { opacity: 0.78; transform: scale(0.96); }
+    50%      { opacity: 1;    transform: scale(1); }
+}
+
+@keyframes loader-wave {
+    0%        { transform: translateY(115%); }
+    22%, 70%  { transform: translateY(0); }
+    92%, 100% { transform: translateY(115%); }
+}

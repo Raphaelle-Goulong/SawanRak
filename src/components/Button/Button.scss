@@ -1,174 +1,140 @@
-// Variables pour le drapeau lesbien
+// ── Palette ──
 $lb-orange: #d52d00;
 $lb-peach: #ef7627;
 $lb-pink: #d162a4;
-$lb-magenta: #b55690;
 $lb-purple: #a30262;
 
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    // ✅ On retire la largeur fixe (13rem) pour qu'il s'adapte à son conteneur
-    width: 100%; 
-    max-width: 200px; // Mais on limite sa taille max
-    height: 3rem;
-    
-    overflow: hidden;
-    background-size: 300% 300%;
-    cursor: pointer;
-    backdrop-filter: blur(1rem);
-    border-radius: 5rem;
-    transition: 0.5s;
-    animation: gradient_301 5s ease infinite;
-    border: double 3px transparent;
-    
-    // ✅ Les couleurs du drapeau dans le dégradé
-    background-image: 
-        linear-gradient(#0f0a14, #0f0a14), // Fond très sombre
-        linear-gradient(137.48deg, $lb-orange 10%, $lb-pink 45%, $lb-magenta 67%, $lb-purple 87%);
-    
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    
-    position: relative; // Important pour les enfants
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
 
-    // ✅ Gestion du bouton désactivé
-    &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        filter: grayscale(1);
-        &:hover {
-            transform: none;
+.btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 9rem;
+    max-width: 100%;
+    min-height: 3rem;
+    padding: 0 1.6rem;
+    font-family: $font-ui;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #f6ede8;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    // Fond sombre + contour dégradé
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background:
+        linear-gradient(rgba(15, 10, 20, 0.88), rgba(15, 10, 20, 0.88)) padding-box,
+        linear-gradient(135deg, $lb-peach, $lb-pink, $lb-purple) border-box;
+
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+
+    // Compense l'espace à droite créé par le letter-spacing
+    &__label {
+        margin-right: -0.14em;
+    }
+
+    // Lueur derrière le bouton
+    &__glow {
+        position: absolute;
+        inset: 4px 14px;
+        z-index: -1;
+        border-radius: 999px;
+        background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
+        filter: blur(14px);
+        opacity: 0.22;
+        transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    // Reflet qui traverse le bouton au survol
+    &__sheen {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                110deg,
+                transparent 35%,
+                rgba(255, 255, 255, 0.16) 50%,
+                transparent 65%
+            );
+            transform: translateX(-120%);
+            transition: transform 0.8s ease;
         }
     }
-}
 
-#container-stars {
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    transition: 0.5s;
-    backdrop-filter: blur(1rem);
-    border-radius: 5rem;
-}
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
 
-strong {
-    z-index: 2;
-    font-family: 'Mulish', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #ffffff;
-    text-shadow: 0 0 8px rgba($lb-pink, 0.5); // Lueur rose sur le texte
-}
+        .btn__glow {
+            opacity: 0.5;
+            filter: blur(18px);
+        }
 
-#glow {
-    position: absolute;
-    display: flex;
-    width: 12rem;
-}
-
-.circle {
-    width: 100%;
-    height: 30px;
-    filter: blur(2rem);
-    animation: pulse_3011 4s infinite;
-    z-index: -1;
-}
-
-// ✅ Les lueurs prennent les couleurs du drapeau
-.circle:nth-of-type(1) {
-    background: rgba($lb-orange, 0.6);
-}
-
-.circle:nth-of-type(2) {
-    background: rgba($lb-purple, 0.7);
-}
-
-.btn:hover #container-stars {
-    z-index: 1;
-}
-
-.btn:hover {
-    transform: scale(1.05); // Un peu moins violent que le 1.1 de base
-}
-
-.btn:active {
-    border: double 3px $lb-pink;
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    animation: none;
-}
-
-.btn:active .circle {
-    background: $lb-pink;
-}
-
-// ── Les étoiles ──────────────────────────────────────────────────────────────
-#stars {
-    position: relative;
-    background: transparent;
-    width: 200rem;
-    height: 200rem;
-}
-
-#stars::after {
-    content: "";
-    position: absolute;
-    top: -10rem;
-    left: -100rem;
-    width: 100%;
-    height: 100%;
-    animation: animStarRotate 90s linear infinite;
-    background-image: radial-gradient(#ffffff 1px, transparent 1%);
-    background-size: 50px 50px;
-}
-
-#stars::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -50%;
-    width: 170%;
-    height: 500%;
-    animation: animStar 60s linear infinite;
-    background-image: radial-gradient(#ffffff 1px, transparent 1%);
-    background-size: 50px 50px;
-    opacity: 0.5;
-}
-
-// ── Animations ───────────────────────────────────────────────────────────────
-@keyframes animStar {
-    from { transform: translateY(0); }
-    to { transform: translateY(-135rem); }
-}
-
-@keyframes animStarRotate {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0); }
-}
-
-@keyframes gradient_301 {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes pulse_3011 {
-    0% {
-        transform: scale(0.75);
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+        .btn__sheen::after {
+            transform: translateX(120%);
+        }
     }
-    70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+
+    &:active:not(:disabled) {
+        transform: translateY(1px) scale(0.97);
     }
-    100% {
-        transform: scale(0.75);
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+
+    &:focus-visible {
+        outline: 2px solid rgba($lb-pink, 0.7);
+        outline-offset: 3px;
+    }
+
+    // ── Variante principale : fond teinté ──
+    &--primary {
+        background:
+            linear-gradient(
+                135deg,
+                rgba($lb-peach, 0.4),
+                rgba($lb-pink, 0.4),
+                rgba($lb-purple, 0.4)
+            ) padding-box,
+            linear-gradient(rgba(15, 10, 20, 1), rgba(15, 10, 20, 1)) padding-box,
+            linear-gradient(135deg, $lb-peach, $lb-pink, $lb-purple) border-box;
+    }
+
+    // ── Petite taille ──
+    &--sm {
+        min-width: 0;
+        min-height: 2.75rem;
+        padding: 0 1.25rem;
+        font-size: 0.7rem;
+    }
+
+    // ── Désactivé ──
+    &:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        filter: grayscale(0.85);
+
+        .btn__glow {
+            opacity: 0;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+
+        &__sheen::after,
+        &__glow {
+            transition: none;
+        }
     }
 }

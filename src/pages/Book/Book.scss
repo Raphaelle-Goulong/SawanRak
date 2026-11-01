@@ -1,19 +1,29 @@
-// Variables pour le drapeau lesbien
+// ── Palette ──
 $lb-orange: #d52d00;
 $lb-peach: #ef7627;
 $lb-pink: #d162a4;
 $lb-magenta: #b55690;
 $lb-purple: #a30262;
 
-// ── Tokens ────────────────────────────────────────────────────────────────────
-$gradient: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
-$text-primary: #f0e6ee; // Blanc cassé, plus doux
-$text-body: rgba(240, 230, 238, 0.75); // Couleur du texte de lecture
-$text-muted: rgba(255, 255, 255, 0.5);
+// ── Tokens ──
+$gradient: linear-gradient(135deg, $lb-peach, $lb-pink, $lb-purple);
+$text-primary: #f6ede8;                      // blanc chaud, moins éblouissant la nuit
+$text-body: rgba(239, 228, 222, 0.86);
+$text-muted: rgba(239, 228, 222, 0.5);
 $border-subtle: rgba(255, 255, 255, 0.08);
+$surface: rgba(12, 8, 16, 0.55);
 $radius: 16px;
 $mobile: 640px;
 $desktop: 1024px;
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
+// Carte « verre dépoli »
+@mixin glass {
+    background: $surface;
+    border: 1px solid $border-subtle;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
 
 // ── Loading overlay ───────────────────────────────────────────────────────────
 .loading {
@@ -29,71 +39,126 @@ $desktop: 1024px;
     backdrop-filter: blur(8px);
 }
 
+// ── Ligne de progression de lecture (en haut de l'écran) ─────────────────────
+.read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 60;
+    pointer-events: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: $gradient;
+        transform-origin: 0 50%;
+        transform: scaleX(var(--read, 0));
+        transition: transform 0.15s linear;
+        box-shadow: 0 0 12px rgba($lb-pink, 0.6);
+    }
+}
+
 // ── Page ──────────────────────────────────────────────────────────────────────
 .Section-Book {
+    // Réglages de lecture (modifiés par les boutons A−/A+ et Moderne/Classique)
+    --reading-size: clamp(1rem, 2.4vw, 1.1rem);
+    --reading-scale: 1;
+    --font-reading: #{$font-ui};
+
+    &[data-font='serif'] {
+        --font-reading: 'Literata', Georgia, 'Times New Roman', serif;
+    }
+
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100dvh;
-    padding-bottom: 4rem;
-    padding: 20px;
+    padding: 20px 16px calc(4rem + env(safe-area-inset-bottom));
     position: relative;
+    font-family: $font-ui;
+    color: $text-body;
+
+    @media (min-width: $mobile) {
+        padding-inline: 20px;
+    }
 }
 
-// ── Book container ────────────────────────────────────────────────────────────
 .Book {
     width: 100%;
-    max-width: 720px; // Un peu plus large pour la lecture
-    z-index: 300;
+    max-width: 720px;
 
     @media (min-width: $desktop) {
         padding: 0 2rem;
     }
 }
 
-// ── Header : titre + barre de progression ────────────────────────────────────
+// ── En-tête : couverture + titre + progression ───────────────────────────────
 .book-header {
+    @include glass;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 0 16px;
-    border-bottom: 1px solid $border-subtle;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-    gap: 15px;
-
-    .book-title {
-        font-family: 'Marcellus', serif;
-        font-size: clamp(1.4rem, 3vw, 1.8rem);
-        color: $text-primary;
-        letter-spacing: 0.04em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 60%;
-        margin: 0;
-        text-shadow: 0 4px 15px rgba($lb-magenta, 0.3);
-    }
+    gap: clamp(14px, 4vw, 24px);
+    padding: clamp(14px, 3vw, 20px);
+    margin-bottom: 28px;
+    border-radius: $radius;
 
     .img-book {
-        height: 120px;
+        flex: 0 0 clamp(76px, 22vw, 112px);
+        width: clamp(76px, 22vw, 112px);
+        height: auto;
+        aspect-ratio: 2 / 3;
+        object-fit: cover;
         border-radius: 10px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        box-shadow:
+            0 12px 34px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba($lb-pink, 0.18);
+    }
+
+    &__info {
+        min-width: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__eyebrow {
+        margin: 0;
+        font-size: 0.66rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: $text-muted;
+    }
+
+    .book-title {
+        margin: 0;
+        font-family: $font-ui;
+        font-weight: 600;
+        font-size: clamp(1.2rem, 4.2vw, 1.7rem);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        color: $text-primary;
+        overflow-wrap: anywhere;
+    }
+
+    .book-author {
+        margin: 0;
+        font-size: 0.82rem;
+        color: $text-muted;
     }
 
     .book-progress {
         display: flex;
         align-items: center;
-        gap: 12px;
-        flex-shrink: 0;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 8px 15px;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        gap: 10px;
 
         &__bar {
-            width: 80px;
-            height: 4px;
+            flex: 1;
+            max-width: 200px;
+            height: 3px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
             overflow: hidden;
@@ -104,124 +169,196 @@ $desktop: 1024px;
             background: $gradient;
             border-radius: 2px;
             transition: width 0.4s ease;
-            box-shadow: 0 0 10px rgba($lb-pink, 0.5); // Petite lueur
+            box-shadow: 0 0 10px rgba($lb-pink, 0.5);
         }
 
         &__label {
-            font-size: 0.8rem;
-            color: $text-primary;
-            font-family: 'Mulish', sans-serif;
-            font-weight: 600;
+            font-size: 0.72rem;
+            color: $text-muted;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.05em;
         }
     }
 }
 
-// ── Dropdown row ──────────────────────────────────────────────────────────────
+// ── Sélecteur de chapitre ─────────────────────────────────────────────────────
 .top-book {
-    margin-bottom: 40px;
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+}
+
+// ── Réglages de lecture ───────────────────────────────────────────────────────
+.reader-tools {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+
+    &__group {
+        @include glass;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 3px;
+        border-radius: 999px;
+    }
+
+    button {
+        min-width: 40px;
+        min-height: 36px;
+        padding: 0 14px;
+        font: inherit;
+        font-size: 0.78rem;
+        color: $text-muted;
+        background: transparent;
+        border: 0;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: color 0.2s ease, background 0.2s ease;
+
+        &:hover:not(:disabled) {
+            color: $text-primary;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        &:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+
+        &.is-active {
+            color: #fff;
+            background: linear-gradient(135deg, rgba($lb-peach, 0.35), rgba($lb-pink, 0.35));
+        }
+    }
 }
 
 // ── Contenu du chapitre ───────────────────────────────────────────────────────
 .Text-Book {
-    max-width: 680px; // Largeur idéale pour la lecture
+    max-width: 680px;
     margin: 0 auto;
-    padding: 0;
 
-    .chapter-title {
-        font-family: 'Marcellus', serif;
-        font-size: clamp(1.6rem, 4vw, 2.2rem);
-        color: $text-primary;
-        line-height: 1.3;
-        letter-spacing: 0.05em;
-        margin: 60px 0 0 0;
-        text-align: center;
+    .chapter-head {
+        margin: clamp(40px, 8vw, 64px) 0 clamp(28px, 5vw, 40px);
     }
 
-    // Séparateur décoratif sous le titre
+    .chapter-eyebrow {
+        margin: 0 0 14px;
+        font-size: 0.66rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: $text-muted;
+    }
+
+    .chapter-title {
+        margin: 0;
+        font-family: $font-ui;
+        font-weight: 600;
+        font-size: clamp(1.5rem, 5vw, 2.2rem);
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+        color: $text-primary;
+    }
+
     .chapter-divider {
-        width: 60px;
+        width: 44px;
         height: 3px;
-        background: $gradient;
+        margin-top: 22px;
         border-radius: 2px;
-        margin: 20px auto 50px auto; // Centré
+        background: $gradient;
     }
 
     // Corps du texte
     .chapter-content {
-        // ✅ NOUVELLE POLICE DE LECTURE & ALIGNEMENT
-        font-family: 'Lora', serif; // Police littéraire
-        font-size: clamp(1.05rem, 2.5vw, 1.15rem); // Un peu plus grand
-        line-height: 1.9; // Interligne très aéré
+        font-family: var(--font-reading);
+        font-size: calc(var(--reading-size) * var(--reading-scale));
+        line-height: 1.85;
+        letter-spacing: 0.005em;
         color: $text-body;
-        text-align: left; // ✅ Aligné à gauche (plus facile à lire)
-        letter-spacing: 0.01em;
+        text-align: left;
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        transition: font-size 0.2s ease;
 
         p {
-            margin-bottom: 1.5em; // Espace entre les paragraphes
-            text-indent: 0; // On enlève l'alinéa, on utilise l'espacement
+            margin: 0 0 1.4em;
         }
 
-        // On met en valeur la première lettre du chapitre (Lettrine)
-        p:first-of-type::first-letter {
-            font-family: 'Marcellus', serif;
-            font-size: 3.5em;
-            float: left;
-            line-height: 0.8;
-            margin-right: 10px;
-            margin-top: 5px;
-            color: $lb-pink;
-            text-shadow: 0 0 10px rgba($lb-pink, 0.3);
+        // Le premier paragraphe est un peu plus lumineux
+        p:first-of-type {
+            color: $text-primary;
+            font-size: 1.04em;
         }
 
         blockquote {
-            border-left: 3px solid rgba($lb-pink, 0.5);
             margin: 2rem 0;
             padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid rgba($lb-pink, 0.5);
             border-radius: 0 8px 8px 0;
+            background: rgba(255, 255, 255, 0.02);
             font-style: italic;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.05rem;
+            color: rgba(239, 228, 222, 0.8);
+            font-size: 0.95em;
         }
+    }
+}
 
-        // ── Mode Édition (Textarea) ──
-        textarea {
-            background: rgba(15, 10, 20, 0.8) !important;
-            border: 1px solid rgba($lb-pink, 0.3) !important;
-            border-radius: 12px !important;
-            color: $text-primary !important;
-            font-family: 'Lora', serif !important;
-            line-height: 1.8 !important;
-            padding: 20px !important;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+// ── Mode édition ──────────────────────────────────────────────────────────────
+.chapter-edit-trigger {
+    margin-top: 2rem;
+}
 
-            &:focus {
-                border-color: $lb-pink !important;
-                box-shadow: 0 0 15px rgba($lb-pink, 0.2) !important;
-            }
+.chapter-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+    &__textarea {
+        width: 100%;
+        min-height: 60vh;
+        padding: 20px;
+        font-family: var(--font-reading);
+        font-size: calc(var(--reading-size) * var(--reading-scale));
+        line-height: 1.8;
+        color: $text-primary;
+        background: rgba(15, 10, 20, 0.8);
+        border: 1px solid rgba($lb-pink, 0.3);
+        border-radius: 12px;
+        outline: none;
+        resize: vertical;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:focus {
+            border-color: $lb-pink;
+            box-shadow: 0 0 0 3px rgba($lb-pink, 0.15);
         }
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 }
 
 // ── Navigation bas de page ────────────────────────────────────────────────────
 .btn-next {
     display: flex;
+    justify-content: space-between;
     gap: 15px;
-    margin: 50px auto;
-    max-width: 680px;
     width: 100%;
-
-    @media (min-width: $desktop) {
-        justify-content: space-between;
-    }
+    max-width: 680px;
+    margin: 50px auto 0;
 
     .Btn {
+        .btn {
         flex: 1;
         max-width: 200px;
-        height: 3rem;
+        min-width: 1;
+    }
 
         .btn {
             width: 100%;
@@ -236,13 +373,63 @@ $desktop: 1024px;
     }
 }
 
+// ── Notification (sauvegarde, erreur) ─────────────────────────────────────────
+.toast {
+    @include glass;
+    position: fixed;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 3000;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: rgba(12, 8, 16, 0.88);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    font-size: 0.85rem;
+    color: $text-primary;
+    animation: toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &--success { border-color: rgba($lb-peach, 0.5); }
+    &--error   { border-color: rgba(255, 107, 107, 0.55); }
+}
+
+// ── Erreur de chargement ──────────────────────────────────────────────────────
+.book-error {
+    @include glass;
+    max-width: 520px;
+    margin: 30vh 20px 0;
+    padding: 28px;
+    border-radius: $radius;
+    text-align: center;
+    font-family: $font-ui;
+    color: $text-body;
+
+    @media (min-width: 600px) {
+        margin-inline: auto;
+    }
+
+    h2 {
+        margin: 0 0 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: $text-primary;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: $text-muted;
+    }
+}
+
 // ── Modal Ending ──────────────────────────────────────────────────────────────
 .modal-overlay {
+    width: 90%;
     position: fixed;
     inset: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     z-index: 2000;
     background: rgba(5, 3, 8, 0.7);
     backdrop-filter: blur(8px);
@@ -252,9 +439,22 @@ $desktop: 1024px;
         align-items: center;
     }
 }
-
+.modal-content {
+    width: 100%;
+    max-width: 720px;
+}
 // ── Animations ────────────────────────────────────────────────────────────────
 @keyframes fade-in {
     from { opacity: 0; }
-    to { opacity: 1; }
+    to   { opacity: 1; }
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: translate(-50%, 12px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .read-progress::after { transition: none; }
+    .toast { animation: none; }
 }

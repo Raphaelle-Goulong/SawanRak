@@ -52,7 +52,7 @@ function App() {
   return (
     <>
     {/* <AuroraBackground /> */}
-    {/* <AmbientBackground /> */}
+   
     <div className="grain-overlay"></div>
     <div className="vignette"></div>
     <BooksProvider> 

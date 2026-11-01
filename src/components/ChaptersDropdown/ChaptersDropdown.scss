@@ -1,19 +1,20 @@
-// Variables pour le drapeau lesbien
+// ── Palette ──
 $lb-orange: #d52d00;
 $lb-peach: #ef7627;
 $lb-pink: #d162a4;
 $lb-magenta: #b55690;
 $lb-purple: #a30262;
 
-// ── Tokens ────────────────────────────────────────────────────────────────────
-$gradient      : linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
-$gradient-soft : linear-gradient(135deg, rgba($lb-orange, 0.2), rgba($lb-pink, 0.2), rgba($lb-purple, 0.2));
-$panel-bg      : rgba(15, 10, 20, 0.95); // Fond sombre
-$panel-border  : rgba(255, 255, 255, 0.08);
-$radius        : 12px;
-$mobile        : 640px;
+// ── Tokens ──
+$gradient: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
+$gradient-soft: linear-gradient(135deg, rgba($lb-orange, 0.2), rgba($lb-pink, 0.2), rgba($lb-purple, 0.2));
+$panel-bg: rgba(15, 10, 20, 0.96);
+$text-primary: #f6ede8;
+$radius: 14px;
+$mobile: 640px;
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
 
-// ── Backdrop (mobile bottom sheet) ───────────────────────────────────────────
+// ── Backdrop (bottom sheet mobile) ───────────────────────────────────────────
 .cd-backdrop {
   display: none;
 
@@ -22,7 +23,7 @@ $mobile        : 640px;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px); // Un peu plus flou
+    backdrop-filter: blur(4px);
     z-index: 999;
     animation: cd-fade-in 0.3s ease;
   }
@@ -32,53 +33,64 @@ $mobile        : 640px;
 .cd-wrap {
   position: relative;
   width: 100%;
-  max-width: 280px; // Un peu plus large
-  font-family: 'Mulish', sans-serif;
+  max-width: 340px;
+  font-family: $font-ui;
   z-index: 1000;
 
   @media (max-width: $mobile) {
     max-width: 100%;
-    z-index: 1000;
   }
 }
 
-// ── Trigger (Le bouton) ───────────────────────────────────────────────────────
+// ── Bouton ────────────────────────────────────────────────────────────────────
 .cd-trigger {
   width: 100%;
-  background: rgba(15, 10, 20, 0.7); // Fond sombre
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: $radius;
-  padding: 12px 16px;
-  
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 12px;
+  padding: 12px 14px;
   cursor: pointer;
-  
-  color: #f0e6ee; // Blanc cassé
-  font-size: 15px;
-  font-weight: 500;
-  font-family: inherit;
-  
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
 
-  &:hover  { 
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: $text-primary;
+
+  background: rgba(12, 8, 16, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
     background: rgba(20, 15, 25, 0.85);
     border-color: rgba($lb-pink, 0.3);
     box-shadow: 0 6px 20px rgba($lb-magenta, 0.15);
   }
-  
-  &:focus-visible { 
-    outline: 2px solid rgba($lb-pink, 0.5); 
-    outline-offset: 3px; 
+
+  &:focus-visible {
+    outline: 2px solid rgba($lb-pink, 0.6);
+    outline-offset: 3px;
+  }
+
+  // Numéro du chapitre
+  &__num {
+    flex-shrink: 0;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+    color: #ffb27a;
+    background: rgba($lb-peach, 0.14);
   }
 
   &__text {
+    flex: 1;
+    text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -88,45 +100,46 @@ $mobile        : 640px;
     flex-shrink: 0;
     width: 18px;
     height: 18px;
-    color: $lb-pink; // L'icône prend la couleur du drapeau
+    color: $lb-pink;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    &--open { transform: rotate(180deg); }
+    &--open {
+      transform: rotate(180deg);
+    }
   }
 }
 
-// ── Panel (Le menu déroulant) ──────────────────────────────────────────────────
+// ── Panneau ───────────────────────────────────────────────────────────────────
 .cd-panel {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  background: $panel-bg;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  
-  // ✅ Bordure dégradée moderne
-  border: 1px solid transparent;
-  background-image: 
-    linear-gradient($panel-bg, $panel-bg), 
-    linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  
-  border-radius: $radius;
-  padding: 6px;
   max-height: 320px;
   overflow-y: auto;
-  
+  padding: 6px;
+
+  // Fond sombre + bordure dégradée
+  border: 1px solid transparent;
+  border-radius: $radius;
+  background:
+    linear-gradient($panel-bg, $panel-bg) padding-box,
+    $gradient border-box;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba($lb-purple, 0.1);
+
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px) scale(0.98);
   transform-origin: top center;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba($lb-purple, 0.1);
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   // Scrollbar discrète
-  &::-webkit-scrollbar       { width: 4px; }
+  &::-webkit-scrollbar { width: 4px; }
   &::-webkit-scrollbar-thumb { background: rgba($lb-magenta, 0.3); border-radius: 4px; }
 
   &--open {
@@ -135,21 +148,23 @@ $mobile        : 640px;
     transform: translateY(0) scale(1);
   }
 
-  // ── Bottom sheet sur mobile ──────────────────────────────────────────────
+  // ── Bottom sheet sur mobile ──
   @media (max-width: $mobile) {
     position: fixed;
     inset: auto 0 0;
     top: auto;
-    border-radius: 20px 20px 0 0;
-    border-bottom: none; // On enlève la bordure en bas
     max-height: 70vh;
     padding: 15px 10px calc(env(safe-area-inset-bottom, 0px) + 15px);
-    transform: translateY(100%);
-    z-index: 1001;
-    background-image: none; // On enlève la bordure dégradée sur mobile pour le bottom sheet
+    border-radius: 20px 20px 0 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    background: $panel-bg;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.35s ease;
+    z-index: 1001;
 
-    &--open { transform: translateY(0); }
+    &--open {
+      transform: translateY(0);
+    }
 
     // Poignée visuelle
     &::before {
@@ -157,47 +172,47 @@ $mobile        : 640px;
       display: block;
       width: 40px;
       height: 5px;
+      margin: 0 auto 15px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 3px;
-      margin: 0 auto 15px;
     }
   }
 }
 
 // ── Options ───────────────────────────────────────────────────────────────────
 .cd-option {
-  border-radius: 8px;
-  padding: 10px 14px;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: rgba(239, 228, 222, 0.7);
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-  position: relative;
-  overflow: hidden;
-  animation: cd-fade-slide 0.3s ease both;
-  animation-delay: var(--delay, 0s);
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 
-  &:hover  { 
-    background: rgba(255, 255, 255, 0.05); 
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
     color: #fff;
   }
-  
-  &:focus-visible { 
-    outline: 2px solid rgba($lb-pink, 0.5); 
-    outline-offset: -2px; 
+
+  &:focus-visible {
+    outline: 2px solid rgba($lb-pink, 0.5);
+    outline-offset: -2px;
   }
 
-  // Barre latérale dégradée (au lieu de la ligne simple)
+  // Barre latérale dégradée
   &::before {
     content: '';
     position: absolute;
-    left: 0; top: 6px; bottom: 6px;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
     width: 4px;
-    background: linear-gradient(to bottom, $lb-orange, $lb-pink, $lb-purple);
     border-radius: 4px;
+    background: linear-gradient(to bottom, $lb-orange, $lb-pink, $lb-purple);
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
@@ -209,38 +224,46 @@ $mobile        : 640px;
 
     &::before { transform: translateX(0); }
 
-    .cd-option__dot { 
-      opacity: 1; 
+    .cd-option__dot {
+      opacity: 1;
       transform: scale(1);
     }
   }
 
   &__num {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.3);
     min-width: 22px;
-    font-variant-numeric: tabular-nums;
+    font-size: 11px;
     font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: rgba(239, 228, 222, 0.3);
   }
 
-  &__label { flex: 1; }
+  &__label {
+    flex: 1;
+  }
 
   &__dot {
+    flex-shrink: 0;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: linear-gradient(135deg, $lb-pink, $lb-purple);
-    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba($lb-pink, 0.6);
     opacity: 0;
     transform: scale(0.5);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 0 8px rgba($lb-pink, 0.6);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   @media (max-width: $mobile) {
-    padding: 14px 16px; // Zone tactile plus grande
-    font-size: 16px; // Empêche le zoom iOS
+    padding: 14px 16px; // zone tactile plus grande
+    font-size: 1rem;
   }
+}
+
+// Les options apparaissent en cascade à l'ouverture du panneau
+.cd-panel--open .cd-option {
+  animation: cd-fade-slide 0.3s ease both;
+  animation-delay: var(--delay, 0s);
 }
 
 // ── Animations ────────────────────────────────────────────────────────────────
@@ -252,4 +275,17 @@ $mobile        : 640px;
 @keyframes cd-fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cd-panel,
+  .cd-trigger__icon,
+  .cd-option::before,
+  .cd-option__dot {
+    transition: none;
+  }
+
+  .cd-panel--open .cd-option {
+    animation: none;
+  }
 }

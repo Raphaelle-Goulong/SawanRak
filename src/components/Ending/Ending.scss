@@ -1,350 +1,349 @@
+// ── Palette ──
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-magenta: #b55690;
+$lb-purple: #a30262;
+
+// ── Tokens ──
+$text-primary: #f6ede8;
+$text-muted: rgba(239, 228, 222, 0.55);
+$border-subtle: rgba(255, 255, 255, 0.08);
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
 .Section-Ending {
-    background-color: #000000d0;
-    backdrop-filter: blur(4px);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    border-radius: 10px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(26px, 5vw, 38px);
+    width: 100%;
+    max-width: 720px;
+    max-height: 92dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: clamp(40px, 7vw, 56px) clamp(18px, 5vw, 40px)
+        calc(clamp(24px, 5vw, 36px) + env(safe-area-inset-bottom));
+    text-align: center;
+    font-family: $font-ui;
+    color: $text-primary;
 
-    .cross {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        cursor: pointer;
-        color: #fff;
-        transition: color 0.3s ease;
+    background: rgba(12, 8, 16, 0.92);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid $border-subtle;
+    border-radius: 28px; // bottom sheet sur mobile
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba($lb-pink, 0.12);
+    animation: ending-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 
-        &:hover {
-            color: #ff6b6b;
-        }
+    @media (min-width: 640px) {
+        max-height: 88dvh;
+        border-radius: 28px;
     }
 
-    h2 {
-        font-family: 'Marcellus', serif;
-        margin: 40px;
-        font-size: 1.2rem;
-        color: #fff;
-    }
-
-    .Note {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        height: 100px;
-        margin: 20px 0 20px 0;
-
-        .title {
-            font-family: 'Marcellus', serif;
-            font-size: 1rem;
-            margin: 15px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            color: #fff;
-        }
-    }
-
-    /* Système d'étoiles avec dégradé chaud */
-    .radio {
-        display: flex;
-        justify-content: center;
-        gap: 5px;
-        flex-direction: row-reverse;
-    }
-
-    .radio > input {
-        position: absolute;
-        appearance: none;
-    }
-
-    .radio > label {
-        cursor: pointer;
-        font-size: 20px;
-        position: relative;
-        display: inline-block;
-        transition: transform 0.3s ease;
-    }
-
-    .radio > label > svg {
-        fill: #535353;
-        transition: fill 0.3s ease, filter 0.3s ease;
-    }
-
-    /* Couleurs spécifiques pour chaque étoile - dégradé du jaune au rouge */
-    .radio > input[value='1']:checked + label > svg,
-    .radio > input[value='1']:checked + label ~ label > svg {
-        fill: #ffeb3b; /* Jaune vif */
-        filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8));
-    }
-
-    .radio > input[value='2']:checked + label > svg,
-    .radio > input[value='2']:checked + label ~ label > svg {
-        fill: #ffc107; /* Jaune-orange */
-        filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.8));
-    }
-
-    .radio > input[value='3']:checked + label > svg,
-    .radio > input[value='3']:checked + label ~ label > svg {
-        fill: #ff9800; /* Orange */
-        filter: drop-shadow(0 0 15px rgba(255, 152, 0, 0.8));
-    }
-
-    .radio > input[value='4']:checked + label > svg,
-    .radio > input[value='4']:checked + label ~ label > svg {
-        fill: #ff5722; /* Orange-rouge */
-        filter: drop-shadow(0 0 15px rgba(255, 87, 34, 0.8));
-    }
-
-    .radio > input[value='5']:checked + label > svg,
-    .radio > input[value='5']:checked + label ~ label > svg {
-        fill: #f44336; /* Rouge */
-        filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.8));
-    }
-
-    /* Effets de hover avec les mêmes couleurs */
-    .radio > label:hover > svg {
-        transform: scale(1.2);
-        transition: transform 0.3s ease, fill 0.3s ease;
-    }
-
-    /* Hover pour chaque étoile avec sa couleur */
-    .radio > label[for='rating-1']:hover > svg,
-    .radio > label[for='rating-1']:hover ~ label > svg {
-        fill: #ffeb3b !important;
-        filter: drop-shadow(0 0 20px rgba(255, 235, 59, 1)) !important;
-    }
-
-    .radio > label[for='rating-2']:hover > svg,
-    .radio > label[for='rating-2']:hover ~ label > svg {
-        fill: #ffc107 !important;
-        filter: drop-shadow(0 0 20px rgba(255, 193, 7, 1)) !important;
-    }
-
-    .radio > label[for='rating-3']:hover > svg,
-    .radio > label[for='rating-3']:hover ~ label > svg {
-        fill: #ff9800 !important;
-        filter: drop-shadow(0 0 20px rgba(255, 152, 0, 1)) !important;
-    }
-
-    .radio > label[for='rating-4']:hover > svg,
-    .radio > label[for='rating-4']:hover ~ label > svg {
-        fill: #ff5722 !important;
-        filter: drop-shadow(0 0 20px rgba(255, 87, 34, 1)) !important;
-    }
-
-    .radio > label[for='rating-5']:hover > svg,
-    .radio > label[for='rating-5']:hover ~ label > svg {
-        fill: #f44336 !important;
-        filter: drop-shadow(0 0 20px rgba(244, 67, 54, 1)) !important;
-    }
-
-    /* Particules animées avec couleurs correspondantes */
-    .radio > label::before,
-    .radio > label::after {
+    // Halo d'orbe, écho de la page de chargement
+    &::before {
         content: '';
         position: absolute;
-        width: 6px;
-        height: 6px;
+        top: -170px;
+        left: 50%;
+        z-index: 0;
+        width: 420px;
+        height: 420px;
+        translate: -50% 0;
         border-radius: 50%;
-        opacity: 0;
-        transform: scale(0);
-        transition: transform 0.4s ease, opacity 0.4s ease;
+        pointer-events: none;
+        opacity: 0.28;
+        background: conic-gradient(
+            from 0deg,
+            $lb-orange, $lb-peach, #ff9a56, $lb-pink, $lb-magenta, $lb-purple, $lb-orange
+        );
+        -webkit-mask-image: radial-gradient(
+            circle closest-side,
+            #000 0%,
+            rgba(0, 0, 0, 0.5) 35%,
+            transparent 100%
+        );
+        mask-image: radial-gradient(
+            circle closest-side,
+            #000 0%,
+            rgba(0, 0, 0, 0.5) 35%,
+            transparent 100%
+        );
+        animation: ending-spin 40s linear infinite;
     }
 
-    .radio > label::before {
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%) scale(0);
-    }
-
-    .radio > label::after {
-        bottom: -15px;
-        left: 50%;
-        transform: translateX(-50%) scale(0);
-    }
-
-    /* Couleurs des particules selon l'étoile */
-    .radio > label[for='rating-1']::before,
-    .radio > label[for='rating-1']::after {
-        background: linear-gradient(45deg, #ffeb3b, #fff59d);
-    }
-
-    .radio > label[for='rating-2']::before,
-    .radio > label[for='rating-2']::after {
-        background: linear-gradient(45deg, #ffc107, #ffecb3);
-    }
-
-    .radio > label[for='rating-3']::before,
-    .radio > label[for='rating-3']::after {
-        background: linear-gradient(45deg, #ff9800, #ffcc80);
-    }
-
-    .radio > label[for='rating-4']::before,
-    .radio > label[for='rating-4']::after {
-        background: linear-gradient(45deg, #ff5722, #ff8a65);
-    }
-
-    .radio > label[for='rating-5']::before,
-    .radio > label[for='rating-5']::after {
-        background: linear-gradient(45deg, #f44336, #ef5350);
-    }
-
-    .radio > label:hover::before,
-    .radio > label:hover::after {
-        opacity: 1;
-        transform: translateX(-50%) scale(1.5);
-        animation: particle-twinkle 0.8s ease-out;
-    }
-
-    /* Animations améliorées */
-    @keyframes particle-twinkle {
-        0% {
-            opacity: 0;
-            transform: translateX(-50%) scale(0) rotate(0deg);
-        }
-        50% {
-            opacity: 1;
-            transform: translateX(-50%) scale(1.8) rotate(180deg);
-        }
-        100% {
-            opacity: 0;
-            transform: translateX(-50%) scale(0.5) rotate(360deg);
-        }
-    }
-
-    @keyframes warm-glow {
-        0% {
-            filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.5));
-        }
-        50% {
-            filter: drop-shadow(0 0 25px rgba(255, 152, 0, 0.8));
-        }
-        100% {
-            filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.6));
-        }
-    }
-
-    @keyframes pulse-warm {
-        0% {
-            transform: scale(1);
-        }
-        100% {
-            transform: scale(1.1);
-        }
-    }
-
-    /* Animation générale pour les étoiles sélectionnées */
-    .radio > input:checked + label > svg {
-        animation: pulse-warm 0.8s infinite alternate, warm-glow 2s infinite alternate;
-    }
-
-    .other-books {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-
-        .title {
-            width: 100%;
-            font-family: 'Marcellus', serif;
-            font-size: 1rem;
-            margin: 15px;
-            display: flex;
-            justify-content: center;
-            color: #fff;
-        }
-
-        .book-cat {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 25px 0;
-            padding: 10px;
-        }
-    }
-
-    .btn-quit {
-        margin: 20px;
-
-        .home-link {
-            text-decoration: none;
-        }
-    }
-
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background: #1a1a1a;
-        overflow: hidden;
-        font-family: 'Arial', sans-serif;
-    }
-
-    .melting-text-container {
+    // Le contenu passe au-dessus du halo
+    > * {
         position: relative;
-        overflow: hidden;
+        z-index: 1;
     }
 
-    .melting-text {
-        font-size: 2.5rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #fff;
-        position: relative;
-        animation: melt 3s infinite ease-in-out;
-        background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-    }
-
-    .melting-text::before,
-    .melting-text::after {
-        content: 'Bye Bye !';
+    // ── Bouton fermer ──
+    .ending-close {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
-        background-clip: text;
-        -webkit-background-clip: text;
+        top: 14px;
+        right: 14px;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        color: $text-muted;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid $border-subtle;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+        &:hover {
+            color: #fff;
+            border-color: rgba($lb-pink, 0.5);
+            background: rgba($lb-pink, 0.15);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba($lb-pink, 0.7);
+            outline-offset: 2px;
+        }
+    }
+
+    // ── En-tête ──
+    .ending-eyebrow {
+        margin: 0;
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: $text-muted;
+        text-wrap: balance;
+    }
+
+    .ending-title {
+        margin: 12px 0 0;
+        font-weight: 600;
+        font-size: clamp(2.6rem, 11vw, 3.8rem);
+        letter-spacing: -0.035em;
+        line-height: 1.1;
+
+        // Dégradé qui brille
         color: transparent;
-        z-index: -1;
-        transform: scaleY(1);
-        opacity: 0.5;
-        animation: drip 3s infinite ease-in-out;
+        -webkit-text-fill-color: transparent;
+        background: linear-gradient(
+            100deg,
+            $lb-peach 0%,
+            $lb-pink 35%,
+            #ffc9a8 55%,
+            $lb-pink 75%,
+            $lb-peach 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation:
+            ending-shine 7s linear infinite,
+            ending-float 5s ease-in-out infinite;
     }
 
-    .melting-text::after {
-        filter: blur(10px);
-        opacity: 0.3;
+    .ending-book {
+        margin: 8px 0 0;
+        font-size: 0.88rem;
+        color: $text-muted;
     }
 
-    /* Keyframes for melting effect */
-    @keyframes melt {
-        0%,
-        100% {
-            transform: translateY(0);
+    .ending-label {
+        margin: 0 0 16px;
+        font-size: 0.7rem;
+        font-weight: 400;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: $text-muted;
+    }
+
+    // ── Étoiles (balisage du composant StarRating inchangé) ──
+    .ending-rate {
+        .radio {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 6px;
+
+            > input {
+                position: absolute;
+                width: 0;
+                height: 0;
+                opacity: 0;
+                pointer-events: none;
+                appearance: none;
+            }
+
+            > label {
+                position: relative;
+                display: inline-flex;
+                padding: 6px; // zone tactile plus grande
+                font-size: 28px;
+                cursor: pointer;
+
+                > svg {
+                    display: block;
+                    width: 1em;
+                    height: 1em;
+                    fill: rgba(255, 255, 255, 0.16);
+                    transition: fill 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+                }
+
+                // Petites étincelles au survol
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    background: linear-gradient(45deg, $lb-peach, $lb-pink);
+                    opacity: 0;
+                    transform: translateX(-50%) scale(0);
+                    pointer-events: none;
+                }
+
+                &::before { top: -2px; }
+                &::after  { bottom: -2px; }
+
+                &:hover::before,
+                &:hover::after {
+                    animation: ending-twinkle 0.8s ease-out;
+                }
+            }
+
+            // Étoiles sélectionnées
+            > input:checked + label > svg,
+            > input:checked + label ~ label > svg {
+                fill: #ff9a56;
+                filter: drop-shadow(0 0 10px rgba($lb-peach, 0.65));
+            }
+
+            // Un petit « pop » à la sélection (une seule fois)
+            > input:checked + label > svg {
+                animation: ending-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
         }
-        50% {
-            transform: translateY(20px);
+
+        // Survol (classe doublée pour passer devant le style « sélectionné »)
+        .radio.radio {
+            > label:hover > svg,
+            > label:hover ~ label > svg {
+                fill: $lb-pink;
+                filter: drop-shadow(0 0 12px rgba($lb-pink, 0.8));
+            }
+
+            > label:hover > svg {
+                transform: scale(1.18);
+            }
         }
     }
 
-    @keyframes drip {
-        0%,
-        100% {
-            transform: scaleY(1);
-            opacity: 0.5;
+    // ── Livres suggérés ──
+    .ending-books {
+        width: 100%;
+        overflow-x: auto;
+        padding: 4px 4px 12px;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
         }
-        50% {
-            transform: scaleY(1.5);
-            opacity: 0.7;
+
+        // width: max-content + marges auto = centré s'il tient, défilable sinon
+        &__track {
+            display: flex;
+            gap: 12px;
+            width: max-content;
+            margin-inline: auto;
+
+            > * {
+                flex: 0 0 auto;
+                scroll-snap-align: start;
+            }
+        }
+
+        @media (min-width: 640px) {
+            overflow: visible;
+
+            &__track {
+                width: auto;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     }
+
+    .ending-skeleton {
+        width: 112px;
+        aspect-ratio: 2 / 3;
+        border-radius: 12px;
+        background: linear-gradient(
+            100deg,
+            rgba(255, 255, 255, 0.04) 30%,
+            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0.04) 70%
+        );
+        background-size: 200% 100%;
+        animation: ending-skeleton 1.4s linear infinite;
+    }
+
+    .ending-empty {
+        margin: 0;
+        font-size: 0.85rem;
+        color: $text-muted;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+
+        &::before,
+        .ending-title,
+        .ending-skeleton,
+        .radio > label::before,
+        .radio > label::after,
+        .radio > input:checked + label > svg {
+            animation: none;
+        }
+    }
+}
+
+// ── Animations ────────────────────────────────────────────────────────────────
+@keyframes ending-in {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ending-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ending-shine {
+    to { background-position: 200% center; }
+}
+
+@keyframes ending-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+}
+
+@keyframes ending-pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+@keyframes ending-twinkle {
+    0%   { opacity: 0; transform: translateX(-50%) scale(0); }
+    50%  { opacity: 1; transform: translateX(-50%) scale(1.6); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+}
+
+@keyframes ending-skeleton {
+    to { background-position: -200% 0; }
 }

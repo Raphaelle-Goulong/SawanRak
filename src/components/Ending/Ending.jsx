@@ -1,172 +1,161 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-// import Data from '../../Data.json'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import '../Ending/Ending.scss'
 import Card from '../../components/Card/Card'
 import Button from '../../components/Button/Button'
 import StarRating from '../../components/StarRating/StarRating'
 import { X } from 'lucide-react'
 
-function Ending({ onClose }) {
+const SUGGESTIONS_COUNT = 3
+
+const toArray = (value) => (Array.isArray(value) ? value : [value])
+
+function Ending({ onClose, book }) {
     const location = useLocation()
     const navigate = useNavigate()
-    const currentBook = location.state?.book
-    const [similarBooks, setSimilarBooks] = useState([])
-    const [userRating, setUserRating] = useState(0)
-    const [hasRated, setHasRated] = useState(false)
-    const [data, setData] = useState([])
 
-    // Ajoute ce useEffect pour charger les livres
+    // Le livre arrive en prop depuis la page Book ; on garde l'état de la route en secours
+    const currentBook = book || location.state?.book
+
+    const [allBooks, setAllBooks] = useState([])
+    const [status, setStatus] = useState('loading') // 'loading' | 'ready' | 'error'
+
+    // Garde la dernière version de onClose sans relancer les effets
+    const onCloseRef = useRef(onClose)
     useEffect(() => {
+        onCloseRef.current = onClose
+    }, [onClose])
+
+    // Charge la liste des livres
+    useEffect(() => {
+        const controller = new AbortController()
+
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/livres');
+                const response = await fetch('/api/livres', { signal: controller.signal })
                 if (!response.ok) throw new Error('Erreur réseau')
                 const json = await response.json()
-                const livres = json.livres || json
-                setData(livres)
+                setAllBooks(json.livres || json)
+                setStatus('ready')
             } catch (error) {
+                if (error.name === 'AbortError') return
                 console.error('Erreur de chargement des livres:', error)
+                setStatus('error')
             }
         }
+
         fetchData()
+        return () => controller.abort()
     }, [])
 
-    // Et modifie ton useEffect existant pour utiliser "data" au lieu de "Data"
+    // Échap ferme la fenêtre, et la page derrière ne défile plus
     useEffect(() => {
-        if (currentBook && currentBook.categorie && data.length > 0) {
-            const firstCategory = Array.isArray(currentBook.categorie)
-                ? currentBook.categorie[0]
-                : currentBook.categorie
-
-            const sameCategoryBooks = data.filter((book) => {
-                // <-- data ici
-                const bookCategories = Array.isArray(book.categorie)
-                    ? book.categorie
-                    : [book.categorie]
-
-                return book.id !== currentBook.id && bookCategories.includes(firstCategory)
-            })
-
-            const shuffled = [...sameCategoryBooks].sort(() => 0.5 - Math.random())
-            setSimilarBooks(shuffled.slice(0, 3))
+        const onKey = (e) => {
+            if (e.key === 'Escape') onCloseRef.current?.()
         }
-    }, [currentBook, data]) // <-- ajoute "data" dans les dépendances
+        const previousOverflow = document.body.style.overflow
 
-    // Charger la note existante depuis localStorage
-    useEffect(() => {
-        if (currentBook?.id) {
-            const savedRating = localStorage.getItem(`book-${currentBook.id}-rating`)
-            if (savedRating) {
-                setUserRating(parseInt(savedRating, 10))
-                setHasRated(true)
-            }
+        document.addEventListener('keydown', onKey)
+        document.body.style.overflow = 'hidden'
+
+        return () => {
+            document.removeEventListener('keydown', onKey)
+            document.body.style.overflow = previousOverflow
         }
-    }, [currentBook])
+    }, [])
 
-    // Gestion des livres similaires - Prendre la PREMIÈRE catégorie
-    useEffect(() => {
-        if (currentBook && currentBook.categorie) {
-            // Récupérer la première catégorie du livre actuel
-            const firstCategory = Array.isArray(currentBook.categorie)
-                ? currentBook.categorie[0]
-                : currentBook.categorie
+    // Livres similaires : même (première) catégorie, tirés au hasard
+    const similarBooks = useMemo(() => {
+        if (!currentBook?.categorie || allBooks.length === 0) return []
 
-            const sameCategoryBooks = Data.filter((book) => {
-                const bookCategories = Array.isArray(book.categorie)
-                    ? book.categorie
-                    : [book.categorie]
+        const firstCategory = toArray(currentBook.categorie)[0]
+        const sameCategory = allBooks.filter(
+            (b) => b.id !== currentBook.id && toArray(b.categorie).includes(firstCategory)
+        )
 
-                return (
-                    book.id !== currentBook.id && bookCategories.includes(firstCategory) // Chercher seulement la première catégorie
-                )
-            })
+        return [...sameCategory].sort(() => 0.5 - Math.random()).slice(0, SUGGESTIONS_COUNT)
+    }, [currentBook, allBooks])
 
-            const shuffled = [...sameCategoryBooks].sort(() => 0.5 - Math.random())
-            setSimilarBooks(shuffled.slice(0, 3))
-        }
-    }, [currentBook])
-
-    // Fonction pour gérer le changement de note
+    // Sauvegarde de la note
     const handleRatingChange = (rating) => {
-        const newRating = parseInt(rating, 10)
-        setUserRating(newRating)
-        setHasRated(true)
+        if (!currentBook?.id) return
+        const value = parseInt(rating, 10)
 
-        if (currentBook?.id) {
-            // Sauvegarder dans localStorage
-            localStorage.setItem(`book-${currentBook.id}-rating`, newRating.toString())
-
-            // Optionnel : Sauvegarder aussi la date de notation
+        try {
+            localStorage.setItem(`book-${currentBook.id}-rating`, String(value))
             localStorage.setItem(`book-${currentBook.id}-rating-date`, new Date().toISOString())
-
-            console.log(`Note sauvegardée pour "${currentBook.title}": ${newRating} étoiles`)
+        } catch {
+            /* stockage indisponible : on ignore */
         }
     }
 
-    // Fonction pour gérer le clic sur un livre suggéré
-    const handleBookClick = (book) => {
-        // Naviguer vers la page Home avec les informations du livre pour ouvrir la modale Resume
+    // Clic sur un livre suggéré : retour à l'accueil avec ouverture de sa fiche
+    const handleBookClick = (suggested) => {
         navigate('/', {
             state: {
                 fromEnding: true,
-                book: book
+                book: suggested
             }
         })
     }
 
+    const handleGoHome = () => {
+        onClose?.()
+        navigate('/')
+    }
+
     return (
-        <section className="Section-Ending">
-            <X className="cross" size={20} onClick={onClose} />
-            <h2>Tu es arrivée à la fin du livre</h2>
-            <div class="melting-text-container">
-                <h1 class="melting-text">Bye Bye !</h1>
+        <section
+            className="Section-Ending"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ending-title"
+        >
+            <button type="button" className="ending-close" onClick={onClose} aria-label="Fermer">
+                <X size={18} />
+            </button>
+
+            <header className="ending-head">
+                <p className="ending-eyebrow">Tu es arrivée à la fin du livre</p>
+                <h2 className="ending-title" id="ending-title">Bye bye !</h2>
+                {currentBook?.title && <p className="ending-book">{currentBook.title}</p>}
+            </header>
+
+            <div className="ending-rate">
+                <h3 className="ending-label">N'oublie pas de noter</h3>
+                <StarRating bookId={currentBook?.id} onRatingChange={handleRatingChange} />
             </div>
 
-            <div className="Note">
-                <div className="title">
-                    <h3>
-                        <h3>N'oublie pas de noter</h3>
-                    </h3>
-                </div>
+            <div className="ending-similar">
+                <h3 className="ending-label">Livre qui pourrait te plaire</h3>
 
-                <div className="star">
-                    <StarRating
-                        bookId={currentBook?.id}
-                        onRatingChange={(rating) => {
-                            setUserRating(rating)
-                            setHasRated(true)
-                        }}
-                    />
-                </div>
-            </div>
-
-            <div className="other-books">
-                <div className="title">
-                    <h3>Livre qui pourrait te plaire</h3>
-                </div>
-                <div className="book-cat">
-                    {similarBooks.length > 0 ? (
-                        similarBooks.map((book) => (
-                            <Card
-                                key={book.id}
-                                Book={book}
-                                onClick={(e) => {
-                                    // e.stopPropagation() // Empêche la propagation vers l'overlay
-                                    handleBookClick(book) // Utilise la nouvelle fonction
-                                }}
-                            />
-                        ))
+                <div className="ending-books">
+                    {status === 'loading' ? (
+                        <div className="ending-books__track" aria-hidden="true">
+                            {Array.from({ length: SUGGESTIONS_COUNT }, (_, i) => (
+                                <div key={i} className="ending-skeleton" />
+                            ))}
+                        </div>
+                    ) : similarBooks.length > 0 ? (
+                        <div className="ending-books__track">
+                            {similarBooks.map((suggested) => (
+                                <Card
+                                    key={suggested.id}
+                                    Book={suggested}
+                                    onClick={() => handleBookClick(suggested)}
+                                />
+                            ))}
+                        </div>
                     ) : (
-                        <p>Aucune suggestion disponible</p>
+                        <p className="ending-empty">Aucune suggestion disponible</p>
                     )}
                 </div>
             </div>
 
-            <div className="btn-quit">
-                <Link to="/" className="home-link">
-                    <Button onClick={onClose} text="Retour Page Home" />
-                </Link>
+            <div className="ending-actions">
+                <Button variant="primary" onClick={handleGoHome}>
+                    Retour à l'accueil
+                </Button>
             </div>
         </section>
     )

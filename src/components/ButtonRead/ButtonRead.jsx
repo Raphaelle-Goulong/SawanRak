@@ -1,14 +1,10 @@
-import '../ButtonRead/ButtonRead.scss';
+import Button from '../Button/Button';
 
-function ButtonRead({ text, children, onClick, type = "button" }) {
+function ButtonRead({ text, children, onClick, type = 'button', ...rest }) {
     return (
-        <button 
-            type={type} 
-            className="rainbow-hover" 
-            onClick={onClick}
-        >
-            <span className="sp">{text || children}</span>
-        </button>
+        <Button variant="primary" size="sm" type={type} onClick={onClick} {...rest}>
+            {text || children}
+        </Button>
     );
 }
 
