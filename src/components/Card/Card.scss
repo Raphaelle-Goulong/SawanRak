@@ -1,51 +1,113 @@
+// ── Palette ──
+$lb-pink: #d162a4;
+
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
 .Card {
-    width: 100px;
-    height: 180px;
-    background-color: transparent;
-    border-radius: 10px;
-    color: white;
+    // Largeur ajustable : <div style="--card-width: 130px"> ou ici
+    --card-width: 100px;
+
+    width: var(--card-width);
+    flex-shrink: 0;
+    color: #efe4de;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+
+    @media (min-width: 1024px) {
+        --card-width: 116px;
+    }
 
     .Img-books {
-        position: relative; // ← nécessaire pour positionner le coeur
+        position: relative; // nécessaire pour positionner le coeur
+        border-radius: 12px;
 
         img {
-            width: 100px;
-            height: 150px;
-            border-radius: 7px;
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 3;
+            border-radius: 12px;
             object-fit: cover;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            background: rgba(255, 255, 255, 0.04);
+            outline: 1px solid rgba(255, 255, 255, 0.08);
+            outline-offset: -1px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+            transition:
+                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s ease,
+                outline-color 0.3s ease;
         }
 
-        // Coeur en haut à droite de la cover
+        // Coeur en haut à droite de la couverture
         .heart-indicator {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 6px;
+            right: 6px;
+            display: grid;
+            place-items: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(12, 8, 16, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
 
             svg {
-                width: 14px;
-                height: 14px;
-                fill: rgb(255, 50, 50);
-                filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+                width: 12px;
+                height: 12px;
+                fill: #f08ac0;
+                filter: drop-shadow(0 0 4px rgba($lb-pink, 0.6));
             }
         }
     }
 
     .Title-books {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         margin-top: 10px;
-        font-family: 'Mulish', sans-serif;
-        font-weight: 300;
-        font-size: 0.9rem;
 
         h3 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100px;
+            margin: 0;
+            min-height: calc(1.3em * 2); // les cartes restent alignées, titre court ou long
+            font-family: $font-ui;
+            font-size: 0.78rem;
+            font-weight: 400;
+            line-height: 1.3;
             text-align: center;
+            color: rgba(239, 228, 222, 0.82);
+
+                        // Titre sur 2 lignes maximum
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+
+    // Survol (uniquement avec une souris)
+    @media (hover: hover) {
+        &:hover .Img-books img {
+            transform: translateY(-4px);
+            outline-color: rgba($lb-pink, 0.45);
+            box-shadow:
+                0 14px 30px rgba(0, 0, 0, 0.5),
+                0 0 28px rgba($lb-pink, 0.25);
+        }
+    }
+
+    &:active .Img-books img {
+        transform: scale(0.97);
+    }
+
+    &:focus-visible .Img-books img {
+        outline: 2px solid rgba($lb-pink, 0.8);
+        outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .Img-books img {
+            transition: none;
         }
     }
 }

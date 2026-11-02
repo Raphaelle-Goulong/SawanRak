@@ -1,64 +1,34 @@
-// ============================================
-// PAGE 404 — Mobile-first (tel + tablette)
-// ============================================
-
-// Palette lesbienne
 $lesbian-orange-dark: #d52d00;
-$lesbian-orange:      #ef7627;
-$lesbian-peach:       #ff9a56;
-$lesbian-pink:        #d162a4;
-$lesbian-magenta:     #b55690;
-$lesbian-purple:      #a30262;
+$lesbian-orange: #ef7627;
+$lesbian-peach: #ff9a56;
+$lesbian-pink: #d162a4;
+$lesbian-magenta: #b55690;
+$lesbian-purple: #a30262;
 
-// ============================================
-// CONTENEUR
-// ============================================
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
 .container-error {
     position: relative;
-    min-height: 100vh;
-    min-height: 100dvh; // ⬅️ gère la barre d'URL mobile qui apparaît/disparaît
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    min-height: 75dvh; // pas 100dvh : l'en-tête est déjà au-dessus, sinon la page déborde
+    padding: 24px clamp(16px, 5vw, 32px);
+    box-sizing: border-box;
     text-align: center;
     overflow: hidden;
-    background: radial-gradient(
-        ellipse at center,
-        #1a0a12 0%,
-        #0f090a 60%,
-        #080506 100%
-    );
-    font-family: 'Anek Latin', sans-serif;
-
-    // Padding adaptatif : petit sur mobile, plus grand sur desktop
-    padding: 20px 16px;
-
-    // Respecte l'encoche et la barre home des iPhone
-    padding-top: max(20px, env(safe-area-inset-top));
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
-
-    // Empêche le scroll horizontal accidentel
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-
-    @media (min-width: 768px) {
-        padding: 40px 32px;
-    }
+    font-family: $font-ui;
+    color: #f6ede8;
 }
 
-// ============================================
-// PARTICULES FLOTTANTES
-// ============================================
+// ── Particules ──
 .particles {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    overflow: hidden;
     z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .particle {
@@ -69,7 +39,7 @@ $lesbian-purple:      #a30262;
     animation-name: floatUp;
     animation-timing-function: ease-in;
     animation-iteration-count: infinite;
-    will-change: transform, opacity; // ⬅️ aide le GPU sur mobile
+    will-change: transform, opacity;
 
     &:nth-child(6n + 1) { background: $lesbian-orange-dark; box-shadow: 0 0 8px $lesbian-orange-dark; }
     &:nth-child(6n + 2) { background: $lesbian-orange;      box-shadow: 0 0 8px $lesbian-orange; }
@@ -86,17 +56,15 @@ $lesbian-purple:      #a30262;
     100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
 }
 
-// ============================================
-// CONTENU
-// ============================================
+// ── Contenu ──
 .error-content {
     position: relative;
     z-index: 1;
-    width: 100%;
-    max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 900px;
     animation: fadeUp 0.9s ease-out both;
 }
 
@@ -105,17 +73,14 @@ $lesbian-purple:      #a30262;
     to   { opacity: 1; transform: translateY(0); }
 }
 
-// ============================================
-// TITRE 404
-// ============================================
 .error-title {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
     margin: 0 0 24px;
-    font-size: clamp(5rem, 26vw, 16rem); // ⬅️ s'adapte de 5rem à 16rem
-    font-weight: 800;
+    font-size: clamp(5rem, 26vw, 14rem);
+    font-weight: 600;
     line-height: 1;
     letter-spacing: -0.04em;
 
@@ -134,22 +99,19 @@ $lesbian-purple:      #a30262;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: gradientShift 6s ease-in-out infinite,
-                   floatDigit 3s ease-in-out infinite;
+        animation: gradientShift 6s ease-in-out infinite, floatDigit 3s ease-in-out infinite;
         will-change: transform;
 
-        &:nth-child(1) { animation-delay: 0s, 0s; }
         &:nth-child(2) { animation-delay: 0s, 0.3s; }
         &:nth-child(3) { animation-delay: 0s, 0.6s; }
     }
 
-    // Tablette
     @media (min-width: 768px) {
         gap: 16px;
         margin-bottom: 32px;
     }
 
-    // Petit mobile en paysage (hauteur limitée)
+    // Téléphone en paysage (hauteur limitée)
     @media (max-height: 500px) and (orientation: landscape) {
         font-size: clamp(3rem, 12vh, 6rem);
         margin-bottom: 12px;
@@ -166,84 +128,67 @@ $lesbian-purple:      #a30262;
     50%      { transform: translateY(-6px); }
 }
 
-// ============================================
-// TEXTE
-// ============================================
 .error-text {
-    font-size: clamp(0.95rem, 3.8vw, 1.6rem);
-    color: #f5e6ec;
+    max-width: 32ch;
     margin: 0 0 28px;
-    opacity: 0.92;
-    max-width: 90%;
-    line-height: 1.5;
-    padding: 0 8px;
+    font-size: clamp(0.95rem, 3.8vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(239, 228, 222, 0.85);
+    text-wrap: balance;
 
     @media (min-width: 768px) {
         margin-bottom: 40px;
-        max-width: 600px;
-        line-height: 1.6;
     }
 }
 
-// ============================================
-// BOUTON
-// ============================================
+// ── Bouton (même style que les autres boutons du site) ──
 .error-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    // ⬇️ Zone tactile minimale recommandée par Apple/Google : 44x44 px
-    min-height: 48px;
-    padding: 14px 28px;
-    font-size: 1rem;
+    min-height: 3rem;
+    padding: 0 1.8rem;
+    font-size: 0.74rem;
     font-weight: 600;
-    color: #fff;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f6ede8;
     text-decoration: none;
+    border: 1px solid transparent;
     border-radius: 999px;
-    background: linear-gradient(
-        135deg,
-        $lesbian-orange-dark 0%,
-        $lesbian-pink 50%,
-        $lesbian-purple 100%
-    );
-    background-size: 200% 200%;
-    box-shadow: 0 8px 20px rgba($lesbian-magenta, 0.35);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    animation: gradientShift 8s ease-in-out infinite;
+    background:
+        linear-gradient(
+            135deg,
+            rgba($lesbian-orange, 0.4),
+            rgba($lesbian-pink, 0.4),
+            rgba($lesbian-purple, 0.4)
+        ) padding-box,
+        linear-gradient(#0f0a14, #0f0a14) padding-box,
+        linear-gradient(135deg, $lesbian-orange, $lesbian-pink, $lesbian-purple) border-box;
+    box-shadow: 0 8px 24px rgba($lesbian-magenta, 0.25);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
 
-    // Sur tactile : on ne déclenche le hover que si l'appareil le supporte
     @media (hover: hover) {
         &:hover {
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 12px 28px rgba($lesbian-magenta, 0.55),
-                        0 0 0 6px rgba($lesbian-peach, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba($lesbian-magenta, 0.45);
         }
     }
 
-    // Feedback immédiat au tap sur mobile
     &:active {
-        transform: scale(0.97);
-        box-shadow: 0 4px 12px rgba($lesbian-magenta, 0.4);
+        transform: translateY(1px) scale(0.97);
     }
 
-    // Tablette : bouton plus généreux
-    @media (min-width: 768px) {
-        min-height: 52px;
-        padding: 16px 40px;
-        font-size: 1.1rem;
+    &:focus-visible {
+        outline: 2px solid rgba($lesbian-pink, 0.7);
+        outline-offset: 3px;
     }
 }
 
-// ============================================
-// ACCESSIBILITÉ : respecte "réduire les animations"
-// ============================================
 @media (prefers-reduced-motion: reduce) {
     .particle { animation: none; opacity: 0; }
     .error-content { animation: none; }
-    .error-title .digit {
-        animation: none;
-        background-position: 50% 50%;
-    }
-    .error-link { animation: none; }
+    .error-title .digit { animation: none; background-position: 50% 50%; }
+    .error-link { transition: none; }
 }

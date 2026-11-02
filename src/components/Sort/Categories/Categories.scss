@@ -1,58 +1,58 @@
-// Variables pour le drapeau lesbien
-$lb-orange: #d52d00;
 $lb-peach: #ef7627;
 $lb-pink: #d162a4;
-$lb-magenta: #b55690;
 $lb-purple: #a30262;
+
+$gradient: linear-gradient(135deg, $lb-peach, $lb-pink, $lb-purple);
+$text-primary: #f6ede8;
+$text-muted: rgba(239, 228, 222, 0.55);
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
 
 .Categories-Container {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
-    font-family: 'Mulish', sans-serif;
-    color: #f0e6ee;
+    font-family: $font-ui;
+    color: $text-primary;
 
     .Categories-Loading {
-        text-align: center;
-        padding: 50px;
-        font-size: 1.2rem;
-        color: $lb-pink;
-        animation: pulseText 1.5s ease-in-out infinite;
+        display: grid;
+        place-items: center;
+        min-height: 40vh;
     }
 
     // ── Titres communs aux sections ──
-    .Title-Section, .Title-Categories {
-        font-family: 'Marcellus', serif;
-        font-size: 2rem;
-        margin-bottom: 25px;
-        color: #fff;
-        position: relative;
-        display: inline-block;
+    .Title-Section,
+    .Title-Categories {
+        margin: 0 0 32px;
+        font-weight: 600;
+        font-size: clamp(1.4rem, 4vw, 1.9rem);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        color: $text-primary;
 
-        // Petite ligne de soulignement colorée
+        // Petite barre dégradée
         &::after {
             content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
+            display: block;
             width: 40px;
             height: 3px;
-            background: linear-gradient(90deg, $lb-orange, $lb-pink, $lb-purple);
+            margin-top: 12px;
             border-radius: 2px;
+            background: $gradient;
         }
 
-        // Pour le compteur dans "Tous les livres"
+        // Compteur de « Tous les livres »
         span {
-            font-family: 'Mulish', sans-serif;
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.4);
+            margin-left: 8px;
+            font-size: 1rem;
             font-weight: 400;
-            margin-left: 10px;
+            letter-spacing: 0;
+            color: $text-muted;
         }
     }
 
-    // ── Section Catégories (Carrousels) ──
+    // ── Catégories (carrousels) ──
     .Section-Categories {
         display: flex;
         flex-direction: column;
@@ -60,94 +60,83 @@ $lb-purple: #a30262;
 
         .Category-group {
             width: 100%;
-            
-            // Si ton composant Carrousel a un titre, on le stylise
+
             .Carrousel-Title {
-                font-family: 'Marcellus', serif;
-                font-size: 1.5rem;
                 margin-bottom: 15px;
-                color: rgba(255, 255, 255, 0.9);
+                font-size: 1.15rem;
+                font-weight: 600;
+                letter-spacing: -0.01em;
+                color: rgba(246, 237, 232, 0.92);
             }
         }
     }
 
-    // ── Section Auteurs ──
+    // ── Auteurs ──
     .Section-Author {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 24px;
+
+        .Title-Section {
+            margin-bottom: 8px;
+        }
 
         .Author-group {
-            background: rgba(15, 10, 20, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
             padding: 20px;
+            background: rgba(12, 8, 16, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
 
             .Author-name {
-                font-family: 'Marcellus', serif;
-                font-size: 1.4rem;
-                margin-top: 0;
-                margin-bottom: 20px;
-                color: $lb-peach; // Un peu de couleur pour différencier
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                padding-bottom: 10px;
+                margin: 0 0 20px;
+                padding-bottom: 12px;
+                font-size: 1.05rem;
+                font-weight: 600;
+                letter-spacing: -0.01em;
+                color: #ffb27a;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
             }
 
             .Author-books {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+                justify-items: center;
                 gap: 20px;
             }
         }
     }
 
-    // ── Section Tous les livres ──
+    // ── Tous les livres ──
     .Section-AllBooks {
         .AllBooks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+            justify-items: center;
+            gap: 28px 20px;
             padding-bottom: 50px;
         }
     }
 }
 
-// Animation de pulsation pour le texte de chargement
-@keyframes pulseText {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; text-shadow: 0 0 10px rgba($lb-pink, 0.5); }
-}
-
-// ── Responsive Mobile ──
+// ── Mobile ──
 @media (max-width: 768px) {
     .Categories-Container {
         padding: 15px;
 
-        .Title-Section, .Title-Categories {
-            font-size: 1.6rem;
-        }
+        .Section-Author .Author-group {
+            padding: 16px;
 
-        .Section-Author {
-            .Author-group {
-                padding: 15px;
-                
-                .Author-name {
-                    font-size: 1.2rem;
-                }
-
-                .Author-books {
-                    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-                    gap: 15px;
-                }
+            .Author-books {
+                grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+                gap: 16px;
             }
         }
 
-        .Section-AllBooks {
-            .AllBooks-grid {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-                gap: 15px;
-            }
+        .Section-AllBooks .AllBooks-grid {
+            grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+            gap: 22px 14px;
         }
     }
 }

@@ -1,3 +1,13 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Filet de sécurité : jamais de défilement horizontal de la page.
+   « clip » ne crée pas de zone de défilement, donc rien d'autre ne casse. */
+body {
+    overflow-x: clip;
+}
+
 #aurora-canvas {
   position: fixed;
   inset: 0;

@@ -1,0 +1,103 @@
+// Les 7 bandes du drapeau : (couleur du tube, couleur du cœur de la lettre)
+$stripes: (
+    (#d52d00, #ffb09a),
+    (#ef7627, #ffc99e),
+    (#ff9a56, #ffe3c9),
+    (#ffe9dc, #ffffff), // bande blanche : lueur légèrement chaude
+    (#d162a4, #f9cfe5),
+    (#b55690, #efb3d8),
+    (#a30262, #ff8ccb)
+);
+
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
+.neon-logo {
+    --k: 1; // échelle de la lueur
+
+    display: inline-block;
+    margin: 0;
+    font-family: $font-ui;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    white-space: nowrap;
+    user-select: none;
+
+    &--lg {
+        font-size: clamp(2.6rem, 11vw, 4rem);
+
+        @media (max-width: 480px) {
+            --k: 0.8; // lueur un peu plus sobre sur petit écran
+        }
+    }
+
+    &--sm {
+        --k: 0.45;
+        font-size: 1.25rem;
+        letter-spacing: 0.04em;
+    }
+
+    &__letters {
+        display: inline-flex;
+    }
+
+    // Texte réservé aux lecteurs d'écran
+    &__sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    // Un tube de néon : cœur clair + halos de plus en plus larges
+    &__letter {
+        display: inline-block;
+        color: var(--core);
+        text-shadow:
+            0 0 calc(2px * var(--k)) rgba(255, 255, 255, 0.85),
+            0 0 calc(6px * var(--k)) var(--core),
+            0 0 calc(14px * var(--k)) var(--tube),
+            0 0 calc(28px * var(--k)) var(--tube),
+            0 0 calc(48px * var(--k)) var(--tube-75),
+            0 0 calc(80px * var(--k)) var(--tube-50);
+    }
+}
+
+// Une couleur de bande par lettre (et on recommence si le texte est plus long)
+@for $i from 1 through length($stripes) {
+    $pair: nth($stripes, $i);
+    $tube: nth($pair, 1);
+    $core: nth($pair, 2);
+
+    .neon-logo__letter:nth-child(#{length($stripes)}n + #{$i}) {
+        --tube: #{$tube};
+        --tube-75: #{rgba($tube, 0.75)};
+        --tube-50: #{rgba($tube, 0.5)};
+        --core: #{$core};
+    }
+}
+
+// Deux lettres clignotent de temps en temps, comme une vraie enseigne
+.neon-logo__letter:nth-child(7n + 3) {
+    animation: neon-flicker 9s linear infinite;
+}
+
+.neon-logo__letter:nth-child(7n + 6) {
+    animation: neon-flicker 13s linear infinite 3s;
+}
+
+@keyframes neon-flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; filter: none; }
+    20%, 24%, 55%                     { opacity: 0.45; filter: brightness(0.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .neon-logo__letter {
+        animation: none;
+    }
+}

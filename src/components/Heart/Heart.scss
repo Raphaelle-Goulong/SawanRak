@@ -1,15 +1,19 @@
-/* From Uiverse.io by waleedlh10 */ 
 .con-like {
-  --red: rgb(255, 50, 50);
+  --heart: #f08ac0;
+  --heart-glow: rgba(209, 98, 164, 0.6);
+
   position: relative;
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
 }
 
 .con-like .like {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: -8px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  margin: 0;
   opacity: 0;
   z-index: 20;
   cursor: pointer;
@@ -21,37 +25,56 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+}
+
+// Focus clavier
+.con-like .like:focus-visible ~ .checkmark {
+  outline: 2px solid rgba(209, 98, 164, 0.7);
+  outline-offset: 6px;
 }
 
 .con-like .outline,
 .con-like .filled {
-  fill: var(--red);
+  fill: var(--heart);
   position: absolute;
 }
 
+.con-like .outline {
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.con-like .like:hover ~ .checkmark .outline {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
 .con-like .filled {
-  animation: kfr-filled 0.5s;
   display: none;
+  filter: drop-shadow(0 0 6px var(--heart-glow));
+  animation: kfr-filled 0.5s;
 }
 
 .con-like .celebrate {
   position: absolute;
+  display: none;
+  pointer-events: none;
   animation: kfr-celebrate 0.5s;
   animation-fill-mode: forwards;
-  display: none;
 }
 
 .con-like .poly {
-  stroke: var(--red);
-  fill: var(--red);
+  stroke: var(--heart);
+  fill: var(--heart);
 }
 
 .con-like .like:checked ~ .checkmark .filled {
-  display: block
+  display: block;
 }
 
 .con-like .like:checked ~ .checkmark .celebrate {
-  display: block
+  display: block;
 }
 
 @keyframes kfr-filled {
@@ -79,5 +102,16 @@
     transform: scale(1.2);
     opacity: 0;
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .con-like .filled,
+  .con-like .celebrate {
+    animation: none;
+  }
+
+  .con-like .celebrate {
+    display: none !important;
   }
 }

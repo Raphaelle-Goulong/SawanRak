@@ -1,193 +1,81 @@
-// Variables pour le drapeau lesbien
-$lb-orange: #D52D00;
-$lb-peach: #EF7627;
-$lb-pink: #D162A4;
-$lb-magenta: #B55690;
-$lb-purple: #A30262;
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-purple: #a30262;
+
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
 
 .tags-navigation {
-    display: flex;
-    align-items: center;
-    padding: 1rem 0;
-    margin-bottom: 2rem;
-    position: relative;
-    margin: 0 20px;
-    
-    .tags-container {
+    padding: 12px 0;
+
+        .tags-container {
         display: flex;
-        gap: 0.75rem;
+        gap: 10px;
         overflow-x: auto;
         scroll-behavior: smooth;
-        padding: 0.5rem 0;
-        flex: 1;
+
+        // Pleine largeur : on annule exactement le padding de la page (--page-pad, défini dans Home.scss)
+        margin-inline: calc(var(--page-pad, 0px) * -1);
+        padding: 6px var(--page-pad, 16px);
+        scroll-padding-inline: var(--page-pad, 16px);
 
         // Masquer la scrollbar
         scrollbar-width: none;
         -ms-overflow-style: none;
-        &::-webkit-scrollbar {
-            display: none;
+        &::-webkit-scrollbar { display: none; }
+
+        // Léger fondu sur les bords : indique que la barre défile
+        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+    }
+
+    .tag-item {
+        flex-shrink: 0;
+        padding: 0.62rem 1.2rem;
+        font-family: $font-ui;
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        color: rgba(239, 228, 222, 0.55);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        cursor: pointer;
+        transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+        &:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
+        &:focus-visible {
+            outline: 2px solid rgba($lb-pink, 0.7);
+            outline-offset: 2px;
+        }
+
+        &:active {
+            transform: scale(0.96);
+        }
+
+        // Onglet actif : fond teinté + bordure dégradée
+        &.active {
+            color: #fff;
+            font-weight: 600;
+            border-color: transparent;
+            background:
+                linear-gradient(135deg, rgba($lb-peach, 0.28), rgba($lb-pink, 0.28), rgba($lb-purple, 0.28)) padding-box,
+                linear-gradient(#0f0a14, #0f0a14) padding-box,
+                linear-gradient(135deg, $lb-peach, $lb-pink, $lb-purple) border-box;
+            box-shadow: 0 4px 18px rgba($lb-pink, 0.2);
+        }
+    }
+
+    @media (max-width: 768px) {
         .tag-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 0.6rem 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            font-family: 'Mulish', sans-serif;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            flex-shrink: 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            position: relative; // Nécessaire pour l'animation interne
-            overflow: hidden; // Nécessaire pour l'animation interne
-
-            &:hover {
-                background: rgba(255, 255, 255, 0.08);
-                border-color: rgba(255, 255, 255, 0.2);
-                color: #fff;
-                transform: translateY(-2px);
-            }
-
-            // ✅ Le tag actif
-            &.active {
-                border: 1px solid transparent;
-                
-                // 1️⃣ LA BORDURE DÉGRADÉE
-                background: 
-                    linear-gradient(rgba(20, 15, 25, 0.8), rgba(20, 15, 25, 0.8)) padding-box,
-                    linear-gradient(135deg, $lb-orange, $lb-peach, $lb-pink, $lb-magenta, $lb-purple) border-box;
-                
-                color: #fff;
-                font-weight: 600;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 15px rgba($lb-magenta, 0.2);
-
-                // 2️⃣ L'EFFET DE LUMIÈRE QUI GLISSE (Pseudo-élément)
-                &::before {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    border-radius: 25px;
-                    background: linear-gradient(
-                        90deg,
-                        transparent 0%,
-                        rgba($lb-pink, 0.15) 50%,
-                        transparent 100%
-                    );
-                    transform: translateX(-100%);
-                    animation: shimmer 3s infinite ease-in-out;
-                    pointer-events: none;
-                }
-
-                &:hover {
-                    box-shadow: 0 6px 20px rgba($lb-pink, 0.35);
-                }
-            }
-
-            &:active {
-                transform: translateY(0) scale(0.96);
-            }
-        }
-    }
-}
-
-// Animation pour la lumière qui glisse
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-// ... (Le reste de ton code .dynamic-content ne change pas, je le remets ci-dessous pour que tu aies tout)
-.dynamic-content {
-    margin-top: 2rem;
-    animation: fadeIn 0.4s ease-in-out;
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .no-books-message {
-        text-align: center;
-        color: rgba(255, 255, 255, 0.6);
-        padding: 3rem;
-        font-size: 1.1rem;
-    }
-
-    .Category-books-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1.5rem;
-        padding: 1rem 0;
-    }
-
-    #Daily-discoveries {
-        margin-top: 3rem;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        
-        .Title-Section {
-            margin-bottom: 2rem;
-
-            h2 {
-                font-size: 1.8rem;
-                margin-bottom: 0.5rem;
-                background: linear-gradient(135deg, $lb-orange, $lb-peach, $lb-pink, $lb-magenta, $lb-purple);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                z-index: 30;
-            }
-
-            .subtitle {
-                color: rgba(255, 255, 255, 0.6);
-                font-size: 0.95rem;
-                font-style: italic;
-            }
-        }
-
-        .Daily-books-grid {
-            gap: 1rem;
-            display: flex;
-        }
-    }
-}
-
-// Responsive
-@media (max-width: 768px) {
-    .tags-navigation {
-        .tags-container {
-            .tag-item {
-                padding: 0.5rem 1.2rem;
-                font-size: 0.85rem;
-            }
-        }
-    }
-
-    .dynamic-content {
-        .Category-books-grid {
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-
-        #Daily-discoveries {
-            padding: 25px;
-
-            .Title-Section {
-                h2 { font-size: 1.4rem; }
-                .subtitle { font-size: 0.85rem; }
-            }
-
-            .Daily-books-grid {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+            padding: 0.56rem 1.05rem;
+            font-size: 0.8rem;
         }
     }
 }

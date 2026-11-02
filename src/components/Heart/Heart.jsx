@@ -29,7 +29,7 @@ function Heart({ bookId }) {
             <input
                 className="like"
                 type="checkbox"
-                title="like"
+                aria-label={isLiked ? 'Retirer des favoris' : 'Ajouter aux favoris'}
                 checked={isLiked}
                 onChange={handleChange}
             />

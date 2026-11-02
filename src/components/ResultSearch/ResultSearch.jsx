@@ -1,149 +1,115 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { X } from 'lucide-react'
 
 import Card from '../Card/Card'
+import useLivres from '../../hooks/useLivres'
 
 import './ResultSearch.scss'
 
+// Minuscules, sans accents : « Étoile » et « etoile » se trouvent mutuellement
+const normalize = (text) =>
+    String(text || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim()
+
 function ResultSearch({ searchTerm, isOpen, onClose, onBookSelect }) {
-    const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const { books } = useLivres()
+    const [visible, setVisible] = useState(false)
 
+    // Recherche dans le titre et l'auteur
+    const filteredBooks = useMemo(() => {
+        const query = normalize(searchTerm)
+        if (!query) return []
+        return books.filter(
+            (book) => normalize(book.title).includes(query) || normalize(book.auteur).includes(query)
+        )
+    }, [books, searchTerm])
+
+    // Animation d'entrée
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/livres');
-                if (!response.ok) throw new Error('Erreur réseau')
-                const json = await response.json()
-
-                // Si ton API renvoie { "livres": [...] }, utilise json.livres
-                const livres = json.livres || json
-                setData(livres)
-            } catch (error) {
-                console.error('Erreur de chargement des livres:', error)
-            } finally {
-                setIsLoading(false)
-            }
+        if (!isOpen) {
+            setVisible(false)
+            return undefined
         }
-        fetchData()
-    }, [])
+        const timer = setTimeout(() => setVisible(true), 10)
+        return () => clearTimeout(timer)
+    }, [isOpen])
 
-    // Normalisation des catégories
-    const normalizedBooks = data.map((book) => ({
-        ...book,
-        categorie: Array.isArray(book.categorie) ? book.categorie : [book.categorie]
-    }))
-
-    // Filtrage des livres selon le terme de recherche (titre et auteur uniquement)
-    const filteredBooks = searchTerm
-        ? normalizedBooks.filter((book) => {
-              const searchLower = searchTerm.toLowerCase().trim()
-
-              // Recherche dans le titre
-              const titleMatch = book.title.toLowerCase().includes(searchLower)
-
-              // Recherche dans l'auteur
-              const authorMatch = book.auteur && book.auteur.toLowerCase().includes(searchLower)
-
-              return titleMatch || authorMatch
-          })
-        : []
-
-    // Fonction pour ajouter aux derniers consultés
-    const addToLastViewed = (bookId) => {
-        try {
-            const stored = localStorage.getItem('lastViewedBooks')
-            let viewedBooks = stored ? JSON.parse(stored) : []
-            viewedBooks = viewedBooks.filter((id) => id !== bookId)
-            viewedBooks.unshift(bookId)
-            viewedBooks = viewedBooks.slice(0, 10)
-            localStorage.setItem('lastViewedBooks', JSON.stringify(viewedBooks))
-        } catch (error) {
-            console.error('Erreur lors de la sauvegarde:', error)
-        }
-    }
-
-    const handleCardClick = (book) => {
-        addToLastViewed(book.id)
-        // Fermer la modale de recherche
-        onClose()
-        // Informer le parent (Search/Home) du livre sélectionné
-        if (onBookSelect) {
-            onBookSelect(book)
-        }
-    }
-
-    // Fermer la modale de recherche quand on appuie sur Escape
+    // Échap ferme la recherche, et la page derrière ne défile plus
     useEffect(() => {
-        const handleEscape = (e) => {
-            if (e.key === 'Escape' && isOpen) {
-                onClose()
-            }
+        if (!isOpen) return undefined
+
+        const onKey = (e) => {
+            if (e.key === 'Escape') onClose()
         }
-        window.addEventListener('keydown', handleEscape)
-        return () => window.removeEventListener('keydown', handleEscape)
+        const previousOverflow = document.body.style.overflow
+
+        window.addEventListener('keydown', onKey)
+        document.body.style.overflow = 'hidden'
+
+        return () => {
+            window.removeEventListener('keydown', onKey)
+            document.body.style.overflow = previousOverflow
+        }
     }, [isOpen, onClose])
 
-    // Bloquer le scroll quand la modale est ouverte
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = 'unset'
-        }
-        return () => {
-            document.body.style.overflow = 'unset'
-        }
-    }, [isOpen])
+    const handleCardClick = (book) => {
+        onClose()
+        // Home ouvre la fiche et enregistre le livre dans les derniers consultés
+        if (onBookSelect) onBookSelect(book)
+    }
 
     if (!isOpen) return null
 
     return (
-        <>
-            <div className={`result-search-overlay ${isOpen ? 'show' : ''}`} onClick={onClose}>
-                <div className="result-search-modal" onClick={(e) => e.stopPropagation()}>
-                    <div className="modal-header">
-                        <h2>
-                            Résultats de recherche
-                            {searchTerm && <span> pour "{searchTerm}"</span>}
-                        </h2>
-                        <button className="close-btn" onClick={onClose} aria-label="Fermer">
-                            <X size={24} />
-                        </button>
-                    </div>
+        <div className={`result-search-overlay${visible ? ' show' : ''}`} onClick={onClose}>
+            <div
+                className="result-search-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Résultats de recherche"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <div className="modal-header">
+                    <h2>
+                        Résultats
+                        {searchTerm && <span> pour « {searchTerm} »</span>}
+                    </h2>
+                    <button type="button" className="close-btn" onClick={onClose} aria-label="Fermer">
+                        <X size={22} />
+                    </button>
+                </div>
 
-                    <div className="modal-body">
-                        {filteredBooks.length > 0 ? (
-                            <>
-                                <p className="results-count">
-                                    {filteredBooks.length} livre(s) trouvé(s)
-                                </p>
-                                <div className="results-grid">
-                                    {filteredBooks.map((book, index) => (
-                                        <div
-                                            key={book.id}
-                                            style={{
-                                                animationDelay: `${index * 0.05}s`
-                                            }}
-                                            className="result-item">
-                                            <Card
-                                                Book={book}
-                                                onClick={() => handleCardClick(book)}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </>
-                        ) : (
-                            <div className="no-results">
-                                <p>Aucun résultat trouvé</p>
-                                <span>Essaie avec un autre terme de recherche</span>
+                <div className="modal-body">
+                    {filteredBooks.length > 0 ? (
+                        <>
+                            <p className="results-count">
+                                {filteredBooks.length} livre{filteredBooks.length > 1 ? 's' : ''} trouvé
+                                {filteredBooks.length > 1 ? 's' : ''}
+                            </p>
+                            <div className="results-grid">
+                                {filteredBooks.map((book, index) => (
+                                    <div
+                                        key={book.id}
+                                        className="result-item"
+                                        style={{ animationDelay: `${Math.min(index, 12) * 0.04}s` }}
+                                    >
+                                        <Card Book={book} onClick={() => handleCardClick(book)} />
+                                    </div>
+                                ))}
                             </div>
-                        )}
-                    </div>
+                        </>
+                    ) : (
+                        <div className="no-results">
+                            <p>Aucun résultat trouvé</p>
+                            <span>Essaie avec un autre terme de recherche</span>
+                        </div>
+                    )}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

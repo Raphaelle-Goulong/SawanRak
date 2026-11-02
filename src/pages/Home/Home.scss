@@ -1,241 +1,186 @@
-// Variables pour le drapeau lesbien
+// ── Palette ──
 $lb-orange: #d52d00;
 $lb-peach: #ef7627;
 $lb-pink: #d162a4;
-$lb-magenta: #b55690;
 $lb-purple: #a30262;
 
+$gradient: linear-gradient(135deg, $lb-peach, $lb-pink, $lb-purple);
+$text-primary: #f6ede8;
+$text-body: rgba(239, 228, 222, 0.86);
+$text-muted: rgba(239, 228, 222, 0.55);
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
+.home-loading {
+    display: grid;
+    place-items: center;
+    min-height: 60vh;
+}
+
 .Section-Home {
-    height: auto;
-    color: white;
-    background-color: transparent; // On laisse le fond animé global agir
+    // Marge latérale de la page, partagée avec la barre de tags
+    --page-pad: clamp(14px, 4vw, 24px);
 
-    // ── 1. DERNIER LIVRE CONSULTÉ (MODERNISÉ) ──
-    #Last-book {
-        width: 100%;
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 30px;
+    font-family: $font-ui;
+    color: $text-body;
+    background-color: transparent; // le fond animé global est visible derrière
+
+    // Garde-fou : padding et bordures comptent dans la largeur, même si le reset global change
+    &,
+    *,
+    *::before,
+    *::after {
         box-sizing: border-box;
-        
-        // Le même conteneur en verre dépoli que les autres sections
-        background: rgba(15, 10, 20, 0.4);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        
-        // Bordure dégradée
-        border: 1px solid transparent;
-        background-image: 
-            linear-gradient(rgba(15, 10, 20, 0.6), rgba(15, 10, 20, 0.6)), 
-            linear-gradient(135deg, rgba($lb-orange, 0.3), rgba($lb-pink, 0.3), rgba($lb-purple, 0.3));
-        background-origin: border-box;
-        background-clip: padding-box, border-box;
-        
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-
-        .Title-Section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-            
-            h2 {
-                font-family: 'Playfair Display', serif; // ou 'Marcellus'
-                font-size: 1.8rem;
-                margin: 0;
-                // Le même dégradé de texte
-                background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
-        }
-
-        .Last-New-book-card {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-
-            // L'écrin de la carte
-            .last-book-wrapper {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 20px;
-                border-radius: 20px;
-                
-                // Un fond un peu plus sombre pour faire ressortir la carte
-                background: rgba(10, 5, 15, 0.5);
-                border: 1px solid rgba(255, 255, 255, 0.05);
-                
-                // Animation de flottaison au survol
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-                &:hover {
-                    transform: translateY(-5px) scale(1.02);
-                    box-shadow: 0 15px 30px rgba($lb-magenta, 0.2);
-                    border-color: rgba($lb-pink, 0.3);
-                }
-            }
-        }
     }
 
-    // ── 2. RÉCENTS AJOUTS ──
-    #New-book {
+    .Home {
         width: 100%;
         max-width: 1200px;
-        margin: 40px auto;
-        padding: 30px;
-        box-sizing: border-box;
-        
-        background: rgba(15, 10, 20, 0.4);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        
-        border: 1px solid transparent;
-        background-image: 
-            linear-gradient(rgba(15, 10, 20, 0.6), rgba(15, 10, 20, 0.6)), 
-            linear-gradient(135deg, rgba($lb-orange, 0.3), rgba($lb-pink, 0.3), rgba($lb-purple, 0.3));
-        background-origin: border-box;
-        background-clip: padding-box, border-box;
-        
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-
-        .Title-Section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-            
-            h2 {
-                font-family: 'Playfair Display', serif;
-                font-size: 1.8rem;
-                margin: 0;
-                background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
-        }
-
-        .New-book-card {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 160px); 
-            gap: 20px;
-            width: 100%;
-            justify-content: center;
-        }
+        margin: 0 auto;
+        padding: 8px var(--page-pad) 40px;
     }
 
-    // ── 3. DÉCOUVERTES DU JOUR ──
-    #Daily-discoveries {
-        width: 100%;
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 30px;
-        box-sizing: border-box;
-        
-        background: rgba(15, 10, 20, 0.4);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        
-        border: 1px solid transparent;
-        background-image: 
-            linear-gradient(rgba(15, 10, 20, 0.6), rgba(15, 10, 20, 0.6)), 
-            linear-gradient(135deg, rgba($lb-orange, 0.3), rgba($lb-pink, 0.3), rgba($lb-purple, 0.3));
-        background-origin: border-box;
-        background-clip: padding-box, border-box;
-        
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-
-        .Title-Section {
-            margin-bottom: 30px;
-            
-            h2 {
-                font-family: 'Playfair Display', serif;
-                font-size: 1.8rem;
-                background: linear-gradient(135deg, $lb-orange, $lb-pink, $lb-purple);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                margin-bottom: 8px;
-            }
-
-            .subtitle {
-                color: rgba(255, 255, 255, 0.5);
-                font-family: 'Outfit', sans-serif; // ou 'Mulish'
-                font-size: 0.95rem;
-                font-style: italic;
-            }
-        }
-
-        .Daily-books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 320px); 
-            gap: 24px; 
-            width: 100%;
-            justify-content: center; 
-        }
-    }
-
-    // ── Autres styles que tu avais ──
-    .Results-grid {
-        gap: 5px;
+    .dynamic-content {
         display: flex;
         flex-direction: column;
+        gap: clamp(18px, 3vw, 28px);
+        margin-top: 8px;
+        animation: home-fade 0.4s ease both;
+    }
+
+    // ── Section « verre dépoli » à bordure dégradée ──
+    .home-section {
+        padding: clamp(20px, 4vw, 32px);
+        border: 1px solid transparent;
+        border-radius: 24px;
+        background:
+            linear-gradient(rgba(12, 8, 16, 0.62), rgba(12, 8, 16, 0.62)) padding-box,
+            linear-gradient(
+                135deg,
+                rgba($lb-orange, 0.3),
+                rgba($lb-pink, 0.3),
+                rgba($lb-purple, 0.3)
+            ) border-box;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+        @media (max-width: 769px) {
+            padding: 20px 16px;
+            border-radius: 18px;
+        }
+
+        &__head {
+            margin-bottom: clamp(18px, 3vw, 26px);
+
+            h2 {
+                margin: 0;
+                font-weight: 600;
+                font-size: clamp(1.25rem, 3.4vw, 1.6rem);
+                letter-spacing: -0.02em;
+                line-height: 1.2;
+                color: $text-primary;
+
+                // Petite barre dégradée sous le titre
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 36px;
+                    height: 3px;
+                    margin-top: 12px;
+                    border-radius: 2px;
+                    background: $gradient;
+                }
+            }
+
+            p {
+                margin: 12px 0 0;
+                font-size: 0.85rem;
+                color: $text-muted;
+            }
+        }
+    }
+
+    // ── Dernier livre consulté ──
+    .last-book {
+        display: flex;
+        align-items: center;
+        gap: clamp(16px, 4vw, 28px);
+
+        &__info {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+
+            .btn {
+                margin-top: 10px;
+            }
+        }
+
+        &__title {
+            margin: 0;
+            font-weight: 600;
+            font-size: clamp(1.05rem, 3vw, 1.3rem);
+            letter-spacing: -0.015em;
+            color: $text-primary;
+        }
+
+        &__meta {
+            margin: 0;
+            font-size: 0.85rem;
+            color: $text-muted;
+        }
+
+        @media (max-width: 520px) {
+            flex-direction: column;
+            text-align: center;
+
+            &__info {
+                align-items: center;
+            }
+        }
+    }
+
+    // ── Récents ajouts ──
+    .recent-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    // ── Découvertes du jour ──
+    .daily-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 320px));
+        justify-content: center;
+        gap: 18px;
+    }
+
+    .home-empty {
+        margin: 0;
+        padding: 2rem 1rem;
+        text-align: center;
+        font-size: 0.95rem;
+        color: $text-muted;
+    }
+
+    .Category-books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+        padding: 1rem 0;
     }
 }
 
-// ── Responsive Mobile ──
-@media (max-width: 769px) {
-    .Section-Home {
-        #Last-book {
-            padding: 20px 15px;
-            margin: 20px auto;
-            border-radius: 16px;
-            
-            .Title-Section h2 {
-                font-size: 1.5rem;
-            }
-            
-            .Last-New-book-card .last-book-wrapper {
-                padding: 15px;
-                border-radius: 16px;
-            }
-        }
+@keyframes home-fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-        #New-book {
-            padding: 20px 15px;
-            margin: 20px auto;
-            border-radius: 16px;
-
-            .Title-Section h2 {
-                font-size: 1.5rem;
-            }
-
-            .New-book-card {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 15px;
-            }
-        }
-
-        #Daily-discoveries {
-            padding: 20px 15px;
-            margin: 20px auto;
-            border-radius: 16px;
-
-            .Title-Section {
-                h2 { font-size: 1.5rem; }
-            }
-
-            .Daily-books-grid {
-                grid-template-columns: 1fr; 
-                gap: 15px;
-            }
-        }
+@media (prefers-reduced-motion: reduce) {
+    .Section-Home .dynamic-content {
+        animation: none;
     }
 }

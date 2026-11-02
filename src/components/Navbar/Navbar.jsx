@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import '../Navbar/Navbar.scss';
 
-import logo from "../../img/ic_launcher.png";
+import NeonLogo from '../NeonLogo/NeonLogo';
 import Search from '../Search/Search';
 
 function Navbar({ searchTerm, setSearchTerm, onFilterChange, onBookSelect }) {
@@ -13,16 +13,16 @@ function Navbar({ searchTerm, setSearchTerm, onFilterChange, onBookSelect }) {
     <section className="Navbar-section">
       <nav className="Navbar">
         <div className="Navbar-title">
-          <Link to="/" className="navbar-logo">
-            <img src={logo} alt="logo" />
+          <Link to="/" className="navbar-logo" aria-label="Glandia, retour à l'accueil">
+            {isOnBookPage && <NeonLogo size="sm" />}
           </Link>
         </div>
-        
+
         {!isOnBookPage && (
           <div className="Search-section">
-            <Search 
-              searchTerm={searchTerm} 
-              setSearchTerm={setSearchTerm} 
+            <Search
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
               onFilterChange={onFilterChange}
               onBookSelect={onBookSelect}
             />

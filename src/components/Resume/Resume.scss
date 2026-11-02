@@ -1,46 +1,70 @@
-// Variables pour le drapeau lesbien
-$lb-orange: #D52D00;
-$lb-peach: #EF7627;
-$lb-pink: #D162A4;
-$lb-magenta: #B55690;
-$lb-purple: #A30262;
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-magenta: #b55690;
+$lb-purple: #a30262;
 
-// Overlay sombre derrière la modale
+$text-primary: #f6ede8;
+$text-body: rgba(239, 228, 222, 0.86);
+$text-muted: rgba(239, 228, 222, 0.55);
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
+// ── Fond derrière la fiche ───────────────────────────────────────────────────
 .resume-modal-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(5, 3, 8, 0.6);
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(0px);
-    transition: all 0.4s ease;
+    background-color: rgba(5, 3, 8, 0.6);
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
 
     &.show {
         background-color: rgba(10, 6, 18, 0.8);
+        -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
     }
 }
 
-// Modale principale
-.Section-Resume {
+.resume-modal-content {
     width: 95%;
     max-width: 800px;
-    max-height: 90vh;
-    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+// ── Fiche ────────────────────────────────────────────────────────────────────
+.Section-Resume {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 90dvh;
     overflow: hidden;
-    
-    // ✅ Fond sombre, effet verre dépoli
-    background: rgba(15, 10, 20, 0.95);
-    border: 1px solid rgba($lb-pink, 0.2); // Bordure discrète
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba($lb-purple, 0.1);
-    
-    // Animations
-    transform: translateY(100%);
-    opacity: 1;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: $font-ui;
+    color: $text-body;
+
+    // Fond sombre + bordure dégradée
+    border: 1px solid transparent;
+    border-radius: 24px;
+    background:
+        linear-gradient(rgba(12, 8, 16, 0.95), rgba(12, 8, 16, 0.95)) padding-box,
+        linear-gradient(
+            135deg,
+            rgba($lb-orange, 0.45),
+            rgba($lb-pink, 0.45),
+            rgba($lb-purple, 0.45)
+        ) border-box;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba($lb-pink, 0.12);
+
+    // État de départ (fermé)
+    transform: translateY(40px);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
 
     &.visible {
         transform: translateY(0);
@@ -48,17 +72,18 @@ $lb-purple: #A30262;
     }
 
     &.closing {
-        transform: translateY(100%);
+        transform: translateY(40px);
         opacity: 0;
-        transition: all 0.3s ease;
+        transition-duration: 0.3s;
     }
 
-    // Scroll global dans la modale
+    // La zone qui défile : flex + min-height:0 (sinon elle est simplement coupée)
     .Top-resume {
-        width: 100%;
-        height: 100%;
+        flex: 1;
+        min-height: 0;
         overflow-y: auto;
-        
+        overscroll-behavior: contain;
+
         &::-webkit-scrollbar { width: 6px; }
         &::-webkit-scrollbar-track { background: transparent; }
         &::-webkit-scrollbar-thumb { background: rgba($lb-magenta, 0.3); border-radius: 4px; }
@@ -67,194 +92,258 @@ $lb-purple: #A30262;
     .resume-book {
         display: flex;
         flex-direction: column;
-        padding: 25px;
+        gap: clamp(20px, 3vw, 28px);
+        padding: clamp(18px, 4vw, 28px);
+        padding-bottom: calc(clamp(18px, 4vw, 28px) + env(safe-area-inset-bottom));
+    }
 
-        // Barre du haut
-        .icon-top-resume {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+    // ── Barre du haut ──
+    .icon-top-resume {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-            .cross {
-                cursor: pointer;
-                color: rgba(255, 255, 255, 0.6);
-                transition: color 0.3s ease;
-                &:hover { color: $lb-pink; transform: scale(1.1); }
+        .resume-back {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            color: $text-muted;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+
+            &:hover {
+                color: #fff;
+                background: rgba($lb-pink, 0.15);
+                border-color: rgba($lb-pink, 0.5);
+            }
+
+            &:focus-visible {
+                outline: 2px solid rgba($lb-pink, 0.7);
+                outline-offset: 2px;
+            }
+        }
+    }
+
+    // ── Couverture + infos ──
+    .info-resume {
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(18px, 4vw, 28px);
+
+        .Resume-img-book {
+            flex-shrink: 0;
+
+            .img-book {
+                display: block;
+                width: clamp(96px, 26vw, 140px);
+                height: auto;
+                aspect-ratio: 2 / 3;
+                object-fit: cover;
+                border-radius: 14px;
+                box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 44px rgba($lb-pink, 0.18);
             }
         }
 
-        // Cover + Infos
-        .info-resume {
+        .in-resume-book {
             display: flex;
-            align-items: flex-start;
-            gap: 25px;
-            font-family: 'Mulish', sans-serif;
-            margin-bottom: 25px;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
 
-            // Image
-            .Resume-img-book {
-                flex-shrink: 0;
-                .img-book {
-                    width: 120px;
-                    height: auto;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-                    object-fit: cover;
-                }
+            h2 {
+                margin: 0;
+                font-weight: 600;
+                font-size: clamp(1.35rem, 4.5vw, 1.8rem);
+                letter-spacing: -0.025em;
+                line-height: 1.2;
+                color: $text-primary;
+                overflow-wrap: anywhere;
             }
 
-            // Infos texte
-            .in-resume-book {
+            .resume-author {
+                margin: 0;
+                font-size: 0.92rem;
+                color: $text-muted;
+            }
+
+            .rating-wrapper .star-rating {
+                margin: 0;
+            }
+
+            .resume-tags {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                flex: 1;
-
-                h2 {
-                    font-family: 'Marcellus', serif;
-                    font-size: 1.8rem;
-                    color: #f0e6ee;
-                    margin: 0 0 5px 0;
-                    line-height: 1.2;
-                }
-
-                #author-name-resume {
-                    font-size: 1rem;
-                    color: rgba(255, 255, 255, 0.6);
-                    margin: 0 0 15px 0;
-                }
-
-                .rating-wrapper {
-                    margin-bottom: 15px;
-                    transform-origin: left center;
-                }
-
-                #gender-resume {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 6px;
-                    padding: 6px 12px;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 15px;
-                    font-size: 0.85rem;
-                    color: rgba(255, 255, 255, 0.8);
-                    width: fit-content;
-                }
-            }
-        }
-
-        // Boutons Lire / Reprendre
-        .buttons-start {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            width: 100%;
-            
-            .btn-container {
-                flex: 1; // Les boutons prennent 50% de la largeur chacun
-                button { width: 100%; } // Force le ButtonRead à prendre toute la place
-            }
-        }
-
-        // Sections (Synopsis, Du Même Auteur)
-        .Resume {
-            width: 100%;
-            margin-bottom: 20px;
-            
-            .text-resume {
-                #title-resume {
-                    font-family: 'Marcellus', serif;
-                    font-size: 1.3rem;
-                    color: #f0e6ee;
-                    margin-bottom: 12px;
-                }
-
-                #resume-book {
-                    font-family: 'Mulish', sans-serif;
-                    font-size: 0.95rem;
-                    line-height: 1.6;
-                    color: rgba(255, 255, 255, 0.7);
-                    
-                    // Bloc avec scroll propre
-                    max-height: 120px;
-                    overflow-y: auto;
-                    padding-right: 10px;
-                    cursor: default;
-
-                    &::-webkit-scrollbar { width: 4px; }
-                    &::-webkit-scrollbar-thumb { background: rgba($lb-magenta, 0.3); border-radius: 4px; }
-                }
-
-                .same-author-books {
-                    display: flex;
-                    gap: 15px;
-                    overflow-x: auto;
-                    padding-bottom: 10px;
-                    
-                    &::-webkit-scrollbar { height: 4px; }
-                    &::-webkit-scrollbar-thumb { background: rgba($lb-magenta, 0.3); border-radius: 4px; }
-                    
-                    .no-books-message {
-                        font-family: 'Mulish', sans-serif;
-                        color: rgba(255, 255, 255, 0.4);
-                        font-size: 0.9rem;
-                        font-style: italic;
-                    }
-                }
+                flex-wrap: wrap;
+                gap: 8px;
             }
         }
     }
-}
 
-// Animation d'apparition en cascade
-.Section-Resume {
-    .Top-resume, .Resume, .buttons-start {
-        transform: scale(0.95) translateY(10px);
-        opacity: 0;
-        transition: all 0.4s ease;
+    // ── Boutons Lire / Reprendre ──
+    .buttons-start {
+        display: flex;
+        gap: 12px;
+
+        .btn {
+            flex: 1;
+            min-width: 0;
+        }
     }
 
+    .resume-last {
+        margin: -10px 0 0;
+        font-size: 0.78rem;
+        color: $text-muted;
+    }
+
+    // ── Synopsis et « Du même auteur » ──
+    .resume-heading {
+        margin: 0 0 12px;
+        font-size: 0.7rem;
+        font-weight: 400;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: $text-muted;
+    }
+
+        .resume-synopsis {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        white-space: pre-line;
+
+        // Limité à 5 lignes tant qu'on n'a pas cliqué sur « Lire la suite »
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        &.is-expanded {
+            display: block;
+            overflow: visible;
+            -webkit-line-clamp: unset;
+            line-clamp: unset;
+        }
+    }
+
+    .resume-more {
+        margin-top: 10px;
+        padding: 0;
+        font: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #f08ac0;
+        background: none;
+        border: 0;
+        cursor: pointer;
+
+        &:hover { text-decoration: underline; }
+
+        &:focus-visible {
+            outline: 2px solid rgba($lb-pink, 0.7);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+    }
+
+    .same-author-books {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding: 4px 2px 12px;
+        scroll-snap-type: x proximity;
+
+        > * {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+        }
+
+        &::-webkit-scrollbar { height: 4px; }
+        &::-webkit-scrollbar-thumb { background: rgba($lb-magenta, 0.3); border-radius: 4px; }
+    }
+
+    .no-books-message {
+        margin: 0;
+        font-size: 0.88rem;
+        font-style: italic;
+        color: $text-muted;
+    }
+
+    // ── Apparition en cascade ──
     &.visible {
-        .Top-resume { transform: scale(1) translateY(0); opacity: 1; transition-delay: 0.1s; }
-        .buttons-start { transform: scale(1) translateY(0); opacity: 1; transition-delay: 0.2s; }
-        .Resume { transform: scale(1) translateY(0); opacity: 1; transition-delay: 0.3s; }
+        .icon-top-resume,
+        .info-resume,
+        .buttons-start,
+        .resume-last,
+        .Resume {
+            animation: resume-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .info-resume   { animation-delay: 0.08s; }
+        .buttons-start { animation-delay: 0.16s; }
+        .resume-last   { animation-delay: 0.2s; }
+        .Resume:nth-of-type(1) { animation-delay: 0.24s; }
+        .Resume:nth-of-type(2) { animation-delay: 0.32s; }
     }
 }
 
-// ── Responsive Mobile ──
+@keyframes resume-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Mobile : tiroir qui monte du bas ──
 @media (max-width: 768px) {
     .Section-Resume {
-        width: 100%;
-        max-height: 95vh;
-        border-radius: 20px 20px 0 0; // Effet bottom-sheet (tiroir)
-        margin: 0;
         position: fixed;
-        bottom: 0;
         left: 0;
         right: 0;
+        bottom: 0;
+        width: 100%;
+        max-height: 92dvh;
+        border-radius: 24px 24px 0 0;
+        transform: translateY(100%);
+        opacity: 1;
 
-        .resume-book {
-            padding: 20px 15px;
+        &.visible { transform: translateY(0); }
+        &.closing { transform: translateY(100%); }
 
-            .info-resume {
-                flex-direction: column; // L'image passe au-dessus du texte
+        .info-resume {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .in-resume-book {
                 align-items: center;
-                text-align: center;
-                gap: 15px;
 
-                .in-resume-book {
-                    align-items: center;
-                    h2 { font-size: 1.5rem; }
-                    #gender-resume { justify-content: center; }
+                .resume-tags {
+                    justify-content: center;
                 }
             }
+        }
 
-            .buttons-start {
-                flex-direction: column; // Boutons l'un sous l'autre
-                gap: 10px;
-            }
+        .buttons-start {
+            flex-direction: column;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Section-Resume {
+        transition: none;
+
+        &.visible .icon-top-resume,
+        &.visible .info-resume,
+        &.visible .buttons-start,
+        &.visible .resume-last,
+        &.visible .Resume {
+            animation: none;
         }
     }
 }

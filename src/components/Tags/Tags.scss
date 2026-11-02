@@ -1,14 +1,16 @@
+.Tags,
 .Tags-Cat {
-    width: 150px;
-    font-family: "Mulish", sans-serif;
-    font-size: 0.9rem;
-    padding: 5px;
-    margin: 3px; 
-    border-radius: 5px;
-    background-color:rgba(204, 204, 204, 0.048);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    min-width: 90px;
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
- }
+    padding: 6px 12px;
+    font-family: var(--font-modern, 'Sora', system-ui, sans-serif);
+    font-size: 0.76rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: rgba(239, 228, 222, 0.82);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+}

@@ -1,65 +1,35 @@
-import { useState, useRef } from 'react'
 import '../Carrousel/Carrousel.scss'
 
 import Card from '../Card/Card'
 
 function Carrousel({ category, books, onCardClick }) {
-    const carrouselRef = useRef(null)
-    
-    // Filtrage des livres
-    const filteredBooks = books.filter(book => 
-        book.categorie && 
-        (Array.isArray(book.categorie) 
-            ? book.categorie.includes(category) 
-            : book.categorie === category)
+    // Filtre de sécurité (Categories filtre déjà les livres)
+    const filteredBooks = books.filter(
+        (book) =>
+            book.categorie &&
+            (Array.isArray(book.categorie)
+                ? book.categorie.includes(category)
+                : book.categorie === category)
     )
 
-    // Fonction pour passer au slide suivant (désactivée)
-    const nextSlide = () => {
-        // Ne rien faire - désactivé car on affiche tout
-    }
-
-    // Fonction pour revenir au slide précédent (désactivée)
-    const prevSlide = () => {
-        // Ne rien faire - désactivé car on affiche tout
-    }
+    if (filteredBooks.length === 0) return null
 
     return (
-        <div className="Carrousel">
-            {/* Debug visuel si aucune donnée */}
-            {filteredBooks.length === 0 && (
-                <div style={{ color: 'red', padding: '10px' }}>
-                    Aucun livre trouvé pour la catégorie "{category}"
-                </div>
-            )}
-
+        <section className="Carrousel" aria-label={category}>
             <div className="Title-carrousel">
-                <h2>{category} </h2>
-                {/* ({filteredBooks.length}) */}
+                <h3>{category}</h3>
             </div>
 
-            {filteredBooks.length > 0 && (
-                <div className="carrousel-container">
-                    {/* Conteneur principal avec défilement horizontal */}
-                    <div 
-                        className="cards-container"
-                        ref={carrouselRef}
-                    >
-                        {filteredBooks.map((book, index) => (
-                            <div 
-                                key={book.id} 
-                                className="card-wrapper"
-                            >
-                                <Card 
-                                    Book={book} 
-                                    onClick={() => onCardClick(book)}
-                                />
-                            </div>
-                        ))}
-                    </div>
+            <div className="carrousel-container">
+                <div className="cards-container">
+                    {filteredBooks.map((book) => (
+                        <div key={book.id} className="card-wrapper">
+                            <Card Book={book} onClick={() => onCardClick(book)} />
+                        </div>
+                    ))}
                 </div>
-            )}
-        </div>
+            </div>
+        </section>
     )
 }
 

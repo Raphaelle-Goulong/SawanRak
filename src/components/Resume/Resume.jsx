@@ -1,43 +1,46 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../Resume/Resume.scss'
 import Card from '../../components/Card/Card'
 import StarRating from '../../components/StarRating/StarRating'
 import Heart from '../Heart/Heart'
 import ButtonRead from '../ButtonRead/ButtonRead'
-import { ArrowLeft, BookOpen } from 'lucide-react'
+import Tags from '../Tags/Tags'
+import useLivres from '../../hooks/useLivres'
+import { ArrowLeft } from 'lucide-react'
 
-function Resume({ book, onClose }) {
+const SYNOPSIS_PREVIEW_LENGTH = 220
+
+function Resume({ book, onClose, onSelectBook, phase = 'open' }) {
     const navigate = useNavigate()
+    const { books } = useLivres()
     const [lastChapterInfo, setLastChapterInfo] = useState(null)
-    const [isVisible, setIsVisible] = useState(true)
-    const [data, setData] = useState([])
+    const [expanded, setExpanded] = useState(false)
 
+    // Dernier chapitre lu
     useEffect(() => {
-        // J'ai gardé ton fetch, mais tu devrais utiliser '/api/livres' en relatif !
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/livres')
-                if (!response.ok) throw new Error('Erreur réseau')
-                const json = await response.json()
-                setData(json.livres || json)
-            } catch (error) {
-                console.error('Erreur de chargement des livres:', error)
-            }
-        }
-        fetchData()
-    }, [])
-
-    useEffect(() => {
-        const savedInfo = localStorage.getItem(`book-${book.id}-lastChapterLink`)
-        if (savedInfo) {
-            const info = JSON.parse(savedInfo)
-            setLastChapterInfo({
-                ...info,
-                chapterTitle: info.chapterTitle.replace('Introduction', 'Chapitre 0')
-            })
+        setExpanded(false)
+        try {
+            const saved = JSON.parse(localStorage.getItem(`book-${book.id}-lastChapterLink`))
+            setLastChapterInfo(saved && typeof saved.chapterIndex === 'number' ? saved : null)
+        } catch {
+            setLastChapterInfo(null)
         }
     }, [book.id])
+
+    const categories = (Array.isArray(book.categorie) ? book.categorie : [book.categorie]).filter(Boolean)
+
+    const sameAuthorBooks = useMemo(
+        () =>
+            book.auteur
+                ? books.filter((b) => b.auteur === book.auteur && b.id !== book.id).slice(0, 50)
+                : [],
+        [books, book.auteur, book.id]
+    )
+
+    const lastChapterTitle = lastChapterInfo?.chapterTitle
+        ? lastChapterInfo.chapterTitle.replace('Introduction', 'Chapitre 0')
+        : null
 
     const handleReadBook = () => {
         navigate(`/book/${book.id}`, { state: { book, chapterIndex: 0 } })
@@ -49,84 +52,121 @@ function Resume({ book, onClose }) {
         })
     }
 
-    const handleClose = () => {
-        setIsVisible(false)
-        if (onClose) onClose()
+    const handleSelectSameAuthor = (selected) => {
+        if (onSelectBook) onSelectBook(selected)
+        else navigate('/', { state: { fromEnding: true, book: selected } })
     }
 
-    const handleCardClick = (selectedBook) => {
-        navigate('/', { state: { fromEnding: true, book: selectedBook } })
-    }
+    const classes = [
+        'Section-Resume',
+        phase === 'open' && 'visible',
+        phase === 'closing' && 'closing'
+    ]
+        .filter(Boolean)
+        .join(' ')
 
-    if (!isVisible) return null
+    const hasLongSynopsis = (book.description || '').length > SYNOPSIS_PREVIEW_LENGTH
 
     return (
-        <section className="Section-Resume">
+        <section
+            className={classes}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="resume-title"
+        >
             <div className="Top-resume">
                 <div className="resume-book">
                     {/* Barre du haut */}
                     <div className="icon-top-resume">
-                        <ArrowLeft className="cross" size={26} onClick={handleClose} />
+                        <button type="button" className="resume-back" onClick={onClose} aria-label="Fermer">
+                            <ArrowLeft size={20} />
+                        </button>
                         <Heart bookId={book.id} />
                     </div>
 
-                    {/* Bloc principal : Cover + Infos */}
+                    {/* Couverture + infos */}
                     <div className="info-resume">
                         <div className="Resume-img-book">
-                            <img src={book.cover} alt={book.title} className="img-book" />
+                            <img
+                                src={book.cover}
+                                alt={`Couverture de ${book.title}`}
+                                className="img-book"
+                            />
                         </div>
 
                         <div className="in-resume-book">
-                            <h2>{book.title}</h2>
-                            <p id="author-name-resume">par {book.auteur}</p>
-                            
+                            <h2 id="resume-title">{book.title}</h2>
+                            {book.auteur && <p className="resume-author">par {book.auteur}</p>}
+
                             <div className="rating-wrapper">
                                 <StarRating bookId={book.id} />
                             </div>
 
-                            <p id="gender-resume">
-                                <BookOpen id="icon-book-open" size={16} />
-                                {(Array.isArray(book.categorie) ? book.categorie : [book.categorie].filter(Boolean)).join(', ')}
-                            </p>
+                            {categories.length > 0 && (
+                                <div className="resume-tags">
+                                    {categories.map((category) => (
+                                        <Tags key={category} text={category} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    {/* Boutons d'action (Lire / Reprendre) */}
+                    {/* Boutons d'action */}
                     <div className="buttons-start">
-                        <div onClick={handleReadBook} className="btn-container">
-                            <ButtonRead text="Lire" />
-                        </div>
-                        {lastChapterInfo && (
-                            <div onClick={handleResumeBook} className="btn-container">
-                                <ButtonRead text="Reprendre" />
-                            </div>
+                        {lastChapterInfo ? (
+                            <>
+                                <ButtonRead text="Reprendre" onClick={handleResumeBook} />
+                                <ButtonRead
+                                    text="Depuis le début"
+                                    variant="default"
+                                    onClick={handleReadBook}
+                                />
+                            </>
+                        ) : (
+                            <ButtonRead text="Lire" onClick={handleReadBook} />
                         )}
                     </div>
+                    {lastChapterTitle && (
+                        <p className="resume-last">Dernière lecture : {lastChapterTitle}</p>
+                    )}
 
                     {/* Synopsis */}
-                    <div className="Resume">
-                        <div className="text-resume">
-                            <h3 id="title-resume">Synopsis</h3>
-                            <p id="resume-book">{book.description}</p>
+                    {book.description && (
+                        <div className="Resume">
+                            <h3 className="resume-heading">Synopsis</h3>
+                            <p className={`resume-synopsis${expanded ? ' is-expanded' : ''}`}>
+                                {book.description}
+                            </p>
+                            {hasLongSynopsis && (
+                                <button
+                                    type="button"
+                                    className="resume-more"
+                                    aria-expanded={expanded}
+                                    onClick={() => setExpanded((v) => !v)}
+                                >
+                                    {expanded ? 'Réduire' : 'Lire la suite'}
+                                </button>
+                            )}
                         </div>
-                    </div>
+                    )}
 
-                    {/* Du Même Auteur */}
-                    <div className="Resume" id="resume-author">
-                        <div className="text-resume">
-                            <h3 id="title-resume">Du Même Auteur</h3>
+                    {/* Du même auteur */}
+                    <div className="Resume">
+                        <h3 className="resume-heading">Du même auteur</h3>
+                        {sameAuthorBooks.length > 0 ? (
                             <div className="same-author-books">
-                                {data
-                                    .filter((b) => b.auteur === book.auteur && b.id !== book.id)
-                                    .slice(0, 50)
-                                    .map((b) => (
-                                        <Card key={b.id} Book={b} onClick={() => handleCardClick(b)} />
-                                    ))}
-                                {data.filter((b) => b.auteur === book.auteur && b.id !== book.id).length === 0 && (
-                                    <p className="no-books-message">Aucun autre livre de cet auteur</p>
-                                )}
+                                {sameAuthorBooks.map((b) => (
+                                    <Card
+                                        key={b.id}
+                                        Book={b}
+                                        onClick={() => handleSelectSameAuthor(b)}
+                                    />
+                                ))}
                             </div>
-                        </div>
+                        ) : (
+                            <p className="no-books-message">Aucun autre livre de cet auteur</p>
+                        )}
                     </div>
                 </div>
             </div>

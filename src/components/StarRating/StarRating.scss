@@ -1,120 +1,157 @@
+// ── Palette ──
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
 .star-rating {
-    display: inline-block;
+    --star-size: 24px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     margin: 10px 0;
+    font-family: $font-ui;
+
+    &--sm { --star-size: 18px; }
+    &--lg { --star-size: 30px; }
 
     .radio {
         display: flex;
-        justify-content: center;
-        gap: 4px;
         flex-direction: row-reverse;
+        justify-content: center;
+        gap: 2px;
     }
 
+    // Les boutons radio restent accessibles au clavier mais invisibles
     .radio > input {
         position: absolute;
-        appearance: none;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        opacity: 0;
+        pointer-events: none;
     }
 
     .radio > label {
-        cursor: pointer;
-        font-size: 20px;
         position: relative;
-        display: inline-block;
-        transition: transform 0.3s ease;
+        display: inline-flex;
+        padding: 0.22em; // zone tactile plus grande
+        font-size: var(--star-size);
+        line-height: 0;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
 
-        svg {
-            fill: #535353;
-            transition: fill 0.3s ease, filter 0.3s ease;
+        > svg {
+            display: block;
+            height: 1em;
+            width: auto;
+            fill: rgba(255, 255, 255, 0.16);
+            transition: fill 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+        }
+
+        // Petites étincelles au survol
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, $lb-peach, $lb-pink);
+            opacity: 0;
+            transform: translateX(-50%) scale(0);
+            pointer-events: none;
+        }
+
+        &::before { top: 0; }
+        &::after  { bottom: 0; }
+
+        &:hover::before,
+        &:hover::after {
+            animation: star-twinkle 0.8s ease-out;
         }
     }
 
-    // ✅ Le sélecteur clé qui manquait — colorie l'étoile ET toutes celles après
-    .radio > input[value='1']:checked + label > svg,
-    .radio > input[value='1']:checked + label ~ label > svg {
-        fill: #ffeb3b;
-        filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8));
+    // Étoile sélectionnée + toutes les étoiles « avant »
+    .radio > input:checked + label > svg,
+    .radio > input:checked + label ~ label > svg {
+        fill: #ff9a56;
+        filter: drop-shadow(0 0 8px rgba($lb-peach, 0.6));
     }
 
-    .radio > input[value='2']:checked + label > svg,
-    .radio > input[value='2']:checked + label ~ label > svg {
-        fill: #ffc107;
-        filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.8));
-    }
-
-    .radio > input[value='3']:checked + label > svg,
-    .radio > input[value='3']:checked + label ~ label > svg {
-        fill: #ff9800;
-        filter: drop-shadow(0 0 15px rgba(255, 152, 0, 0.8));
-    }
-
-    .radio > input[value='4']:checked + label > svg,
-    .radio > input[value='4']:checked + label ~ label > svg {
-        fill: #ff5722;
-        filter: drop-shadow(0 0 15px rgba(255, 87, 34, 0.8));
-    }
-
-    .radio > input[value='5']:checked + label > svg,
-    .radio > input[value='5']:checked + label ~ label > svg {
-        fill: #f44336;
-        filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.8));
-    }
-
-    // Hover
-    .radio > label:hover > svg {
-        transform: scale(1.2);
-    }
-
-    .radio > label[for$='-1']:hover > svg,
-    .radio > label[for$='-1']:hover ~ label > svg {
-        fill: #ffeb3b !important;
-        filter: drop-shadow(0 0 20px rgba(255, 235, 59, 1)) !important;
-    }
-
-    .radio > label[for$='-2']:hover > svg,
-    .radio > label[for$='-2']:hover ~ label > svg {
-        fill: #ffc107 !important;
-        filter: drop-shadow(0 0 20px rgba(255, 193, 7, 1)) !important;
-    }
-
-    .radio > label[for$='-3']:hover > svg,
-    .radio > label[for$='-3']:hover ~ label > svg {
-        fill: #ff9800 !important;
-        filter: drop-shadow(0 0 20px rgba(255, 152, 0, 1)) !important;
-    }
-
-    .radio > label[for$='-4']:hover > svg,
-    .radio > label[for$='-4']:hover ~ label > svg {
-        fill: #ff5722 !important;
-        filter: drop-shadow(0 0 20px rgba(255, 87, 34, 1)) !important;
-    }
-
-    .radio > label[for$='-5']:hover > svg,
-    .radio > label[for$='-5']:hover ~ label > svg {
-        fill: #f44336 !important;
-        filter: drop-shadow(0 0 20px rgba(244, 67, 54, 1)) !important;
-    }
-
+    // Un petit « pop » à la sélection (une seule fois, plus d'animation infinie)
     .radio > input:checked + label > svg {
-        animation: pulse-warm 0.8s infinite alternate, warm-glow 2s infinite alternate;
+        animation: star-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-}
 
-@keyframes pulse-warm {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
-}
+    // Survol : classe doublée pour passer devant le style « sélectionné », sans !important
+    .radio.radio > label:hover > svg,
+    .radio.radio > label:hover ~ label > svg {
+        fill: $lb-pink;
+        filter: drop-shadow(0 0 10px rgba($lb-pink, 0.8));
+    }
 
-@keyframes warm-glow {
-    0% { filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.5)); }
-    50% { filter: drop-shadow(0 0 25px rgba(255, 152, 0, 0.8)); }
-    100% { filter: drop-shadow(0 0 15px rgba(244, 67, 54, 0.6)); }
-}
-.star-rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    .radio.radio > label:hover > svg {
+        transform: scale(1.18);
+    }
+
+    // Accessibilité clavier
+    .radio > input:focus-visible + label {
+        outline: 2px solid rgba($lb-pink, 0.7);
+        outline-offset: 2px;
+        border-radius: 8px;
+    }
+
+    // Lecture seule
+    &.is-readonly .radio > label {
+        pointer-events: none;
+        cursor: default;
+    }
 
     .rating-number {
-        font-size: 0.9rem;
-        color: #aaa;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        font-variant-numeric: tabular-nums;
+        color: rgba(239, 228, 222, 0.6);
     }
+
+    // Texte réservé aux lecteurs d'écran
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .radio > label > svg {
+            transition: none;
+        }
+
+        .radio > input:checked + label > svg,
+        .radio > label:hover::before,
+        .radio > label:hover::after {
+            animation: none;
+        }
+    }
+}
+
+@keyframes star-pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+@keyframes star-twinkle {
+    0%   { opacity: 0; transform: translateX(-50%) scale(0); }
+    50%  { opacity: 1; transform: translateX(-50%) scale(1.6); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.5); }
 }

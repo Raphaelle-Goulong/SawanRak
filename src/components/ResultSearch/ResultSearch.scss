@@ -1,23 +1,26 @@
-// Variables pour le drapeau lesbien
-$lb-orange: #D52D00;
-$lb-peach: #EF7627;
-$lb-pink: #D162A4;
-$lb-magenta: #B55690;
-$lb-purple: #A30262;
+$lb-orange: #d52d00;
+$lb-peach: #ef7627;
+$lb-pink: #d162a4;
+$lb-magenta: #b55690;
+$lb-purple: #a30262;
+
+$text-primary: #f6ede8;
+$text-muted: rgba(239, 228, 222, 0.55);
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
 
 .result-search-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(10, 6, 18, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(10, 6, 18, 0.6);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 
     &.show {
         opacity: 1;
@@ -31,113 +34,101 @@ $lb-purple: #A30262;
 }
 
 .result-search-modal {
-    border-radius: 20px;
-    width: 90%;
-    max-width: 900px;
-    max-height: 85vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    
-    // ✅ LA NOUVELLE BORDURE DÉGRADÉE
+    width: 90%;
+    max-width: 900px;
+    max-height: 85dvh;
+    overflow: hidden;
+    font-family: $font-ui;
+    color: $text-primary;
+
+    // Fond sombre + bordure dégradée
     border: 1px solid transparent;
-    background: 
-        // Couche 1 : le fond de la modale (légèrement transparent)
-        linear-gradient(rgba(15, 10, 20, 0.9), rgba(15, 10, 20, 0.9)) padding-box,
-        // Couche 2 : le dégradé du drapeau qui ne s'affiche que sur la bordure
+    border-radius: 24px;
+    background:
+        linear-gradient(rgba(12, 8, 16, 0.94), rgba(12, 8, 16, 0.94)) padding-box,
         linear-gradient(135deg, $lb-orange, $lb-peach, $lb-pink, $lb-magenta, $lb-purple) border-box;
-    
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    
-    // Ombre portée + petite lueur colorée
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 
-                0 0 30px rgba($lb-pink, 0.15);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba($lb-pink, 0.15);
 
-    transform: translateY(-20px) scale(0.95);
+    transform: translateY(-20px) scale(0.96);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-
-    // (J'ai supprimé l'ancien ::before avec la ligne lumineuse car la bordure fait le job maintenant)
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 
     .modal-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 25px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        background: rgba(255, 255, 255, 0.02); // Léger éclat sur le header
-        
+        gap: 12px;
+        padding: 18px 22px;
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
         h2 {
-            font-family: "Mulish", sans-serif;
             margin: 0;
-            font-size: 1.5rem;
-            color: #f0e6ee;
+            min-width: 0;
+            font-size: clamp(1rem, 3vw, 1.25rem);
             font-weight: 600;
+            letter-spacing: -0.015em;
+            overflow-wrap: anywhere;
 
             span {
-                color: $lb-pink;
                 font-weight: 400;
+                color: #f08ac0;
             }
         }
 
         .close-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            color: $text-muted;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.25s ease;
-            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 
             &:hover {
-                background: rgba($lb-pink, 0.15); // Fond rose au survol
-                color: $lb-pink;
+                color: #fff;
+                background: rgba($lb-pink, 0.15);
+                border-color: rgba($lb-pink, 0.5);
                 transform: rotate(90deg);
             }
 
-            &:active {
-                transform: scale(0.9) rotate(90deg);
+            &:focus-visible {
+                outline: 2px solid rgba($lb-pink, 0.7);
+                outline-offset: 2px;
             }
         }
     }
 
     .modal-body {
         flex: 1;
+        min-height: 0;
         overflow-y: auto;
-        padding: 25px;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
+        overscroll-behavior: contain;
+        padding: 22px 25px 28px;
 
         .results-count {
-            width: 100%;
-            margin: 0 0 20px 0;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 500;
+            margin: 0 0 20px;
+            font-size: 0.85rem;
+            color: $text-muted;
         }
 
         .results-grid {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            width: 100%;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+            justify-items: center;
+            gap: 24px 16px;
 
             .result-item {
-                display: flex;
-                justify-content: center;
-                animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
-
-                &:hover {
-                    transform: translateY(-4px);
-                    transition: transform 0.3s ease;
-                }
+                animation: result-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
             }
         }
 
@@ -145,65 +136,65 @@ $lb-purple: #A30262;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            width: 100%;
             padding: 60px 20px;
             text-align: center;
 
             p {
-                font-size: 1.3rem;
-                color: #f0e6ee;
-                margin: 0 0 10px 0;
+                margin: 0 0 10px;
+                font-size: 1.15rem;
                 font-weight: 600;
             }
 
             span {
-                font-size: 0.95rem;
-                color: rgba(255, 255, 255, 0.4);
+                font-size: 0.9rem;
+                color: $text-muted;
             }
         }
-    }
 
-    // Scrollbar
-    .modal-body::-webkit-scrollbar {
-        width: 6px;
-    }
+        // Scrollbar discrète
+        &::-webkit-scrollbar { width: 6px; }
+        &::-webkit-scrollbar-track { background: transparent; }
+        &::-webkit-scrollbar-thumb {
+            background: rgba($lb-magenta, 0.3);
+            border-radius: 10px;
 
-    .modal-body::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-    }
-
-    .modal-body::-webkit-scrollbar-thumb {
-        background: rgba($lb-magenta, 0.3);
-        border-radius: 10px;
-
-        &:hover {
-            background: rgba($lb-pink, 0.6);
+            &:hover { background: rgba($lb-pink, 0.6); }
         }
     }
 }
 
-@keyframes fadeInUp {
+@keyframes result-in {
     from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-// Responsive Mobile
+// ── Mobile ──
 @media (max-width: 768px) {
     .result-search-modal {
         width: 95%;
-        max-height: 90vh;
-        border-radius: 15px;
+        max-height: 90dvh;
+        border-radius: 20px;
 
         .modal-header {
-            padding: 15px 20px;
-            h2 { font-size: 1.1rem; }
+            padding: 14px 16px;
         }
 
         .modal-body {
-            padding: 20px 15px;
-            .results-grid { gap: 10px; }
+            padding: 18px 14px 24px;
+
+            .results-grid {
+                grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+                gap: 20px 12px;
+            }
         }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .result-search-overlay,
+    .result-search-modal,
+    .result-search-modal .modal-body .results-grid .result-item {
+        transition: none;
+        animation: none;
     }
 }

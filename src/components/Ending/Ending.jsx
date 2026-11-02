@@ -76,18 +76,7 @@ function Ending({ onClose, book }) {
         return [...sameCategory].sort(() => 0.5 - Math.random()).slice(0, SUGGESTIONS_COUNT)
     }, [currentBook, allBooks])
 
-    // Sauvegarde de la note
-    const handleRatingChange = (rating) => {
-        if (!currentBook?.id) return
-        const value = parseInt(rating, 10)
-
-        try {
-            localStorage.setItem(`book-${currentBook.id}-rating`, String(value))
-            localStorage.setItem(`book-${currentBook.id}-rating-date`, new Date().toISOString())
-        } catch {
-            /* stockage indisponible : on ignore */
-        }
-    }
+   
 
     // Clic sur un livre suggéré : retour à l'accueil avec ouverture de sa fiche
     const handleBookClick = (suggested) => {
@@ -123,7 +112,7 @@ function Ending({ onClose, book }) {
 
             <div className="ending-rate">
                 <h3 className="ending-label">N'oublie pas de noter</h3>
-                <StarRating bookId={currentBook?.id} onRatingChange={handleRatingChange} />
+                <StarRating bookId={currentBook?.id} size="lg" />
             </div>
 
             <div className="ending-similar">

@@ -1,88 +1,78 @@
-import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
 import '../Categories/Categories.scss'
 import Carrousel from '../../Carrousel/Carrousel'
 import Card from '../../Card/Card'
+import Loading from '../../Loading/Loading'
+import useLivres from '../../../hooks/useLivres'
+
+const toArray = (value) => (Array.isArray(value) ? value : [value])
+
+const normalizeTitle = (title) =>
+    String(title || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
 
 function Categories({ filterType = 'Categories', onCardClick: onClick }) {
-    const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const { books, isLoading } = useLivres()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/livres')
-                if (!response.ok) throw new Error('Erreur réseau')
-                const json = await response.json()
-                const livres = json.livres || json
-                setData(livres)
-            } catch (error) {
-                console.error('Erreur de chargement des livres:', error)
-            } finally {
-                setIsLoading(false)
-            }
-        }
-        fetchData()
-    }, [])
+    // Catégories uniques, triées
+    const allCategories = useMemo(
+        () =>
+            [
+                ...new Set(books.flatMap((book) => toArray(book.categorie)).filter(Boolean))
+            ].sort((a, b) => a.localeCompare(b, 'fr')),
+        [books]
+    )
 
-    const books = data
-
-    // Récupération dynamique des catégories
-    const allCategories = [
-        ...new Set(
-            books
-                .flatMap((book) =>
-                    Array.isArray(book.categorie) ? book.categorie : [book.categorie]
-                )
-                .filter(Boolean)
-        )
-    ].sort()
-
-    // Grouper les livres par auteur
-    const booksByAuthor = books.reduce((acc, book) => {
-        const author = book.auteur || 'Inconnu'
-        if (!acc[author]) acc[author] = []
-        acc[author].push(book)
-        return acc
-    }, {})
-
-    const sortedAuthors = Object.keys(booksByAuthor).sort()
-
-    // Trier les livres de chaque auteur par titre (Corrigé)
-    sortedAuthors.forEach((author) => {
-        booksByAuthor[author].sort((a, b) => {
-            const titleA = (a.title || '').toString().toLowerCase()
-            const titleB = (b.title || '').toString().toLowerCase()
-            return titleA.localeCompare(titleB)
+    // Livres groupés par auteur, auteurs et livres triés
+    const authorGroups = useMemo(() => {
+        const groups = {}
+        books.forEach((book) => {
+            const author = book.auteur || 'Inconnu'
+            if (!groups[author]) groups[author] = []
+            groups[author].push(book)
         })
-    })
 
-    // Trier tous les livres par titre
-    const sortedBooks = [...data].sort((a, b) => {
-        const titleA = (a.title || '').toString()
-        const titleB = (b.title || '').toString()
-        const normalizedA = titleA.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        const normalizedB = titleB.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        return normalizedA.localeCompare(normalizedB)
-    })
+        return Object.keys(groups)
+            .sort((a, b) => a.localeCompare(b, 'fr'))
+            .map((author) => ({
+                author,
+                books: [...groups[author]].sort((a, b) =>
+                    normalizeTitle(a.title).localeCompare(normalizeTitle(b.title), 'fr')
+                )
+            }))
+    }, [books])
+
+    // Tous les livres, par titre
+    const sortedBooks = useMemo(
+        () =>
+            [...books].sort((a, b) =>
+                normalizeTitle(a.title).localeCompare(normalizeTitle(b.title), 'fr')
+            ),
+        [books]
+    )
 
     if (isLoading) {
-        return <div className="Categories-Loading">Chargement de la bibliothèque...</div>
+        return (
+            <div className="Categories-Loading">
+                <Loading label="Chargement" />
+            </div>
+        )
     }
 
     return (
         <div className="Categories-Container">
             {filterType === 'Categories' && (
                 <div className="Section-Categories">
-                    <h2 className="Title-Categories">Explorer par Catégories</h2>
+                    <h2 className="Title-Categories">Explorer par catégories</h2>
                     {allCategories.map((category) => (
                         <div key={category} className="Category-group">
                             <div className="Category-books">
                                 <Carrousel
                                     category={category}
                                     books={books.filter((book) =>
-                                        Array.isArray(book.categorie)
-                                            ? book.categorie.includes(category)
-                                            : book.categorie === category
+                                        toArray(book.categorie).includes(category)
                                     )}
                                     onCardClick={onClick}
                                 />
@@ -94,12 +84,12 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
 
             {filterType === 'Author' && (
                 <div className="Section-Author">
-                    <h2 className="Title-Section">Nos Auteurs</h2>
-                    {sortedAuthors.map((author) => (
+                    <h2 className="Title-Section">Nos auteurs</h2>
+                    {authorGroups.map(({ author, books: authorBooks }) => (
                         <div key={author} className="Author-group">
                             <h3 className="Author-name">{author}</h3>
                             <div className="Author-books">
-                                {booksByAuthor[author].map((book) => (
+                                {authorBooks.map((book) => (
                                     <Card key={book.id} Book={book} onClick={() => onClick(book)} />
                                 ))}
                             </div>
@@ -110,7 +100,9 @@ function Categories({ filterType = 'Categories', onCardClick: onClick }) {
 
             {filterType === 'All' && (
                 <div className="Section-AllBooks">
-                    <h2 className="Title-Section">Tous les Livres <span>({books.length})</span></h2>
+                    <h2 className="Title-Section">
+                        Tous les livres <span>({books.length})</span>
+                    </h2>
                     <div className="AllBooks-grid">
                         {sortedBooks.map((book) => (
                             <Card key={book.id} Book={book} onClick={() => onClick(book)} />

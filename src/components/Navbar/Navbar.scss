@@ -1,26 +1,49 @@
+$font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
+
 .Navbar-section {
+    width: 100%;
+    box-sizing: border-box;
+
     .Navbar {
         display: flex;
         flex-direction: column;
+        gap: 4px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 12px var(--page-pad, clamp(14px, 4vw, 24px));
+        box-sizing: border-box;
+    }
 
-        .Navbar-title {
-            display: flex;
-            width: 100%;
-            // justify-content: center;
+    .Navbar-title {
+        display: flex;
+        align-items: center;
+
+        .navbar-logo {
+            display: inline-flex;
             align-items: center;
-            cursor: pointer;
+            gap: 10px;
+            color: #f6ede8;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
 
-            .navbar-logo {
-                img {
-                    height: 50px;
-                }
+            &:focus-visible {
+                outline: 2px solid rgba(209, 98, 164, 0.7);
+                outline-offset: 4px;
+                border-radius: 12px;
             }
-            
-        }
 
-        .Search-section {
-            display: flex;
-            color: var(--text-color);
+            img {
+                height: 42px;
+                width: auto;
+                border-radius: 10px;
+            }
         }
+    }
+
+    .Search-section {
+        display: flex;
+        width: 100%;
+        color: #f6ede8;
     }
 }

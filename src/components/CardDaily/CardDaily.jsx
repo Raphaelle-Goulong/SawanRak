@@ -1,32 +1,63 @@
 import '../CardDaily/CardDaily.scss'
-import Tags from '../../components/Tags/Tags' // Assure-toi que le chemin est bon
+import Tags from '../../components/Tags/Tags'
+
+const MAX_TAGS = 2
 
 function CardDaily({ Book, onClick = () => {} }) {
     if (!Book) return null
 
+    const categories = (Array.isArray(Book.categorie) ? Book.categorie : [Book.categorie])
+        .filter(Boolean)
+        .slice(0, MAX_TAGS)
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            onClick(Book)
+        }
+    }
+
     return (
-        <section className="cardDaily-section" onClick={() => onClick(Book)}>
+        <div
+            className="cardDaily-section"
+            role="button"
+            tabIndex={0}
+            aria-label={`${Book.title}${Book.auteur ? `, par ${Book.auteur}` : ''}`}
+            onClick={() => onClick(Book)}
+            onKeyDown={handleKeyDown}
+        >
             <div className="cardDaily-card">
                 <div className="cardDaily-img">
-                    <img src={Book.cover} alt={`Couverture de ${Book.title}`} loading="lazy" />
+                    <img
+                        src={Book.cover}
+                        alt=""
+                        width="92"
+                        height="138"
+                        loading="lazy"
+                        decoding="async"
+                    />
                 </div>
+
                 <div className="cardDaily-resume">
                     <h2>{Book.title}</h2>
-                    <h3>{Book.auteur}</h3>
-                    
-                    <div className='cardDaily-text'>
-                       <p>{Book.description}</p> 
-                    </div>
-                    
-                    {/* Si tu veux afficher les tags du livre : */}
-                    {Book.categorie && (
+                    {Book.auteur && <h3>{Book.auteur}</h3>}
+
+                    {Book.description && (
+                        <div className="cardDaily-text">
+                            <p>{Book.description}</p>
+                        </div>
+                    )}
+
+                    {categories.length > 0 && (
                         <div className="cardDaily-tags">
-                            <Tags tags={Book.categorie} />
+                            {categories.map((category) => (
+                                <Tags key={category} text={category} />
+                            ))}
                         </div>
                     )}
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
 
