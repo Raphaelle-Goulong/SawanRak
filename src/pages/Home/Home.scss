@@ -44,7 +44,39 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
         flex-direction: column;
         gap: clamp(18px, 3vw, 28px);
         margin-top: 8px;
-        animation: home-fade 0.4s ease both;
+        min-height: 60vh; // le pied de page ne saute pas pendant le changement d'onglet
+
+        // Le bloc glisse légèrement dans le sens du changement (data-direction, voir Home.jsx)
+        animation: home-slide-forward 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+        &[data-direction='back'] {
+            animation-name: home-slide-back;
+        }
+
+        // Chaque bloc apparaît l'un après l'autre
+        > * {
+            animation: home-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @for $i from 2 through 6 {
+            > :nth-child(#{$i}) {
+                animation-delay: ($i - 1) * 0.08s;
+            }
+        }
+    }
+    // Les cartes apparaissent l'une après l'autre
+    .recent-grid > *,
+    .daily-grid > *,
+    .last-book > * {
+        animation: home-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @for $i from 1 through 8 {
+        .recent-grid > :nth-child(#{$i}),
+        .daily-grid > :nth-child(#{$i}),
+        .last-book > :nth-child(#{$i}) {
+            animation-delay: 0.15s + ($i - 1) * 0.06s;
+        }
     }
 
     // ── Section « verre dépoli » à bordure dégradée ──
@@ -55,11 +87,12 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
         background:
             linear-gradient(rgba(12, 8, 16, 0.62), rgba(12, 8, 16, 0.62)) padding-box,
             linear-gradient(
-                135deg,
-                rgba($lb-orange, 0.3),
-                rgba($lb-pink, 0.3),
-                rgba($lb-purple, 0.3)
-            ) border-box;
+                    135deg,
+                    rgba($lb-orange, 0.3),
+                    rgba($lb-pink, 0.3),
+                    rgba($lb-purple, 0.3)
+                )
+                border-box;
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -174,13 +207,54 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
     }
 }
 
-@keyframes home-fade {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+@keyframes home-slide-forward {
+    from {
+        transform: translateX(24px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes home-slide-back {
+    from {
+        transform: translateX(-24px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes home-rise {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes home-pop {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .Section-Home .dynamic-content {
-        animation: none;
+    .Section-Home {
+        .dynamic-content,
+        .dynamic-content > *,
+        .recent-grid > *,
+        .daily-grid > *,
+        .last-book > * {
+            animation: none;
+        }
     }
 }

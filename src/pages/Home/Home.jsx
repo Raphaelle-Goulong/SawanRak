@@ -16,6 +16,8 @@ const VIEWED_KEY = 'lastViewedBooks'
 const MAX_VIEWED = 10
 const DAILY_COUNT = 5
 const MODAL_CLOSE_MS = 300
+// Même ordre que dans TagsNavigation : sert à savoir si on va vers la droite ou vers la gauche
+const TAG_ORDER = ['last-viewed', 'recent', 'categories', 'authors', 'all']
 
 // ── Utilitaires ──
 const readViewedIds = () => {
@@ -65,6 +67,13 @@ function Home({ onBookSelectFromSearch }) {
     const { books, status, isLoading } = useLivres()
 
     const [activeTag, setActiveTag] = useState('last-viewed')
+    const [direction, setDirection] = useState('forward')
+
+    const handleTagClick = (tagId) => {
+        if (tagId === activeTag) return
+        setDirection(TAG_ORDER.indexOf(tagId) > TAG_ORDER.indexOf(activeTag) ? 'forward' : 'back')
+        setActiveTag(tagId)
+    }
     const [viewedIds, setViewedIds] = useState(readViewedIds)
 
     // Fiche du livre : 'closed' | 'opening' | 'open' | 'closing'
@@ -95,7 +104,10 @@ function Home({ onBookSelectFromSearch }) {
 
     // ── Ouverture / fermeture de la fiche ──
     const openBook = (book) => {
-        const next = [book.id, ...readViewedIds().filter((id) => id !== book.id)].slice(0, MAX_VIEWED)
+        const next = [book.id, ...readViewedIds().filter((id) => id !== book.id)].slice(
+            0,
+            MAX_VIEWED
+        )
         try {
             localStorage.setItem(VIEWED_KEY, JSON.stringify(next))
         } catch {
@@ -201,7 +213,10 @@ function Home({ onBookSelectFromSearch }) {
                                             Tu en étais à « {lastChapterTitle} »
                                         </p>
                                     )}
-                                    <ButtonRead text="Reprendre" onClick={() => openBook(lastBook)} />
+                                    <ButtonRead
+                                        text="Reprendre"
+                                        onClick={() => openBook(lastBook)}
+                                    />
                                 </div>
                             </div>
                         ) : (
@@ -256,10 +271,10 @@ function Home({ onBookSelectFromSearch }) {
     return (
         <section className="Section-Home">
             <div className="Home">
-                <TagsNavigation activeTag={activeTag} onTagClick={setActiveTag} />
+                <TagsNavigation activeTag={activeTag} onTagClick={handleTagClick} />
 
-                {/* key : l'apparition se rejoue à chaque changement d'onglet */}
-                <div className="dynamic-content" key={activeTag}>
+                {/* key : l'animation se rejoue à chaque changement d'onglet */}
+                <div className="dynamic-content" key={activeTag} data-direction={direction}>
                     {renderContent()}
                 </div>
             </div>
@@ -267,8 +282,7 @@ function Home({ onBookSelectFromSearch }) {
             {modal.book && (
                 <div
                     className={`resume-modal-overlay${modal.phase === 'open' ? ' show' : ''}`}
-                    onClick={closeBook}
-                >
+                    onClick={closeBook}>
                     <div className="resume-modal-content" onClick={(e) => e.stopPropagation()}>
                         <Resume
                             key={modal.book.id}

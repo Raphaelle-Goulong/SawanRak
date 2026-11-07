@@ -7,7 +7,7 @@ $lb-purple: #a30262;
 
 // ── Tokens ──
 $gradient: linear-gradient(135deg, $lb-peach, $lb-pink, $lb-purple);
-$text-primary: #f6ede8;                      // blanc chaud, moins éblouissant la nuit
+$text-primary: #f6ede8; // blanc chaud, moins éblouissant la nuit
 $text-body: rgba(239, 228, 222, 0.86);
 $text-muted: rgba(239, 228, 222, 0.5);
 $border-subtle: rgba(255, 255, 255, 0.08);
@@ -216,7 +216,9 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
         border: 0;
         border-radius: 999px;
         cursor: pointer;
-        transition: color 0.2s ease, background 0.2s ease;
+        transition:
+            color 0.2s ease,
+            background 0.2s ease;
 
         &:hover:not(:disabled) {
             color: $text-primary;
@@ -329,7 +331,9 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
         border-radius: 12px;
         outline: none;
         resize: vertical;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        transition:
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
 
         &:focus {
             border-color: $lb-pink;
@@ -355,10 +359,10 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
 
     .Btn {
         .btn {
-        flex: 1;
-        max-width: 200px;
-        min-width: 1;
-    }
+            flex: 1;
+            max-width: 200px;
+            min-width: 1;
+        }
 
         .btn {
             width: 100%;
@@ -389,8 +393,12 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
     color: $text-primary;
     animation: toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 
-    &--success { border-color: rgba($lb-peach, 0.5); }
-    &--error   { border-color: rgba(255, 107, 107, 0.55); }
+    &--success {
+        border-color: rgba($lb-peach, 0.5);
+    }
+    &--error {
+        border-color: rgba(255, 107, 107, 0.55);
+    }
 }
 
 // ── Erreur de chargement ──────────────────────────────────────────────────────
@@ -424,37 +432,48 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
 
 // ── Modal Ending ──────────────────────────────────────────────────────────────
 .modal-overlay {
-    width: 90%;
     position: fixed;
     inset: 0;
+    z-index: 2000;
     display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 2000;
+    align-items: center; // centré aussi sur mobile
+    padding: 16px; // marge autour de la fenêtre
     background: rgba(5, 3, 8, 0.7);
     backdrop-filter: blur(8px);
     animation: fade-in 0.3s ease;
-
-    @media (min-width: $mobile) {
-        align-items: center;
-    }
 }
+
 .modal-content {
     width: 100%;
     max-width: 720px;
 }
 // ── Animations ────────────────────────────────────────────────────────────────
 @keyframes fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes toast-in {
-    from { opacity: 0; transform: translate(-50%, 12px); }
-    to   { opacity: 1; transform: translate(-50%, 0); }
+    from {
+        opacity: 0;
+        transform: translate(-50%, 12px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .read-progress::after { transition: none; }
-    .toast { animation: none; }
+    .read-progress::after {
+        transition: none;
+    }
+    .toast {
+        animation: none;
+    }
 }

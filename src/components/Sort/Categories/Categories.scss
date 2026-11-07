@@ -118,6 +118,34 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
             padding-bottom: 50px;
         }
     }
+        // ── Apparition en cascade quand on arrive sur l'onglet ──
+    .Section-Categories > *,
+    .Section-Author > *,
+    .Section-AllBooks > .Title-Section {
+        animation: categories-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @for $i from 2 through 10 {
+        .Section-Categories > :nth-child(#{$i}),
+        .Section-Author > :nth-child(#{$i}) {
+            animation-delay: ($i - 1) * 0.07s;
+        }
+    }
+
+    // Tous les livres : les 16 premières cartes en cascade, les autres apparaissent d'un coup
+    .AllBooks-grid > * {
+        animation: categories-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @for $i from 1 through 16 {
+        .AllBooks-grid > :nth-child(#{$i}) {
+            animation-delay: 0.1s + ($i - 1) * 0.035s;
+        }
+    }
+
+    .AllBooks-grid > :nth-child(n + 17) {
+        animation: none;
+    }
 }
 
 // ── Mobile ──
@@ -137,6 +165,27 @@ $font-ui: var(--font-modern, 'Sora', system-ui, sans-serif);
         .Section-AllBooks .AllBooks-grid {
             grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
             gap: 22px 14px;
+        }
+    }
+}
+
+@keyframes categories-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes categories-pop {
+    from { opacity: 0; transform: translateY(10px) scale(0.94); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Categories-Container {
+        .Section-Categories > *,
+        .Section-Author > *,
+        .Section-AllBooks > .Title-Section,
+        .AllBooks-grid > * {
+            animation: none;
         }
     }
 }
